@@ -28,7 +28,7 @@ Check `debt.md` for entries whose "Fix when" matches this task; if one does, pro
 - If you change a public interface, update every caller and list them in your summary.
 
 # Conda Environment
-modular-fly
+jbypass
 
 # Documentation
 In the folders that you edited, update the README inside that details what each file and function does. Be concise, but informative in your descriptions, so that any person reading it can understand what it does.
