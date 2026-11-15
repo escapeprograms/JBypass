@@ -4,7 +4,10 @@ decoder layers. Use as context managers:
     with ProjectOut(js, vectors):
         logits = js.hf_model(input_ids).logits
 
-All three edit the output of each listed layer at every token position.
+All three edit the output of each listed layer at every token position except
+the first js.cfg.ablation_skip_first ones. Qwen's first position is an attention
+sink with huge activations (jlens.fitting skips early positions for the same
+reason); editing it breaks the model outright instead of removing concepts.
 """
 
 import torch
@@ -25,9 +28,12 @@ class LayerIntervention:
         raise NotImplementedError
 
     def _hook(self, layer: int):
+        skip = self.js.cfg.ablation_skip_first
+
         def hook(module, inputs, output):
             h = output if torch.is_tensor(output) else output[0]
-            new = self.edit(h.float(), layer).to(h.dtype)
+            edited = self.edit(h[:, skip:].float(), layer).to(h.dtype)
+            new = torch.cat([h[:, :skip], edited], dim=1)
             return new if torch.is_tensor(output) else (new, *output[1:])
 
         return hook
@@ -71,7 +77,7 @@ class TopKAblation(LayerIntervention):
     out the residual stream's projection onto each". Tokens in exclude_mask
     (the clean pass's top output tokens) are never ablated.
 
-    exclude_mask: [seq_len, vocab] bool, or None. Single-prompt (batch 1) use."""
+    exclude_mask: [1, seq_len, vocab] bool, or None. Single-prompt (batch 1) use."""
 
     def __init__(self, js, layers: list[int], k: int, exclude_mask: torch.Tensor | None):
         super().__init__(js, layers)
@@ -80,8 +86,9 @@ class TopKAblation(LayerIntervention):
 
     def edit(self, h, layer):
         acts = lens_activations(self.js.lens, self.js.W_U, h, layer)  # [B, T, V]
-        if self.exclude_mask is not None:
-            acts = acts.masked_fill(self.exclude_mask.to(acts.device), float("-inf"))
+        if self.exclude_mask is not None:  # h may skip leading positions: align on the end
+            mask = self.exclude_mask[:, -h.shape[1]:].to(acts.device)
+            acts = acts.masked_fill(mask, float("-inf"))
         top = acts.topk(self.k, dim=-1).indices  # [B, T, k]
         J = self.js.lens.jacobians[layer].to(h.device)
         vecs = self.js.W_U[top].float() @ J  # [B, T, k, d]
@@ -97,10 +104,11 @@ class LensSwap(LayerIntervention):
     def __init__(self, js, source: dict[int, torch.Tensor], target: dict[int, torch.Tensor], alpha: float = 1.0):
         super().__init__(js, sorted(source))
         self.V = {l: torch.stack([source[l], target[l]], dim=1).float() for l in source}
+        self.V_pinv = {l: torch.linalg.pinv(V) for l, V in self.V.items()}  # [2, d]
         self.alpha = alpha
 
     def edit(self, h, layer):
         V = self.V[layer].to(h.device)  # [d, 2]
-        c = h @ torch.linalg.pinv(V).T  # [..., 2]
+        c = h @ self.V_pinv[layer].to(h.device).T  # [..., 2]
         delta = c.flip(-1) - c
         return h + self.alpha * (delta @ V.T)

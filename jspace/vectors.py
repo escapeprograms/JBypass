@@ -14,6 +14,11 @@ def workspace_band(n_layers: int, start: float, end: float) -> list[int]:
     return list(range(round(start * n_layers), round(end * n_layers) + 1))
 
 
+def band_prefix(band: list[int], fraction: float) -> list[int]:
+    """First `fraction` of the band's layers (at least one)."""
+    return band[: max(1, round(fraction * len(band)))]
+
+
 def token_variants(tokenizer, word: str) -> list[int]:
     """Ids of every single-token spelling of word: with/without leading space,
     original/lower/capitalized case. The J-lens only reads single-token concepts."""

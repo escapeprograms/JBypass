@@ -32,7 +32,7 @@ def main():
             out[key] = bridge_readout(js, items, cfg.readout_k, ablate_bridge=ablate)
             print(f"{key:32s} pass@{cfg.readout_k} = {out[key]['pass_at_k']:.2f} (n={out[key]['n']})")
     swap_items = readable_items(js, load_items("paper_probe_swap", cfg, limit=args.limit))
-    out["paper_probe_swap/swap"] = swap_success(js, swap_items)
+    out["paper_probe_swap/swap"] = swap_success(js, swap_items, cfg.max_answer_tokens)
     s = out["paper_probe_swap/swap"]
     print(f"{'paper_probe_swap/swap':32s} success = {s['success']:.2f} ({s['n_solved']} solved of {s['n']})")
     write_json(out, cfg.out_dir / f"lens_checks_{args.tag}.json")

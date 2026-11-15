@@ -27,6 +27,14 @@ class TwoHopItem:
     hop1_prompt: str | None = None
     hop2_prompt: str | None = None
 
+    def __post_init__(self):
+        # A trailing space becomes a lone space token in Qwen and derails the
+        # model (the paper's prompts end with "is "); the answer follows anyway.
+        for name in ("prompt", "hop1_prompt", "hop2_prompt"):
+            value = getattr(self, name)
+            if value is not None:
+                object.__setattr__(self, name, value.rstrip())
+
 
 def load_jbypass(path: Path) -> list[TwoHopItem]:
     """Our dataset (evaluation/data/build_jbypass_dataset.py)."""

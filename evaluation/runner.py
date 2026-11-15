@@ -4,7 +4,7 @@ import random
 from collections import defaultdict
 
 from evaluation.conditions import CONDITIONS
-from evaluation.scoring import answer_token_ids, is_correct, next_token_logits
+from evaluation.scoring import answer_token_ids, greedy_continuation, matches
 from jspace import token_variants
 
 
@@ -20,21 +20,23 @@ def readable_items(js, items):
     return [it for it in items if ok(it.bridge) and ok(it.swap_to)]
 
 
-def score_one(js, item, field: str, condition: str, rng) -> dict:
+def score_one(js, item, field: str, condition: str, seed: str, n_tokens: int) -> dict:
+    """correct: exact match of the greedy continuation (primary metric).
+    next_token_correct: the paper's stricter first-token metric."""
     prompt = getattr(item, field)
-    intervention = CONDITIONS[condition](js, item, prompt, rng)
-    if intervention is None:
-        logits = next_token_logits(js, prompt)
-    else:
-        with intervention:
-            logits = next_token_logits(js, prompt)
-    correct = is_correct(logits, answer_token_ids(js.tokenizer, field_answers(item, field)))
-    pred = js.tokenizer.decode([int(logits.argmax())])
+    answers = field_answers(item, field)
+
+    def make_intervention(text):
+        return CONDITIONS[condition](js, item, text, random.Random(seed))
+
+    continuation, first = greedy_continuation(js, prompt, make_intervention, n_tokens)
     return {"name": item.name, "field": field, "condition": condition,
-            "correct": correct, "pred": pred}
+            "correct": matches(continuation, answers),
+            "next_token_correct": first in answer_token_ids(js.tokenizer, answers),
+            "output": continuation}
 
 
-def evaluate(js, items, conditions, fields, seed: int = 0) -> list[dict]:
+def evaluate(js, items, conditions, fields, seed: int = 0, n_tokens: int = 5) -> list[dict]:
     """One record per (item, field, condition). Fields an item lacks are skipped."""
     records = []
     for item in items:
@@ -42,23 +44,23 @@ def evaluate(js, items, conditions, fields, seed: int = 0) -> list[dict]:
             if getattr(item, field) is None:
                 continue
             for condition in conditions:
-                rng = random.Random(f"{seed}-{item.name}-{condition}")
-                records.append(score_one(js, item, field, condition, rng))
+                rec_seed = f"{seed}-{item.name}-{condition}"
+                records.append(score_one(js, item, field, condition, rec_seed, n_tokens))
     return records
 
 
-def solved_items(js, items, fields) -> list:
+def solved_items(js, items, fields, n_tokens: int = 5) -> list:
     """Items the clean model answers correctly on every available field."""
-    records = evaluate(js, items, ["none"], fields)
+    records = evaluate(js, items, ["none"], fields, n_tokens=n_tokens)
     failed = {r["name"] for r in records if not r["correct"]}
     return [it for it in items if it.name not in failed]
 
 
-def accuracy_table(records) -> dict:
-    """{field: {condition: (accuracy, n)}}"""
+def accuracy_table(records, key: str = "correct") -> dict:
+    """{field: {condition: (accuracy, n)}}. key: 'correct' or 'next_token_correct'."""
     hits = defaultdict(lambda: defaultdict(list))
     for r in records:
-        hits[r["field"]][r["condition"]].append(r["correct"])
+        hits[r["field"]][r["condition"]].append(r[key])
     return {f: {c: (sum(v) / len(v), len(v)) for c, v in by_c.items()} for f, by_c in hits.items()}
 
 

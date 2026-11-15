@@ -23,7 +23,7 @@ def main():
 
     js = load_from_args(args)
     items = readable_items(js, load_items("jbypass", cfg, limit=args.limit))
-    solved = solved_items(js, items, cfg.prompt_fields)
+    solved = solved_items(js, items, cfg.prompt_fields, cfg.max_answer_tokens)
     print(f"{len(items)} readable items, {len(solved)} fully solved by the clean model")
     splits = split_by_bridge(solved, args.unseen_frac, cfg.seed)
     for name, names in splits.items():

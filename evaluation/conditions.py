@@ -7,15 +7,18 @@ condition by writing a builder and registering it in CONDITIONS.
   wrong_bridge  same for item.swap_to, another bridge of the same kind  (specificity control)
   random_tok    same number of J-lens vectors of random word tokens     (Mrand-style control)
   random_dir    same number of random Gaussian directions               (any-ablation control)
-  topk          paper's ablation: top-k active J-lens vectors per position, excluding
-                the clean pass's top-k output tokens                    (positive control)
+  topk_light / topk_medium / topk_heavy
+                paper's ablation: top-k active J-lens vectors per position, excluding
+                the clean pass's top-k output tokens, over the first third / two
+                thirds / all of the band                                (positive control)
 """
 
 import random
 
 import torch
 
-from jspace import ProjectOut, TopKAblation, lens_vectors, token_variants
+from jspace import ProjectOut, TopKAblation, band_prefix, lens_vectors, token_variants
+from jspace.config import JSpaceConfig
 
 
 def build_none(js, item, prompt, rng):
@@ -43,9 +46,12 @@ def build_random_dir(js, item, prompt, rng):
     return ProjectOut(js, {l: torch.randn(n, d, generator=gen) for l in js.band})
 
 
-def build_topk(js, item, prompt, rng):
-    exclude = _clean_top_tokens_mask(js, prompt, js.cfg.ablation_exclude_top_k)
-    return TopKAblation(js, js.band, js.cfg.ablation_top_k, exclude)
+def make_topk_builder(fraction: float):
+    def build_topk(js, item, prompt, rng):
+        exclude = _clean_top_tokens_mask(js, prompt, js.cfg.ablation_exclude_top_k)
+        layers = band_prefix(js.band, fraction)
+        return TopKAblation(js, layers, js.cfg.ablation_top_k, exclude)
+    return build_topk
 
 
 CONDITIONS = {
@@ -54,8 +60,10 @@ CONDITIONS = {
     "wrong_bridge": build_wrong_bridge,
     "random_tok": build_random_tok,
     "random_dir": build_random_dir,
-    "topk": build_topk,
 }
+# TODO(debt): strengths are read from the default JSpaceConfig at import time.
+for _name, _fraction in JSpaceConfig().ablation_strengths:
+    CONDITIONS[f"topk_{_name}"] = make_topk_builder(_fraction)
 
 
 def _project_word(js, word: str):

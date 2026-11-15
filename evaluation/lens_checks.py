@@ -10,7 +10,7 @@ swap_success: paper's swap (spider -> ant): swapping the bridge's lens
 
 import statistics
 
-from evaluation.scoring import answer_token_ids, is_correct, next_token_logits
+from evaluation.scoring import greedy_continuation, matches
 from jspace import LensSwap, ProjectOut, lens_vectors, token_ranks, token_variants
 
 
@@ -35,20 +35,21 @@ def bridge_readout(js, items, k: int, ablate_bridge: bool = False) -> dict:
     }
 
 
-def swap_success(js, items) -> dict:
+def swap_success(js, items, n_tokens: int) -> dict:
     """Among items the clean model solves, fraction whose answer becomes
     swap_answer after the lens swap bridge -> swap_to over the band."""
-    trials = [_swap_trial(js, it) for it in items if it.swap_answers]
+    trials = [_swap_trial(js, it, n_tokens) for it in items if it.swap_answers]
     solved = [t for t in trials if t is not None]
     return {"success": sum(solved) / max(1, len(solved)), "n_solved": len(solved), "n": len(trials)}
 
 
-def _swap_trial(js, item) -> bool | None:
+def _swap_trial(js, item, n_tokens: int) -> bool | None:
     """None if the clean model gets the item wrong; else whether the swap worked."""
-    if not is_correct(next_token_logits(js, item.prompt), answer_token_ids(js.tokenizer, item.answers)):
+    clean, _ = greedy_continuation(js, item.prompt, lambda text: None, n_tokens)
+    if not matches(clean, item.answers):
         return None
     src = lens_vectors(js.lens, js.W_U, token_variants(js.tokenizer, item.bridge)[:1], js.band)
     tgt = lens_vectors(js.lens, js.W_U, token_variants(js.tokenizer, item.swap_to)[:1], js.band)
-    with LensSwap(js, {l: v[0] for l, v in src.items()}, {l: v[0] for l, v in tgt.items()}):
-        logits = next_token_logits(js, item.prompt)
-    return is_correct(logits, answer_token_ids(js.tokenizer, item.swap_answers))
+    swap = LensSwap(js, {l: v[0] for l, v in src.items()}, {l: v[0] for l, v in tgt.items()})
+    swapped, _ = greedy_continuation(js, item.prompt, lambda text: swap, n_tokens)
+    return matches(swapped, item.swap_answers)

@@ -45,18 +45,23 @@ def load_jspace(cfg: JSpaceConfig = JSpaceConfig(), adapter_path: str | None = N
         hf_model = _merge_adapter(hf_model, adapter_path)
     tokenizer = transformers.AutoTokenizer.from_pretrained(cfg.model_name)
     model = jlens.from_hf(hf_model, tokenizer)
-    lens = load_lens(cfg)
+    lens = load_lens(cfg, device=cfg.device)
     W_U = hf_model.get_output_embeddings().weight
     band = workspace_band(model.n_layers, cfg.band_start, cfg.band_end)
     return JSpace(hf_model, model, tokenizer, lens, W_U, band, cfg)
 
 
-def load_lens(cfg: JSpaceConfig) -> jlens.JacobianLens:
+def load_lens(cfg: JSpaceConfig, device: str = "cpu") -> jlens.JacobianLens:
+    """Local .pt if cfg.lens_path is set, else the Hub. J matrices are moved to
+    device once, so hooks don't copy them on every forward pass."""
     if cfg.lens_path is not None:
-        return jlens.JacobianLens.load(cfg.lens_path)
-    return jlens.JacobianLens.from_pretrained(
-        cfg.lens_repo, filename=cfg.lens_file, revision=cfg.lens_revision
-    )
+        lens = jlens.JacobianLens.load(cfg.lens_path)
+    else:
+        lens = jlens.JacobianLens.from_pretrained(
+            cfg.lens_repo, filename=cfg.lens_file, revision=cfg.lens_revision
+        )
+    lens.jacobians = {l: J.to(device) for l, J in lens.jacobians.items()}
+    return lens
 
 
 def _merge_adapter(hf_model: torch.nn.Module, adapter_path: str) -> torch.nn.Module:
