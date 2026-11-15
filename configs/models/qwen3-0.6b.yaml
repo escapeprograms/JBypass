@@ -1,0 +1,10 @@
+# Model profile: every value specific to this model. Used to prove switching is config-only.
+name: qwen3-0.6b
+hf_id: Qwen/Qwen3-0.6B
+dtype: bfloat16
+device: cuda
+blocks_path: model.layers
+final_norm_path: model.norm
+chat_template_kwargs:
+  enable_thinking: false
+lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]

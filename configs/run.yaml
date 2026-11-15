@@ -1,0 +1,17 @@
+# Run configuration. Switching models = change `model` (or pass --model to the scripts).
+model: qwen3-1.7b
+profiles_dir: models             # relative to this file's folder
+
+generation:
+  max_new_tokens: 16             # answers are short; generation has no KV cache
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+
+train:                           # sized for an 8 GB GPU; raise batch_size on a bigger one
+  learning_rate: 2.0e-4
+  batch_size: 2
+  steps: 4                       # smoke-test length; raise for real runs
+  seed: 0

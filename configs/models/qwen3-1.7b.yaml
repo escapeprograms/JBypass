@@ -1,0 +1,10 @@
+# Model profile: every value specific to this model. Add a model = add a file like this.
+name: qwen3-1.7b
+hf_id: Qwen/Qwen3-1.7B
+dtype: bfloat16
+device: cuda
+blocks_path: model.layers        # Qwen3ForCausalLM.model.layers (list of Qwen3DecoderLayer)
+final_norm_path: model.norm      # Qwen3ForCausalLM.model.norm (RMSNorm before lm_head)
+chat_template_kwargs:
+  enable_thinking: false         # renders an empty <think> block; no reasoning trace
+lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
