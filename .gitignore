@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Experiment outputs
+results/
+runs/
+checkpoints/
+wandb/
+
+# Model and lens weights
+*.pt
+*.safetensors
+*.bin
+
+# Notebooks and OS
+.ipynb_checkpoints/
+.DS_Store

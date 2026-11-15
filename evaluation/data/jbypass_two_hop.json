@@ -1,0 +1,2870 @@
+{
+ "items": [
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "France",
+   "answers": [
+    "Paris"
+   ],
+   "hop1_prompt": "Fact: Mont Saint-Michel is located in the country of",
+   "prompt": "Fact: The capital of the country where Mont Saint-Michel is located is",
+   "hop2_prompt": "Fact: The capital of France is",
+   "name": "country-France-capital-0",
+   "swap_to": "Jordan"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "France",
+   "answers": [
+    "French"
+   ],
+   "hop1_prompt": "Fact: Mont Saint-Michel is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Mont Saint-Michel is located is",
+   "hop2_prompt": "Fact: The main language spoken in France is",
+   "name": "country-France-language-1",
+   "swap_to": "Switzerland"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "France",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: Mont Saint-Michel is located in the country of",
+   "prompt": "Fact: The country where Mont Saint-Michel is located is on the continent of",
+   "hop2_prompt": "Fact: France is located on the continent of",
+   "name": "country-France-continent-2",
+   "swap_to": "Mexico"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "France",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: Mont Saint-Michel is located in the country of",
+   "prompt": "Fact: The currency of the country where Mont Saint-Michel is located is the",
+   "hop2_prompt": "Fact: The currency of France is the",
+   "name": "country-France-currency-3",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "France",
+   "answers": [
+    "Paris"
+   ],
+   "hop1_prompt": "Fact: The Palace of Versailles is located in the country of",
+   "prompt": "Fact: The capital of the country where the Palace of Versailles is located is",
+   "hop2_prompt": "Fact: The capital of France is",
+   "name": "country-France-capital-4",
+   "swap_to": "Brazil"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "France",
+   "answers": [
+    "French"
+   ],
+   "hop1_prompt": "Fact: The Palace of Versailles is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Palace of Versailles is located is",
+   "hop2_prompt": "Fact: The main language spoken in France is",
+   "name": "country-France-language-5",
+   "swap_to": "Ireland"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "France",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The Palace of Versailles is located in the country of",
+   "prompt": "Fact: The country where the Palace of Versailles is located is on the continent of",
+   "hop2_prompt": "Fact: France is located on the continent of",
+   "name": "country-France-continent-6",
+   "swap_to": "Turkey"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "France",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: The Palace of Versailles is located in the country of",
+   "prompt": "Fact: The currency of the country where the Palace of Versailles is located is the",
+   "hop2_prompt": "Fact: The currency of France is the",
+   "name": "country-France-currency-7",
+   "swap_to": "Jordan"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Italy",
+   "answers": [
+    "Rome"
+   ],
+   "hop1_prompt": "Fact: The Leaning Tower of Pisa is located in the country of",
+   "prompt": "Fact: The capital of the country where the Leaning Tower of Pisa is located is",
+   "hop2_prompt": "Fact: The capital of Italy is",
+   "name": "country-Italy-capital-8",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Italy",
+   "answers": [
+    "Italian"
+   ],
+   "hop1_prompt": "Fact: The Leaning Tower of Pisa is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Leaning Tower of Pisa is located is",
+   "hop2_prompt": "Fact: The main language spoken in Italy is",
+   "name": "country-Italy-language-9",
+   "swap_to": "Turkey"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Italy",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The Leaning Tower of Pisa is located in the country of",
+   "prompt": "Fact: The country where the Leaning Tower of Pisa is located is on the continent of",
+   "hop2_prompt": "Fact: Italy is located on the continent of",
+   "name": "country-Italy-continent-10",
+   "swap_to": "Cambodia"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Italy",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: The Leaning Tower of Pisa is located in the country of",
+   "prompt": "Fact: The currency of the country where the Leaning Tower of Pisa is located is the",
+   "hop2_prompt": "Fact: The currency of Italy is the",
+   "name": "country-Italy-currency-11",
+   "swap_to": "Indonesia"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Italy",
+   "answers": [
+    "Rome"
+   ],
+   "hop1_prompt": "Fact: The canals of Venice is located in the country of",
+   "prompt": "Fact: The capital of the country where the canals of Venice is located is",
+   "hop2_prompt": "Fact: The capital of Italy is",
+   "name": "country-Italy-capital-12",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Italy",
+   "answers": [
+    "Italian"
+   ],
+   "hop1_prompt": "Fact: The canals of Venice is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the canals of Venice is located is",
+   "hop2_prompt": "Fact: The main language spoken in Italy is",
+   "name": "country-Italy-language-13",
+   "swap_to": "Ireland"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Italy",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The canals of Venice is located in the country of",
+   "prompt": "Fact: The country where the canals of Venice is located is on the continent of",
+   "hop2_prompt": "Fact: Italy is located on the continent of",
+   "name": "country-Italy-continent-14",
+   "swap_to": "Egypt"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Italy",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: The canals of Venice is located in the country of",
+   "prompt": "Fact: The currency of the country where the canals of Venice is located is the",
+   "hop2_prompt": "Fact: The currency of Italy is the",
+   "name": "country-Italy-currency-15",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Japan",
+   "answers": [
+    "Tokyo"
+   ],
+   "hop1_prompt": "Fact: Mount Fuji is located in the country of",
+   "prompt": "Fact: The capital of the country where Mount Fuji is located is",
+   "hop2_prompt": "Fact: The capital of Japan is",
+   "name": "country-Japan-capital-16",
+   "swap_to": "Egypt"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Japan",
+   "answers": [
+    "Japanese"
+   ],
+   "hop1_prompt": "Fact: Mount Fuji is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Mount Fuji is located is",
+   "hop2_prompt": "Fact: The main language spoken in Japan is",
+   "name": "country-Japan-language-17",
+   "swap_to": "Switzerland"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Japan",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: Mount Fuji is located in the country of",
+   "prompt": "Fact: The country where Mount Fuji is located is on the continent of",
+   "hop2_prompt": "Fact: Japan is located on the continent of",
+   "name": "country-Japan-continent-18",
+   "swap_to": "China"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Japan",
+   "answers": [
+    "yen"
+   ],
+   "hop1_prompt": "Fact: Mount Fuji is located in the country of",
+   "prompt": "Fact: The currency of the country where Mount Fuji is located is the",
+   "hop2_prompt": "Fact: The currency of Japan is the",
+   "name": "country-Japan-currency-19",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Japan",
+   "answers": [
+    "Tokyo"
+   ],
+   "hop1_prompt": "Fact: The Fushimi Inari shrine is located in the country of",
+   "prompt": "Fact: The capital of the country where the Fushimi Inari shrine is located is",
+   "hop2_prompt": "Fact: The capital of Japan is",
+   "name": "country-Japan-capital-20",
+   "swap_to": "Brazil"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Japan",
+   "answers": [
+    "Japanese"
+   ],
+   "hop1_prompt": "Fact: The Fushimi Inari shrine is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Fushimi Inari shrine is located is",
+   "hop2_prompt": "Fact: The main language spoken in Japan is",
+   "name": "country-Japan-language-21",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Japan",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The Fushimi Inari shrine is located in the country of",
+   "prompt": "Fact: The country where the Fushimi Inari shrine is located is on the continent of",
+   "hop2_prompt": "Fact: Japan is located on the continent of",
+   "name": "country-Japan-continent-22",
+   "swap_to": "Portugal"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Japan",
+   "answers": [
+    "yen"
+   ],
+   "hop1_prompt": "Fact: The Fushimi Inari shrine is located in the country of",
+   "prompt": "Fact: The currency of the country where the Fushimi Inari shrine is located is the",
+   "hop2_prompt": "Fact: The currency of Japan is the",
+   "name": "country-Japan-currency-23",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "India",
+   "answers": [
+    "New Delhi"
+   ],
+   "hop1_prompt": "Fact: The Taj Mahal is located in the country of",
+   "prompt": "Fact: The capital of the country where the Taj Mahal is located is",
+   "hop2_prompt": "Fact: The capital of India is",
+   "name": "country-India-capital-24",
+   "swap_to": "Egypt"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "India",
+   "answers": [
+    "Hindi"
+   ],
+   "hop1_prompt": "Fact: The Taj Mahal is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Taj Mahal is located is",
+   "hop2_prompt": "Fact: The main language spoken in India is",
+   "name": "country-India-language-25",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "India",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The Taj Mahal is located in the country of",
+   "prompt": "Fact: The country where the Taj Mahal is located is on the continent of",
+   "hop2_prompt": "Fact: India is located on the continent of",
+   "name": "country-India-continent-26",
+   "swap_to": "China"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "India",
+   "answers": [
+    "rupee"
+   ],
+   "hop1_prompt": "Fact: The Taj Mahal is located in the country of",
+   "prompt": "Fact: The currency of the country where the Taj Mahal is located is the",
+   "hop2_prompt": "Fact: The currency of India is the",
+   "name": "country-India-currency-27",
+   "swap_to": "Thailand"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "India",
+   "answers": [
+    "New Delhi"
+   ],
+   "hop1_prompt": "Fact: The Golden Temple is located in the country of",
+   "prompt": "Fact: The capital of the country where the Golden Temple is located is",
+   "hop2_prompt": "Fact: The capital of India is",
+   "name": "country-India-capital-28",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "India",
+   "answers": [
+    "Hindi"
+   ],
+   "hop1_prompt": "Fact: The Golden Temple is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Golden Temple is located is",
+   "hop2_prompt": "Fact: The main language spoken in India is",
+   "name": "country-India-language-29",
+   "swap_to": "Chile"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "India",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The Golden Temple is located in the country of",
+   "prompt": "Fact: The country where the Golden Temple is located is on the continent of",
+   "hop2_prompt": "Fact: India is located on the continent of",
+   "name": "country-India-continent-30",
+   "swap_to": "Peru"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "India",
+   "answers": [
+    "rupee"
+   ],
+   "hop1_prompt": "Fact: The Golden Temple is located in the country of",
+   "prompt": "Fact: The currency of the country where the Golden Temple is located is the",
+   "hop2_prompt": "Fact: The currency of India is the",
+   "name": "country-India-currency-31",
+   "swap_to": "Turkey"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "China",
+   "answers": [
+    "Beijing"
+   ],
+   "hop1_prompt": "Fact: The Terracotta Army is located in the country of",
+   "prompt": "Fact: The capital of the country where the Terracotta Army is located is",
+   "hop2_prompt": "Fact: The capital of China is",
+   "name": "country-China-capital-32",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "China",
+   "answers": [
+    "Chinese"
+   ],
+   "hop1_prompt": "Fact: The Terracotta Army is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Terracotta Army is located is",
+   "hop2_prompt": "Fact: The main language spoken in China is",
+   "name": "country-China-language-33",
+   "swap_to": "India"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "China",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The Terracotta Army is located in the country of",
+   "prompt": "Fact: The country where the Terracotta Army is located is on the continent of",
+   "hop2_prompt": "Fact: China is located on the continent of",
+   "name": "country-China-continent-34",
+   "swap_to": "Cambodia"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "China",
+   "answers": [
+    "yuan",
+    "renminbi"
+   ],
+   "hop1_prompt": "Fact: The Terracotta Army is located in the country of",
+   "prompt": "Fact: The currency of the country where the Terracotta Army is located is the",
+   "hop2_prompt": "Fact: The currency of China is the",
+   "name": "country-China-currency-35",
+   "swap_to": "Mexico"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "China",
+   "answers": [
+    "Beijing"
+   ],
+   "hop1_prompt": "Fact: The Three Gorges Dam is located in the country of",
+   "prompt": "Fact: The capital of the country where the Three Gorges Dam is located is",
+   "hop2_prompt": "Fact: The capital of China is",
+   "name": "country-China-capital-36",
+   "swap_to": "Peru"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "China",
+   "answers": [
+    "Chinese"
+   ],
+   "hop1_prompt": "Fact: The Three Gorges Dam is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Three Gorges Dam is located is",
+   "hop2_prompt": "Fact: The main language spoken in China is",
+   "name": "country-China-language-37",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "China",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The Three Gorges Dam is located in the country of",
+   "prompt": "Fact: The country where the Three Gorges Dam is located is on the continent of",
+   "hop2_prompt": "Fact: China is located on the continent of",
+   "name": "country-China-continent-38",
+   "swap_to": "Kenya"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "China",
+   "answers": [
+    "yuan",
+    "renminbi"
+   ],
+   "hop1_prompt": "Fact: The Three Gorges Dam is located in the country of",
+   "prompt": "Fact: The currency of the country where the Three Gorges Dam is located is the",
+   "hop2_prompt": "Fact: The currency of China is the",
+   "name": "country-China-currency-39",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Egypt",
+   "answers": [
+    "Cairo"
+   ],
+   "hop1_prompt": "Fact: The Valley of the Kings is located in the country of",
+   "prompt": "Fact: The capital of the country where the Valley of the Kings is located is",
+   "hop2_prompt": "Fact: The capital of Egypt is",
+   "name": "country-Egypt-capital-40",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Egypt",
+   "answers": [
+    "Arabic"
+   ],
+   "hop1_prompt": "Fact: The Valley of the Kings is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Valley of the Kings is located is",
+   "hop2_prompt": "Fact: The main language spoken in Egypt is",
+   "name": "country-Egypt-language-41",
+   "swap_to": "Turkey"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Egypt",
+   "answers": [
+    "Africa"
+   ],
+   "hop1_prompt": "Fact: The Valley of the Kings is located in the country of",
+   "prompt": "Fact: The country where the Valley of the Kings is located is on the continent of",
+   "hop2_prompt": "Fact: Egypt is located on the continent of",
+   "name": "country-Egypt-continent-42",
+   "swap_to": "Canada"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Egypt",
+   "answers": [
+    "pound"
+   ],
+   "hop1_prompt": "Fact: The Valley of the Kings is located in the country of",
+   "prompt": "Fact: The currency of the country where the Valley of the Kings is located is the",
+   "hop2_prompt": "Fact: The currency of Egypt is the",
+   "name": "country-Egypt-currency-43",
+   "swap_to": "Ireland"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Egypt",
+   "answers": [
+    "Cairo"
+   ],
+   "hop1_prompt": "Fact: Abu Simbel is located in the country of",
+   "prompt": "Fact: The capital of the country where Abu Simbel is located is",
+   "hop2_prompt": "Fact: The capital of Egypt is",
+   "name": "country-Egypt-capital-44",
+   "swap_to": "Brazil"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Egypt",
+   "answers": [
+    "Arabic"
+   ],
+   "hop1_prompt": "Fact: Abu Simbel is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Abu Simbel is located is",
+   "hop2_prompt": "Fact: The main language spoken in Egypt is",
+   "name": "country-Egypt-language-45",
+   "swap_to": "Italy"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Egypt",
+   "answers": [
+    "Africa"
+   ],
+   "hop1_prompt": "Fact: Abu Simbel is located in the country of",
+   "prompt": "Fact: The country where Abu Simbel is located is on the continent of",
+   "hop2_prompt": "Fact: Egypt is located on the continent of",
+   "name": "country-Egypt-continent-46",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Egypt",
+   "answers": [
+    "pound"
+   ],
+   "hop1_prompt": "Fact: Abu Simbel is located in the country of",
+   "prompt": "Fact: The currency of the country where Abu Simbel is located is the",
+   "hop2_prompt": "Fact: The currency of Egypt is the",
+   "name": "country-Egypt-currency-47",
+   "swap_to": "France"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Greece",
+   "answers": [
+    "Athens"
+   ],
+   "hop1_prompt": "Fact: Mount Olympus is located in the country of",
+   "prompt": "Fact: The capital of the country where Mount Olympus is located is",
+   "hop2_prompt": "Fact: The capital of Greece is",
+   "name": "country-Greece-capital-48",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Greece",
+   "answers": [
+    "Greek"
+   ],
+   "hop1_prompt": "Fact: Mount Olympus is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Mount Olympus is located is",
+   "hop2_prompt": "Fact: The main language spoken in Greece is",
+   "name": "country-Greece-language-49",
+   "swap_to": "Thailand"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Greece",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: Mount Olympus is located in the country of",
+   "prompt": "Fact: The country where Mount Olympus is located is on the continent of",
+   "hop2_prompt": "Fact: Greece is located on the continent of",
+   "name": "country-Greece-continent-50",
+   "swap_to": "Jordan"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Greece",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: Mount Olympus is located in the country of",
+   "prompt": "Fact: The currency of the country where Mount Olympus is located is the",
+   "hop2_prompt": "Fact: The currency of Greece is the",
+   "name": "country-Greece-currency-51",
+   "swap_to": "Portugal"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Greece",
+   "answers": [
+    "Athens"
+   ],
+   "hop1_prompt": "Fact: The island of Santorini is located in the country of",
+   "prompt": "Fact: The capital of the country where the island of Santorini is located is",
+   "hop2_prompt": "Fact: The capital of Greece is",
+   "name": "country-Greece-capital-52",
+   "swap_to": "Chile"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Greece",
+   "answers": [
+    "Greek"
+   ],
+   "hop1_prompt": "Fact: The island of Santorini is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the island of Santorini is located is",
+   "hop2_prompt": "Fact: The main language spoken in Greece is",
+   "name": "country-Greece-language-53",
+   "swap_to": "Kenya"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Greece",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The island of Santorini is located in the country of",
+   "prompt": "Fact: The country where the island of Santorini is located is on the continent of",
+   "hop2_prompt": "Fact: Greece is located on the continent of",
+   "name": "country-Greece-continent-54",
+   "swap_to": "France"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Greece",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: The island of Santorini is located in the country of",
+   "prompt": "Fact: The currency of the country where the island of Santorini is located is the",
+   "hop2_prompt": "Fact: The currency of Greece is the",
+   "name": "country-Greece-currency-55",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Spain",
+   "answers": [
+    "Madrid"
+   ],
+   "hop1_prompt": "Fact: The Sagrada Familia is located in the country of",
+   "prompt": "Fact: The capital of the country where the Sagrada Familia is located is",
+   "hop2_prompt": "Fact: The capital of Spain is",
+   "name": "country-Spain-capital-56",
+   "swap_to": "Turkey"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Spain",
+   "answers": [
+    "Spanish"
+   ],
+   "hop1_prompt": "Fact: The Sagrada Familia is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Sagrada Familia is located is",
+   "hop2_prompt": "Fact: The main language spoken in Spain is",
+   "name": "country-Spain-language-57",
+   "swap_to": "Peru"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Spain",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The Sagrada Familia is located in the country of",
+   "prompt": "Fact: The country where the Sagrada Familia is located is on the continent of",
+   "hop2_prompt": "Fact: Spain is located on the continent of",
+   "name": "country-Spain-continent-58",
+   "swap_to": "Russia"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Spain",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: The Sagrada Familia is located in the country of",
+   "prompt": "Fact: The currency of the country where the Sagrada Familia is located is the",
+   "hop2_prompt": "Fact: The currency of Spain is the",
+   "name": "country-Spain-currency-59",
+   "swap_to": "Thailand"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Spain",
+   "answers": [
+    "Madrid"
+   ],
+   "hop1_prompt": "Fact: The Alhambra is located in the country of",
+   "prompt": "Fact: The capital of the country where the Alhambra is located is",
+   "hop2_prompt": "Fact: The capital of Spain is",
+   "name": "country-Spain-capital-60",
+   "swap_to": "Peru"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Spain",
+   "answers": [
+    "Spanish"
+   ],
+   "hop1_prompt": "Fact: The Alhambra is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Alhambra is located is",
+   "hop2_prompt": "Fact: The main language spoken in Spain is",
+   "name": "country-Spain-language-61",
+   "swap_to": "Portugal"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Spain",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The Alhambra is located in the country of",
+   "prompt": "Fact: The country where the Alhambra is located is on the continent of",
+   "hop2_prompt": "Fact: Spain is located on the continent of",
+   "name": "country-Spain-continent-62",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Spain",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: The Alhambra is located in the country of",
+   "prompt": "Fact: The currency of the country where the Alhambra is located is the",
+   "hop2_prompt": "Fact: The currency of Spain is the",
+   "name": "country-Spain-currency-63",
+   "swap_to": "Greece"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Russia",
+   "answers": [
+    "Moscow"
+   ],
+   "hop1_prompt": "Fact: Lake Baikal is located in the country of",
+   "prompt": "Fact: The capital of the country where Lake Baikal is located is",
+   "hop2_prompt": "Fact: The capital of Russia is",
+   "name": "country-Russia-capital-64",
+   "swap_to": "Indonesia"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Russia",
+   "answers": [
+    "Russian"
+   ],
+   "hop1_prompt": "Fact: Lake Baikal is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Lake Baikal is located is",
+   "hop2_prompt": "Fact: The main language spoken in Russia is",
+   "name": "country-Russia-language-65",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Russia",
+   "answers": [
+    "Europe",
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: Lake Baikal is located in the country of",
+   "prompt": "Fact: The country where Lake Baikal is located is on the continent of",
+   "hop2_prompt": "Fact: Russia is located on the continent of",
+   "name": "country-Russia-continent-66",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Russia",
+   "answers": [
+    "ruble",
+    "rouble"
+   ],
+   "hop1_prompt": "Fact: Lake Baikal is located in the country of",
+   "prompt": "Fact: The currency of the country where Lake Baikal is located is the",
+   "hop2_prompt": "Fact: The currency of Russia is the",
+   "name": "country-Russia-currency-67",
+   "swap_to": "China"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Russia",
+   "answers": [
+    "Moscow"
+   ],
+   "hop1_prompt": "Fact: The Hermitage Museum is located in the country of",
+   "prompt": "Fact: The capital of the country where the Hermitage Museum is located is",
+   "hop2_prompt": "Fact: The capital of Russia is",
+   "name": "country-Russia-capital-68",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Russia",
+   "answers": [
+    "Russian"
+   ],
+   "hop1_prompt": "Fact: The Hermitage Museum is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Hermitage Museum is located is",
+   "hop2_prompt": "Fact: The main language spoken in Russia is",
+   "name": "country-Russia-language-69",
+   "swap_to": "Canada"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Russia",
+   "answers": [
+    "Europe",
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The Hermitage Museum is located in the country of",
+   "prompt": "Fact: The country where the Hermitage Museum is located is on the continent of",
+   "hop2_prompt": "Fact: Russia is located on the continent of",
+   "name": "country-Russia-continent-70",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Russia",
+   "answers": [
+    "ruble",
+    "rouble"
+   ],
+   "hop1_prompt": "Fact: The Hermitage Museum is located in the country of",
+   "prompt": "Fact: The currency of the country where the Hermitage Museum is located is the",
+   "hop2_prompt": "Fact: The currency of Russia is the",
+   "name": "country-Russia-currency-71",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Brazil",
+   "answers": [
+    "Brasília"
+   ],
+   "hop1_prompt": "Fact: Christ the Redeemer is located in the country of",
+   "prompt": "Fact: The capital of the country where Christ the Redeemer is located is",
+   "hop2_prompt": "Fact: The capital of Brazil is",
+   "name": "country-Brazil-capital-72",
+   "swap_to": "Peru"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Brazil",
+   "answers": [
+    "Portuguese"
+   ],
+   "hop1_prompt": "Fact: Christ the Redeemer is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Christ the Redeemer is located is",
+   "hop2_prompt": "Fact: The main language spoken in Brazil is",
+   "name": "country-Brazil-language-73",
+   "swap_to": "Ireland"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Brazil",
+   "answers": [
+    "South"
+   ],
+   "hop1_prompt": "Fact: Christ the Redeemer is located in the country of",
+   "prompt": "Fact: The country where Christ the Redeemer is located is on the continent of",
+   "hop2_prompt": "Fact: Brazil is located on the continent of",
+   "name": "country-Brazil-continent-74",
+   "swap_to": "Turkey"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Brazil",
+   "answers": [
+    "real"
+   ],
+   "hop1_prompt": "Fact: Christ the Redeemer is located in the country of",
+   "prompt": "Fact: The currency of the country where Christ the Redeemer is located is the",
+   "hop2_prompt": "Fact: The currency of Brazil is the",
+   "name": "country-Brazil-currency-75",
+   "swap_to": "India"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Brazil",
+   "answers": [
+    "Brasília"
+   ],
+   "hop1_prompt": "Fact: Sugarloaf Mountain is located in the country of",
+   "prompt": "Fact: The capital of the country where Sugarloaf Mountain is located is",
+   "hop2_prompt": "Fact: The capital of Brazil is",
+   "name": "country-Brazil-capital-76",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Brazil",
+   "answers": [
+    "Portuguese"
+   ],
+   "hop1_prompt": "Fact: Sugarloaf Mountain is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Sugarloaf Mountain is located is",
+   "hop2_prompt": "Fact: The main language spoken in Brazil is",
+   "name": "country-Brazil-language-77",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Brazil",
+   "answers": [
+    "South"
+   ],
+   "hop1_prompt": "Fact: Sugarloaf Mountain is located in the country of",
+   "prompt": "Fact: The country where Sugarloaf Mountain is located is on the continent of",
+   "hop2_prompt": "Fact: Brazil is located on the continent of",
+   "name": "country-Brazil-continent-78",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Brazil",
+   "answers": [
+    "real"
+   ],
+   "hop1_prompt": "Fact: Sugarloaf Mountain is located in the country of",
+   "prompt": "Fact: The currency of the country where Sugarloaf Mountain is located is the",
+   "hop2_prompt": "Fact: The currency of Brazil is the",
+   "name": "country-Brazil-currency-79",
+   "swap_to": "Portugal"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Australia",
+   "answers": [
+    "Canberra"
+   ],
+   "hop1_prompt": "Fact: The Sydney Opera House is located in the country of",
+   "prompt": "Fact: The capital of the country where the Sydney Opera House is located is",
+   "hop2_prompt": "Fact: The capital of Australia is",
+   "name": "country-Australia-capital-80",
+   "swap_to": "India"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Australia",
+   "answers": [
+    "English"
+   ],
+   "hop1_prompt": "Fact: The Sydney Opera House is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Sydney Opera House is located is",
+   "hop2_prompt": "Fact: The main language spoken in Australia is",
+   "name": "country-Australia-language-81",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Australia",
+   "answers": [
+    "Australia",
+    "Oceania"
+   ],
+   "hop1_prompt": "Fact: The Sydney Opera House is located in the country of",
+   "prompt": "Fact: The country where the Sydney Opera House is located is on the continent of",
+   "hop2_prompt": "Fact: Australia is located on the continent of",
+   "name": "country-Australia-continent-82",
+   "swap_to": "Peru"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Australia",
+   "answers": [
+    "dollar"
+   ],
+   "hop1_prompt": "Fact: The Sydney Opera House is located in the country of",
+   "prompt": "Fact: The currency of the country where the Sydney Opera House is located is the",
+   "hop2_prompt": "Fact: The currency of Australia is the",
+   "name": "country-Australia-currency-83",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Australia",
+   "answers": [
+    "Canberra"
+   ],
+   "hop1_prompt": "Fact: Uluru is located in the country of",
+   "prompt": "Fact: The capital of the country where Uluru is located is",
+   "hop2_prompt": "Fact: The capital of Australia is",
+   "name": "country-Australia-capital-84",
+   "swap_to": "Greece"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Australia",
+   "answers": [
+    "English"
+   ],
+   "hop1_prompt": "Fact: Uluru is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Uluru is located is",
+   "hop2_prompt": "Fact: The main language spoken in Australia is",
+   "name": "country-Australia-language-85",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Australia",
+   "answers": [
+    "Australia",
+    "Oceania"
+   ],
+   "hop1_prompt": "Fact: Uluru is located in the country of",
+   "prompt": "Fact: The country where Uluru is located is on the continent of",
+   "hop2_prompt": "Fact: Australia is located on the continent of",
+   "name": "country-Australia-continent-86",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Australia",
+   "answers": [
+    "dollar"
+   ],
+   "hop1_prompt": "Fact: Uluru is located in the country of",
+   "prompt": "Fact: The currency of the country where Uluru is located is the",
+   "hop2_prompt": "Fact: The currency of Australia is the",
+   "name": "country-Australia-currency-87",
+   "swap_to": "Indonesia"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Peru",
+   "answers": [
+    "Lima"
+   ],
+   "hop1_prompt": "Fact: Machu Picchu is located in the country of",
+   "prompt": "Fact: The capital of the country where Machu Picchu is located is",
+   "hop2_prompt": "Fact: The capital of Peru is",
+   "name": "country-Peru-capital-88",
+   "swap_to": "Brazil"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Peru",
+   "answers": [
+    "Spanish"
+   ],
+   "hop1_prompt": "Fact: Machu Picchu is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Machu Picchu is located is",
+   "hop2_prompt": "Fact: The main language spoken in Peru is",
+   "name": "country-Peru-language-89",
+   "swap_to": "Canada"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Peru",
+   "answers": [
+    "South"
+   ],
+   "hop1_prompt": "Fact: Machu Picchu is located in the country of",
+   "prompt": "Fact: The country where Machu Picchu is located is on the continent of",
+   "hop2_prompt": "Fact: Peru is located on the continent of",
+   "name": "country-Peru-continent-90",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Peru",
+   "answers": [
+    "sol"
+   ],
+   "hop1_prompt": "Fact: Machu Picchu is located in the country of",
+   "prompt": "Fact: The currency of the country where Machu Picchu is located is the",
+   "hop2_prompt": "Fact: The currency of Peru is the",
+   "name": "country-Peru-currency-91",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Peru",
+   "answers": [
+    "Lima"
+   ],
+   "hop1_prompt": "Fact: Lake Titicaca is located in the country of",
+   "prompt": "Fact: The capital of the country where Lake Titicaca is located is",
+   "hop2_prompt": "Fact: The capital of Peru is",
+   "name": "country-Peru-capital-92",
+   "swap_to": "Jordan"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Peru",
+   "answers": [
+    "Spanish"
+   ],
+   "hop1_prompt": "Fact: Lake Titicaca is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Lake Titicaca is located is",
+   "hop2_prompt": "Fact: The main language spoken in Peru is",
+   "name": "country-Peru-language-93",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Peru",
+   "answers": [
+    "South"
+   ],
+   "hop1_prompt": "Fact: Lake Titicaca is located in the country of",
+   "prompt": "Fact: The country where Lake Titicaca is located is on the continent of",
+   "hop2_prompt": "Fact: Peru is located on the continent of",
+   "name": "country-Peru-continent-94",
+   "swap_to": "Indonesia"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Peru",
+   "answers": [
+    "sol"
+   ],
+   "hop1_prompt": "Fact: Lake Titicaca is located in the country of",
+   "prompt": "Fact: The currency of the country where Lake Titicaca is located is the",
+   "hop2_prompt": "Fact: The currency of Peru is the",
+   "name": "country-Peru-currency-95",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Cambodia",
+   "answers": [
+    "Phnom Penh"
+   ],
+   "hop1_prompt": "Fact: Angkor Wat is located in the country of",
+   "prompt": "Fact: The capital of the country where Angkor Wat is located is",
+   "hop2_prompt": "Fact: The capital of Cambodia is",
+   "name": "country-Cambodia-capital-96",
+   "swap_to": "Brazil"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Cambodia",
+   "answers": [
+    "Khmer"
+   ],
+   "hop1_prompt": "Fact: Angkor Wat is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Angkor Wat is located is",
+   "hop2_prompt": "Fact: The main language spoken in Cambodia is",
+   "name": "country-Cambodia-language-97",
+   "swap_to": "Egypt"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Cambodia",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: Angkor Wat is located in the country of",
+   "prompt": "Fact: The country where Angkor Wat is located is on the continent of",
+   "hop2_prompt": "Fact: Cambodia is located on the continent of",
+   "name": "country-Cambodia-continent-98",
+   "swap_to": "Greece"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Cambodia",
+   "answers": [
+    "riel"
+   ],
+   "hop1_prompt": "Fact: Angkor Wat is located in the country of",
+   "prompt": "Fact: The currency of the country where Angkor Wat is located is the",
+   "hop2_prompt": "Fact: The currency of Cambodia is the",
+   "name": "country-Cambodia-currency-99",
+   "swap_to": "Egypt"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Jordan",
+   "answers": [
+    "Amman"
+   ],
+   "hop1_prompt": "Fact: Petra is located in the country of",
+   "prompt": "Fact: The capital of the country where Petra is located is",
+   "hop2_prompt": "Fact: The capital of Jordan is",
+   "name": "country-Jordan-capital-100",
+   "swap_to": "Italy"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Jordan",
+   "answers": [
+    "Arabic"
+   ],
+   "hop1_prompt": "Fact: Petra is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Petra is located is",
+   "hop2_prompt": "Fact: The main language spoken in Jordan is",
+   "name": "country-Jordan-language-101",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Jordan",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: Petra is located in the country of",
+   "prompt": "Fact: The country where Petra is located is on the continent of",
+   "hop2_prompt": "Fact: Jordan is located on the continent of",
+   "name": "country-Jordan-continent-102",
+   "swap_to": "Chile"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Jordan",
+   "answers": [
+    "dinar"
+   ],
+   "hop1_prompt": "Fact: Petra is located in the country of",
+   "prompt": "Fact: The currency of the country where Petra is located is the",
+   "hop2_prompt": "Fact: The currency of Jordan is the",
+   "name": "country-Jordan-currency-103",
+   "swap_to": "Russia"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Mexico",
+   "answers": [
+    "Mexico City"
+   ],
+   "hop1_prompt": "Fact: Chichen Itza is located in the country of",
+   "prompt": "Fact: The capital of the country where Chichen Itza is located is",
+   "hop2_prompt": "Fact: The capital of Mexico is",
+   "name": "country-Mexico-capital-104",
+   "swap_to": "Turkey"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Mexico",
+   "answers": [
+    "Spanish"
+   ],
+   "hop1_prompt": "Fact: Chichen Itza is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Chichen Itza is located is",
+   "hop2_prompt": "Fact: The main language spoken in Mexico is",
+   "name": "country-Mexico-language-105",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Mexico",
+   "answers": [
+    "North"
+   ],
+   "hop1_prompt": "Fact: Chichen Itza is located in the country of",
+   "prompt": "Fact: The country where Chichen Itza is located is on the continent of",
+   "hop2_prompt": "Fact: Mexico is located on the continent of",
+   "name": "country-Mexico-continent-106",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Mexico",
+   "answers": [
+    "peso"
+   ],
+   "hop1_prompt": "Fact: Chichen Itza is located in the country of",
+   "prompt": "Fact: The currency of the country where Chichen Itza is located is the",
+   "hop2_prompt": "Fact: The currency of Mexico is the",
+   "name": "country-Mexico-currency-107",
+   "swap_to": "Chile"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Mexico",
+   "answers": [
+    "Mexico City"
+   ],
+   "hop1_prompt": "Fact: Cancún is located in the country of",
+   "prompt": "Fact: The capital of the country where Cancún is located is",
+   "hop2_prompt": "Fact: The capital of Mexico is",
+   "name": "country-Mexico-capital-108",
+   "swap_to": "Switzerland"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Mexico",
+   "answers": [
+    "Spanish"
+   ],
+   "hop1_prompt": "Fact: Cancún is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Cancún is located is",
+   "hop2_prompt": "Fact: The main language spoken in Mexico is",
+   "name": "country-Mexico-language-109",
+   "swap_to": "China"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Mexico",
+   "answers": [
+    "North"
+   ],
+   "hop1_prompt": "Fact: Cancún is located in the country of",
+   "prompt": "Fact: The country where Cancún is located is on the continent of",
+   "hop2_prompt": "Fact: Mexico is located on the continent of",
+   "name": "country-Mexico-continent-110",
+   "swap_to": "China"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Mexico",
+   "answers": [
+    "peso"
+   ],
+   "hop1_prompt": "Fact: Cancún is located in the country of",
+   "prompt": "Fact: The currency of the country where Cancún is located is the",
+   "hop2_prompt": "Fact: The currency of Mexico is the",
+   "name": "country-Mexico-currency-111",
+   "swap_to": "Italy"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Canada",
+   "answers": [
+    "Ottawa"
+   ],
+   "hop1_prompt": "Fact: The CN Tower is located in the country of",
+   "prompt": "Fact: The capital of the country where the CN Tower is located is",
+   "hop2_prompt": "Fact: The capital of Canada is",
+   "name": "country-Canada-capital-112",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Canada",
+   "answers": [
+    "English"
+   ],
+   "hop1_prompt": "Fact: The CN Tower is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the CN Tower is located is",
+   "hop2_prompt": "Fact: The main language spoken in Canada is",
+   "name": "country-Canada-language-113",
+   "swap_to": "Portugal"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Canada",
+   "answers": [
+    "North"
+   ],
+   "hop1_prompt": "Fact: The CN Tower is located in the country of",
+   "prompt": "Fact: The country where the CN Tower is located is on the continent of",
+   "hop2_prompt": "Fact: Canada is located on the continent of",
+   "name": "country-Canada-continent-114",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Canada",
+   "answers": [
+    "dollar"
+   ],
+   "hop1_prompt": "Fact: The CN Tower is located in the country of",
+   "prompt": "Fact: The currency of the country where the CN Tower is located is the",
+   "hop2_prompt": "Fact: The currency of Canada is the",
+   "name": "country-Canada-currency-115",
+   "swap_to": "Chile"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Canada",
+   "answers": [
+    "Ottawa"
+   ],
+   "hop1_prompt": "Fact: Banff National Park is located in the country of",
+   "prompt": "Fact: The capital of the country where Banff National Park is located is",
+   "hop2_prompt": "Fact: The capital of Canada is",
+   "name": "country-Canada-capital-116",
+   "swap_to": "Cambodia"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Canada",
+   "answers": [
+    "English"
+   ],
+   "hop1_prompt": "Fact: Banff National Park is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Banff National Park is located is",
+   "hop2_prompt": "Fact: The main language spoken in Canada is",
+   "name": "country-Canada-language-117",
+   "swap_to": "Portugal"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Canada",
+   "answers": [
+    "North"
+   ],
+   "hop1_prompt": "Fact: Banff National Park is located in the country of",
+   "prompt": "Fact: The country where Banff National Park is located is on the continent of",
+   "hop2_prompt": "Fact: Canada is located on the continent of",
+   "name": "country-Canada-continent-118",
+   "swap_to": "Ireland"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Canada",
+   "answers": [
+    "dollar"
+   ],
+   "hop1_prompt": "Fact: Banff National Park is located in the country of",
+   "prompt": "Fact: The currency of the country where Banff National Park is located is the",
+   "hop2_prompt": "Fact: The currency of Canada is the",
+   "name": "country-Canada-currency-119",
+   "swap_to": "Russia"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Turkey",
+   "answers": [
+    "Ankara"
+   ],
+   "hop1_prompt": "Fact: The Hagia Sophia is located in the country of",
+   "prompt": "Fact: The capital of the country where the Hagia Sophia is located is",
+   "hop2_prompt": "Fact: The capital of Turkey is",
+   "name": "country-Turkey-capital-120",
+   "swap_to": "Ireland"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Turkey",
+   "answers": [
+    "Turkish"
+   ],
+   "hop1_prompt": "Fact: The Hagia Sophia is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Hagia Sophia is located is",
+   "hop2_prompt": "Fact: The main language spoken in Turkey is",
+   "name": "country-Turkey-language-121",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Turkey",
+   "answers": [
+    "Europe",
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The Hagia Sophia is located in the country of",
+   "prompt": "Fact: The country where the Hagia Sophia is located is on the continent of",
+   "hop2_prompt": "Fact: Turkey is located on the continent of",
+   "name": "country-Turkey-continent-122",
+   "swap_to": "Greece"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Turkey",
+   "answers": [
+    "lira"
+   ],
+   "hop1_prompt": "Fact: The Hagia Sophia is located in the country of",
+   "prompt": "Fact: The currency of the country where the Hagia Sophia is located is the",
+   "hop2_prompt": "Fact: The currency of Turkey is the",
+   "name": "country-Turkey-currency-123",
+   "swap_to": "Chile"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Turkey",
+   "answers": [
+    "Ankara"
+   ],
+   "hop1_prompt": "Fact: Cappadocia is located in the country of",
+   "prompt": "Fact: The capital of the country where Cappadocia is located is",
+   "hop2_prompt": "Fact: The capital of Turkey is",
+   "name": "country-Turkey-capital-124",
+   "swap_to": "Indonesia"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Turkey",
+   "answers": [
+    "Turkish"
+   ],
+   "hop1_prompt": "Fact: Cappadocia is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Cappadocia is located is",
+   "hop2_prompt": "Fact: The main language spoken in Turkey is",
+   "name": "country-Turkey-language-125",
+   "swap_to": "Jordan"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Turkey",
+   "answers": [
+    "Europe",
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: Cappadocia is located in the country of",
+   "prompt": "Fact: The country where Cappadocia is located is on the continent of",
+   "hop2_prompt": "Fact: Turkey is located on the continent of",
+   "name": "country-Turkey-continent-126",
+   "swap_to": "Indonesia"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Turkey",
+   "answers": [
+    "lira"
+   ],
+   "hop1_prompt": "Fact: Cappadocia is located in the country of",
+   "prompt": "Fact: The currency of the country where Cappadocia is located is the",
+   "hop2_prompt": "Fact: The currency of Turkey is the",
+   "name": "country-Turkey-currency-127",
+   "swap_to": "Russia"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Ireland",
+   "answers": [
+    "Dublin"
+   ],
+   "hop1_prompt": "Fact: The Cliffs of Moher is located in the country of",
+   "prompt": "Fact: The capital of the country where the Cliffs of Moher is located is",
+   "hop2_prompt": "Fact: The capital of Ireland is",
+   "name": "country-Ireland-capital-128",
+   "swap_to": "Mexico"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Ireland",
+   "answers": [
+    "English"
+   ],
+   "hop1_prompt": "Fact: The Cliffs of Moher is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Cliffs of Moher is located is",
+   "hop2_prompt": "Fact: The main language spoken in Ireland is",
+   "name": "country-Ireland-language-129",
+   "swap_to": "Canada"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Ireland",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The Cliffs of Moher is located in the country of",
+   "prompt": "Fact: The country where the Cliffs of Moher is located is on the continent of",
+   "hop2_prompt": "Fact: Ireland is located on the continent of",
+   "name": "country-Ireland-continent-130",
+   "swap_to": "Chile"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Ireland",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: The Cliffs of Moher is located in the country of",
+   "prompt": "Fact: The currency of the country where the Cliffs of Moher is located is the",
+   "hop2_prompt": "Fact: The currency of Ireland is the",
+   "name": "country-Ireland-currency-131",
+   "swap_to": "Kenya"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Norway",
+   "answers": [
+    "Oslo"
+   ],
+   "hop1_prompt": "Fact: The Geirangerfjord is located in the country of",
+   "prompt": "Fact: The capital of the country where the Geirangerfjord is located is",
+   "hop2_prompt": "Fact: The capital of Norway is",
+   "name": "country-Norway-capital-132",
+   "swap_to": "Portugal"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Norway",
+   "answers": [
+    "Norwegian"
+   ],
+   "hop1_prompt": "Fact: The Geirangerfjord is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Geirangerfjord is located is",
+   "hop2_prompt": "Fact: The main language spoken in Norway is",
+   "name": "country-Norway-language-133",
+   "swap_to": "Peru"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Norway",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The Geirangerfjord is located in the country of",
+   "prompt": "Fact: The country where the Geirangerfjord is located is on the continent of",
+   "hop2_prompt": "Fact: Norway is located on the continent of",
+   "name": "country-Norway-continent-134",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Norway",
+   "answers": [
+    "krone"
+   ],
+   "hop1_prompt": "Fact: The Geirangerfjord is located in the country of",
+   "prompt": "Fact: The currency of the country where the Geirangerfjord is located is the",
+   "hop2_prompt": "Fact: The currency of Norway is the",
+   "name": "country-Norway-currency-135",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Indonesia",
+   "answers": [
+    "Jakarta"
+   ],
+   "hop1_prompt": "Fact: Borobudur is located in the country of",
+   "prompt": "Fact: The capital of the country where Borobudur is located is",
+   "hop2_prompt": "Fact: The capital of Indonesia is",
+   "name": "country-Indonesia-capital-136",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Indonesia",
+   "answers": [
+    "Indonesian"
+   ],
+   "hop1_prompt": "Fact: Borobudur is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Borobudur is located is",
+   "hop2_prompt": "Fact: The main language spoken in Indonesia is",
+   "name": "country-Indonesia-language-137",
+   "swap_to": "India"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Indonesia",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: Borobudur is located in the country of",
+   "prompt": "Fact: The country where Borobudur is located is on the continent of",
+   "hop2_prompt": "Fact: Indonesia is located on the continent of",
+   "name": "country-Indonesia-continent-138",
+   "swap_to": "Canada"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Indonesia",
+   "answers": [
+    "rupiah"
+   ],
+   "hop1_prompt": "Fact: Borobudur is located in the country of",
+   "prompt": "Fact: The currency of the country where Borobudur is located is the",
+   "hop2_prompt": "Fact: The currency of Indonesia is the",
+   "name": "country-Indonesia-currency-139",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Indonesia",
+   "answers": [
+    "Jakarta"
+   ],
+   "hop1_prompt": "Fact: The island of Bali is located in the country of",
+   "prompt": "Fact: The capital of the country where the island of Bali is located is",
+   "hop2_prompt": "Fact: The capital of Indonesia is",
+   "name": "country-Indonesia-capital-140",
+   "swap_to": "Kenya"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Indonesia",
+   "answers": [
+    "Indonesian"
+   ],
+   "hop1_prompt": "Fact: The island of Bali is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the island of Bali is located is",
+   "hop2_prompt": "Fact: The main language spoken in Indonesia is",
+   "name": "country-Indonesia-language-141",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Indonesia",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The island of Bali is located in the country of",
+   "prompt": "Fact: The country where the island of Bali is located is on the continent of",
+   "hop2_prompt": "Fact: Indonesia is located on the continent of",
+   "name": "country-Indonesia-continent-142",
+   "swap_to": "Greece"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Indonesia",
+   "answers": [
+    "rupiah"
+   ],
+   "hop1_prompt": "Fact: The island of Bali is located in the country of",
+   "prompt": "Fact: The currency of the country where the island of Bali is located is the",
+   "hop2_prompt": "Fact: The currency of Indonesia is the",
+   "name": "country-Indonesia-currency-143",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Vietnam",
+   "answers": [
+    "Hanoi"
+   ],
+   "hop1_prompt": "Fact: Ha Long Bay is located in the country of",
+   "prompt": "Fact: The capital of the country where Ha Long Bay is located is",
+   "hop2_prompt": "Fact: The capital of Vietnam is",
+   "name": "country-Vietnam-capital-144",
+   "swap_to": "France"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Vietnam",
+   "answers": [
+    "Vietnamese"
+   ],
+   "hop1_prompt": "Fact: Ha Long Bay is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Ha Long Bay is located is",
+   "hop2_prompt": "Fact: The main language spoken in Vietnam is",
+   "name": "country-Vietnam-language-145",
+   "swap_to": "Thailand"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Vietnam",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: Ha Long Bay is located in the country of",
+   "prompt": "Fact: The country where Ha Long Bay is located is on the continent of",
+   "hop2_prompt": "Fact: Vietnam is located on the continent of",
+   "name": "country-Vietnam-continent-146",
+   "swap_to": "Russia"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Vietnam",
+   "answers": [
+    "dong"
+   ],
+   "hop1_prompt": "Fact: Ha Long Bay is located in the country of",
+   "prompt": "Fact: The currency of the country where Ha Long Bay is located is the",
+   "hop2_prompt": "Fact: The currency of Vietnam is the",
+   "name": "country-Vietnam-currency-147",
+   "swap_to": "India"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Kenya",
+   "answers": [
+    "Nairobi"
+   ],
+   "hop1_prompt": "Fact: The Maasai Mara is located in the country of",
+   "prompt": "Fact: The capital of the country where the Maasai Mara is located is",
+   "hop2_prompt": "Fact: The capital of Kenya is",
+   "name": "country-Kenya-capital-148",
+   "swap_to": "Portugal"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Kenya",
+   "answers": [
+    "Swahili"
+   ],
+   "hop1_prompt": "Fact: The Maasai Mara is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Maasai Mara is located is",
+   "hop2_prompt": "Fact: The main language spoken in Kenya is",
+   "name": "country-Kenya-language-149",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Kenya",
+   "answers": [
+    "Africa"
+   ],
+   "hop1_prompt": "Fact: The Maasai Mara is located in the country of",
+   "prompt": "Fact: The country where the Maasai Mara is located is on the continent of",
+   "hop2_prompt": "Fact: Kenya is located on the continent of",
+   "name": "country-Kenya-continent-150",
+   "swap_to": "Peru"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Kenya",
+   "answers": [
+    "shilling"
+   ],
+   "hop1_prompt": "Fact: The Maasai Mara is located in the country of",
+   "prompt": "Fact: The currency of the country where the Maasai Mara is located is the",
+   "hop2_prompt": "Fact: The currency of Kenya is the",
+   "name": "country-Kenya-currency-151",
+   "swap_to": "Egypt"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Chile",
+   "answers": [
+    "Santiago"
+   ],
+   "hop1_prompt": "Fact: Easter Island is located in the country of",
+   "prompt": "Fact: The capital of the country where Easter Island is located is",
+   "hop2_prompt": "Fact: The capital of Chile is",
+   "name": "country-Chile-capital-152",
+   "swap_to": "Australia"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Chile",
+   "answers": [
+    "Spanish"
+   ],
+   "hop1_prompt": "Fact: Easter Island is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Easter Island is located is",
+   "hop2_prompt": "Fact: The main language spoken in Chile is",
+   "name": "country-Chile-language-153",
+   "swap_to": "Jordan"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Chile",
+   "answers": [
+    "South"
+   ],
+   "hop1_prompt": "Fact: Easter Island is located in the country of",
+   "prompt": "Fact: The country where Easter Island is located is on the continent of",
+   "hop2_prompt": "Fact: Chile is located on the continent of",
+   "name": "country-Chile-continent-154",
+   "swap_to": "Italy"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Chile",
+   "answers": [
+    "peso"
+   ],
+   "hop1_prompt": "Fact: Easter Island is located in the country of",
+   "prompt": "Fact: The currency of the country where Easter Island is located is the",
+   "hop2_prompt": "Fact: The currency of Chile is the",
+   "name": "country-Chile-currency-155",
+   "swap_to": "India"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Portugal",
+   "answers": [
+    "Lisbon"
+   ],
+   "hop1_prompt": "Fact: The city of Porto is located in the country of",
+   "prompt": "Fact: The capital of the country where the city of Porto is located is",
+   "hop2_prompt": "Fact: The capital of Portugal is",
+   "name": "country-Portugal-capital-156",
+   "swap_to": "China"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Portugal",
+   "answers": [
+    "Portuguese"
+   ],
+   "hop1_prompt": "Fact: The city of Porto is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the city of Porto is located is",
+   "hop2_prompt": "Fact: The main language spoken in Portugal is",
+   "name": "country-Portugal-language-157",
+   "swap_to": "Chile"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Portugal",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The city of Porto is located in the country of",
+   "prompt": "Fact: The country where the city of Porto is located is on the continent of",
+   "hop2_prompt": "Fact: Portugal is located on the continent of",
+   "name": "country-Portugal-continent-158",
+   "swap_to": "Spain"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Portugal",
+   "answers": [
+    "euro"
+   ],
+   "hop1_prompt": "Fact: The city of Porto is located in the country of",
+   "prompt": "Fact: The currency of the country where the city of Porto is located is the",
+   "hop2_prompt": "Fact: The currency of Portugal is the",
+   "name": "country-Portugal-currency-159",
+   "swap_to": "Italy"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Thailand",
+   "answers": [
+    "Bangkok"
+   ],
+   "hop1_prompt": "Fact: The island of Phuket is located in the country of",
+   "prompt": "Fact: The capital of the country where the island of Phuket is located is",
+   "hop2_prompt": "Fact: The capital of Thailand is",
+   "name": "country-Thailand-capital-160",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Thailand",
+   "answers": [
+    "Thai"
+   ],
+   "hop1_prompt": "Fact: The island of Phuket is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the island of Phuket is located is",
+   "hop2_prompt": "Fact: The main language spoken in Thailand is",
+   "name": "country-Thailand-language-161",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Thailand",
+   "answers": [
+    "Asia"
+   ],
+   "hop1_prompt": "Fact: The island of Phuket is located in the country of",
+   "prompt": "Fact: The country where the island of Phuket is located is on the continent of",
+   "hop2_prompt": "Fact: Thailand is located on the continent of",
+   "name": "country-Thailand-continent-162",
+   "swap_to": "Ireland"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Thailand",
+   "answers": [
+    "baht"
+   ],
+   "hop1_prompt": "Fact: The island of Phuket is located in the country of",
+   "prompt": "Fact: The currency of the country where the island of Phuket is located is the",
+   "hop2_prompt": "Fact: The currency of Thailand is the",
+   "name": "country-Thailand-currency-163",
+   "swap_to": "Indonesia"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Switzerland",
+   "answers": [
+    "Bern"
+   ],
+   "hop1_prompt": "Fact: The Matterhorn is located in the country of",
+   "prompt": "Fact: The capital of the country where the Matterhorn is located is",
+   "hop2_prompt": "Fact: The capital of Switzerland is",
+   "name": "country-Switzerland-capital-164",
+   "swap_to": "Kenya"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Switzerland",
+   "answers": [
+    "German"
+   ],
+   "hop1_prompt": "Fact: The Matterhorn is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where the Matterhorn is located is",
+   "hop2_prompt": "Fact: The main language spoken in Switzerland is",
+   "name": "country-Switzerland-language-165",
+   "swap_to": "Japan"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Switzerland",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: The Matterhorn is located in the country of",
+   "prompt": "Fact: The country where the Matterhorn is located is on the continent of",
+   "hop2_prompt": "Fact: Switzerland is located on the continent of",
+   "name": "country-Switzerland-continent-166",
+   "swap_to": "France"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Switzerland",
+   "answers": [
+    "franc"
+   ],
+   "hop1_prompt": "Fact: The Matterhorn is located in the country of",
+   "prompt": "Fact: The currency of the country where the Matterhorn is located is the",
+   "hop2_prompt": "Fact: The currency of Switzerland is the",
+   "name": "country-Switzerland-currency-167",
+   "swap_to": "India"
+  },
+  {
+   "category": "country",
+   "relation": "capital",
+   "bridge": "Switzerland",
+   "answers": [
+    "Bern"
+   ],
+   "hop1_prompt": "Fact: Lake Geneva is located in the country of",
+   "prompt": "Fact: The capital of the country where Lake Geneva is located is",
+   "hop2_prompt": "Fact: The capital of Switzerland is",
+   "name": "country-Switzerland-capital-168",
+   "swap_to": "Vietnam"
+  },
+  {
+   "category": "country",
+   "relation": "language",
+   "bridge": "Switzerland",
+   "answers": [
+    "German"
+   ],
+   "hop1_prompt": "Fact: Lake Geneva is located in the country of",
+   "prompt": "Fact: The main language spoken in the country where Lake Geneva is located is",
+   "hop2_prompt": "Fact: The main language spoken in Switzerland is",
+   "name": "country-Switzerland-language-169",
+   "swap_to": "Greece"
+  },
+  {
+   "category": "country",
+   "relation": "continent",
+   "bridge": "Switzerland",
+   "answers": [
+    "Europe"
+   ],
+   "hop1_prompt": "Fact: Lake Geneva is located in the country of",
+   "prompt": "Fact: The country where Lake Geneva is located is on the continent of",
+   "hop2_prompt": "Fact: Switzerland is located on the continent of",
+   "name": "country-Switzerland-continent-170",
+   "swap_to": "Indonesia"
+  },
+  {
+   "category": "country",
+   "relation": "currency",
+   "bridge": "Switzerland",
+   "answers": [
+    "franc"
+   ],
+   "hop1_prompt": "Fact: Lake Geneva is located in the country of",
+   "prompt": "Fact: The currency of the country where Lake Geneva is located is the",
+   "hop2_prompt": "Fact: The currency of Switzerland is the",
+   "name": "country-Switzerland-currency-171",
+   "swap_to": "Norway"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "California",
+   "answers": [
+    "Sacramento"
+   ],
+   "hop1_prompt": "Fact: Hollywood is located in the US state of",
+   "prompt": "Fact: The capital of the US state where Hollywood is located is",
+   "hop2_prompt": "Fact: The capital of California is",
+   "name": "us_state-California-capital-172",
+   "swap_to": "Arizona"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "California",
+   "answers": [
+    "Sacramento"
+   ],
+   "hop1_prompt": "Fact: The Golden Gate Bridge is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the Golden Gate Bridge is located is",
+   "hop2_prompt": "Fact: The capital of California is",
+   "name": "us_state-California-capital-173",
+   "swap_to": "Tennessee"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Florida",
+   "answers": [
+    "Tallahassee"
+   ],
+   "hop1_prompt": "Fact: Walt Disney World is located in the US state of",
+   "prompt": "Fact: The capital of the US state where Walt Disney World is located is",
+   "hop2_prompt": "Fact: The capital of Florida is",
+   "name": "us_state-Florida-capital-174",
+   "swap_to": "Arizona"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Florida",
+   "answers": [
+    "Tallahassee"
+   ],
+   "hop1_prompt": "Fact: The Everglades is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the Everglades is located is",
+   "hop2_prompt": "Fact: The capital of Florida is",
+   "name": "us_state-Florida-capital-175",
+   "swap_to": "Pennsylvania"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Arizona",
+   "answers": [
+    "Phoenix"
+   ],
+   "hop1_prompt": "Fact: The Grand Canyon is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the Grand Canyon is located is",
+   "hop2_prompt": "Fact: The capital of Arizona is",
+   "name": "us_state-Arizona-capital-176",
+   "swap_to": "Florida"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Nevada",
+   "answers": [
+    "Carson City"
+   ],
+   "hop1_prompt": "Fact: The Las Vegas Strip is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the Las Vegas Strip is located is",
+   "hop2_prompt": "Fact: The capital of Nevada is",
+   "name": "us_state-Nevada-capital-177",
+   "swap_to": "California"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Texas",
+   "answers": [
+    "Austin"
+   ],
+   "hop1_prompt": "Fact: The Alamo is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the Alamo is located is",
+   "hop2_prompt": "Fact: The capital of Texas is",
+   "name": "us_state-Texas-capital-178",
+   "swap_to": "Missouri"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Louisiana",
+   "answers": [
+    "Baton Rouge"
+   ],
+   "hop1_prompt": "Fact: The French Quarter is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the French Quarter is located is",
+   "hop2_prompt": "Fact: The capital of Louisiana is",
+   "name": "us_state-Louisiana-capital-179",
+   "swap_to": "California"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Pennsylvania",
+   "answers": [
+    "Harrisburg"
+   ],
+   "hop1_prompt": "Fact: The Liberty Bell is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the Liberty Bell is located is",
+   "hop2_prompt": "Fact: The capital of Pennsylvania is",
+   "name": "us_state-Pennsylvania-capital-180",
+   "swap_to": "Nevada"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Tennessee",
+   "answers": [
+    "Nashville"
+   ],
+   "hop1_prompt": "Fact: Graceland is located in the US state of",
+   "prompt": "Fact: The capital of the US state where Graceland is located is",
+   "hop2_prompt": "Fact: The capital of Tennessee is",
+   "name": "us_state-Tennessee-capital-181",
+   "swap_to": "Arizona"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Wyoming",
+   "answers": [
+    "Cheyenne"
+   ],
+   "hop1_prompt": "Fact: Old Faithful is located in the US state of",
+   "prompt": "Fact: The capital of the US state where Old Faithful is located is",
+   "hop2_prompt": "Fact: The capital of Wyoming is",
+   "name": "us_state-Wyoming-capital-182",
+   "swap_to": "Florida"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Hawaii",
+   "answers": [
+    "Honolulu"
+   ],
+   "hop1_prompt": "Fact: Pearl Harbor is located in the US state of",
+   "prompt": "Fact: The capital of the US state where Pearl Harbor is located is",
+   "hop2_prompt": "Fact: The capital of Hawaii is",
+   "name": "us_state-Hawaii-capital-183",
+   "swap_to": "Tennessee"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Missouri",
+   "answers": [
+    "Jefferson City"
+   ],
+   "hop1_prompt": "Fact: The Gateway Arch is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the Gateway Arch is located is",
+   "hop2_prompt": "Fact: The capital of Missouri is",
+   "name": "us_state-Missouri-capital-184",
+   "swap_to": "Nevada"
+  },
+  {
+   "category": "us_state",
+   "relation": "capital",
+   "bridge": "Michigan",
+   "answers": [
+    "Lansing"
+   ],
+   "hop1_prompt": "Fact: The city of Detroit is located in the US state of",
+   "prompt": "Fact: The capital of the US state where the city of Detroit is located is",
+   "hop2_prompt": "Fact: The capital of Michigan is",
+   "name": "us_state-Michigan-capital-185",
+   "swap_to": "California"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "spider",
+   "answers": [
+    "8",
+    "eight"
+   ],
+   "hop1_prompt": "Fact: The animal that spins webs is the",
+   "prompt": "Fact: The number of legs on the animal that spins webs is",
+   "hop2_prompt": "Fact: The number of legs on a spider is",
+   "name": "animal-spider-manual-186",
+   "swap_to": "horse"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "bee",
+   "answers": [
+    "6",
+    "six"
+   ],
+   "hop1_prompt": "Fact: The insect that makes honey is the",
+   "prompt": "Fact: The number of legs on the insect that makes honey is",
+   "hop2_prompt": "Fact: The number of legs on a bee is",
+   "name": "animal-bee-manual-187",
+   "swap_to": "spider"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "octopus",
+   "answers": [
+    "8",
+    "eight"
+   ],
+   "hop1_prompt": "Fact: The sea creature that squirts ink is the",
+   "prompt": "Fact: The number of arms on the sea creature that squirts ink is",
+   "hop2_prompt": "Fact: The number of arms on an octopus is",
+   "name": "animal-octopus-manual-188",
+   "swap_to": "frog"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "cow",
+   "answers": [
+    "calf"
+   ],
+   "hop1_prompt": "Fact: The farm animal that says moo is the",
+   "prompt": "Fact: The baby of the farm animal that says moo is called a",
+   "hop2_prompt": "Fact: The baby of a cow is called a",
+   "name": "animal-cow-manual-189",
+   "swap_to": "pig"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "dog",
+   "answers": [
+    "puppy",
+    "pup"
+   ],
+   "hop1_prompt": "Fact: The animal that barks is the",
+   "prompt": "Fact: The baby of the animal that barks is called a",
+   "hop2_prompt": "Fact: The baby of a dog is called a",
+   "name": "animal-dog-manual-190",
+   "swap_to": "bear"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "cat",
+   "answers": [
+    "kitten"
+   ],
+   "hop1_prompt": "Fact: The pet that purrs is the",
+   "prompt": "Fact: The baby of the pet that purrs is called a",
+   "hop2_prompt": "Fact: The baby of a cat is called a",
+   "name": "animal-cat-manual-191",
+   "swap_to": "bee"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "sheep",
+   "answers": [
+    "lamb"
+   ],
+   "hop1_prompt": "Fact: The farm animal that gives us wool is the",
+   "prompt": "Fact: The baby of the farm animal that gives us wool is called a",
+   "hop2_prompt": "Fact: The baby of a sheep is called a",
+   "name": "animal-sheep-manual-192",
+   "swap_to": "dog"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "pig",
+   "answers": [
+    "piglet"
+   ],
+   "hop1_prompt": "Fact: The farm animal that says oink is the",
+   "prompt": "Fact: The baby of the farm animal that says oink is called a",
+   "hop2_prompt": "Fact: The baby of a pig is called a",
+   "name": "animal-pig-manual-193",
+   "swap_to": "bee"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "kangaroo",
+   "answers": [
+    "joey"
+   ],
+   "hop1_prompt": "Fact: The Australian animal that hops and carries its baby in a pouch is the",
+   "prompt": "Fact: The baby of the Australian animal that hops and carries its baby in a pouch is called a",
+   "hop2_prompt": "Fact: The baby of a kangaroo is called a",
+   "name": "animal-kangaroo-manual-194",
+   "swap_to": "cow"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "frog",
+   "answers": [
+    "tadpole"
+   ],
+   "hop1_prompt": "Fact: The amphibian that croaks is the",
+   "prompt": "Fact: The baby of the amphibian that croaks is called a",
+   "hop2_prompt": "Fact: The baby of a frog is called a",
+   "name": "animal-frog-manual-195",
+   "swap_to": "bee"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "bear",
+   "answers": [
+    "cub"
+   ],
+   "hop1_prompt": "Fact: The large forest animal that hibernates and loves honey is the",
+   "prompt": "Fact: The baby of the large forest animal that hibernates and loves honey is called a",
+   "hop2_prompt": "Fact: The baby of a bear is called a",
+   "name": "animal-bear-manual-196",
+   "swap_to": "horse"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "horse",
+   "answers": [
+    "foal",
+    "colt",
+    "filly"
+   ],
+   "hop1_prompt": "Fact: The animal that neighs is the",
+   "prompt": "Fact: The baby of the animal that neighs is called a",
+   "hop2_prompt": "Fact: The baby of a horse is called a",
+   "name": "animal-horse-manual-197",
+   "swap_to": "dog"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "dog",
+   "answers": [
+    "4",
+    "four"
+   ],
+   "hop1_prompt": "Fact: The animal that barks is the",
+   "prompt": "Fact: The number of legs on the animal that barks is",
+   "hop2_prompt": "Fact: The number of legs on a dog is",
+   "name": "animal-dog-manual-198",
+   "swap_to": "sheep"
+  },
+  {
+   "category": "animal",
+   "relation": "manual",
+   "bridge": "bee",
+   "answers": [
+    "4",
+    "four"
+   ],
+   "hop1_prompt": "Fact: The insect that makes honey is the",
+   "prompt": "Fact: The number of wings on the insect that makes honey is",
+   "hop2_prompt": "Fact: The number of wings on a bee is",
+   "name": "animal-bee-manual-199",
+   "swap_to": "pig"
+  },
+  {
+   "category": "planet",
+   "relation": "manual",
+   "bridge": "Mars",
+   "answers": [
+    "4",
+    "four"
+   ],
+   "hop1_prompt": "Fact: The planet known as the Red Planet is",
+   "prompt": "Fact: Counting from the sun, the position of the Red Planet is number",
+   "hop2_prompt": "Fact: Counting from the sun, the position of Mars is number",
+   "name": "planet-Mars-manual-200",
+   "swap_to": "Jupiter"
+  },
+  {
+   "category": "planet",
+   "relation": "manual",
+   "bridge": "Jupiter",
+   "answers": [
+    "5",
+    "five"
+   ],
+   "hop1_prompt": "Fact: The largest planet in the solar system is",
+   "prompt": "Fact: Counting from the sun, the position of the largest planet in the solar system is number",
+   "hop2_prompt": "Fact: Counting from the sun, the position of Jupiter is number",
+   "name": "planet-Jupiter-manual-201",
+   "swap_to": "Mars"
+  },
+  {
+   "category": "planet",
+   "relation": "manual",
+   "bridge": "Saturn",
+   "answers": [
+    "6",
+    "six"
+   ],
+   "hop1_prompt": "Fact: The planet with the most famous rings is",
+   "prompt": "Fact: Counting from the sun, the position of the planet with the most famous rings is number",
+   "hop2_prompt": "Fact: Counting from the sun, the position of Saturn is number",
+   "name": "planet-Saturn-manual-202",
+   "swap_to": "Venus"
+  },
+  {
+   "category": "planet",
+   "relation": "manual",
+   "bridge": "Venus",
+   "answers": [
+    "2",
+    "two"
+   ],
+   "hop1_prompt": "Fact: The hottest planet in the solar system is",
+   "prompt": "Fact: Counting from the sun, the position of the hottest planet in the solar system is number",
+   "hop2_prompt": "Fact: Counting from the sun, the position of Venus is number",
+   "name": "planet-Venus-manual-203",
+   "swap_to": "Jupiter"
+  },
+  {
+   "category": "planet",
+   "relation": "manual",
+   "bridge": "Mars",
+   "answers": [
+    "2",
+    "two"
+   ],
+   "hop1_prompt": "Fact: The planet known as the Red Planet is",
+   "prompt": "Fact: The number of moons of the Red Planet is",
+   "hop2_prompt": "Fact: The number of moons of Mars is",
+   "name": "planet-Mars-manual-204",
+   "swap_to": "Jupiter"
+  },
+  {
+   "category": "element",
+   "relation": "manual",
+   "bridge": "oxygen",
+   "answers": [
+    "O"
+   ],
+   "hop1_prompt": "Fact: The gas humans need to breathe to survive is",
+   "prompt": "Fact: The chemical symbol of the gas humans need to breathe to survive is",
+   "hop2_prompt": "Fact: The chemical symbol of oxygen is",
+   "name": "element-oxygen-manual-205",
+   "swap_to": "gold"
+  },
+  {
+   "category": "element",
+   "relation": "manual",
+   "bridge": "iron",
+   "answers": [
+    "Fe"
+   ],
+   "hop1_prompt": "Fact: The metal that rusts when exposed to water is",
+   "prompt": "Fact: The chemical symbol of the metal that rusts when exposed to water is",
+   "hop2_prompt": "Fact: The chemical symbol of iron is",
+   "name": "element-iron-manual-206",
+   "swap_to": "oxygen"
+  },
+  {
+   "category": "element",
+   "relation": "manual",
+   "bridge": "copper",
+   "answers": [
+    "Cu"
+   ],
+   "hop1_prompt": "Fact: The metal used in most electrical wires is",
+   "prompt": "Fact: The chemical symbol of the metal used in most electrical wires is",
+   "hop2_prompt": "Fact: The chemical symbol of copper is",
+   "name": "element-copper-manual-207",
+   "swap_to": "silver"
+  },
+  {
+   "category": "element",
+   "relation": "manual",
+   "bridge": "carbon",
+   "answers": [
+    "6",
+    "six"
+   ],
+   "hop1_prompt": "Fact: The element that diamonds are made of is",
+   "prompt": "Fact: The atomic number of the element that diamonds are made of is",
+   "hop2_prompt": "Fact: The atomic number of carbon is",
+   "name": "element-carbon-manual-208",
+   "swap_to": "hydrogen"
+  },
+  {
+   "category": "element",
+   "relation": "manual",
+   "bridge": "hydrogen",
+   "answers": [
+    "1",
+    "one"
+   ],
+   "hop1_prompt": "Fact: The lightest element is",
+   "prompt": "Fact: The atomic number of the lightest element is",
+   "hop2_prompt": "Fact: The atomic number of hydrogen is",
+   "name": "element-hydrogen-manual-209",
+   "swap_to": "iron"
+  },
+  {
+   "category": "element",
+   "relation": "manual",
+   "bridge": "oxygen",
+   "answers": [
+    "8",
+    "eight"
+   ],
+   "hop1_prompt": "Fact: The gas humans need to breathe to survive is",
+   "prompt": "Fact: The atomic number of the gas humans need to breathe to survive is",
+   "hop2_prompt": "Fact: The atomic number of oxygen is",
+   "name": "element-oxygen-manual-210",
+   "swap_to": "carbon"
+  },
+  {
+   "category": "element",
+   "relation": "manual",
+   "bridge": "gold",
+   "answers": [
+    "Au"
+   ],
+   "hop1_prompt": "Fact: The precious metal used for Olympic first place medals is",
+   "prompt": "Fact: The chemical symbol of the precious metal used for Olympic first place medals is",
+   "hop2_prompt": "Fact: The chemical symbol of gold is",
+   "name": "element-gold-manual-211",
+   "swap_to": "copper"
+  },
+  {
+   "category": "element",
+   "relation": "manual",
+   "bridge": "silver",
+   "answers": [
+    "Ag"
+   ],
+   "hop1_prompt": "Fact: The precious metal used for Olympic second place medals is",
+   "prompt": "Fact: The chemical symbol of the precious metal used for Olympic second place medals is",
+   "hop2_prompt": "Fact: The chemical symbol of silver is",
+   "name": "element-silver-manual-212",
+   "swap_to": "gold"
+  },
+  {
+   "category": "person",
+   "relation": "manual",
+   "bridge": "Einstein",
+   "answers": [
+    "Germany"
+   ],
+   "hop1_prompt": "Fact: The scientist who developed the theory of relativity is Albert",
+   "prompt": "Fact: The scientist who developed the theory of relativity was born in the country of",
+   "hop2_prompt": "Fact: Albert Einstein was born in the country of",
+   "name": "person-Einstein-manual-213",
+   "swap_to": "Curie"
+  },
+  {
+   "category": "person",
+   "relation": "manual",
+   "bridge": "Shakespeare",
+   "answers": [
+    "England",
+    "UK",
+    "United",
+    "Britain"
+   ],
+   "hop1_prompt": "Fact: The playwright who wrote Hamlet is William",
+   "prompt": "Fact: The playwright who wrote Hamlet was born in the country of",
+   "hop2_prompt": "Fact: William Shakespeare was born in the country of",
+   "name": "person-Shakespeare-manual-214",
+   "swap_to": "Mozart"
+  },
+  {
+   "category": "person",
+   "relation": "manual",
+   "bridge": "Mozart",
+   "answers": [
+    "Austria"
+   ],
+   "hop1_prompt": "Fact: The composer of The Magic Flute is Wolfgang Amadeus",
+   "prompt": "Fact: The composer of The Magic Flute was born in the country of",
+   "hop2_prompt": "Fact: Wolfgang Amadeus Mozart was born in the country of",
+   "name": "person-Mozart-manual-215",
+   "swap_to": "Shakespeare"
+  },
+  {
+   "category": "person",
+   "relation": "manual",
+   "bridge": "Darwin",
+   "answers": [
+    "England",
+    "UK",
+    "United",
+    "Britain"
+   ],
+   "hop1_prompt": "Fact: The scientist who proposed evolution by natural selection is Charles",
+   "prompt": "Fact: The scientist who proposed evolution by natural selection was born in the country of",
+   "hop2_prompt": "Fact: Charles Darwin was born in the country of",
+   "name": "person-Darwin-manual-216",
+   "swap_to": "Einstein"
+  },
+  {
+   "category": "person",
+   "relation": "manual",
+   "bridge": "Curie",
+   "answers": [
+    "Poland"
+   ],
+   "hop1_prompt": "Fact: The scientist who discovered radium is Marie",
+   "prompt": "Fact: The scientist who discovered radium was born in the country of",
+   "hop2_prompt": "Fact: Marie Curie was born in the country of",
+   "name": "person-Curie-manual-217",
+   "swap_to": "Shakespeare"
+  }
+ ]
+}
