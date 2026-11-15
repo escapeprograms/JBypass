@@ -1,9 +1,8 @@
 """Run items x prompt types x ablation conditions and summarize accuracy."""
 
-import random
 from collections import defaultdict
 
-from evaluation.conditions import CONDITIONS
+from evaluation.conditions import CONDITIONS, item_rng
 from evaluation.scoring import answer_token_ids, greedy_continuation, matches
 from jspace import token_variants
 
@@ -16,23 +15,23 @@ def field_answers(item, field: str) -> tuple[str, ...]:
 def readable_items(js, items):
     """Drop items whose bridge (or swap_to) has no single-token spelling."""
     def ok(word):
-        return word is None or bool(token_variants(js.tokenizer, word))
+        return word is None or bool(token_variants(js.lm.tokenizer, word))
     return [it for it in items if ok(it.bridge) and ok(it.swap_to)]
 
 
-def score_one(js, item, field: str, condition: str, seed: str, n_tokens: int) -> dict:
+def score_one(js, item, field: str, condition: str, seed: int, n_tokens: int) -> dict:
     """correct: exact match of the greedy continuation (primary metric).
     next_token_correct: the paper's stricter first-token metric."""
     prompt = getattr(item, field)
     answers = field_answers(item, field)
 
-    def make_intervention(text):
-        return CONDITIONS[condition](js, item, text, random.Random(seed))
+    def interventions_for(enc):   # a fresh rng every step, so random ablations stay fixed
+        return CONDITIONS[condition](js, item, enc, item_rng(seed, item, condition))
 
-    continuation, first = greedy_continuation(js, prompt, make_intervention, n_tokens)
+    continuation, first = greedy_continuation(js.lm, prompt, interventions_for, n_tokens)
     return {"name": item.name, "field": field, "condition": condition,
             "correct": matches(continuation, answers),
-            "next_token_correct": first in answer_token_ids(js.tokenizer, answers),
+            "next_token_correct": first in answer_token_ids(js.lm.tokenizer, answers),
             "output": continuation}
 
 
@@ -44,8 +43,7 @@ def evaluate(js, items, conditions, fields, seed: int = 0, n_tokens: int = 5) ->
             if getattr(item, field) is None:
                 continue
             for condition in conditions:
-                rec_seed = f"{seed}-{item.name}-{condition}"
-                records.append(score_one(js, item, field, condition, rec_seed, n_tokens))
+                records.append(score_one(js, item, field, condition, seed, n_tokens))
     return records
 
 

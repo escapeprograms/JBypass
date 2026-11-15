@@ -13,7 +13,7 @@ from typing import Protocol
 import torch
 from torch.utils.hooks import RemovableHandle
 
-from jbypass.model.loading import LanguageModel
+from model.loading import LanguageModel
 
 
 @dataclass(frozen=True)
@@ -29,6 +29,28 @@ class Intervention(Protocol):
     layers: Sequence[int]
 
     def __call__(self, resid: torch.Tensor, ctx: HookContext) -> torch.Tensor: ...
+
+
+class PerRow:
+    """Satisfies Intervention: rows[i] applies to batch row i only, so each example in a
+    batch gets its own edits. Each row's interventions see that row's slice of the
+    residual and of the attention mask."""
+
+    def __init__(self, rows: Sequence[Sequence[Intervention]]):
+        self.rows = [list(row) for row in rows]
+        self.layers = sorted({layer for row in self.rows for iv in row for layer in iv.layers})
+
+    def __call__(self, resid: torch.Tensor, ctx: HookContext) -> torch.Tensor:
+        if resid.shape[0] != len(self.rows):
+            raise ValueError(f"PerRow has {len(self.rows)} rows but the batch has {resid.shape[0]}")
+        return torch.cat([self._edit_row(i, resid[i:i + 1], ctx) for i in range(len(self.rows))])
+
+    def _edit_row(self, i: int, resid: torch.Tensor, ctx: HookContext) -> torch.Tensor:
+        row_ctx = HookContext(ctx.layer, ctx.attention_mask[i:i + 1])
+        for iv in self.rows[i]:
+            if ctx.layer in iv.layers:
+                resid = iv(resid, row_ctx)
+        return resid
 
 
 def block_residual(output) -> torch.Tensor:

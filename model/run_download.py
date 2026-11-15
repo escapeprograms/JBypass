@@ -1,15 +1,19 @@
 """Fetch a profile's model weights and tokenizer into the default Hugging Face cache.
 
-Usage:  python scripts/download_model.py [--model qwen3-0.6b] [--config configs/run.yaml]
+Usage:  python -m model.run_download [--model qwen3-0.6b] [--config configs/run.yaml]
 """
+
+import argparse
 
 from huggingface_hub import snapshot_download
 
-from _cli import parse_run_args, resolve_run
+from model.cli import add_profile_args, resolve_profile
 
 
 def main() -> None:
-    _, profile = resolve_run(parse_run_args(__doc__))
+    parser = argparse.ArgumentParser(description=__doc__)
+    add_profile_args(parser)
+    _, profile = resolve_profile(parser.parse_args())
     path = snapshot_download(repo_id=profile.hf_id)
     print(f"{profile.name}: {profile.hf_id} -> {path}")
 

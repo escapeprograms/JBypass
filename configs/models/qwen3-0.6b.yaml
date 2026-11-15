@@ -8,3 +8,4 @@ final_norm_path: model.norm
 chat_template_kwargs:
   enable_thinking: false
 lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+prefit_lens: null                # no prefit lens exists; pass --lens_path to a fitted one

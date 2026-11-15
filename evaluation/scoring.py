@@ -4,35 +4,23 @@ We also record the paper's metric (greedy next token == answer's first token);
 on a 1.7B model it is harsh, because filler like " a" or a bare " " before a
 digit often wins the first token.
 
-The intervention is rebuilt for every decoding step from the current text, so
-prompt-dependent ones (the paper's top-k ablation) see the right sequence. No
-KV cache: each step is a full forward pass.
+Decoding is `model.inference.greedy_tokens`: the interventions are rebuilt for every
+step from the current token ids, so sequence-dependent ones (the paper's top-k
+ablation) see the right sequence. No KV cache: each step is a full forward pass.
 """
 
-import contextlib
-
-import torch
+from model.inference import InterventionsFor, encode, greedy_tokens
+from model.loading import LanguageModel
 
 FILLER_PREFIXES = ("a ", "an ", "the ", "called ", "number ")
 
 
-@torch.no_grad()
-def next_token_logits(js, prompt: str) -> torch.Tensor:
-    """Final-position logits [vocab] under whatever interventions are active."""
-    input_ids = js.model.encode(prompt)
-    return js.hf_model(input_ids=input_ids).logits[0, -1].float()
-
-
-def greedy_continuation(js, prompt: str, make_intervention, n_tokens: int) -> tuple[str, int]:
-    """Greedy-decode n_tokens. make_intervention(text) -> context manager or None.
-    Returns (continuation text, first generated token id)."""
-    text, first = prompt, None
-    for _ in range(n_tokens):
-        with make_intervention(text) or contextlib.nullcontext():
-            token = int(next_token_logits(js, text).argmax())
-        first = token if first is None else first
-        text += js.tokenizer.decode([token])
-    return text[len(prompt):], first
+def greedy_continuation(lm: LanguageModel, prompt: str, interventions_for: InterventionsFor,
+                        n_tokens: int) -> tuple[str, int]:
+    """Greedy-decode up to n_tokens (stops early at EOS). interventions_for(enc) gives
+    the interventions for each step. Returns (continuation text, first generated token id)."""
+    tokens = greedy_tokens(lm, encode(lm, [prompt]), n_tokens, interventions_for)[0].tolist()
+    return lm.tokenizer.decode(tokens), tokens[0]
 
 
 def matches(continuation: str, answers) -> bool:

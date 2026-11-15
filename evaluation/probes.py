@@ -31,8 +31,9 @@ def strip_jspace(js, X: torch.Tensor, k: int) -> torch.Tensor:
     """Replace each [n, n_layers, d] residual with its non-J-space part."""
     layers = sorted(js.lens.source_layers)
     out = X.clone()
+    W_U = js.lm.unembedding_matrix
     for l in layers:
-        out[:, l] = non_jspace_part(js.lens, js.W_U, X[:, l].to(js.device), l, k).cpu()
+        out[:, l] = non_jspace_part(js.lens, W_U, X[:, l].to(js.lm.device), l, k).cpu()
     return out
 
 

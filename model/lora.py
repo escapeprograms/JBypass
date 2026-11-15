@@ -12,8 +12,8 @@ from pathlib import Path
 
 from peft import LoraConfig, PeftModel, get_peft_model
 
-from jbypass.model.config import LoraSettings
-from jbypass.model.loading import LanguageModel
+from model.config import LoraSettings
+from model.loading import LanguageModel
 
 PROFILE_FILE = "jbypass_profile.json"   # written beside the adapter weights
 

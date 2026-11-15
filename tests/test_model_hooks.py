@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from jbypass.model.hooks import apply_interventions, block_residual, capture_residuals, with_block_residual
+from model.hooks import PerRow, apply_interventions, block_residual, capture_residuals, with_block_residual
 
 from conftest import D_MODEL, N_LAYERS, random_ids
 from dummies import Identity, ZeroOut
@@ -96,3 +96,31 @@ def test_block_output_normalisation_handles_tensor_and_tuple():
     assert with_block_residual(resid, new) is new
     rebuilt = with_block_residual((resid, extra), new)
     assert isinstance(rebuilt, tuple) and rebuilt[0] is new and rebuilt[1] is extra
+
+
+def test_per_row_edits_only_its_own_row(lm):
+    ids, mask = random_ids(lm, batch=2)
+    with capture_residuals(lm, [1]) as clean:
+        logits_of(lm, ids, mask)
+    per_row = PerRow([[ZeroOut(layers=[1])], []])
+    assert per_row.layers == [1]
+    with apply_interventions(lm, [per_row], mask), capture_residuals(lm, [1]) as edited:
+        logits_of(lm, ids, mask)
+    assert torch.count_nonzero(edited[1][0]) == 0
+    torch.testing.assert_close(edited[1][1], clean[1][1])
+
+
+def test_per_row_passes_gradients_to_its_input(lm):
+    ids, mask = random_ids(lm, batch=2)
+    spies = [Identity(layers=[1]), Identity(layers=[1])]
+    with apply_interventions(lm, [PerRow([[spies[0]], [spies[1]]])], mask):
+        loss = logits_of(lm, ids, mask).sum()
+    grads = torch.autograd.grad(loss, [spy.seen[0] for spy in spies])
+    assert all(g.abs().sum() > 0 for g in grads)
+    assert [s.seen[0].shape[0] for s in spies] == [1, 1]
+
+
+def test_per_row_rejects_wrong_batch_size(lm):
+    ids, mask = random_ids(lm, batch=2)
+    with pytest.raises(ValueError), apply_interventions(lm, [PerRow([[ZeroOut(layers=[1])]])], mask):
+        logits_of(lm, ids, mask)

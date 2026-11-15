@@ -1,6 +1,7 @@
-"""Ablation conditions. Each builder takes (js, item, prompt, rng) and returns a
-jspace intervention (a context manager) or None for the clean run. Add a new
-condition by writing a builder and registering it in CONDITIONS.
+"""Ablation conditions. Each builder takes (js, item, enc, rng) and returns a sequence
+of `model.hooks.Intervention`s, `()` for the clean run. `enc` is the current token
+sequence (`model.inference.Encoded`, one row). Add a new condition by writing a builder
+and registering it in CONDITIONS. Training uses the same builders (finetune/ablated.py).
 
   none          clean model
   bridge        project out the bridge's J-lens vectors over the band   (the intervention)
@@ -14,47 +15,58 @@ condition by writing a builder and registering it in CONDITIONS.
 """
 
 import random
+from collections.abc import Callable, Sequence
 
 import torch
 
-from jspace import ProjectOut, TopKAblation, band_prefix, lens_vectors, token_variants
+from evaluation.data_loading import TwoHopItem
+from jspace import JSpace, ProjectOut, TopKAblation, band_prefix, lens_vectors, token_variants
 from jspace.config import JSpaceConfig
+from model.hooks import Intervention
+from model.inference import Encoded, forward_logits
+
+Builder = Callable[[JSpace, TwoHopItem, Encoded, random.Random], Sequence[Intervention]]
 
 
-def build_none(js, item, prompt, rng):
-    return None
+def item_rng(seed, item: TwoHopItem, condition: str) -> random.Random:
+    """The per-item random source for a condition; one seeding rule for eval and training."""
+    return random.Random(f"{seed}-{item.name}-{condition}")
 
 
-def build_bridge(js, item, prompt, rng):
-    return _project_word(js, item.bridge)
+def build_none(js, item, enc, rng):
+    return ()
 
 
-def build_wrong_bridge(js, item, prompt, rng):
-    return _project_word(js, item.swap_to)
+def build_bridge(js, item, enc, rng):
+    return (_project_word(js, item.bridge),)
 
 
-def build_random_tok(js, item, prompt, rng):
-    n = len(token_variants(js.tokenizer, item.bridge))
-    ids = _random_word_tokens(js.tokenizer, n, rng)
-    return ProjectOut(js, lens_vectors(js.lens, js.W_U, ids, js.band))
+def build_wrong_bridge(js, item, enc, rng):
+    return (_project_word(js, item.swap_to),)
 
 
-def build_random_dir(js, item, prompt, rng):
-    n = len(token_variants(js.tokenizer, item.bridge))
+def build_random_tok(js, item, enc, rng):
+    n = len(token_variants(js.lm.tokenizer, item.bridge))
+    ids = _random_word_tokens(js.lm.tokenizer, n, rng)
+    return (ProjectOut(js, lens_vectors(js.lens, js.lm.unembedding_matrix, ids, js.band)),)
+
+
+def build_random_dir(js, item, enc, rng):
+    n = len(token_variants(js.lm.tokenizer, item.bridge))
     gen = torch.Generator().manual_seed(rng.randrange(2**31))
-    d = js.model.d_model
-    return ProjectOut(js, {l: torch.randn(n, d, generator=gen) for l in js.band})
+    d = js.lm.d_model
+    return (ProjectOut(js, {l: torch.randn(n, d, generator=gen) for l in js.band}),)
 
 
-def make_topk_builder(fraction: float):
-    def build_topk(js, item, prompt, rng):
-        exclude = _clean_top_tokens_mask(js, prompt, js.cfg.ablation_exclude_top_k)
+def make_topk_builder(fraction: float) -> Builder:
+    def build_topk(js, item, enc, rng):
+        exclude = _clean_top_tokens_mask(js, enc, js.cfg.ablation_exclude_top_k)
         layers = band_prefix(js.band, fraction)
-        return TopKAblation(js, layers, js.cfg.ablation_top_k, exclude)
+        return (TopKAblation(js, layers, js.cfg.ablation_top_k, exclude),)
     return build_topk
 
 
-CONDITIONS = {
+CONDITIONS: dict[str, Builder] = {
     "none": build_none,
     "bridge": build_bridge,
     "wrong_bridge": build_wrong_bridge,
@@ -67,10 +79,10 @@ for _name, _fraction in JSpaceConfig().ablation_strengths:
 
 
 def _project_word(js, word: str):
-    ids = token_variants(js.tokenizer, word)
+    ids = token_variants(js.lm.tokenizer, word)
     if not ids:
         raise ValueError(f"{word!r} has no single-token spelling; the J-lens cannot read it")
-    return ProjectOut(js, lens_vectors(js.lens, js.W_U, ids, js.band))
+    return ProjectOut(js, lens_vectors(js.lens, js.lm.unembedding_matrix, ids, js.band))
 
 
 def _random_word_tokens(tokenizer, n: int, rng: random.Random) -> list[int]:
@@ -85,11 +97,10 @@ def _random_word_tokens(tokenizer, n: int, rng: random.Random) -> list[int]:
 
 
 @torch.no_grad()
-def _clean_top_tokens_mask(js, prompt: str, k: int) -> torch.Tensor:
-    """[1, seq_len, vocab] bool: the clean pass's top-k output tokens at each position.
+def _clean_top_tokens_mask(js, enc: Encoded, k: int) -> torch.Tensor:
+    """[batch, seq_len, vocab] bool: the clean pass's top-k output tokens at each position.
     TODO(debt): paper says "tokens that appear in the top-10 tokens of a clean
     forward pass" without saying per position or final position; we use per position."""
-    input_ids = js.model.encode(prompt)
-    logits = js.hf_model(input_ids=input_ids).logits.float()
+    logits = forward_logits(js.lm, enc.input_ids, enc.attention_mask).float()
     mask = torch.zeros_like(logits, dtype=torch.bool)
     return mask.scatter_(-1, logits.topk(k, dim=-1).indices, True)

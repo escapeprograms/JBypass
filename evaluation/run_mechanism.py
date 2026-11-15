@@ -9,9 +9,9 @@ python -m evaluation.run_mechanism --adapter runs/some_adapter --extra_lens reco
 
 import argparse
 import dataclasses
-import random
 
 from evaluation.cli_common import add_model_args, load_from_args, load_items, write_json
+from evaluation.conditions import item_rng
 from evaluation.config import EvalConfig
 from evaluation.mechanism import bridge_ranks_all_positions, collect_final_token, summarize_ranks
 from evaluation.probes import chance_level, probe_accuracy_by_layer, strip_jspace
@@ -22,7 +22,7 @@ from jspace import load_lens
 def readout_section(js, items, conditions, cfg) -> dict:
     out = {}
     for cond in conditions:
-        per_item = [bridge_ranks_all_positions(js, it, cond, _rng(cfg, it, cond)) for it in items]
+        per_item = [bridge_ranks_all_positions(js, it, cond, item_rng(cfg.seed, it, cond)) for it in items]
         out[cond] = summarize_ranks(per_item, cfg.readout_k, js.band)
         f, q = out[cond]["final"], out[cond]["question_best"]
         print(f"  readout {cond:12s} pass@{cfg.readout_k} all layers / band: "
@@ -36,7 +36,7 @@ def probe_section(js, items, conditions, cfg) -> dict:
     groups = [subject_key(it) for it in items]
     out = {"chance": chance_level(labels, groups, cfg.probe_folds)}
     for cond in conditions:
-        X = collect_final_token(js, items, cond, lambda it: _rng(cfg, it, cond))
+        X = collect_final_token(js, items, cond, lambda it: item_rng(cfg.seed, it, cond))
         args = (labels, groups, cfg.probe_folds, cfg.probe_steps, cfg.probe_weight_decay)
         out[cond] = {"full": probe_accuracy_by_layer(X, *args),
                      "non_jspace": probe_accuracy_by_layer(strip_jspace(js, X, js.cfg.decompose_k), *args)}
@@ -49,10 +49,6 @@ def subject_key(item) -> str:
     """Items sharing a hop-1 prompt are about the same subject (one landmark,
     several relations). Datasets without hop-1 prompts group by the prompt."""
     return item.hop1_prompt or item.prompt
-
-
-def _rng(cfg, item, cond):
-    return random.Random(f"{cfg.seed}-{item.name}-{cond}")
 
 
 def main():
@@ -72,7 +68,7 @@ def main():
     lenses = {"original": js.lens}
     for spec in args.extra_lens:
         label, path = spec.split("=", 1)
-        lenses[label] = load_lens(dataclasses.replace(js.cfg, lens_path=path), device=js.cfg.device)
+        lenses[label] = load_lens(js.lm, path)
 
     out = {}
     for label, lens in lenses.items():

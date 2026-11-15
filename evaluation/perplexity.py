@@ -3,19 +3,17 @@ fine-tuning did not damage general abilities. Compare M against Mctrl / Mexp."""
 
 import math
 
-import torch
+from model.inference import encode, sequence_nll
+from model.loading import LanguageModel
 
 
-@torch.no_grad()
-def perplexity(js, texts: list[str], max_len: int) -> float:
-    """Token-weighted perplexity of js.hf_model over texts (truncated to max_len)."""
+def perplexity(lm: LanguageModel, texts: list[str], max_len: int, batch_size: int) -> float:
+    """Token-weighted perplexity over all texts, each truncated to its first max_len
+    tokens; texts under 2 tokens are skipped. Runs in left-padded batches."""
+    usable = [t for t in texts if len(lm.token_ids(t)) >= 2]
     total_nll, total_tokens = 0.0, 0
-    for text in texts:
-        ids = js.model.encode(text, max_length=max_len)
-        if ids.shape[1] < 2:
-            continue
-        logits = js.hf_model(input_ids=ids).logits[0, :-1].float()
-        nll = torch.nn.functional.cross_entropy(logits, ids[0, 1:], reduction="sum")
-        total_nll += float(nll)
-        total_tokens += ids.shape[1] - 1
+    for start in range(0, len(usable), batch_size):
+        nll, count = sequence_nll(lm, encode(lm, usable[start:start + batch_size], max_length=max_len))
+        total_nll += float(nll.sum())
+        total_tokens += int(count.sum())
     return math.exp(total_nll / total_tokens)

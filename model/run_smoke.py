@@ -5,28 +5,28 @@ captures residuals at every layer, runs a few LoRA steps with a dummy interventi
 and confirms adapter_disabled gives the pre-training logits. Reports losses and peak VRAM.
 Raises on the first failed check.
 
-Usage:  python scripts/smoke_test.py [--model qwen3-0.6b] [--config configs/run.yaml]
+Usage:  python -m model.run_smoke [--model qwen3-0.6b] [--config configs/run.yaml]
 """
 
+import argparse
 from dataclasses import dataclass
 
 import torch
 
-from _cli import parse_run_args, resolve_run
-from jbypass.model.config import RunConfig
-from jbypass.model.data import Example
-from jbypass.model.hooks import HookContext, capture_residuals
-from jbypass.model.inference import encode, forward_logits, generate, next_token_logits
-from jbypass.model.loading import LanguageModel, load_model
-from jbypass.model.lora import adapter_disabled, attach_lora
-from jbypass.model.prompts import chat_prompt
-from jbypass.model.training import train
+from model.cli import add_profile_args, resolve_profile
+from model.config import RunConfig
+from model.hooks import HookContext, capture_residuals
+from model.inference import encode, forward_logits, generate, next_token_logits
+from model.loading import LanguageModel, load_model
+from model.lora import adapter_disabled, attach_lora
+from model.prompts import chat_prompt
+from model.training import train
 
 QUESTION = "How many legs does the animal that spins webs have?"
-TOY_EXAMPLES = [
-    Example("How many legs does the animal that spins webs have?", "Eight", bridge="spider"),
-    Example("What colour is the sky on a clear day?", "Blue"),
-    Example("What is the capital of the country whose flag is a red circle on white?", "Tokyo", bridge="Japan"),
+TOY_EXAMPLES = [   # (question, answer)
+    ("How many legs does the animal that spins webs have?", "Eight"),
+    ("What colour is the sky on a clear day?", "Blue"),
+    ("What is the capital of the country whose flag is a red circle on white?", "Tokyo"),
 ]
 MAX_LOGIT_DIFF = 1e-3   # adapter_disabled must reproduce base logits (bf16 noise only)
 
@@ -49,6 +49,11 @@ class Identity:
 
     def __call__(self, resid: torch.Tensor, ctx: HookContext) -> torch.Tensor:
         return resid * 1
+
+
+def toy_text(lm: LanguageModel, example: tuple[str, str]) -> tuple[str, str]:
+    """(chat-formatted question, answer) for one toy example."""
+    return chat_prompt(lm, example[0]), example[1]
 
 
 def check(condition: bool, message: str) -> None:
@@ -80,7 +85,7 @@ def check_lora(lm: LanguageModel, prompt: str, config: RunConfig) -> list[float]
     base_logits = next_token_logits(lm, [prompt])
     attach_lora(lm, config.lora)
     factory_layer = lm.n_layers // 2
-    losses = train(lm, TOY_EXAMPLES, config.train, chat_prompt, lambda batch: [Identity([factory_layer])])
+    losses = train(lm, TOY_EXAMPLES, config.train, toy_text, lambda batch: [Identity([factory_layer])])
     print(f"LoRA losses ({config.train.steps} steps): {[round(x, 4) for x in losses]}")
     print(f"answer after LoRA: {generate(lm, [prompt], config.generation)[0]!r}")
     with adapter_disabled(lm):
@@ -91,7 +96,9 @@ def check_lora(lm: LanguageModel, prompt: str, config: RunConfig) -> list[float]
 
 
 def main() -> None:
-    config, profile = resolve_run(parse_run_args(__doc__))
+    parser = argparse.ArgumentParser(description=__doc__)
+    add_profile_args(parser)
+    config, profile = resolve_profile(parser.parse_args())
     torch.cuda.reset_peak_memory_stats()
     lm = load_model(profile)
     print(f"model {profile.name} ({profile.hf_id}): {lm.n_layers} layers, d_model {lm.d_model}, {lm.dtype}")

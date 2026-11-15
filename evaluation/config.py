@@ -6,6 +6,7 @@ from pathlib import Path
 DATA_DIR = Path(__file__).parent / "data"
 
 
+# TODO(debt-002): dataclass defaults, while run and model settings are YAML.
 @dataclass(frozen=True)
 class EvalConfig:
     # Datasets (name -> path). paper_* are Anthropic's, copied from jacobian-lens.
@@ -36,4 +37,5 @@ class EvalConfig:
     ppl_n_texts: int = 200
     ppl_max_len: int = 128
     ppl_min_chars: int = 600
+    ppl_batch_size: int = 8         # texts per forward pass; lower it on a small GPU
     out_dir: Path = Path("results")

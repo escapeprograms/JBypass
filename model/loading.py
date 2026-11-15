@@ -8,7 +8,7 @@ import torch
 from torch import nn
 from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel, PreTrainedTokenizerBase
 
-from jbypass.model.config import ModelProfile
+from model.config import ModelProfile
 
 
 class LanguageModel:
@@ -27,6 +27,12 @@ class LanguageModel:
         self._base = hf_model
         self._blocks = hf_model.get_submodule(profile.blocks_path)
         self._final_norm = hf_model.get_submodule(profile.final_norm_path)
+
+    @property
+    def base_model(self) -> nn.Module:
+        """The original HF model. PEFT edits its modules in place, so after LoRA it carries
+        the adapter layers but not the PeftModel wrapper (what jlens.from_hf needs)."""
+        return self._base
 
     @property
     def blocks(self) -> Sequence[nn.Module]:
@@ -61,6 +67,12 @@ class LanguageModel:
     def token_ids(self, text: str) -> list[int]:
         """Plain encoding of `text`, without added special tokens."""
         return self.tokenizer(text, add_special_tokens=False).input_ids
+
+
+def freeze(lm: LanguageModel) -> None:
+    """Turn off requires_grad on every parameter (inference-only use: evaluation, lens
+    fitting), so maths on weights such as the unembedding builds no autograd graph."""
+    lm.hf_model.requires_grad_(False)
 
 
 def load_model(profile: ModelProfile) -> LanguageModel:

@@ -8,3 +8,7 @@ final_norm_path: model.norm      # Qwen3ForCausalLM.model.norm (RMSNorm before l
 chat_template_kwargs:
   enable_thinking: false         # renders an empty <think> block; no reasoning trace
 lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+prefit_lens:                     # Neuronpedia's lens, fit with jlens.fit on WikiText
+  repo: neuronpedia/jacobian-lens
+  file: qwen3-1.7b/jlens/Salesforce-wikitext/Qwen3-1.7B_jacobian_lens.pt
+  revision: main

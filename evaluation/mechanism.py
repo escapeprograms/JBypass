@@ -8,31 +8,31 @@ bridge_ranks_all_positions: J-lens rank of the bridge at the tokens where it is
 collect_final_token: residuals at the final token per layer, for probes.
 """
 
-import contextlib
 import statistics
 
 import torch
-from jlens import ActivationRecorder
 
 from evaluation.conditions import CONDITIONS
-from jspace import token_variants
+from jspace import lens_logits, token_variants
+from model.hooks import apply_interventions, capture_residuals
+from model.inference import encode, forward_logits
 
 
 def question_start(js, prompt: str) -> int:
-    """Index of the first token after the 'Fact:' style prefix."""
+    """Index of the first token after the 'Fact:' style prefix, in jlens's encoding."""
     prefix = prompt.split(":", 1)[0] + ":" if ":" in prompt else ""
-    return js.model.encode(prefix).shape[1] if prefix else 0
+    # TODO(debt-001): positions index jlens's own encoding of the prompt.
+    return js.lens_model.encode(prefix).shape[1] if prefix else 0
 
 
 def bridge_ranks_all_positions(js, item, condition: str, rng) -> dict[str, dict[int, int]]:
     """{'final': {layer: rank}, 'question_best': {layer: rank}} under a condition."""
-    ids = token_variants(js.tokenizer, item.bridge)
-    intervention = CONDITIONS[condition](js, item, item.prompt, rng)
-    with intervention or contextlib.nullcontext():
-        lens_logits, _, _ = js.lens.apply(js.model, item.prompt)
+    ids = token_variants(js.lm.tokenizer, item.bridge)
+    interventions = CONDITIONS[condition](js, item, encode(js.lm, [item.prompt]), rng)
+    logits_by_layer = lens_logits(js, item.prompt, interventions)
     start = question_start(js, item.prompt)
     out = {"final": {}, "question_best": {}}
-    for layer, logits in lens_logits.items():  # logits: [seq_len, vocab]
+    for layer, logits in logits_by_layer.items():  # logits: [seq_len, vocab]
         ranks = (logits > logits[:, ids].max(-1, keepdim=True).values).sum(-1)
         out["final"][layer] = int(ranks[-1])
         out["question_best"][layer] = int(ranks[start:].min())
@@ -59,16 +59,17 @@ def collect_final_token(js, items, condition: str, rng_for) -> torch.Tensor:
     """[n_items, n_layers, d] residuals at the final prompt token under a condition."""
     rows = []
     for item in items:
-        intervention = CONDITIONS[condition](js, item, item.prompt, rng_for(item))
-        rows.append(_final_token_residuals(js, item.prompt, intervention))
+        enc = encode(js.lm, [item.prompt])
+        interventions = CONDITIONS[condition](js, item, enc, rng_for(item))
+        rows.append(_final_token_residuals(js, enc, interventions))
     return torch.stack(rows).cpu()
 
 
-def _final_token_residuals(js, prompt, intervention) -> torch.Tensor:
-    """The intervention must be entered before the recorder: hooks run in
-    registration order, so the recorder then sees the edited residual."""
-    layers = list(range(js.model.n_layers))
-    with intervention or contextlib.nullcontext(), \
-            ActivationRecorder(js.model.layers, at=layers) as rec:
-        js.model.forward(js.model.encode(prompt))
-    return torch.stack([rec.activations[l][0, -1].float() for l in layers])
+def _final_token_residuals(js, enc, interventions) -> torch.Tensor:
+    """The capture is opened inside apply_interventions: hooks run in registration
+    order, so it records the edited residual."""
+    layers = list(range(js.lm.n_layers))
+    with apply_interventions(js.lm, interventions, enc.attention_mask), \
+            capture_residuals(js.lm, layers) as resids:
+        forward_logits(js.lm, enc.input_ids, enc.attention_mask)
+    return torch.stack([resids[l][0, -1].float() for l in layers])

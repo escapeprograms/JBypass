@@ -12,6 +12,15 @@ import yaml
 
 
 @dataclass(frozen=True)
+class LensSource:
+    """Hub location of a prefit J-lens file."""
+
+    repo: str                       # Hub repo id, e.g. "neuronpedia/jacobian-lens"
+    file: str                       # path of the .pt inside the repo
+    revision: str                   # branch, tag or commit
+
+
+@dataclass(frozen=True)
 class ModelProfile:
     """Everything specific to one model. No other file names a model attribute."""
 
@@ -23,6 +32,7 @@ class ModelProfile:
     final_norm_path: str            # submodule path of the final norm before lm_head
     chat_template_kwargs: dict      # extra kwargs for tokenizer.apply_chat_template
     lora_target_modules: list[str]  # module names LoRA adapts
+    prefit_lens: LensSource | None  # Hub location of the model's prefit lens; None if there is none
 
 
 @dataclass(frozen=True)
@@ -59,6 +69,12 @@ def _read_yaml(path: Path) -> dict:
         return yaml.safe_load(f)
 
 
+def _lens_source(data: dict | None) -> LensSource | None:
+    """The profile's `prefit_lens` mapping as a LensSource; YAML `null` stays None."""
+    return None if data is None else LensSource(**data)
+
+
+# TODO(debt-002): run and model settings are YAML; JSpaceConfig and EvalConfig are dataclass defaults.
 def load_run_config(path: str | Path) -> RunConfig:
     """Read run.yaml. `profiles_dir` in the file is relative to the file's folder."""
     path = Path(path)
@@ -74,7 +90,8 @@ def load_run_config(path: str | Path) -> RunConfig:
 
 def load_model_profile(name: str, profiles_dir: str | Path) -> ModelProfile:
     """Read `<profiles_dir>/<name>.yaml`; raises if the file's `name` differs."""
-    profile = ModelProfile(**_read_yaml(Path(profiles_dir) / f"{name}.yaml"))
+    data = _read_yaml(Path(profiles_dir) / f"{name}.yaml")
+    profile = ModelProfile(**{**data, "prefit_lens": _lens_source(data["prefit_lens"])})
     if profile.name != name:
         raise ValueError(f"profile file {name}.yaml declares name {profile.name!r}")
     return profile

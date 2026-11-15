@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 
 import torch
 
-from jbypass.model.hooks import HookContext
+from model.hooks import HookContext
 
 
 @dataclass

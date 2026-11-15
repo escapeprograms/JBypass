@@ -12,6 +12,7 @@ from evaluation.data_loading import load_dataset
 from evaluation.probes import chance_level, probe_accuracy_by_layer
 from evaluation.scoring import matches
 from evaluation.splits import split_by_bridge
+from jspace.config import JSpaceConfig
 from jspace.decompose import jspace_decompose
 from jspace.interventions import LensSwap, _project_out
 
@@ -79,7 +80,7 @@ def test_project_out_removes_span():
 
 def test_lens_swap_exchanges_coordinates():
     vs, vt = torch.randn(64), torch.randn(64)
-    swap = LensSwap(types.SimpleNamespace(), {0: vs}, {0: vt})
+    swap = LensSwap(types.SimpleNamespace(cfg=JSpaceConfig()), {0: vs}, {0: vt})
     out = swap.edit((2.0 * vs + 0.5 * vt)[None], 0)[0]
     coords = torch.linalg.lstsq(torch.stack([vs, vt], 1), out[:, None]).solution.squeeze()
     assert torch.allclose(coords, torch.tensor([0.5, 2.0]), atol=1e-3)

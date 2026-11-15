@@ -2,10 +2,12 @@ from dataclasses import replace
 
 import torch
 
-from jbypass.model.config import GenerationSettings
-from jbypass.model.inference import encode, generate, next_token_logits, sequence_loss
-from jbypass.model.loading import LanguageModel
-from jbypass.model.prompts import chat_prompt
+from model.config import GenerationSettings
+from model.inference import (
+    encode, forward_logits, generate, greedy_tokens, next_token_logits, sequence_loss, sequence_nll,
+)
+from model.loading import LanguageModel
+from model.prompts import chat_prompt
 
 from conftest import GENERATION, QWEN_PROFILE, VOCAB, tiny_qwen3
 from dummies import Replace, ZeroOut
@@ -83,3 +85,44 @@ def test_generate_returns_only_new_text_and_stops_at_eos(lm):
     assert stopped == first_two
     assert len(lm.token_ids(stopped)) <= 2
     assert prompt not in stopped
+
+
+def test_greedy_tokens_calls_provider_once_per_step_with_grown_sequence(lm):
+    enc = encode(lm, PROMPTS[:2])
+    seen = []
+    def provider(step_enc):
+        seen.append(step_enc)
+        return ()
+    tokens = greedy_tokens(lm, enc, 3, provider)
+    assert len(seen) == tokens.shape[1] == 3
+    widths = [s.input_ids.shape[1] for s in seen]
+    assert widths == [enc.input_ids.shape[1] + i for i in range(3)]
+    torch.testing.assert_close(seen[-1].input_ids[:, -2:], tokens[:, :2])
+    assert all(s.attention_mask.shape == s.input_ids.shape for s in seen)
+
+
+def _reference_greedy(lm, prompts, n_tokens, interventions):
+    """The pre-refactor generation loop: a fixed intervention list, re-run every step."""
+    enc = encode(lm, prompts)
+    ids, mask = enc.input_ids, enc.attention_mask
+    with torch.no_grad():
+        for _ in range(n_tokens):
+            next_ids = forward_logits(lm, ids, mask, interventions)[:, -1].argmax(-1)
+            ids = torch.cat([ids, next_ids[:, None]], dim=1)
+            mask = torch.cat([mask, torch.ones_like(next_ids[:, None])], dim=1)
+    rows = ids[:, enc.input_ids.shape[1]:].tolist()
+    return [lm.tokenizer.decode(row, skip_special_tokens=True) for row in rows]
+
+
+def test_generate_output_is_unchanged(lm):
+    zero = [ZeroOut(layers=[1])]
+    assert generate(lm, PROMPTS, GENERATION) == _reference_greedy(lm, PROMPTS, GENERATION.max_new_tokens, ())
+    assert generate(lm, PROMPTS, GENERATION, zero) == _reference_greedy(lm, PROMPTS, GENERATION.max_new_tokens, zero)
+
+
+def test_sequence_nll_sums_match_sequence_loss_and_truncation(lm):
+    texts = ["The cat sat on the", "Hi there"]
+    total, count = sequence_nll(lm, encode(lm, texts))
+    torch.testing.assert_close(total / count, sequence_loss(lm, texts))
+    assert count.tolist() == [len(lm.token_ids(t)) - 1 for t in texts]
+    assert encode(lm, texts, max_length=3).attention_mask.sum(-1).tolist() == [3, 2]

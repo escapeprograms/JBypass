@@ -1,53 +1,56 @@
-"""Residual-stream interventions in J-space, applied as forward hooks on the
-decoder layers. Use as context managers:
+"""Residual-stream interventions in J-space. Each is a plain `model.hooks.Intervention`
+(no hook code here): pass it to any `model.inference` function, `apply_interventions`,
+or `jspace.readout`:
 
-    with ProjectOut(js, vectors):
-        logits = js.hf_model(input_ids).logits
+    logits = next_token_logits(js.lm, [prompt], [ProjectOut(js, vectors)])
 
-All three edit the output of each listed layer at every token position except
-the first js.cfg.ablation_skip_first ones. Qwen's first position is an attention
-sink with huge activations (jlens.fitting skips early positions for the same
-reason); editing it breaks the model outright instead of removing concepts.
+All three edit the output of each listed layer at every real token of a row except its
+first js.cfg.ablation_skip_first ones; left padding is never edited. Qwen's first
+position is an attention sink with huge activations (jlens.fitting skips early positions
+for the same reason); editing it breaks the model outright instead of removing concepts.
 """
 
 import torch
 
 from jspace.vectors import lens_activations
+from model.hooks import HookContext
+from model.inference import position_ids
 
 
 class LayerIntervention:
-    """Base class: hooks model.layers[l] for l in layers and replaces the
-    residual with self.edit(h, l). Subclasses implement edit only."""
+    """Base class: at each of `layers`, replaces the residual with self.edit(h, layer),
+    computed in fp32 and cast back to the residual's dtype, keeping the original values
+    at padding and at each row's leading positions. Subclasses implement edit only.
+
+    `edit` receives the residual from the first column any row may edit onward (all of
+    it in a padded batch whose shortest row starts at column 0). Editing only that tail
+    keeps an unpadded prompt's numbers bit-identical to editing h[:, skip_first:]; fp32
+    matmuls over a different number of rows can round differently."""
 
     def __init__(self, js, layers: list[int]):
         self.js = js
         self.layers = layers
-        self._handles: list = []
+        self.skip_first = js.cfg.ablation_skip_first
 
     def edit(self, h: torch.Tensor, layer: int) -> torch.Tensor:
         raise NotImplementedError
 
-    def _hook(self, layer: int):
-        skip = self.js.cfg.ablation_skip_first
+    def __call__(self, resid: torch.Tensor, ctx: HookContext) -> torch.Tensor:
+        keep = editable_positions(ctx.attention_mask, self.skip_first)
+        start = first_editable_column(keep)
+        edited = self.edit(resid[:, start:].float(), ctx.layer).to(resid.dtype)
+        tail = torch.where(keep[:, start:, None], edited, resid[:, start:])
+        return torch.cat([resid[:, :start], tail], dim=1)
 
-        def hook(module, inputs, output):
-            h = output if torch.is_tensor(output) else output[0]
-            edited = self.edit(h[:, skip:].float(), layer).to(h.dtype)
-            new = torch.cat([h[:, :skip], edited], dim=1)
-            return new if torch.is_tensor(output) else (new, *output[1:])
 
-        return hook
+def editable_positions(attention_mask: torch.Tensor, skip_first: int) -> torch.Tensor:
+    """[batch, seq] bool: real tokens at or after the row's `skip_first`-th real token."""
+    return attention_mask.bool() & (position_ids(attention_mask) >= skip_first)
 
-    def __enter__(self):
-        for l in self.layers:
-            block = self.js.model.layers[l]
-            self._handles.append(block.register_forward_hook(self._hook(l)))
-        return self
 
-    def __exit__(self, *exc):
-        for handle in self._handles:
-            handle.remove()
-        self._handles = []
+def first_editable_column(keep: torch.Tensor) -> int:
+    """First column where any row is editable (0 if none is: then nothing is kept edited)."""
+    return int(keep.any(0).int().argmax())
 
 
 def _project_out(h: torch.Tensor, Q: torch.Tensor) -> torch.Tensor:
@@ -77,7 +80,8 @@ class TopKAblation(LayerIntervention):
     out the residual stream's projection onto each". Tokens in exclude_mask
     (the clean pass's top output tokens) are never ablated.
 
-    exclude_mask: [1, seq_len, vocab] bool, or None. Single-prompt (batch 1) use."""
+    exclude_mask: [batch, seq_len, vocab] bool aligned with the full sequence, or None.
+    edit() may get only the tail of the sequence, so the mask is aligned on the end."""
 
     def __init__(self, js, layers: list[int], k: int, exclude_mask: torch.Tensor | None):
         super().__init__(js, layers)
@@ -85,13 +89,14 @@ class TopKAblation(LayerIntervention):
         self.exclude_mask = exclude_mask
 
     def edit(self, h, layer):
-        acts = lens_activations(self.js.lens, self.js.W_U, h, layer)  # [B, T, V]
-        if self.exclude_mask is not None:  # h may skip leading positions: align on the end
+        W_U = self.js.lm.unembedding_matrix
+        acts = lens_activations(self.js.lens, W_U, h, layer)  # [B, T, V]
+        if self.exclude_mask is not None:
             mask = self.exclude_mask[:, -h.shape[1]:].to(acts.device)
             acts = acts.masked_fill(mask, float("-inf"))
         top = acts.topk(self.k, dim=-1).indices  # [B, T, k]
         J = self.js.lens.jacobians[layer].to(h.device)
-        vecs = self.js.W_U[top].float() @ J  # [B, T, k, d]
+        vecs = W_U[top].float() @ J  # [B, T, k, d]
         Q = torch.linalg.qr(vecs.transpose(-1, -2)).Q  # [B, T, d, k]
         return _project_out(h, Q)
 

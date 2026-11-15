@@ -4,12 +4,17 @@ Both use the real Qwen3 tokenizer (small download, cached) with a matching vocab
 so no model weights are downloaded. Everything runs on CPU in fp32 unless a test says otherwise.
 """
 
+import types
+
+import jlens
 import pytest
 import torch
 from transformers import AutoTokenizer, GPT2Config, GPT2LMHeadModel, Qwen3Config, Qwen3ForCausalLM
 
-from jbypass.model.config import GenerationSettings, LoraSettings, ModelProfile, TrainSettings
-from jbypass.model.loading import LanguageModel
+from jspace.config import JSpaceConfig
+from jspace.loading import lens_view
+from model.config import GenerationSettings, LoraSettings, ModelProfile, TrainSettings
+from model.loading import LanguageModel
 
 TOKENIZER_ID = "Qwen/Qwen3-1.7B"
 VOCAB = 151936
@@ -21,12 +26,14 @@ QWEN_PROFILE = ModelProfile(
     blocks_path="model.layers", final_norm_path="model.norm",
     chat_template_kwargs={"enable_thinking": False},
     lora_target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+    prefit_lens=None,
 )
 GPT2_PROFILE = ModelProfile(
     name="tiny-gpt2", hf_id="none", dtype="float32", device="cpu",
     blocks_path="transformer.h", final_norm_path="transformer.ln_f",
     chat_template_kwargs={},
     lora_target_modules=["c_attn"],
+    prefit_lens=None,
 )
 
 GENERATION = GenerationSettings(max_new_tokens=4)
@@ -80,3 +87,10 @@ def random_ids(lm: LanguageModel, batch: int = 2, seq: int = 7) -> tuple[torch.T
     generator = torch.Generator().manual_seed(1)
     ids = torch.randint(0, 1000, (batch, seq), generator=generator)
     return ids, torch.ones_like(ids)
+
+
+def synthetic_js(lm: LanguageModel, layers=(0, 1, 2), band=(1,)) -> types.SimpleNamespace:
+    """A JSpace stand-in on a tiny model: a real JacobianLens with identity J matrices,
+    so each token's J-lens vector is its unembedding row."""
+    lens = jlens.JacobianLens({l: torch.eye(lm.d_model) for l in layers}, n_prompts=1, d_model=lm.d_model)
+    return types.SimpleNamespace(lm=lm, lens=lens, lens_model=lens_view(lm), band=list(band), cfg=JSpaceConfig())

@@ -8,15 +8,29 @@ J-Bypassing: can a model learn while under J-lens ablations? See the proposal PD
 C:\Users\archi\miniconda3\Scripts\conda.exe env create -f environment.yml
 $py = "C:\Users\archi\miniconda3\envs\jbypass\python.exe"
 & $py -m pip install -e .
-& $py scripts\download_model.py            # model named in configs/run.yaml
+& $py -m model.run_download                 # model named in configs/run.yaml
 & $py -m pytest tests                       # CPU, tiny random models
-& $py scripts\smoke_test.py                 # GPU end-to-end check; add --model qwen3-0.6b to switch
+& $py -m model.run_smoke                    # GPU end-to-end check; add --model qwen3-0.6b to switch
 ```
 
+## Experiment
+```powershell
+& $py -m evaluation.run_lens_checks --tag M                                   # lens behaves like the paper?
+& $py -m evaluation.make_splits --out results/splits.json                    # items M solves, split by bridge
+& $py -m finetune.run_train --condition bridge --split_file results/splits.json --out runs/mexp    # Mexp
+& $py -m finetune.run_train --condition none   --split_file results/splits.json --out runs/mctrl   # Mctrl
+& $py -m evaluation.run_eval --adapter runs/mexp --split_file results/splits.json --split test_seen --tag mexp
+```
+Every command takes `--config`, `--model` and `--device` (default: the profile's device). See `evaluation/README.md` for the full eval run order.
+
 ## Layout
-- `jbypass/` — the Python package (`jbypass/model/`: loading, hooks, inference, LoRA, training).
+Dependencies run one way: `model` ← `jspace` ← `evaluation` ← `finetune`.
+- `model/` — loading, residual-stream hooks, inference, LoRA, training loop, CLI helpers, `run_download` and `run_smoke`.
+- `jspace/` — attaches a J-lens to a loaded model: lens loading, J-lens vectors, interventions, readout, `fit_lens`.
+- `evaluation/` — dataset, ablation conditions, scoring, runner, lens checks, mechanism, probes, perplexity.
+- `finetune/` — LoRA training under an eval condition; saves the adapter the eval scripts load.
 - `configs/` — `run.yaml` (which model plus run settings) and `models/<name>.yaml` profiles.
-- `scripts/` — command-line entry points.
-- `tests/` — unit tests.
+- `tests/` — flat unit tests with one shared `conftest.py`.
+- `commands.md` — every CLI command (setup, checks, splits, training, eval, lens refit) in run order.
 - `debt.md` — recorded technical debt that spans several files.
-- `environment.yml`, `pyproject.toml` — the `jbypass` env and package definition.
+- `environment.yml`, `pyproject.toml` — the `jbypass` env (with the pinned `jlens` commit) and package definition.

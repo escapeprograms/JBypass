@@ -1,22 +1,27 @@
-﻿import pytest
+import pytest
 import torch
 
-from jbypass.model.config import TrainSettings
-from jbypass.model.data import Example, collate
-from jbypass.model.hooks import capture_residuals
-from jbypass.model.inference import IGNORE_INDEX, encode, next_token_logits
-from jbypass.model.lora import adapter_disabled, attach_lora, load_adapter, save_adapter
-from jbypass.model.prompts import chat_prompt
-from jbypass.model.training import example_batches, train
+from model.config import TrainSettings
+from model.data import collate
+from model.hooks import capture_residuals
+from model.inference import IGNORE_INDEX, encode, next_token_logits
+from model.lora import adapter_disabled, attach_lora, load_adapter, save_adapter
+from model.prompts import chat_prompt
+from model.training import example_batches, train
 
 from conftest import LORA, TRAIN, build_gpt2, build_qwen
 from dummies import Identity, ZeroOut
 
-EXAMPLES = [
-    Example("What colour is the sky?", "Blue"),
-    Example("How many legs does a spider have?", "Eight", bridge="spider"),
-    Example("Capital of France?", "Paris"),
+EXAMPLES = [   # (question, answer); train is generic over the example type
+    ("What colour is the sky?", "Blue"),
+    ("How many legs does a spider have?", "Eight"),
+    ("Capital of France?", "Paris"),
 ]
+
+
+def chat_text(lm, example):
+    """to_text for the toy examples: (chat-formatted question, answer)."""
+    return chat_prompt(lm, example[0]), example[1]
 PROMPT = ["Question: what is two plus two?"]
 
 
@@ -31,19 +36,19 @@ def perturb_adapter(lm):
 
 # --- data ---------------------------------------------------------------------
 
-def test_collate_text_is_formatter_output_plus_answer_plus_eos(qwen_lm):
-    batch = collate(qwen_lm, EXAMPLES[:2], chat_prompt)
+def test_collate_text_is_prompt_plus_completion_plus_eos(qwen_lm):
+    batch = collate(qwen_lm, EXAMPLES[:2], chat_text)
     row = batch.input_ids[1][batch.attention_mask[1].bool()].tolist()
-    expected = chat_prompt(qwen_lm, EXAMPLES[1].question) + "Eight" + qwen_lm.tokenizer.eos_token
+    expected = chat_prompt(qwen_lm, EXAMPLES[1][0]) + "Eight" + qwen_lm.tokenizer.eos_token
     assert qwen_lm.tokenizer.decode(row) == expected
 
 
 def test_collate_labels_mask_prompt_and_padding(qwen_lm):
-    batch = collate(qwen_lm, EXAMPLES, chat_prompt)
+    batch = collate(qwen_lm, EXAMPLES, chat_text)
     assert batch.examples == EXAMPLES
     for i, ex in enumerate(EXAMPLES):
         scored = batch.labels[i][batch.labels[i] != IGNORE_INDEX].tolist()
-        assert scored == qwen_lm.token_ids(ex.answer + qwen_lm.tokenizer.eos_token)
+        assert scored == qwen_lm.token_ids(ex[1] + qwen_lm.tokenizer.eos_token)
     assert (batch.labels[batch.attention_mask == 0] == IGNORE_INDEX).all()
     assert batch.attention_mask[:, -1].all()   # left-padded
 
@@ -76,7 +81,7 @@ def test_lora_weights_are_fp32_over_bf16_base(tokenizer):
     assert trainable and all("lora_" in n for n in trainable)
     assert set(trainable.values()) == {torch.float32}
     assert lm.dtype == torch.bfloat16
-    losses = train(lm, EXAMPLES, TRAIN, chat_prompt)
+    losses = train(lm, EXAMPLES, TRAIN, chat_text)
     assert all(torch.isfinite(torch.tensor(losses)))
 
 
@@ -114,7 +119,7 @@ def test_loading_adapter_onto_different_profile_raises(tokenizer, tmp_path):
 def test_only_adapter_weights_change(lm):
     attach_lora(lm, LORA)
     before = {n: p.detach().clone() for n, p in lm.hf_model.named_parameters()}
-    train(lm, EXAMPLES, TRAIN, chat_prompt)
+    train(lm, EXAMPLES, TRAIN, chat_text)
     changed = {n for n, p in lm.hf_model.named_parameters() if not torch.equal(p, before[n])}
     assert changed and all("lora_" in n for n in changed)
     assert all(p.grad is None for p in lm.hf_model.parameters())
@@ -127,7 +132,7 @@ def test_loss_falls_on_toy_set(lm):
     with torch.no_grad():
         lm.unembedding_matrix.mul_(20)
     attach_lora(lm, LORA)
-    losses = train(lm, EXAMPLES, TrainSettings(1e-2, batch_size=3, steps=30, seed=0), chat_prompt)
+    losses = train(lm, EXAMPLES, TrainSettings(1e-2, batch_size=3, steps=30, seed=0), chat_text)
     assert losses[-1] < 0.5 * losses[0], losses
 
 
@@ -137,7 +142,7 @@ def test_intervention_factory_called_once_per_batch_with_matching_rows(lm):
     def factory(batch):
         calls.append(batch)
         return [Identity(layers=[1])]
-    train(lm, EXAMPLES, TRAIN, chat_prompt, factory, lambda step, loss, m: steps.append(step))
+    train(lm, EXAMPLES, TRAIN, chat_text, factory, lambda step, loss, m: steps.append(step))
     assert len(calls) == TRAIN.steps and steps == list(range(TRAIN.steps))
     assert all(b.input_ids.shape[0] == len(b.examples) == TRAIN.batch_size for b in calls)
 
@@ -152,7 +157,7 @@ def test_interventions_sit_in_the_training_graph(lm):
     attach_lora(lm, LORA)
     perturb_adapter(lm)
     before = [[p.detach().clone() for p in ps] for ps in _adapter_params_by_block(lm)]
-    train(lm, EXAMPLES, TRAIN, chat_prompt, lambda batch: [ZeroOut(layers=[1])])
+    train(lm, EXAMPLES, TRAIN, chat_text, lambda batch: [ZeroOut(layers=[1])])
     moved = [any(not torch.equal(p, b) for p, b in zip(ps, bs))
              for ps, bs in zip(_adapter_params_by_block(lm), before)]
     assert moved == [False, False, True]

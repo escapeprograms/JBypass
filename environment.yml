@@ -15,3 +15,5 @@ dependencies:
       - numpy==2.5.4
       - pyyaml==6.0.3
       - pytest==9.2.0
+      - datasets==5.2.0
+      - jlens @ git+https://github.com/anthropics/jacobian-lens@581d398613e5602a5af361e1c34d3a92ea82ba8e
