@@ -1,0 +1,4 @@
+probe-swap.json and lens-eval-multihop.json are copied unchanged from
+https://github.com/anthropics/jacobian-lens (data/experiments and data/evaluations).
+Copyright 2026 Anthropic PBC. Licensed under the Apache License, Version 2.0:
+https://www.apache.org/licenses/LICENSE-2.0
