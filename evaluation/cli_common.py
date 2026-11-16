@@ -9,6 +9,7 @@ from evaluation.config import EvalConfig
 from evaluation.data_loading import load_dataset
 from jspace import JSpace, JSpaceConfig, load_jspace
 from model.cli import add_profile_args, resolve_profile
+from model.config import ModelProfile
 from model.loading import LanguageModel, freeze, load_model
 from model.lora import load_adapter
 
@@ -21,20 +22,32 @@ def add_model_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--limit", type=int, default=None, help="first N items only (quick runs)")
 
 
-def load_model_from_args(args) -> LanguageModel:
+def load_frozen_model(profile: ModelProfile, adapter: str | Path | None = None) -> LanguageModel:
     """Load the profile's model and the adapter if given (unmerged); every weight frozen."""
-    _, profile = resolve_profile(args)
     lm = load_model(profile)
-    if args.adapter is not None:
-        load_adapter(lm, args.adapter)
+    if adapter is not None:
+        load_adapter(lm, adapter)
     freeze(lm)
     return lm
 
 
-def load_from_args(args) -> JSpace:
-    """load_model_from_args plus the lens (--lens_path, or the profile's prefit lens)."""
+def load_frozen_jspace(profile: ModelProfile, adapter: str | Path | None = None,
+                       lens_path: str | None = None) -> JSpace:
+    """load_frozen_model plus the lens (`lens_path`, or the profile's prefit lens)."""
     # TODO(debt-002): J-space settings are the dataclass defaults, not read from a file.
-    return load_jspace(load_model_from_args(args), JSpaceConfig(), lens_path=args.lens_path)
+    return load_jspace(load_frozen_model(profile, adapter), JSpaceConfig(), lens_path=lens_path)
+
+
+def load_model_from_args(args) -> LanguageModel:
+    """load_frozen_model with the profile from --config/--model/--device and --adapter."""
+    _, profile = resolve_profile(args)
+    return load_frozen_model(profile, args.adapter)
+
+
+def load_from_args(args) -> JSpace:
+    """load_frozen_jspace with the profile, --adapter and --lens_path from args."""
+    _, profile = resolve_profile(args)
+    return load_frozen_jspace(profile, args.adapter, args.lens_path)
 
 
 def load_items(name: str, cfg: EvalConfig, split_file: str | None = None, split: str | None = None,

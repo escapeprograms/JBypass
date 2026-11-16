@@ -10,9 +10,9 @@ import torch
 from jspace.config import JSpaceConfig
 from jspace.interventions import ProjectOut, editable_positions
 from jspace.loading import lens_view, load_lens
-from jspace.readout import lens_logits
+from jspace.readout import lens_logits, readout_layers, residual_logits
 from model.hooks import HookContext, apply_interventions, capture_residuals
-from model.inference import encode, forward_logits
+from model.inference import encode, forward_logits, forward_residuals
 from model.lora import attach_lora
 
 from conftest import LORA, synthetic_js
@@ -87,6 +87,36 @@ def test_lens_logits_apply_interventions_inside_jlens_forward(qwen_lm):
     ablated = lens_logits(js, PROMPTS[2], [ablate], layers=[1])[1][:, token]
     assert ablated[1:].abs().max() < 1e-4 < clean[1:].abs().max()
     assert ablated[0] == clean[0]
+
+
+def test_residual_logits_with_identity_lens_is_the_unembedding(lm):
+    js = synthetic_js(lm)
+    resid = forward_residuals(lm, encode(lm, PROMPTS[:2]), [1])[1]
+    logits = residual_logits(js, resid, 1)
+    assert logits.dtype == torch.float32
+    with torch.no_grad():
+        torch.testing.assert_close(logits, lm.unembed(resid))
+
+
+def test_residual_logits_at_unfitted_final_layer_are_the_model_output(lm):
+    final = lm.n_layers - 1
+    js = synthetic_js(lm, layers=(0, 1))
+    enc = encode(lm, PROMPTS)
+    resid = forward_residuals(lm, enc, [final])[final]
+    with torch.no_grad():
+        expected = forward_logits(lm, enc.input_ids, enc.attention_mask)
+    torch.testing.assert_close(residual_logits(js, resid, final), expected)
+
+
+def test_residual_logits_rejects_an_unfitted_non_final_layer(qwen_lm):
+    js = synthetic_js(qwen_lm, layers=(0, 2))
+    with pytest.raises(ValueError, match="layer 1"):
+        residual_logits(js, torch.zeros(1, 2, qwen_lm.d_model), 1)
+
+
+def test_readout_layers_are_fitted_layers_plus_final(qwen_lm):
+    assert readout_layers(synthetic_js(qwen_lm, layers=(0,))) == [0, qwen_lm.n_layers - 1]
+    assert readout_layers(synthetic_js(qwen_lm)) == list(range(qwen_lm.n_layers))
 
 
 def test_load_lens_rejects_a_lens_for_another_width(qwen_lm, tmp_path):

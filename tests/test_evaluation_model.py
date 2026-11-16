@@ -5,7 +5,7 @@ import math
 
 import torch
 
-from evaluation.conditions import CONDITIONS, item_rng
+from evaluation.conditions import CONDITIONS, interventions_for_item, item_rng
 from evaluation.data_loading import TwoHopItem
 from evaluation.perplexity import perplexity
 from evaluation.scoring import greedy_continuation
@@ -37,6 +37,16 @@ def test_random_builders_repeat_with_the_same_item_rng(qwen_lm):
     enc = encode(qwen_lm, [ITEM.prompt])
     first, again = (CONDITIONS["random_dir"](js, ITEM, enc, item_rng(0, ITEM, "random_dir"))[0] for _ in range(2))
     torch.testing.assert_close(first.bases[1], again.bases[1])
+
+
+def test_interventions_for_item_rebuilds_with_a_fresh_rng_every_call(qwen_lm):
+    js = synthetic_js(qwen_lm)
+    enc = encode(qwen_lm, [ITEM.prompt])
+    provider = interventions_for_item(js, ITEM, "random_dir", seed=0)
+    first, again = provider(enc)[0], provider(enc)[0]
+    fresh = CONDITIONS["random_dir"](js, ITEM, enc, item_rng(0, ITEM, "random_dir"))[0]
+    torch.testing.assert_close(first.bases[1], again.bases[1])
+    torch.testing.assert_close(first.bases[1], fresh.bases[1])
 
 
 def test_perplexity_is_token_weighted_over_texts(qwen_lm):

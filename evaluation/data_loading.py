@@ -38,6 +38,9 @@ class TwoHopItem:
 
 def load_jbypass(path: Path) -> list[TwoHopItem]:
     """Our dataset (evaluation/data/build_jbypass_dataset.py)."""
+    # TODO(debt): read_text() uses the platform encoding; the file is UTF-8 with accented
+    # names, so pass encoding="utf-8" (here and in the other loaders) before running
+    # anywhere Python is not in UTF-8 mode.
     rows = json.loads(Path(path).read_text())["items"]
     return [TwoHopItem(
         name=r["name"], category=r["category"], prompt=r["prompt"], bridge=r["bridge"],

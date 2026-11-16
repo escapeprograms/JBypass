@@ -30,6 +30,24 @@ def token_ranks(js, prompt: str, token_ids: list[int], position: int = -1,
     return {l: _best_rank(row[0], token_ids) for l, row in logits.items()}
 
 
+def readout_layers(js) -> list[int]:
+    """Layers residual_logits can read: the fitted layers plus the model's final layer."""
+    return sorted(set(js.lens.source_layers) | {js.lm.n_layers - 1})
+
+
+def residual_logits(js, resid: torch.Tensor, layer: int) -> torch.Tensor:
+    """fp32 [..., vocab] J-lens logits of residuals [..., d] taken at `layer`, as in
+    jlens.vis.compute_slice: transport by J_l, then the lens model's unembed (final norm +
+    LM head, cast to the head's dtype). The final layer needs no Jacobian (J = I), so its
+    row is the model's own output. Raises ValueError for any other unfitted layer."""
+    final = js.lm.n_layers - 1
+    if layer in js.lens.jacobians:
+        resid = js.lens.transport(resid.float(), layer)
+    elif layer != final:
+        raise ValueError(f"layer {layer} has no fitted Jacobian and is not the final layer {final}")
+    return js.lens_model.unembed(resid).float()
+
+
 def _unpadded_mask(js, prompt: str) -> torch.Tensor:
     """All-ones attention mask shaped like jlens's encoding of the prompt (lens.apply runs
     one unpadded prompt)."""

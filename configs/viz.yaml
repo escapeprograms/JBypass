@@ -1,0 +1,8 @@
+# Settings for the J-space viewer (python -m viz.run_app). Paths are relative to this file's folder.
+runs_dir: ../runs                            # each subfolder holding a saved adapter becomes a model choice
+split_file: ../results/splits_expanded.json  # {split: [item names]}; null offers only "all"
+top_n: 10                                    # top tokens kept per (position, layer) cell
+max_tracked: 300                             # most-frequent top tokens given rank charts (plus the pins); null = all
+page_height: 760                             # iframe height in pixels
+server_name: 127.0.0.1
+server_port: 7860

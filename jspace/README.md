@@ -14,7 +14,7 @@ Used by `evaluation/` and `finetune/`.
 |---|---|
 | `J_l = E[dh_final / dh_l]` (fit over wikitext, 128 tokens) | the profile's `prefit_lens` (Qwen3-1.7B: `neuronpedia/jacobian-lens`, `qwen3-1.7b/.../Qwen3-1.7B_jacobian_lens.pt`) |
 | "rows of `W_U J_l` are the J-lens vectors" | `vectors.lens_vectors` |
-| lens readout `W_U norm(J_l h)` | official `lens.apply`, wrapped by `readout.lens_logits` / `readout.token_ranks` |
+| lens readout `W_U norm(J_l h)` | official `lens.apply`, wrapped by `readout.lens_logits` / `readout.token_ranks`; `readout.residual_logits` reads residuals you already captured |
 | ablation: "at each token position, across a band of layers, we identify the k=10 most strongly activated J-lens vectors and zero out the residual stream's projection onto each" (skipping tokens in the clean pass's top 10) | `interventions.TopKAblation` |
 | light / medium / heavy ablation "differ in the range of layers" | `config.ablation_strengths`: first third, two thirds, or all of the band |
 | swap: `c = pinv(V) h`, `h + V(swap(c) - c)` with `V = [v_s v_t]` | `interventions.LensSwap` |
@@ -43,6 +43,8 @@ Used by `evaluation/` and `finetune/`.
 - `readout.py`
   - `lens_logits(js, prompt, interventions=(), layers=None, positions=None)`: `{layer: [n_positions, vocab]}` from `lens.apply`, with the interventions applied (an all-ones mask shaped like jlens's encoding of the prompt).
   - `token_ranks(js, prompt, ids, position=-1, layers=None, interventions=())`: best rank of those tokens in the J-lens readout, per layer.
+  - `readout_layers(js)`: the fitted layers plus the model's final layer (the layers `residual_logits` accepts).
+  - `residual_logits(js, resid, layer)`: fp32 `[..., vocab]` J-lens logits for residuals `[..., d]` you already have (e.g. from `model.inference.forward_residuals`): `lens.transport` if the layer has a Jacobian, then `lens_model.unembed` (casts to the head's dtype). The final layer needs no Jacobian, so its row equals the model's output logits; any other unfitted layer raises `ValueError`. Matches `jlens.vis.compute_slice`.
 - `decompose.py`: the paper's J-space as a sparse nonnegative combination of at most 25 J-lens vectors, found by gradient pursuit.
   - `jspace_decompose(lens, W_U, h, layer, k)`: returns the J-space part of `h`, the chosen token ids, and their coefficients.
   - `non_jspace_part(lens, W_U, h, layer, k)`: `h` minus its J-space part (used by the probes in `evaluation/`).

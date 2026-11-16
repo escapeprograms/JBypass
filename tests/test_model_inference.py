@@ -4,7 +4,8 @@ import torch
 
 from model.config import GenerationSettings
 from model.inference import (
-    encode, forward_logits, generate, greedy_tokens, next_token_logits, sequence_loss, sequence_nll,
+    encode, forward_logits, forward_residuals, generate, greedy_tokens, next_token_logits, sequence_loss,
+    sequence_nll,
 )
 from model.loading import LanguageModel
 from model.prompts import chat_prompt
@@ -65,6 +66,21 @@ def test_batched_and_single_generate_agree(lm):
 def test_interventions_change_inference_outputs(lm):
     zero = [ZeroOut(layers=[lm.n_layers - 1])]
     assert not torch.allclose(next_token_logits(lm, PROMPTS[:1], zero), next_token_logits(lm, PROMPTS[:1]))
+
+
+def test_forward_residuals_shapes_without_interventions(lm):
+    enc = encode(lm, PROMPTS)
+    resids = forward_residuals(lm, enc, [0, lm.n_layers - 1])
+    assert sorted(resids) == [0, lm.n_layers - 1]
+    assert all(r.shape == (*enc.input_ids.shape, lm.d_model) for r in resids.values())
+    assert not any(r.requires_grad for r in resids.values())
+
+
+def test_forward_residuals_capture_post_intervention(lm):
+    enc = encode(lm, PROMPTS[:1])
+    resids = forward_residuals(lm, enc, [0, 1], [ZeroOut(layers=[1])])
+    assert torch.equal(resids[1], torch.zeros_like(resids[1]))
+    assert resids[0].abs().max() > 0
 
 
 def _force_eos_after(lm, prompt_len: int, n_tokens: int) -> Replace:

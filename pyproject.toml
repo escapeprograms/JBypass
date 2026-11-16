@@ -9,7 +9,7 @@ description = "J-Bypassing: can a model learn while under J-lens ablations?"
 requires-python = ">=3.12"
 
 [tool.setuptools.packages.find]
-include = ["model*", "jspace*", "evaluation*", "finetune*"]
+include = ["model*", "jspace*", "evaluation*", "finetune*", "viz*"]
 
 [tool.setuptools.package-data]
 evaluation = ["data/*.json"]

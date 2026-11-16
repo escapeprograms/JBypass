@@ -54,6 +54,7 @@ python -m model.run_smoke    [--model qwen3-0.6b]   # GPU end-to-end check
 - `forward_logits(lm, input_ids, attention_mask, interventions=())`: in-graph logits with interventions applied (shared with training).
 - `nll_per_row(logits, labels)`: in-graph summed fp32 next-token NLL and scored-token count per row; labels of `IGNORE_INDEX` (-100) are skipped.
 - `next_token_logits(lm, prompts, interventions=())`: `[batch, vocab]`.
+- `forward_residuals(lm, enc, layers, interventions=())`: `{layer: [batch, seq, d]}` residuals of one forward pass, post-intervention (the capture is opened inside `apply_interventions`), in the model's dtype.
 - `sequence_nll(lm, enc, interventions=())`: summed NLL and token count per row over each row's real tokens after the first.
 - `sequence_loss(lm, texts, interventions=())`: `[batch]` mean NLL (exp gives perplexity).
 - `greedy_tokens(lm, enc, max_new_tokens, interventions_for)`: `[batch, n_new]` greedy tokens; calls `interventions_for` before every step with the grown sequence; stops once every row has produced EOS. No KV cache (`TODO(debt)`).
@@ -68,6 +69,7 @@ python -m model.run_smoke    [--model qwen3-0.6b]   # GPU end-to-end check
 ### `lora.py` — adapter lifecycle
 - `attach_lora(lm, settings)`: fresh trainable adapter on the profile's `lora_target_modules`; base frozen; adapter weights fp32 over a bf16 base.
 - `save_adapter(lm, path)`: adapter weights plus `jbypass_profile.json` with the profile name.
+- `saved_profile(path)`: the profile name recorded in a saved adapter's `jbypass_profile.json`.
 - `load_adapter(lm, path)`: loads a frozen, unmerged adapter (every eval script uses this); raises `ValueError` if the profile name differs.
 - `adapter_disabled(lm)`: context manager that runs the exact base model.
 

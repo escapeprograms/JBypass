@@ -5,7 +5,7 @@ from model.config import TrainSettings
 from model.data import collate
 from model.hooks import capture_residuals
 from model.inference import IGNORE_INDEX, encode, next_token_logits
-from model.lora import adapter_disabled, attach_lora, load_adapter, save_adapter
+from model.lora import adapter_disabled, attach_lora, load_adapter, save_adapter, saved_profile
 from model.prompts import chat_prompt
 from model.training import example_batches, train
 
@@ -104,6 +104,13 @@ def test_save_load_round_trip(tokenizer, tmp_path):
     fresh = build_qwen(tokenizer)
     load_adapter(fresh, tmp_path)
     torch.testing.assert_close(next_token_logits(fresh, PROMPT), tuned)
+
+
+def test_saved_profile_reads_the_saved_name(tokenizer, tmp_path):
+    lm = build_qwen(tokenizer)
+    attach_lora(lm, LORA)
+    save_adapter(lm, tmp_path)
+    assert saved_profile(tmp_path) == saved_profile(str(tmp_path)) == lm.profile.name
 
 
 def test_loading_adapter_onto_different_profile_raises(tokenizer, tmp_path):

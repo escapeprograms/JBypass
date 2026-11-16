@@ -11,7 +11,7 @@ import torch
 import torch.nn.functional as F
 
 from model.config import GenerationSettings
-from model.hooks import Intervention, apply_interventions
+from model.hooks import Intervention, apply_interventions, capture_residuals
 from model.loading import LanguageModel
 
 IGNORE_INDEX = -100   # label value excluded from the loss (prompt and padding)
@@ -76,6 +76,19 @@ def next_token_logits(
     """[batch, vocab] logits for the token after each prompt."""
     enc = encode(lm, prompts)
     return forward_logits(lm, enc.input_ids, enc.attention_mask, interventions)[:, -1]
+
+
+@torch.no_grad()
+def forward_residuals(
+    lm: LanguageModel, enc: Encoded, layers: Sequence[int], interventions: Sequence[Intervention] = ()
+) -> dict[int, torch.Tensor]:
+    """{layer: [batch, seq, d_model]} residuals of one forward pass, post-intervention."""
+    # The capture is opened inside apply_interventions: hooks run in registration order,
+    # so it records the edited residual.
+    with apply_interventions(lm, interventions, enc.attention_mask), \
+            capture_residuals(lm, layers) as resids:
+        forward_logits(lm, enc.input_ids, enc.attention_mask)
+    return {layer: resids[layer] for layer in layers}
 
 
 @torch.no_grad()

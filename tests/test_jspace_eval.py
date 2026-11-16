@@ -3,14 +3,18 @@
 python -m pytest tests/test_jspace_eval.py
 """
 
+import re
 import types
 
+import pytest
 import torch
 
 from evaluation.config import EvalConfig
+from evaluation.data.build_jbypass_dataset import BRIDGES, RELATIONS, add_swaps, build_items, fill_relation, validate
 from evaluation.data_loading import load_dataset
 from evaluation.probes import chance_level, probe_accuracy_by_layer
 from evaluation.scoring import matches
+from evaluation.show_table import describe, expand
 from evaluation.splits import split_by_bridge
 from jspace.config import JSpaceConfig
 from jspace.decompose import jspace_decompose
@@ -30,6 +34,44 @@ def test_split_by_bridge_has_no_leakage():
     bridges = {k: {it.bridge for it in items if it.name in set(v)} for k, v in splits.items()}
     assert not bridges["train"] & bridges["test_unseen"]
     assert bridges["test_seen"] <= bridges["train"]
+
+
+def _built_items():
+    items = build_items()
+    validate(items)
+    return add_swaps(items)
+
+
+def test_dataset_names_unique():
+    names = [it["name"] for it in _built_items()]
+    assert len(names) == len(set(names))
+
+
+def test_dataset_bridge_in_one_category():
+    categories = {}
+    for it in _built_items():
+        categories.setdefault(it["bridge"], set()).add(it["category"])
+    assert all(len(c) == 1 for c in categories.values())
+
+
+def test_dataset_bridge_absent_from_two_hop_prompt():
+    for it in _built_items():
+        assert not re.search(rf"\b{re.escape(it['bridge'])}\b", it["prompt"], re.IGNORECASE), it["name"]
+
+
+def test_dataset_hop2_is_relation_template_with_bridge_phrase():
+    phrase = {b.name: b.phrase for rows in BRIDGES.values() for b in rows}
+    for it in _built_items():
+        template = RELATIONS[it["category"]][it["relation"]]
+        assert it["hop2_prompt"] == fill_relation(template, phrase[it["bridge"]])
+
+
+def test_dataset_swap_is_other_bridge_of_same_category():
+    items = _built_items()
+    category_of = {it["bridge"]: it["category"] for it in items}
+    for it in items:
+        assert it["swap_to"] != it["bridge"]
+        assert category_of[it["swap_to"]] == it["category"]
 
 
 def test_matches_handles_synonyms_and_filler():
@@ -84,3 +126,32 @@ def test_lens_swap_exchanges_coordinates():
     out = swap.edit((2.0 * vs + 0.5 * vt)[None], 0)[0]
     coords = torch.linalg.lstsq(torch.stack([vs, vt], 1), out[:, None]).solution.squeeze()
     assert torch.allclose(coords, torch.tensor([0.5, 2.0]), atol=1e-3)
+
+
+def _record(name, field, condition, correct, next_token_correct):
+    return {"name": name, "field": field, "condition": condition, "correct": correct,
+            "next_token_correct": next_token_correct, "output": ""}
+
+
+def test_show_table_describe_rebuilds_tables_from_records():
+    records = [_record("a", "prompt", "none", True, True), _record("b", "prompt", "none", True, False),
+               _record("a", "prompt", "bridge", True, False), _record("b", "prompt", "bridge", False, False),
+               _record("a", "hop2_prompt", "none", True, True), _record("b", "hop2_prompt", "none", True, True),
+               _record("a", "hop2_prompt", "bridge", False, False), _record("b", "hop2_prompt", "bridge", False, False)]
+    result = {"tag": "M", "dataset": "jbypass", "split": None, "adapter": None, "table": {}, "records": records}
+    lines = describe("eval_M_jbypass_all.json", result).splitlines()
+    assert "base model" in lines[0] and "items=2" in lines[0] and "eval_M_jbypass_all.json" in lines[0]
+    exact, paper = lines.index("exact match (primary):"), lines.index("next token (paper's metric):")
+    assert lines[exact + 1].split() == ["prompt", "type", "none", "bridge"]
+    assert lines[exact + 2].split() == ["prompt", "1.00", "0.50"]
+    assert lines[exact + 3].split() == ["hop2_prompt", "1.00", "0.00"]
+    assert lines[paper + 2].split() == ["prompt", "0.50", "0.00"]
+    assert lines[paper + 3].split() == ["hop2_prompt", "1.00", "0.00"]
+
+
+def test_show_table_expand_raises_on_unmatched_pattern(tmp_path):
+    (tmp_path / "eval_b.json").write_text("{}", encoding="utf-8")
+    (tmp_path / "eval_a.json").write_text("{}", encoding="utf-8")
+    assert [p.name for p in expand([str(tmp_path / "eval_*.json")])] == ["eval_a.json", "eval_b.json"]
+    with pytest.raises(FileNotFoundError):
+        expand([str(tmp_path / "missing_*.json")])

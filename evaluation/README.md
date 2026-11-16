@@ -13,6 +13,7 @@ python -m evaluation.run_eval --dataset jbypass --tag M            # 3. baseline
 python -m evaluation.run_eval --dataset paper_probe_swap --tag M --fields prompt
 python -m evaluation.run_mechanism --tag M                         # 4. bridge readout by position + probes
 python -m evaluation.run_perplexity --tag M                        # 5. held-out perplexity
+python -m evaluation.show_table "results/eval_*.json"              # reprint saved eval tables (no model)
 ```
 Every script takes `--config` (run.yaml) and `--model` (profile; default from run.yaml), `--device` (default = the profile's device; `--device mps` on a Mac), `--adapter path/to/adapter` to evaluate a fine-tuned model instead of M (an adapter saved by `finetune.run_train` / `model.lora.save_adapter`, loaded unmerged), and `--lens_path` to ablate with a different lens (e.g. one from `jspace.fit_lens`; required for a profile without `prefit_lens`). `run_eval` and `run_mechanism` take `--split_file results/splits.json --split test_seen` (or `test_unseen`). `run_mechanism` takes `--extra_lens recomputed=path.pt` to compare a recomputed lens with the original side by side.
 For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to `results/`.
@@ -44,9 +45,10 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
 - `conditions.py`
   - `Builder = (js, item, enc, rng) -> Sequence[Intervention]`; one builder per condition, registered in `CONDITIONS`; `()` for the clean run. `enc` is the current one-row token sequence (`model.inference.Encoded`). The top-k builders run a clean pass on it for the exclude mask.
   - `item_rng(seed, item, condition)`: the per-item random source; one seeding rule for eval, mechanism and training.
+  - `interventions_for_item(js, item, condition, seed)`: an `InterventionsFor` (`enc -> interventions`) that calls the condition's builder with a fresh `item_rng` on every call, so random ablations stay fixed across decoding steps.
 - `runner.py`
   - `evaluate(js, items, conditions, fields, seed, n_tokens)`: one record per item, prompt type, and condition.
-  - `score_one(js, item, field, condition, seed, n_tokens)`: one record; the condition's builder is called every decoding step with a fresh `item_rng`, so random ablations stay fixed across steps.
+  - `score_one(js, item, field, condition, seed, n_tokens)`: one record; decodes with `conditions.interventions_for_item`, so the builder runs every step and random ablations stay fixed.
   - `solved_items`: items the clean model gets right on every prompt type.
   - `readable_items`: drops bridges with no single-token spelling.
   - `accuracy_table`, `format_table`.
@@ -58,7 +60,7 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
   - `question_start(js, prompt)`: index of the first token after the `Fact:` prefix, in jlens's encoding.
   - `bridge_ranks_all_positions(js, item, condition, rng)`: the bridge's J-lens rank per layer at the final prompt token and the best rank over the question span (every token after `Fact:`, which includes the bridge's description), via `jspace.lens_logits` under the condition.
   - `summarize_ranks`: pass@k over all layers (paper's metric), pass@k within the band (where ablations act), and median rank per layer.
-  - `collect_final_token`: residuals at the final token for every layer, under a condition (for the probes): `model.hooks.capture_residuals` opened inside `apply_interventions`, so it records the edited residual.
+  - `collect_final_token`: residuals at the final token for every layer, under a condition (for the probes), via `model.inference.forward_residuals`, so it records the edited residual.
 - `probes.py`
   - `probe_accuracy_by_layer(X, labels, groups, ...)`: cross-validated multinomial logistic regression that predicts the bridge from the residual at each layer. Folds are grouped by subject, so all questions about one landmark land in the same fold and the probe can't score by recognizing the landmark.
   - `strip_jspace(js, X, k)`: replaces each residual with its non-J-space part (`jspace.decompose`).
@@ -66,13 +68,26 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
 - `perplexity.py`: `perplexity(lm, texts, max_len, batch_size)`: token-weighted perplexity over all texts, each truncated to `max_len` tokens, texts under 2 tokens skipped, computed in left-padded batches with `model.inference.sequence_nll`.
 - `cli_common.py`
   - `add_model_args(parser)`: `--config`, `--model`, `--device` (from `model.cli`), `--adapter`, `--lens_path`, `--limit`.
-  - `load_model_from_args(args)`: the profile's model plus the adapter if given (unmerged, `model.lora.load_adapter`), with every weight frozen (`model.loading.freeze`; the probes' decomposition relies on it). Used by `run_perplexity`, which needs no lens.
-  - `load_from_args(args)`: the above plus the lens, as a `JSpace`.
+  - `load_frozen_model(profile, adapter=None)`: the profile's model plus the adapter if given (unmerged, `model.lora.load_adapter`), with every weight frozen (`model.loading.freeze`; the probes' decomposition relies on it).
+  - `load_frozen_jspace(profile, adapter=None, lens_path=None)`: the above plus the lens (`lens_path`, or the profile's prefit lens), as a `JSpace` with the default `JSpaceConfig` (`TODO(debt-002)`).
+  - `load_model_from_args(args)`: `load_frozen_model` with the profile and `--adapter` from the flags. Used by `run_perplexity`, which needs no lens.
+  - `load_from_args(args)`: `load_frozen_jspace` with the profile, `--adapter` and `--lens_path` from the flags.
   - `load_items(name, cfg, split_file, split, limit)`, `write_json(obj, path)`.
 - `run_eval.py`, `run_lens_checks.py`, `make_splits.py`, `run_mechanism.py`, `run_perplexity.py`: command-line entry points.
+- `show_table.py`: command-line tool that reprints `run_eval` result tables without loading a model.
+  - `expand(patterns) -> list[Path]`: paths or glob patterns (expanded here, since PowerShell doesn't), each pattern's matches sorted; raises `FileNotFoundError` if a pattern matches nothing.
+  - `load_result(path) -> dict`: reads a result JSON as UTF-8.
+  - `describe(path, result) -> str`: header (file name, tag, dataset, split, adapter or "base model", distinct items) plus the exact-match and next-token tables, rebuilt from `records` with `runner.accuracy_table` / `format_table`, so old and new files read the same.
 - `data/`
   - Prompts are stripped of trailing spaces on load. Qwen turns a trailing space into a lone token that derails the model, and the paper's prompts end with `"is "`.
-  - `build_jbypass_dataset.py` writes `jbypass_two_hop.json`: 218 items, 66 bridges, in the paper's `Fact:` format, each with both one-hop prompts. For capital questions the landmark is not in the capital, so the model can't skip the bridge.
+  - `build_jbypass_dataset.py` writes `jbypass_two_hop.json`: 1032 items, 156 bridges (89 countries, 39 US states, 12 animals, 4 planets, 7 elements, 5 people), in the paper's `Fact:` format, each with both one-hop prompts. All tables live in this file.
+    - Idea: a two-hop prompt is the hop-2 template with the bridge replaced by a reference to the subject (`"the country where Mont Saint-Michel is located"`). The dataset is the cross product bridge x its subjects x its relations.
+    - `RELATIONS`: hop-2 template per category and relation (`{b}` = bridge phrase or subject reference, `{B}` = capitalised).
+    - `KINDS`: how a subject points at its bridge, as (hop-1 template, reference template): `place` ("is located in"), `person` ("was born in"), `company` ("is headquartered in"), `description` ("the lightest element is"), `known_as` ("the planet known as the Red Planet is").
+    - `Bridge`: `name` (the ablated word), `attrs` (`{relation: [answers]}`, first = training target), `subjects` (`[(kind, text)]`), `phrase` (how hop 2 names it, e.g. "a spider"), `lead` (hop-1 lead-in, e.g. " the", " Albert"). Built by `country`, `state`, `described`, `animal`; `None` for a country attribute omits that relation.
+    - `compose(category, bridge, kind, subject, relation)`: one item. `build_items()`: the cross product. `validate(items)`: raises on duplicate names, a bridge in two categories, or a bridge named in its own two-hop prompt. `add_swaps(items, seed)`: `swap_to` = another bridge of the same category.
+    - Rules: no subject is in, born in, or headquartered in the bridge's capital, or best known for its ties to it (Rosa Parks and Montgomery), so the model can't skip the bridge for capital questions; a subject never contains its bridge's name; every new bridge name is a single Qwen token (Curie, kangaroo and octopus are not, and are dropped by `readable_items`); a relation is omitted when its answer contains the bridge name (Singapore, Guatemala capitals) or is disputed.
+    - Row keys: `name` (`{category}-{bridge}-{relation}-{subject slug}`, no index, so table edits don't rename other items), `category`, `relation`, `bridge`, `answers`, `subject`, `subject_kind`, `hop1_prompt`, `prompt`, `hop2_prompt`, `swap_to`. `load_jbypass` ignores `relation`, `subject` and `subject_kind`.
   - `probe-swap.json` (90 items), `lens-eval-multihop.json` (93 items): Anthropic's two-hop sets, copied unchanged from jacobian-lens (Apache 2.0, see `data/NOTICE`).
 
 ## Coverage of the proposal's Evaluation section
@@ -99,7 +114,7 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
 If `bridge` barely hurts but `topk` does, removing the bridge alone isn't enough. That's a finding in itself, and the next step is to ablate more of the J-space.
 
 ## Tested
-`tests/test_jspace_eval.py` runs without a model: loaders, split leakage, answer matching, probe separability and subject leakage, decomposition recovery, projection, and swap math. `tests/test_evaluation_model.py` runs decoding, the condition builders and perplexity on a tiny random model with a synthetic lens.
+`tests/test_jspace_eval.py` runs without a model: loaders, split leakage, the dataset generator's invariants, answer matching, probe separability and subject leakage, decomposition recovery, projection, and swap math. `tests/test_evaluation_model.py` runs decoding, the condition builders and perplexity on a tiny random model with a synthetic lens.
 
 Every script was also run end to end on Qwen3-1.7B with the prefit lens, on small item counts on an M-series Mac (`--device mps`). Smoke numbers, not results:
 - Lens checks (30 items): bridge readout pass@10 is 0.77 on our dataset and 0.27 on the paper's multihop set. Bridge ablation drops it to 0.07 and 0.00. Swap success is 0.10 (1 of 10 solved). The paper reports 54% to 70% on Claude.

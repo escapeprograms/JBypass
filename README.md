@@ -24,12 +24,13 @@ $py = "C:\Users\archi\miniconda3\envs\jbypass\python.exe"
 Every command takes `--config`, `--model` and `--device` (default: the profile's device). See `evaluation/README.md` for the full eval run order.
 
 ## Layout
-Dependencies run one way: `model` ← `jspace` ← `evaluation` ← `finetune`.
+Dependencies run one way: `model` ← `jspace` ← `evaluation` ← `finetune` / `viz`.
 - `model/` — loading, residual-stream hooks, inference, LoRA, training loop, CLI helpers, `run_download` and `run_smoke`.
 - `jspace/` — attaches a J-lens to a loaded model: lens loading, J-lens vectors, interventions, readout, `fit_lens`.
 - `evaluation/` — dataset, ablation conditions, scoring, runner, lens checks, mechanism, probes, perplexity.
 - `finetune/` — LoRA training under an eval condition; saves the adapter the eval scripts load.
-- `configs/` — `run.yaml` (which model plus run settings) and `models/<name>.yaml` profiles.
+- `viz/` — local Gradio app: run one example under one ablation and browse the J-lens readout of every layer (`python -m viz.run_app`).
+- `configs/` — `run.yaml` (which model plus run settings), `viz.yaml` (viewer settings) and `models/<name>.yaml` profiles.
 - `tests/` — flat unit tests with one shared `conftest.py`.
 - `commands.md` — every CLI command (setup, checks, splits, training, eval, lens refit) in run order.
 - `debt.md` — recorded technical debt that spans several files.

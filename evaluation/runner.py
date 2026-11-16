@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-from evaluation.conditions import CONDITIONS, item_rng
+from evaluation.conditions import interventions_for_item
 from evaluation.scoring import answer_token_ids, greedy_continuation, matches
 from jspace import token_variants
 
@@ -24,10 +24,7 @@ def score_one(js, item, field: str, condition: str, seed: int, n_tokens: int) ->
     next_token_correct: the paper's stricter first-token metric."""
     prompt = getattr(item, field)
     answers = field_answers(item, field)
-
-    def interventions_for(enc):   # a fresh rng every step, so random ablations stay fixed
-        return CONDITIONS[condition](js, item, enc, item_rng(seed, item, condition))
-
+    interventions_for = interventions_for_item(js, item, condition, seed)
     continuation, first = greedy_continuation(js.lm, prompt, interventions_for, n_tokens)
     return {"name": item.name, "field": field, "condition": condition,
             "correct": matches(continuation, answers),

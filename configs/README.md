@@ -5,4 +5,12 @@
   - `qwen3-1.7b.yaml` — default model; prefit lens from `neuronpedia/jacobian-lens`.
   - `qwen3-0.6b.yaml` — second profile, proves switching is config-only. No prefit lens exists (`prefit_lens: null`): J-space commands need `--lens_path` to a lens from `jspace.fit_lens`.
 
+- `viz.yaml` — the J-space viewer (`viz/`); paths relative to this folder.
+  - `runs_dir` — folder whose subfolders holding a saved adapter become model choices.
+  - `split_file` — `{split: [item names]}` JSON for the split dropdown, or `null` (only `all`); a missing file raises.
+  - `top_n` — top tokens kept per (position, layer) cell.
+  - `max_tracked` — cap on frequently-top tokens given rank charts, besides the pinned bridge/answers; `null` = all (pages can reach ~10 MB).
+  - `page_height` — heatmap iframe height in pixels.
+  - `server_name`, `server_port` — where the app listens.
+
 J-space and eval settings are still dataclass defaults (`jspace/config.py`, `evaluation/config.py`, `finetune/config.py`); see debt 002.

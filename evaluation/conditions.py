@@ -23,7 +23,7 @@ from evaluation.data_loading import TwoHopItem
 from jspace import JSpace, ProjectOut, TopKAblation, band_prefix, lens_vectors, token_variants
 from jspace.config import JSpaceConfig
 from model.hooks import Intervention
-from model.inference import Encoded, forward_logits
+from model.inference import Encoded, InterventionsFor, forward_logits
 
 Builder = Callable[[JSpace, TwoHopItem, Encoded, random.Random], Sequence[Intervention]]
 
@@ -31,6 +31,14 @@ Builder = Callable[[JSpace, TwoHopItem, Encoded, random.Random], Sequence[Interv
 def item_rng(seed, item: TwoHopItem, condition: str) -> random.Random:
     """The per-item random source for a condition; one seeding rule for eval and training."""
     return random.Random(f"{seed}-{item.name}-{condition}")
+
+
+def interventions_for_item(js, item: TwoHopItem, condition: str, seed: int) -> InterventionsFor:
+    """enc -> the condition's interventions on that sequence. A fresh item_rng on every
+    call, so random ablations stay fixed across decode steps."""
+    def interventions_for(enc: Encoded) -> Sequence[Intervention]:
+        return CONDITIONS[condition](js, item, enc, item_rng(seed, item, condition))
+    return interventions_for
 
 
 def build_none(js, item, enc, rng):

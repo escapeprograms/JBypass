@@ -14,8 +14,7 @@ import torch
 
 from evaluation.conditions import CONDITIONS
 from jspace import lens_logits, token_variants
-from model.hooks import apply_interventions, capture_residuals
-from model.inference import encode, forward_logits
+from model.inference import encode, forward_residuals
 
 
 def question_start(js, prompt: str) -> int:
@@ -66,10 +65,7 @@ def collect_final_token(js, items, condition: str, rng_for) -> torch.Tensor:
 
 
 def _final_token_residuals(js, enc, interventions) -> torch.Tensor:
-    """The capture is opened inside apply_interventions: hooks run in registration
-    order, so it records the edited residual."""
+    """[n_layers, d] fp32 post-intervention residuals at the last position."""
     layers = list(range(js.lm.n_layers))
-    with apply_interventions(js.lm, interventions, enc.attention_mask), \
-            capture_residuals(js.lm, layers) as resids:
-        forward_logits(js.lm, enc.input_ids, enc.attention_mask)
+    resids = forward_residuals(js.lm, enc, layers, interventions)
     return torch.stack([resids[l][0, -1].float() for l in layers])
