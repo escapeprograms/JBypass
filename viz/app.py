@@ -1,20 +1,23 @@
 """Gradio wiring for the J-space viewer: controls, handlers and the event chains between them.
-No model or tensor logic here; handlers call viz.catalog / run / slice / page and viz.session."""
+No model or tensor logic here; handlers call viz.catalog / run / slice / gloss / page and viz.session."""
 
 import random
 from dataclasses import dataclass
 from functools import partial
 
 import gradio as gr
+from jlens.vis import SliceData
 
 from evaluation.config import EvalConfig
 from evaluation.data_loading import TwoHopItem
 from model.config import RunConfig
 from viz.catalog import (ALL_SPLITS, ModelChoice, examples, pick_random, split_names, valid_conditions,
                          valid_fields)
+from viz.cedict import Cedict
 from viz.config import VizConfig
-from viz.page import iframe, item_card, slice_page, summary
-from viz.run import run_example
+from viz.gloss import gloss_payload
+from viz.page import iframe, item_card, slice_page, summary, with_glosses
+from viz.run import RunResult, run_example
 from viz.session import Session
 from viz.slice import replay_mismatches, run_slice
 
@@ -31,6 +34,7 @@ class AppContext:
     choices: dict[str, ModelChoice]         # dropdown label -> choice
     default_model: str                      # a key of `choices`
     rng: random.Random                      # for the Random example button
+    dictionary: Cedict | None               # CC-CEDICT for the translation box; None = off
 
 
 @dataclass
@@ -99,8 +103,16 @@ def on_run(ctx: AppContext, label: str, items: dict, name: str | None, field: st
                          ctx.run.generation.max_new_tokens)
     slice_data = run_slice(js, result, ctx.viz.top_n, ctx.viz.max_tracked)
     mismatches = replay_mismatches(slice_data, result)
-    page = slice_page(slice_data, result, title=f"{choice.label}: {name}")
+    page = _page(ctx, slice_data, result, title=f"{choice.label}: {name}")
     return summary(result, mismatches), iframe(page, ctx.viz.page_height)
+
+
+def _page(ctx: AppContext, slice_data: SliceData, result: RunResult, title: str) -> str:
+    """The jlens page, with the click-to-translate box when a dictionary is loaded."""
+    page = slice_page(slice_data, result, title=title)
+    if ctx.dictionary is None:
+        return page
+    return with_glosses(page, gloss_payload(slice_data, ctx.dictionary))
 
 
 def _items(ctx: AppContext, label: str, dataset: str, split: str) -> list[TwoHopItem]:

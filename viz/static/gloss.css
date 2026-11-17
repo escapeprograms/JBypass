@@ -1,0 +1,21 @@
+/* Click-to-translate box (viz/static/gloss.js), injected into the jlens slice page. */
+.jlens-page{--jb-gloss-width:320px;--jb-gloss-max-height:45vh;--jb-gloss-margin:12px;
+  --jb-gloss-z:900}                      /* below the page's #tt tooltip (z-index 1000) */
+.jb-gloss{position:fixed;right:var(--jb-gloss-margin);bottom:var(--jb-gloss-margin);
+  z-index:var(--jb-gloss-z);width:var(--jb-gloss-width);max-width:calc(100vw - 2 * var(--jb-gloss-margin));
+  max-height:var(--jb-gloss-max-height);display:flex;flex-direction:column;
+  background:#fff;color:#222;border:1px solid #bbb;border-radius:4px;
+  box-shadow:0 2px 10px rgba(0,0,0,.2);font:12px/1.4 system-ui,-apple-system,sans-serif}
+.jb-gloss[hidden]{display:none}
+.jb-gloss-close{position:absolute;top:2px;right:4px;border:none;background:none;cursor:pointer;
+  font-size:16px;line-height:1;color:#888;padding:2px 4px}
+.jb-gloss-close:hover{color:#000}
+.jb-gloss-body{overflow-y:auto;padding:6px 26px 4px 10px;min-height:0}
+.jb-gloss-token{font:600 16px/1.3 system-ui,sans-serif;margin-bottom:4px}
+.jb-gloss-seg{padding:3px 0;border-top:1px solid #eee}
+.jb-gloss-word{font-size:14px;font-weight:600}
+.jb-gloss-entry{margin:1px 0 3px}
+.jb-gloss-reading{font:11px monospace;color:#555}
+.jb-gloss-senses{margin:1px 0 0;padding-left:20px}
+.jb-gloss-none{color:#888;font-style:italic}
+.jb-gloss-foot{flex:none;padding:2px 10px 4px;font-size:9px;color:#999;border-top:1px solid #eee}

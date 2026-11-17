@@ -12,6 +12,7 @@ $py = "C:\Users\archi\miniconda3\envs\jbypass\python.exe"
 & $py -m pytest tests                       # CPU, tiny random models
 & $py -m model.run_smoke                    # GPU end-to-end check; add --model qwen3-0.6b to switch
 ```
+For the viewer's translations, save `cedict_1_0_ts_utf-8_mdbg.txt.gz` from https://www.mdbg.net/chinese/dictionary?page=cc-cedict into `downloads/` by hand in a browser (scripted download is prohibited by the site; see `commands.md`).
 
 ## Experiment
 ```powershell

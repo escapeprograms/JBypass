@@ -8,6 +8,7 @@ from evaluation.config import EvalConfig
 from model.cli import add_profile_args, resolve_profile
 from viz.app import AppContext, build_app
 from viz.catalog import ModelChoice, model_choices
+from viz.cedict import Cedict, load_cedict
 from viz.config import DEFAULT_VIZ_CONFIG, load_viz_config
 from viz.session import Session, make_loader
 
@@ -20,7 +21,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def build_context(args: argparse.Namespace) -> AppContext:
-    """Configs, the empty model session and the model choices; the default is --model's base model."""
+    """Configs, the empty model session, the model choices (the default is --model's base model)
+    and the dictionary for the translation box."""
     run, profile = resolve_profile(args)
     viz = load_viz_config(args.viz_config)
     choices = {c.label: c for c in model_choices(run.profiles_dir, viz.runs_dir)}
@@ -29,7 +31,18 @@ def build_context(args: argparse.Namespace) -> AppContext:
         raise ValueError(f"profile {profile.name!r} has no prefit lens; choose one of {list(choices)}")
     eval_cfg = EvalConfig()  # TODO(debt-002): eval settings are the dataclass defaults, not read from a file.
     return AppContext(run=run, viz=viz, eval_cfg=eval_cfg, session=Session(make_loader(run, args.device)),
-                      choices=choices, default_model=default, rng=random.Random(eval_cfg.seed))
+                      choices=choices, default_model=default, rng=random.Random(eval_cfg.seed),
+                      dictionary=load_dictionary(viz.dictionary_file))
+
+
+def load_dictionary(path: Path | None) -> Cedict | None:
+    """CC-CEDICT from `path` (a missing file raises), or None when translations are off; prints which."""
+    if path is None:
+        print("Translations off (dictionary_file: null)")
+        return None
+    cedict = load_cedict(path)
+    print(f"CC-CEDICT: {cedict.n_entries:,} entries, {len(cedict.index):,} headwords <- {path}")
+    return cedict
 
 
 def main() -> None:

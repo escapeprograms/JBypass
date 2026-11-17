@@ -11,6 +11,9 @@ runs/
 checkpoints/
 wandb/
 
+# Files downloaded by hand (e.g. the CC-CEDICT dictionary for viz/)
+downloads/
+
 # Model and lens weights
 *.pt
 *.safetensors

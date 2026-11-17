@@ -31,7 +31,8 @@ Used by `evaluation/` and `finetune/`.
 - `vectors.py`
   - `workspace_band(n_layers, start, end)`: layer indices in the band.
   - `band_prefix(band, fraction)`: the first part of the band (for ablation strengths).
-  - `token_variants(tokenizer, word)`: ids of every single-token spelling (space or no space, case).
+  - `token_variants(tokenizer, word)`: ids of every single-token spelling (space or no space, case); builds the variants and delegates to `single_token_ids`.
+  - `single_token_ids(tokenizer, spellings)`: ids of the given spellings that tokenize to exactly one token, first-seen order, deduplicated; no case or space variants added (used for the Chinese bridge spellings).
   - `lens_vectors(lens, W_U, ids, layers)`: `{layer: [k, d]}` rows of `W_U J_l`.
   - `lens_activations(lens, W_U, h, layer)`: activation of every J-lens vector on `h`, `[..., vocab]`.
 - `interventions.py`: J-space edits as `model.hooks.Intervention`s. Each edits every real token of a row except its first `cfg.ablation_skip_first`; left padding is never edited.

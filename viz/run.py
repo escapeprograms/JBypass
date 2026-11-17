@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from evaluation.conditions import interventions_for_item
 from evaluation.data_loading import TwoHopItem
 from evaluation.runner import field_answers
-from evaluation.scoring import matches
+from evaluation.scoring import answer_index, matches
 from model.inference import encode, greedy_tokens
 
 
@@ -21,6 +21,13 @@ class RunResult:
     response_text: str              # decoded as evaluation.scoring.greedy_continuation does
     answers: tuple[str, ...]        # accepted answers for this field
     correct: bool                   # evaluation.scoring.matches(response_text, answers)
+    answer_index: int               # index into response_ids of the token scoring compares
+                                    # against (evaluation.scoring.answer_index)
+
+    @property
+    def shown_ids(self) -> tuple[int, ...]:
+        """What the heatmap shows after the prompt: the response up to and including the answer token."""
+        return self.response_ids[: self.answer_index + 1]
 
 
 def run_example(js, item: TwoHopItem, field: str, condition: str, seed: int,
@@ -36,4 +43,5 @@ def run_example(js, item: TwoHopItem, field: str, condition: str, seed: int,
         item=item, field=field, condition=condition, seed=seed, prompt=prompt,
         prompt_ids=tuple(enc.input_ids[0].tolist()), response_ids=tuple(response),
         response_text=text, answers=answers, correct=matches(text, answers),
+        answer_index=answer_index(js.lm.tokenizer, response),
     )

@@ -14,6 +14,7 @@ Pieces
   description / known_as): hop-1 template and reference template.
 - Bridge + country / state / described / animal: the tables' rows; BRIDGES: the data.
 - compose: one item. validate: fail loudly on bad tables. add_swaps: wrong-bridge control.
+- BRIDGE_ZH: simplified Chinese spellings per bridge; check_bridge_zh: fail loudly on gaps.
 
 Rules
 - No subject is located in, born in, or headquartered in the bridge's capital,
@@ -26,6 +27,8 @@ Rules
 - Item names are index-free ({category}-{bridge}-{relation}-{subject slug}), so
   table edits do not rename other items.
 - swap_to = another bridge of the same category (wrong-bridge control).
+- Every bridge has simplified Chinese spellings (bridge_zh), full name first;
+  they need not be single tokens.
 
 Run: python -m evaluation.data.build_jbypass_dataset
 """
@@ -357,6 +360,91 @@ BRIDGES = {
     ],
 }
 
+# Simplified Chinese spellings per bridge (keyed by Bridge.name): the standard full
+# name first, then common short forms. Single-tokenness is not required; consumers
+# filter (the viewer pins only single-token spellings).
+BRIDGE_ZH: dict[str, list[str]] = {
+    # countries
+    "France": ["法国"], "Italy": ["意大利"], "Japan": ["日本"], "India": ["印度"],
+    "China": ["中国"], "Egypt": ["埃及"], "Greece": ["希腊"], "Spain": ["西班牙"],
+    "Russia": ["俄罗斯", "俄国"], "Brazil": ["巴西"], "Australia": ["澳大利亚", "澳洲"],
+    "Peru": ["秘鲁"], "Cambodia": ["柬埔寨"], "Jordan": ["约旦"], "Mexico": ["墨西哥"],
+    "Canada": ["加拿大"], "Turkey": ["土耳其"], "Ireland": ["爱尔兰"], "Norway": ["挪威"],
+    "Indonesia": ["印度尼西亚", "印尼"], "Vietnam": ["越南"], "Kenya": ["肯尼亚"],
+    "Chile": ["智利"], "Portugal": ["葡萄牙"], "Thailand": ["泰国"], "Switzerland": ["瑞士"],
+    "Germany": ["德国"], "Austria": ["奥地利"], "Belgium": ["比利时"], "Netherlands": ["荷兰"],
+    "Sweden": ["瑞典"], "Denmark": ["丹麦"], "Finland": ["芬兰"], "Iceland": ["冰岛"],
+    "Poland": ["波兰"], "Hungary": ["匈牙利"], "Romania": ["罗马尼亚"], "Bulgaria": ["保加利亚"],
+    "Croatia": ["克罗地亚"], "Serbia": ["塞尔维亚"], "Ukraine": ["乌克兰"], "Israel": ["以色列"],
+    "Iran": ["伊朗"], "Iraq": ["伊拉克"], "Syria": ["叙利亚"], "Lebanon": ["黎巴嫩"],
+    "Pakistan": ["巴基斯坦"], "Bangladesh": ["孟加拉国", "孟加拉"], "Nepal": ["尼泊尔"],
+    "Philippines": ["菲律宾"], "Malaysia": ["马来西亚"], "Singapore": ["新加坡"],
+    "Myanmar": ["缅甸"], "Laos": ["老挝"], "Afghanistan": ["阿富汗"],
+    "Kazakhstan": ["哈萨克斯坦"], "Armenia": ["亚美尼亚"], "Morocco": ["摩洛哥"],
+    "Algeria": ["阿尔及利亚"], "Tunisia": ["突尼斯"], "Libya": ["利比亚"],
+    "Nigeria": ["尼日利亚"], "Ghana": ["加纳"], "Ethiopia": ["埃塞俄比亚"],
+    "Tanzania": ["坦桑尼亚"], "Uganda": ["乌干达"], "Madagascar": ["马达加斯加"],
+    "Mali": ["马里"], "Sudan": ["苏丹"], "Argentina": ["阿根廷"], "Colombia": ["哥伦比亚"],
+    "Venezuela": ["委内瑞拉"], "Ecuador": ["厄瓜多尔"], "Bolivia": ["玻利维亚"],
+    "Uruguay": ["乌拉圭"], "Cuba": ["古巴"], "Jamaica": ["牙买加"], "Guatemala": ["危地马拉"],
+    "Honduras": ["洪都拉斯"], "Oman": ["阿曼"], "Yemen": ["也门"], "Cyprus": ["塞浦路斯"],
+    "Malta": ["马耳他"], "Estonia": ["爱沙尼亚"], "Lithuania": ["立陶宛"],
+    "Slovakia": ["斯洛伐克"], "Slovenia": ["斯洛文尼亚"], "Albania": ["阿尔巴尼亚"],
+    "Belize": ["伯利兹"],
+    # US states (bare transliteration, then the 州 form or a common short form)
+    "California": ["加利福尼亚", "加州"], "Florida": ["佛罗里达", "佛州"],
+    "Arizona": ["亚利桑那", "亚利桑那州"], "Nevada": ["内华达", "内华达州"],
+    "Texas": ["得克萨斯", "德州"], "Louisiana": ["路易斯安那", "路易斯安那州"],
+    "Pennsylvania": ["宾夕法尼亚", "宾州"], "Tennessee": ["田纳西", "田纳西州"],
+    "Wyoming": ["怀俄明", "怀俄明州"], "Hawaii": ["夏威夷", "夏威夷州"],
+    "Missouri": ["密苏里", "密苏里州"], "Michigan": ["密歇根", "密歇根州"],
+    "Alabama": ["亚拉巴马", "阿拉巴马"], "Alaska": ["阿拉斯加", "阿拉斯加州"],
+    "Arkansas": ["阿肯色", "阿肯色州"], "Colorado": ["科罗拉多", "科罗拉多州"],
+    "Connecticut": ["康涅狄格", "康州"], "Delaware": ["特拉华", "特拉华州"],
+    "Georgia": ["佐治亚", "佐治亚州"], "Idaho": ["爱达荷", "爱达荷州"],
+    "Illinois": ["伊利诺伊", "伊州"], "Indiana": ["印第安纳", "印第安纳州"],
+    "Iowa": ["艾奥瓦", "爱荷华"], "Kansas": ["堪萨斯", "堪萨斯州"],
+    "Kentucky": ["肯塔基", "肯塔基州"], "Maine": ["缅因", "缅因州"],
+    "Maryland": ["马里兰", "马里兰州"], "Massachusetts": ["马萨诸塞", "麻省", "麻州"],
+    "Minnesota": ["明尼苏达", "明尼苏达州"], "Mississippi": ["密西西比", "密西西比州"],
+    "Montana": ["蒙大拿", "蒙大拿州"], "Nebraska": ["内布拉斯加", "内布拉斯加州"],
+    "Ohio": ["俄亥俄", "俄亥俄州"], "Oregon": ["俄勒冈", "俄勒冈州"],
+    "Utah": ["犹他", "犹他州"], "Vermont": ["佛蒙特", "佛蒙特州"],
+    "Virginia": ["弗吉尼亚", "弗吉尼亚州"], "Washington": ["华盛顿", "华盛顿州"],
+    "Wisconsin": ["威斯康星", "威斯康星州"],
+    # animals
+    "spider": ["蜘蛛"], "bee": ["蜜蜂", "蜂"], "octopus": ["章鱼"], "cow": ["牛", "奶牛"],
+    "dog": ["狗", "犬"], "cat": ["猫"], "sheep": ["羊", "绵羊"], "pig": ["猪"],
+    "kangaroo": ["袋鼠"], "frog": ["青蛙", "蛙"], "bear": ["熊"], "horse": ["马"],
+    # planets
+    "Mars": ["火星"], "Jupiter": ["木星"], "Saturn": ["土星"], "Venus": ["金星"],
+    # elements
+    "oxygen": ["氧", "氧气"], "iron": ["铁"], "copper": ["铜"], "carbon": ["碳"],
+    "hydrogen": ["氢", "氢气"], "gold": ["金", "黄金"], "silver": ["银", "白银"],
+    # persons
+    "Einstein": ["爱因斯坦"], "Shakespeare": ["莎士比亚"], "Mozart": ["莫扎特"],
+    "Darwin": ["达尔文"], "Curie": ["居里", "居里夫人"],
+}
+
+
+def _bad_spellings(table: dict) -> list[str]:
+    """Table keys whose entry is empty or has an empty / all-ASCII spelling."""
+    return [name for name, spellings in table.items()
+            if not spellings or any(not s or s.isascii() for s in spellings)]
+
+
+def check_bridge_zh(bridges: dict = BRIDGES, table: dict = BRIDGE_ZH) -> None:
+    """Raise if a bridge lacks Chinese spellings, a key is not a bridge, or a spelling is empty / ASCII."""
+    names = {b.name for rows in bridges.values() for b in rows}
+    problems = {
+        "bridges without Chinese spellings": sorted(names - table.keys()),
+        "BRIDGE_ZH keys that are not bridges": sorted(table.keys() - names),
+        "empty or ASCII Chinese spellings": sorted(_bad_spellings(table)),
+    }
+    found = [f"{what}: {keys}" for what, keys in problems.items() if keys]
+    if found:
+        raise ValueError("; ".join(found))
+
 
 def _cap(s: str) -> str:
     return s[0].upper() + s[1:]
@@ -379,7 +467,8 @@ def compose(category: str, bridge: Bridge, kind: str, subject: str, relation: st
     template = RELATIONS[category][relation]
     return dict(
         name=f"{category}-{bridge.name}-{relation}-{_slug(subject)}",
-        category=category, relation=relation, bridge=bridge.name, answers=bridge.attrs[relation],
+        category=category, relation=relation, bridge=bridge.name,
+        bridge_zh=BRIDGE_ZH[bridge.name], answers=bridge.attrs[relation],
         subject=subject, subject_kind=kind,
         hop1_prompt=hop1.format(**slots),
         prompt=fill_relation(template, reference.format(**slots)),
@@ -426,6 +515,7 @@ def add_swaps(items: list[dict], seed: int = SEED) -> list[dict]:
 
 
 def main():
+    check_bridge_zh()
     items = build_items()
     validate(items)
     add_swaps(items)

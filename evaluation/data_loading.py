@@ -15,6 +15,7 @@ class TwoHopItem:
     swap_to: a different bridge of the same kind (wrong-bridge control / swap).
     swap_answers: answer if the bridge were swap_to (paper swap check), if known.
     hop1_prompt / hop2_prompt: one-hop components, if the dataset has them.
+    bridge_zh: simplified Chinese spellings of the bridge, full name first; () for datasets without them.
     """
 
     name: str
@@ -26,6 +27,7 @@ class TwoHopItem:
     swap_answers: tuple[str, ...] = ()
     hop1_prompt: str | None = None
     hop2_prompt: str | None = None
+    bridge_zh: tuple[str, ...] = ()
 
     def __post_init__(self):
         # A trailing space becomes a lone space token in Qwen and derails the
@@ -38,19 +40,17 @@ class TwoHopItem:
 
 def load_jbypass(path: Path) -> list[TwoHopItem]:
     """Our dataset (evaluation/data/build_jbypass_dataset.py)."""
-    # TODO(debt): read_text() uses the platform encoding; the file is UTF-8 with accented
-    # names, so pass encoding="utf-8" (here and in the other loaders) before running
-    # anywhere Python is not in UTF-8 mode.
-    rows = json.loads(Path(path).read_text())["items"]
+    rows = json.loads(Path(path).read_text(encoding="utf-8"))["items"]
     return [TwoHopItem(
         name=r["name"], category=r["category"], prompt=r["prompt"], bridge=r["bridge"],
         answers=tuple(r["answers"]), swap_to=r["swap_to"],
-        hop1_prompt=r["hop1_prompt"], hop2_prompt=r["hop2_prompt"]) for r in rows]
+        hop1_prompt=r["hop1_prompt"], hop2_prompt=r["hop2_prompt"],
+        bridge_zh=tuple(r["bridge_zh"])) for r in rows]
 
 
 def load_paper_probe_swap(path: Path) -> list[TwoHopItem]:
     """Anthropic's probe-swap.json: 90 two-hop prompts with bridge and swap target."""
-    rows = json.loads(Path(path).read_text())["items"]
+    rows = json.loads(Path(path).read_text(encoding="utf-8"))["items"]
     return [TwoHopItem(
         name=r["name"], category=r["category"], prompt=r["prompt"],
         bridge=r["intermediate"], answers=(r["answer"],), swap_to=r["swap_to"],
@@ -60,7 +60,7 @@ def load_paper_probe_swap(path: Path) -> list[TwoHopItem]:
 def load_paper_multihop(path: Path) -> list[TwoHopItem]:
     """Anthropic's lens-eval-multihop.json (lens readout eval). Uses the first
     listed intermediate as the bridge."""
-    rows = json.loads(Path(path).read_text())["items"]
+    rows = json.loads(Path(path).read_text(encoding="utf-8"))["items"]
     return [TwoHopItem(
         name=r["name"], category="multihop", prompt=r["prompt"],
         bridge=r["intermediates"][0], answers=(r["target"],)) for r in rows]

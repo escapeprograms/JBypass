@@ -6,6 +6,8 @@ is W_U[v] @ J_l (a direction in layer-l residual space), and its activation on a
 residual h is W_U[v] @ J_l @ h. The final norm is not part of the vector.
 """
 
+from collections.abc import Iterable
+
 import torch
 
 
@@ -24,8 +26,14 @@ def token_variants(tokenizer, word: str) -> list[int]:
     original/lower/capitalized case. The J-lens only reads single-token concepts."""
     spellings = [word, word.lower(), word.capitalize()]
     candidates = [prefix + s for s in spellings for prefix in (" ", "")]
+    return single_token_ids(tokenizer, candidates)
+
+
+def single_token_ids(tokenizer, spellings: Iterable[str]) -> list[int]:
+    """Ids of the spellings that tokenize to exactly one token, first-seen order,
+    deduplicated. Spellings are used as given (no case or space variants)."""
     ids: list[int] = []
-    for text in candidates:
+    for text in spellings:
         tokens = tokenizer(text, add_special_tokens=False).input_ids
         if len(tokens) == 1 and tokens[0] not in ids:
             ids.append(tokens[0])

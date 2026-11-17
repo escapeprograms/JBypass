@@ -13,7 +13,7 @@ from jlens.vis import SliceData
 
 from evaluation.conditions import interventions_for_item
 from evaluation.scoring import answer_token_ids
-from jspace import readout_layers, residual_logits, token_variants
+from jspace import readout_layers, residual_logits, single_token_ids, token_variants
 from model.hooks import Intervention
 from model.inference import Encoded, forward_residuals
 from viz.run import RunResult
@@ -22,16 +22,19 @@ RANK_CHUNK = 256   # positions ranked per full-vocab sort (bounds the sort buffe
 
 
 def pinned_tokens(js, result: RunResult) -> list[int]:
-    """Sorted ids of every single-token spelling of the bridge plus the answers' first tokens."""
+    """Sorted ids of the bridge's single-token spellings (English variants and the single-token
+    Chinese spellings) plus the answers' first tokens."""
+    # TODO(debt): jlens pins at most 8 ids on load (slice_vis.html, id order); the rest stay tracked and pinnable by click
     tokenizer = js.lm.tokenizer
     bridge = set(token_variants(tokenizer, result.item.bridge))
-    return sorted(bridge | answer_token_ids(tokenizer, result.answers))
+    bridge_zh = set(single_token_ids(tokenizer, result.item.bridge_zh))
+    return sorted(bridge | bridge_zh | answer_token_ids(tokenizer, result.answers))
 
 
 def run_slice(js, result: RunResult, top_n: int, max_tracked: int | None) -> SliceData:
-    """The readout of prompt + response under the result's condition, rebuilt once on the
-    full sequence, with the bridge and answers pinned."""
-    ids = torch.tensor([result.prompt_ids + result.response_ids], dtype=torch.long, device=js.lm.device)
+    """The readout of prompt + response up to the answer token (`result.shown_ids`) under the
+    result's condition, rebuilt once on that sequence, with the bridge and answers pinned."""
+    ids = torch.tensor([result.prompt_ids + result.shown_ids], dtype=torch.long, device=js.lm.device)
     enc = Encoded(ids, torch.ones_like(ids))
     interventions = interventions_for_item(js, result.item, result.condition, result.seed)(enc)
     return slice_from_ids(js, enc, interventions, top_n, max_tracked, pinned_tokens(js, result))
@@ -59,11 +62,12 @@ def slice_from_ids(js, enc: Encoded, interventions: Sequence[Intervention], top_
 
 
 def replay_mismatches(slice_data: SliceData, result: RunResult) -> list[int]:
-    """Indices i into response_ids where the final layer's top-1 at the position before
-    response token i is not that token. Empty = the readout reproduces generation."""
+    """Indices i into shown_ids (= response_ids up to the answer token) where the final
+    layer's top-1 at the position before response token i is not that token.
+    Empty = the readout reproduces generation over the shown tokens."""
     start = len(result.prompt_ids) - 1
     final_top1 = slice_data.top_ids[:, -1, 0]   # layers are sorted; the last is the model's final layer
-    return [i for i, tok in enumerate(result.response_ids) if int(final_top1[start + i]) != tok]
+    return [i for i, tok in enumerate(result.shown_ids) if int(final_top1[start + i]) != tok]
 
 
 def _layer_logits(js, resids: dict[int, torch.Tensor], layer: int) -> torch.Tensor:

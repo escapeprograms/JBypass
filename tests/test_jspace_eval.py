@@ -3,15 +3,19 @@
 python -m pytest tests/test_jspace_eval.py
 """
 
+import json
 import re
 import types
+from pathlib import Path
 
 import pytest
 import torch
 
 from evaluation.config import EvalConfig
-from evaluation.data.build_jbypass_dataset import BRIDGES, RELATIONS, add_swaps, build_items, fill_relation, validate
-from evaluation.data_loading import load_dataset
+from evaluation.data.build_jbypass_dataset import (
+    BRIDGE_ZH, BRIDGES, OUT, RELATIONS, add_swaps, build_items, check_bridge_zh, fill_relation, validate,
+)
+from evaluation.data_loading import TwoHopItem, load_dataset
 from evaluation.probes import chance_level, probe_accuracy_by_layer
 from evaluation.scoring import matches
 from evaluation.show_table import describe, expand
@@ -19,6 +23,7 @@ from evaluation.splits import split_by_bridge
 from jspace.config import JSpaceConfig
 from jspace.decompose import jspace_decompose
 from jspace.interventions import LensSwap, _project_out
+from jspace.vectors import single_token_ids, token_variants
 
 
 def test_datasets_load_and_strip_trailing_space():
@@ -72,6 +77,49 @@ def test_dataset_swap_is_other_bridge_of_same_category():
     for it in items:
         assert it["swap_to"] != it["bridge"]
         assert category_of[it["swap_to"]] == it["category"]
+
+
+def test_dataset_every_bridge_has_chinese_names():
+    check_bridge_zh()
+    for it in _built_items():
+        assert it["bridge_zh"] and all(s and not s.isascii() for s in it["bridge_zh"]), it["name"]
+
+
+def test_check_bridge_zh_raises_on_missing_and_unknown():
+    missing = {k: v for k, v in BRIDGE_ZH.items() if k != "France"}
+    with pytest.raises(ValueError, match="France"):
+        check_bridge_zh(table=missing)
+    with pytest.raises(ValueError, match="Atlantis"):
+        check_bridge_zh(table={**BRIDGE_ZH, "Atlantis": ["亚特兰蒂斯"]})
+
+
+def test_committed_dataset_matches_the_builder():
+    committed = json.loads(Path(OUT).read_text(encoding="utf-8"))
+    assert committed == {"items": _built_items()}
+
+
+def test_load_jbypass_reads_bridge_zh():
+    datasets = EvalConfig().datasets
+    items = load_dataset("jbypass", datasets["jbypass"])
+    assert all(isinstance(it.bridge_zh, tuple) and it.bridge_zh for it in items)
+    assert all("法国" in it.bridge_zh for it in items if it.bridge == "France")
+    assert all(it.bridge_zh == () for it in load_dataset("paper_probe_swap", datasets["paper_probe_swap"]))
+    assert TwoHopItem(name="x", category="c", prompt="p", bridge="b", answers=("a",)).bridge_zh == ()
+
+
+def test_single_token_ids_keeps_single_tokens_in_order(tokenizer):
+    def n_tokens(text):
+        return len(tokenizer(text, add_special_tokens=False).input_ids)
+    assert n_tokens("爱因斯坦") > 1 and n_tokens(" 法国") > 1
+    france = tokenizer("法国", add_special_tokens=False).input_ids[0]
+    assert single_token_ids(tokenizer, ["法国", "爱因斯坦", " 法国", "法国"]) == [france]
+
+
+def test_token_variants_unchanged(tokenizer):
+    ids = token_variants(tokenizer, "France")
+    assert ids and len(ids) == len(set(ids))
+    for i in ids:
+        assert tokenizer(tokenizer.decode([i]), add_special_tokens=False).input_ids == [i]
 
 
 def test_matches_handles_synonyms_and_filler():

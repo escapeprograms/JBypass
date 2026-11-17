@@ -8,6 +8,7 @@
 - `viz.yaml` — the J-space viewer (`viz/`); paths relative to this folder.
   - `runs_dir` — folder whose subfolders holding a saved adapter become model choices.
   - `split_file` — `{split: [item names]}` JSON for the split dropdown, or `null` (only `all`); a missing file raises.
+  - `dictionary_file` — the gzipped CC-CEDICT for the click-to-translate box (`../downloads/cedict_1_0_ts_utf-8_mdbg.txt.gz`, saved by hand from mdbg.net; see `viz/README.md`), or `null` (no translations). Configured but missing raises at startup.
   - `top_n` — top tokens kept per (position, layer) cell.
   - `max_tracked` — cap on frequently-top tokens given rank charts, besides the pinned bridge/answers; `null` = all (pages can reach ~10 MB).
   - `page_height` — heatmap iframe height in pixels.

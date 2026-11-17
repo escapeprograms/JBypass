@@ -9,10 +9,13 @@ step from the current token ids, so sequence-dependent ones (the paper's top-k
 ablation) see the right sequence. No KV cache: each step is a full forward pass.
 """
 
+from collections.abc import Sequence
+
 from model.inference import InterventionsFor, encode, greedy_tokens
 from model.loading import LanguageModel
 
 FILLER_PREFIXES = ("a ", "an ", "the ", "called ", "number ")
+FILLER_WORDS = tuple(p.strip() for p in FILLER_PREFIXES)
 
 
 def greedy_continuation(lm: LanguageModel, prompt: str, interventions_for: InterventionsFor,
@@ -33,6 +36,26 @@ def matches(continuation: str, answers) -> bool:
         if t.startswith(a) and (len(t) == len(a) or not t[len(a)].isalnum()):
             return True
     return False
+
+
+def is_answer_token(text: str) -> bool:
+    """True when a decoded token is not whitespace, a bare quote or a filler word."""
+    word = text.strip().lower().lstrip("\"'")
+    return bool(word) and word not in FILLER_WORDS
+
+
+def answer_index(tokenizer, response_ids: Sequence[int]) -> int:
+    """Index of the first response token that `is_answer_token` accepts; 0 when none does.
+
+    The per-token mirror of `matches`'s normalisation, used by the viewer to show the
+    response only up to the answer token. It deviates from `matches` in two ways:
+    `matches` strips filler only when a space follows it and reads only the first line,
+    while this rule treats " a" as filler regardless and does not stop at a newline.
+    `correct` is still computed by `matches` on the full text."""
+    for i, tok in enumerate(response_ids):
+        if is_answer_token(tokenizer.decode([tok], skip_special_tokens=True)):
+            return i
+    return 0
 
 
 def answer_token_ids(tokenizer, answers) -> set[int]:

@@ -5,6 +5,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "Paris"
    ],
@@ -20,6 +23,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "French"
    ],
@@ -35,6 +41,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -50,6 +59,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "euro"
    ],
@@ -65,6 +77,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "Paris"
    ],
@@ -80,6 +95,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "French"
    ],
@@ -95,6 +113,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -110,6 +131,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "euro"
    ],
@@ -125,6 +149,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "Paris"
    ],
@@ -140,6 +167,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "French"
    ],
@@ -155,6 +185,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -170,6 +203,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "euro"
    ],
@@ -185,6 +221,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "Paris"
    ],
@@ -200,6 +239,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "French"
    ],
@@ -215,6 +257,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -230,6 +275,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "France",
+   "bridge_zh": [
+    "法国"
+   ],
    "answers": [
     "euro"
    ],
@@ -245,6 +293,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Rome"
    ],
@@ -260,6 +311,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Italian"
    ],
@@ -275,6 +329,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -290,6 +347,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "euro"
    ],
@@ -305,6 +365,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Rome"
    ],
@@ -320,6 +383,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Italian"
    ],
@@ -335,6 +401,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -350,6 +419,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "euro"
    ],
@@ -365,6 +437,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Rome"
    ],
@@ -380,6 +455,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Italian"
    ],
@@ -395,6 +473,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -410,6 +491,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "euro"
    ],
@@ -425,6 +509,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Rome"
    ],
@@ -440,6 +527,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Italian"
    ],
@@ -455,6 +545,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -470,6 +563,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Italy",
+   "bridge_zh": [
+    "意大利"
+   ],
    "answers": [
     "euro"
    ],
@@ -485,6 +581,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Tokyo"
    ],
@@ -500,6 +599,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Japanese"
    ],
@@ -515,6 +617,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Asia"
    ],
@@ -530,6 +635,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "yen"
    ],
@@ -545,6 +653,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Tokyo"
    ],
@@ -560,6 +671,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Japanese"
    ],
@@ -575,6 +689,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Asia"
    ],
@@ -590,6 +707,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "yen"
    ],
@@ -605,6 +725,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Tokyo"
    ],
@@ -620,6 +743,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Japanese"
    ],
@@ -635,6 +761,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Asia"
    ],
@@ -650,6 +779,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "yen"
    ],
@@ -665,6 +797,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Tokyo"
    ],
@@ -680,6 +815,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Japanese"
    ],
@@ -695,6 +833,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "Asia"
    ],
@@ -710,6 +851,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Japan",
+   "bridge_zh": [
+    "日本"
+   ],
    "answers": [
     "yen"
    ],
@@ -725,6 +869,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "New Delhi"
    ],
@@ -740,6 +887,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "Hindi"
    ],
@@ -755,6 +905,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "Asia"
    ],
@@ -770,6 +923,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "rupee"
    ],
@@ -785,6 +941,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "New Delhi"
    ],
@@ -800,6 +959,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "Hindi"
    ],
@@ -815,6 +977,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "Asia"
    ],
@@ -830,6 +995,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "rupee"
    ],
@@ -845,6 +1013,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "New Delhi"
    ],
@@ -860,6 +1031,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "Hindi"
    ],
@@ -875,6 +1049,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "Asia"
    ],
@@ -890,6 +1067,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "rupee"
    ],
@@ -905,6 +1085,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "New Delhi"
    ],
@@ -920,6 +1103,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "Hindi"
    ],
@@ -935,6 +1121,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "Asia"
    ],
@@ -950,6 +1139,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "India",
+   "bridge_zh": [
+    "印度"
+   ],
    "answers": [
     "rupee"
    ],
@@ -965,6 +1157,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Beijing"
    ],
@@ -980,6 +1175,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Chinese"
    ],
@@ -995,6 +1193,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Asia"
    ],
@@ -1010,6 +1211,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "yuan",
     "renminbi"
@@ -1026,6 +1230,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Beijing"
    ],
@@ -1041,6 +1248,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Chinese"
    ],
@@ -1056,6 +1266,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Asia"
    ],
@@ -1071,6 +1284,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "yuan",
     "renminbi"
@@ -1087,6 +1303,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Beijing"
    ],
@@ -1102,6 +1321,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Chinese"
    ],
@@ -1117,6 +1339,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Asia"
    ],
@@ -1132,6 +1357,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "yuan",
     "renminbi"
@@ -1148,6 +1376,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Beijing"
    ],
@@ -1163,6 +1394,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Chinese"
    ],
@@ -1178,6 +1412,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Asia"
    ],
@@ -1193,6 +1430,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "yuan",
     "renminbi"
@@ -1209,6 +1449,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Beijing"
    ],
@@ -1224,6 +1467,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Chinese"
    ],
@@ -1239,6 +1485,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "Asia"
    ],
@@ -1254,6 +1503,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "China",
+   "bridge_zh": [
+    "中国"
+   ],
    "answers": [
     "yuan",
     "renminbi"
@@ -1270,6 +1522,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Cairo"
    ],
@@ -1285,6 +1540,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -1300,6 +1558,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Africa"
    ],
@@ -1315,6 +1576,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "pound"
    ],
@@ -1330,6 +1594,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Cairo"
    ],
@@ -1345,6 +1612,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -1360,6 +1630,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Africa"
    ],
@@ -1375,6 +1648,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "pound"
    ],
@@ -1390,6 +1666,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Cairo"
    ],
@@ -1405,6 +1684,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -1420,6 +1702,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Africa"
    ],
@@ -1435,6 +1720,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "pound"
    ],
@@ -1450,6 +1738,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Cairo"
    ],
@@ -1465,6 +1756,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -1480,6 +1774,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "Africa"
    ],
@@ -1495,6 +1792,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Egypt",
+   "bridge_zh": [
+    "埃及"
+   ],
    "answers": [
     "pound"
    ],
@@ -1510,6 +1810,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Athens"
    ],
@@ -1525,6 +1828,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Greek"
    ],
@@ -1540,6 +1846,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Europe"
    ],
@@ -1555,6 +1864,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "euro"
    ],
@@ -1570,6 +1882,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Athens"
    ],
@@ -1585,6 +1900,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Greek"
    ],
@@ -1600,6 +1918,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Europe"
    ],
@@ -1615,6 +1936,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "euro"
    ],
@@ -1630,6 +1954,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Athens"
    ],
@@ -1645,6 +1972,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Greek"
    ],
@@ -1660,6 +1990,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Europe"
    ],
@@ -1675,6 +2008,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "euro"
    ],
@@ -1690,6 +2026,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Athens"
    ],
@@ -1705,6 +2044,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Greek"
    ],
@@ -1720,6 +2062,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "Europe"
    ],
@@ -1735,6 +2080,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Greece",
+   "bridge_zh": [
+    "希腊"
+   ],
    "answers": [
     "euro"
    ],
@@ -1750,6 +2098,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Madrid"
    ],
@@ -1765,6 +2116,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -1780,6 +2134,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Europe"
    ],
@@ -1795,6 +2152,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "euro"
    ],
@@ -1810,6 +2170,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Madrid"
    ],
@@ -1825,6 +2188,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -1840,6 +2206,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Europe"
    ],
@@ -1855,6 +2224,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "euro"
    ],
@@ -1870,6 +2242,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Madrid"
    ],
@@ -1885,6 +2260,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -1900,6 +2278,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Europe"
    ],
@@ -1915,6 +2296,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "euro"
    ],
@@ -1930,6 +2314,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Madrid"
    ],
@@ -1945,6 +2332,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -1960,6 +2350,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Europe"
    ],
@@ -1975,6 +2368,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "euro"
    ],
@@ -1990,6 +2386,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Madrid"
    ],
@@ -2005,6 +2404,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -2020,6 +2422,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "Europe"
    ],
@@ -2035,6 +2440,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Spain",
+   "bridge_zh": [
+    "西班牙"
+   ],
    "answers": [
     "euro"
    ],
@@ -2050,6 +2458,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Moscow"
    ],
@@ -2065,6 +2477,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Russian"
    ],
@@ -2080,6 +2496,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -2096,6 +2516,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "ruble",
     "rouble"
@@ -2112,6 +2536,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Moscow"
    ],
@@ -2127,6 +2555,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Russian"
    ],
@@ -2142,6 +2574,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -2158,6 +2594,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "ruble",
     "rouble"
@@ -2174,6 +2614,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Moscow"
    ],
@@ -2189,6 +2633,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Russian"
    ],
@@ -2204,6 +2652,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -2220,6 +2672,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "ruble",
     "rouble"
@@ -2236,6 +2692,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Moscow"
    ],
@@ -2251,6 +2711,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Russian"
    ],
@@ -2266,6 +2730,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -2282,6 +2750,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Russia",
+   "bridge_zh": [
+    "俄罗斯",
+    "俄国"
+   ],
    "answers": [
     "ruble",
     "rouble"
@@ -2298,6 +2770,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "Brasília"
    ],
@@ -2313,6 +2788,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "Portuguese"
    ],
@@ -2328,6 +2806,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "South"
    ],
@@ -2343,6 +2824,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "real"
    ],
@@ -2358,6 +2842,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "Brasília"
    ],
@@ -2373,6 +2860,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "Portuguese"
    ],
@@ -2388,6 +2878,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "South"
    ],
@@ -2403,6 +2896,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "real"
    ],
@@ -2418,6 +2914,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "Brasília"
    ],
@@ -2433,6 +2932,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "Portuguese"
    ],
@@ -2448,6 +2950,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "South"
    ],
@@ -2463,6 +2968,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "real"
    ],
@@ -2478,6 +2986,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "Brasília"
    ],
@@ -2493,6 +3004,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "Portuguese"
    ],
@@ -2508,6 +3022,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "South"
    ],
@@ -2523,6 +3040,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Brazil",
+   "bridge_zh": [
+    "巴西"
+   ],
    "answers": [
     "real"
    ],
@@ -2538,6 +3058,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "Canberra"
    ],
@@ -2553,6 +3077,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "English"
    ],
@@ -2568,6 +3096,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "Australia",
     "Oceania"
@@ -2584,6 +3116,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "dollar"
    ],
@@ -2599,6 +3135,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "Canberra"
    ],
@@ -2614,6 +3154,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "English"
    ],
@@ -2629,6 +3173,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "Australia",
     "Oceania"
@@ -2645,6 +3193,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "dollar"
    ],
@@ -2660,6 +3212,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "Canberra"
    ],
@@ -2675,6 +3231,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "English"
    ],
@@ -2690,6 +3250,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "Australia",
     "Oceania"
@@ -2706,6 +3270,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "dollar"
    ],
@@ -2721,6 +3289,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "Canberra"
    ],
@@ -2736,6 +3308,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "English"
    ],
@@ -2751,6 +3327,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "Australia",
     "Oceania"
@@ -2767,6 +3347,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Australia",
+   "bridge_zh": [
+    "澳大利亚",
+    "澳洲"
+   ],
    "answers": [
     "dollar"
    ],
@@ -2782,6 +3366,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "Lima"
    ],
@@ -2797,6 +3384,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -2812,6 +3402,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "South"
    ],
@@ -2827,6 +3420,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "sol"
    ],
@@ -2842,6 +3438,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "Lima"
    ],
@@ -2857,6 +3456,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -2872,6 +3474,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "South"
    ],
@@ -2887,6 +3492,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "sol"
    ],
@@ -2902,6 +3510,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "Lima"
    ],
@@ -2917,6 +3528,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -2932,6 +3546,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "South"
    ],
@@ -2947,6 +3564,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Peru",
+   "bridge_zh": [
+    "秘鲁"
+   ],
    "answers": [
     "sol"
    ],
@@ -2962,6 +3582,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Cambodia",
+   "bridge_zh": [
+    "柬埔寨"
+   ],
    "answers": [
     "Phnom Penh"
    ],
@@ -2977,6 +3600,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Cambodia",
+   "bridge_zh": [
+    "柬埔寨"
+   ],
    "answers": [
     "Khmer"
    ],
@@ -2992,6 +3618,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Cambodia",
+   "bridge_zh": [
+    "柬埔寨"
+   ],
    "answers": [
     "Asia"
    ],
@@ -3007,6 +3636,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Cambodia",
+   "bridge_zh": [
+    "柬埔寨"
+   ],
    "answers": [
     "riel"
    ],
@@ -3022,6 +3654,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Cambodia",
+   "bridge_zh": [
+    "柬埔寨"
+   ],
    "answers": [
     "Phnom Penh"
    ],
@@ -3037,6 +3672,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Cambodia",
+   "bridge_zh": [
+    "柬埔寨"
+   ],
    "answers": [
     "Khmer"
    ],
@@ -3052,6 +3690,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Cambodia",
+   "bridge_zh": [
+    "柬埔寨"
+   ],
    "answers": [
     "Asia"
    ],
@@ -3067,6 +3708,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Cambodia",
+   "bridge_zh": [
+    "柬埔寨"
+   ],
    "answers": [
     "riel"
    ],
@@ -3082,6 +3726,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Jordan",
+   "bridge_zh": [
+    "约旦"
+   ],
    "answers": [
     "Amman"
    ],
@@ -3097,6 +3744,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Jordan",
+   "bridge_zh": [
+    "约旦"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -3112,6 +3762,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Jordan",
+   "bridge_zh": [
+    "约旦"
+   ],
    "answers": [
     "Asia"
    ],
@@ -3127,6 +3780,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Jordan",
+   "bridge_zh": [
+    "约旦"
+   ],
    "answers": [
     "dinar"
    ],
@@ -3142,6 +3798,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Jordan",
+   "bridge_zh": [
+    "约旦"
+   ],
    "answers": [
     "Amman"
    ],
@@ -3157,6 +3816,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Jordan",
+   "bridge_zh": [
+    "约旦"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -3172,6 +3834,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Jordan",
+   "bridge_zh": [
+    "约旦"
+   ],
    "answers": [
     "Asia"
    ],
@@ -3187,6 +3852,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Jordan",
+   "bridge_zh": [
+    "约旦"
+   ],
    "answers": [
     "dinar"
    ],
@@ -3202,6 +3870,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "Mexico City"
    ],
@@ -3217,6 +3888,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -3232,6 +3906,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "North"
    ],
@@ -3247,6 +3924,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "peso"
    ],
@@ -3262,6 +3942,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "Mexico City"
    ],
@@ -3277,6 +3960,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -3292,6 +3978,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "North"
    ],
@@ -3307,6 +3996,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "peso"
    ],
@@ -3322,6 +4014,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "Mexico City"
    ],
@@ -3337,6 +4032,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -3352,6 +4050,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "North"
    ],
@@ -3367,6 +4068,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "peso"
    ],
@@ -3382,6 +4086,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "Mexico City"
    ],
@@ -3397,6 +4104,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -3412,6 +4122,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "North"
    ],
@@ -3427,6 +4140,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Mexico",
+   "bridge_zh": [
+    "墨西哥"
+   ],
    "answers": [
     "peso"
    ],
@@ -3442,6 +4158,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "Ottawa"
    ],
@@ -3457,6 +4176,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "English"
    ],
@@ -3472,6 +4194,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "North"
    ],
@@ -3487,6 +4212,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "dollar"
    ],
@@ -3502,6 +4230,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "Ottawa"
    ],
@@ -3517,6 +4248,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "English"
    ],
@@ -3532,6 +4266,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "North"
    ],
@@ -3547,6 +4284,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "dollar"
    ],
@@ -3562,6 +4302,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "Ottawa"
    ],
@@ -3577,6 +4320,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "English"
    ],
@@ -3592,6 +4338,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "North"
    ],
@@ -3607,6 +4356,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "dollar"
    ],
@@ -3622,6 +4374,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "Ottawa"
    ],
@@ -3637,6 +4392,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "English"
    ],
@@ -3652,6 +4410,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "North"
    ],
@@ -3667,6 +4428,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Canada",
+   "bridge_zh": [
+    "加拿大"
+   ],
    "answers": [
     "dollar"
    ],
@@ -3682,6 +4446,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Ankara"
    ],
@@ -3697,6 +4464,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Turkish"
    ],
@@ -3712,6 +4482,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -3728,6 +4501,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "lira"
    ],
@@ -3743,6 +4519,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Ankara"
    ],
@@ -3758,6 +4537,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Turkish"
    ],
@@ -3773,6 +4555,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -3789,6 +4574,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "lira"
    ],
@@ -3804,6 +4592,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Ankara"
    ],
@@ -3819,6 +4610,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Turkish"
    ],
@@ -3834,6 +4628,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -3850,6 +4647,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "lira"
    ],
@@ -3865,6 +4665,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Ankara"
    ],
@@ -3880,6 +4683,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Turkish"
    ],
@@ -3895,6 +4701,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -3911,6 +4720,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Turkey",
+   "bridge_zh": [
+    "土耳其"
+   ],
    "answers": [
     "lira"
    ],
@@ -3926,6 +4738,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "Dublin"
    ],
@@ -3941,6 +4756,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "English"
    ],
@@ -3956,6 +4774,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -3971,6 +4792,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -3986,6 +4810,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "Dublin"
    ],
@@ -4001,6 +4828,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "English"
    ],
@@ -4016,6 +4846,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -4031,6 +4864,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -4046,6 +4882,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "Dublin"
    ],
@@ -4061,6 +4900,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "English"
    ],
@@ -4076,6 +4918,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -4091,6 +4936,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ireland",
+   "bridge_zh": [
+    "爱尔兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -4106,6 +4954,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Oslo"
    ],
@@ -4121,6 +4972,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Norwegian"
    ],
@@ -4136,6 +4990,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Europe"
    ],
@@ -4151,6 +5008,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "krone"
    ],
@@ -4166,6 +5026,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Oslo"
    ],
@@ -4181,6 +5044,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Norwegian"
    ],
@@ -4196,6 +5062,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Europe"
    ],
@@ -4211,6 +5080,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "krone"
    ],
@@ -4226,6 +5098,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Oslo"
    ],
@@ -4241,6 +5116,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Norwegian"
    ],
@@ -4256,6 +5134,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "Europe"
    ],
@@ -4271,6 +5152,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Norway",
+   "bridge_zh": [
+    "挪威"
+   ],
    "answers": [
     "krone"
    ],
@@ -4286,6 +5170,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Jakarta"
    ],
@@ -4301,6 +5189,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Indonesian"
    ],
@@ -4316,6 +5208,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Asia"
    ],
@@ -4331,6 +5227,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "rupiah"
    ],
@@ -4346,6 +5246,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Jakarta"
    ],
@@ -4361,6 +5265,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Indonesian"
    ],
@@ -4376,6 +5284,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Asia"
    ],
@@ -4391,6 +5303,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "rupiah"
    ],
@@ -4406,6 +5322,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Jakarta"
    ],
@@ -4421,6 +5341,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Indonesian"
    ],
@@ -4436,6 +5360,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "Asia"
    ],
@@ -4451,6 +5379,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Indonesia",
+   "bridge_zh": [
+    "印度尼西亚",
+    "印尼"
+   ],
    "answers": [
     "rupiah"
    ],
@@ -4466,6 +5398,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Hanoi"
    ],
@@ -4481,6 +5416,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Vietnamese"
    ],
@@ -4496,6 +5434,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Asia"
    ],
@@ -4511,6 +5452,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "dong"
    ],
@@ -4526,6 +5470,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Hanoi"
    ],
@@ -4541,6 +5488,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Vietnamese"
    ],
@@ -4556,6 +5506,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Asia"
    ],
@@ -4571,6 +5524,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "dong"
    ],
@@ -4586,6 +5542,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Hanoi"
    ],
@@ -4601,6 +5560,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Vietnamese"
    ],
@@ -4616,6 +5578,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "Asia"
    ],
@@ -4631,6 +5596,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Vietnam",
+   "bridge_zh": [
+    "越南"
+   ],
    "answers": [
     "dong"
    ],
@@ -4646,6 +5614,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Nairobi"
    ],
@@ -4661,6 +5632,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Swahili"
    ],
@@ -4676,6 +5650,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -4691,6 +5668,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "shilling"
    ],
@@ -4706,6 +5686,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Nairobi"
    ],
@@ -4721,6 +5704,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Swahili"
    ],
@@ -4736,6 +5722,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -4751,6 +5740,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "shilling"
    ],
@@ -4766,6 +5758,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Nairobi"
    ],
@@ -4781,6 +5776,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Swahili"
    ],
@@ -4796,6 +5794,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -4811,6 +5812,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Kenya",
+   "bridge_zh": [
+    "肯尼亚"
+   ],
    "answers": [
     "shilling"
    ],
@@ -4826,6 +5830,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "Santiago"
    ],
@@ -4841,6 +5848,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -4856,6 +5866,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "South"
    ],
@@ -4871,6 +5884,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "peso"
    ],
@@ -4886,6 +5902,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "Santiago"
    ],
@@ -4901,6 +5920,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -4916,6 +5938,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "South"
    ],
@@ -4931,6 +5956,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "peso"
    ],
@@ -4946,6 +5974,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "Santiago"
    ],
@@ -4961,6 +5992,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -4976,6 +6010,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "South"
    ],
@@ -4991,6 +6028,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Chile",
+   "bridge_zh": [
+    "智利"
+   ],
    "answers": [
     "peso"
    ],
@@ -5006,6 +6046,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Lisbon"
    ],
@@ -5021,6 +6064,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Portuguese"
    ],
@@ -5036,6 +6082,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5051,6 +6100,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "euro"
    ],
@@ -5066,6 +6118,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Lisbon"
    ],
@@ -5081,6 +6136,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Portuguese"
    ],
@@ -5096,6 +6154,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5111,6 +6172,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "euro"
    ],
@@ -5126,6 +6190,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Lisbon"
    ],
@@ -5141,6 +6208,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Portuguese"
    ],
@@ -5156,6 +6226,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5171,6 +6244,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Portugal",
+   "bridge_zh": [
+    "葡萄牙"
+   ],
    "answers": [
     "euro"
    ],
@@ -5186,6 +6262,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Thailand",
+   "bridge_zh": [
+    "泰国"
+   ],
    "answers": [
     "Bangkok"
    ],
@@ -5201,6 +6280,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Thailand",
+   "bridge_zh": [
+    "泰国"
+   ],
    "answers": [
     "Thai"
    ],
@@ -5216,6 +6298,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Thailand",
+   "bridge_zh": [
+    "泰国"
+   ],
    "answers": [
     "Asia"
    ],
@@ -5231,6 +6316,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Thailand",
+   "bridge_zh": [
+    "泰国"
+   ],
    "answers": [
     "baht"
    ],
@@ -5246,6 +6334,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Thailand",
+   "bridge_zh": [
+    "泰国"
+   ],
    "answers": [
     "Bangkok"
    ],
@@ -5261,6 +6352,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Thailand",
+   "bridge_zh": [
+    "泰国"
+   ],
    "answers": [
     "Thai"
    ],
@@ -5276,6 +6370,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Thailand",
+   "bridge_zh": [
+    "泰国"
+   ],
    "answers": [
     "Asia"
    ],
@@ -5291,6 +6388,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Thailand",
+   "bridge_zh": [
+    "泰国"
+   ],
    "answers": [
     "baht"
    ],
@@ -5306,6 +6406,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Bern"
    ],
@@ -5321,6 +6424,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "German"
    ],
@@ -5336,6 +6442,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5351,6 +6460,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "franc"
    ],
@@ -5366,6 +6478,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Bern"
    ],
@@ -5381,6 +6496,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "German"
    ],
@@ -5396,6 +6514,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5411,6 +6532,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "franc"
    ],
@@ -5426,6 +6550,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Bern"
    ],
@@ -5441,6 +6568,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "German"
    ],
@@ -5456,6 +6586,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5471,6 +6604,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "franc"
    ],
@@ -5486,6 +6622,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Bern"
    ],
@@ -5501,6 +6640,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "German"
    ],
@@ -5516,6 +6658,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5531,6 +6676,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "franc"
    ],
@@ -5546,6 +6694,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Bern"
    ],
@@ -5561,6 +6712,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "German"
    ],
@@ -5576,6 +6730,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5591,6 +6748,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Switzerland",
+   "bridge_zh": [
+    "瑞士"
+   ],
    "answers": [
     "franc"
    ],
@@ -5606,6 +6766,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Berlin"
    ],
@@ -5621,6 +6784,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "German"
    ],
@@ -5636,6 +6802,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5651,6 +6820,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "euro"
    ],
@@ -5666,6 +6838,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Berlin"
    ],
@@ -5681,6 +6856,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "German"
    ],
@@ -5696,6 +6874,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5711,6 +6892,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "euro"
    ],
@@ -5726,6 +6910,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Berlin"
    ],
@@ -5741,6 +6928,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "German"
    ],
@@ -5756,6 +6946,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5771,6 +6964,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "euro"
    ],
@@ -5786,6 +6982,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Berlin"
    ],
@@ -5801,6 +7000,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "German"
    ],
@@ -5816,6 +7018,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5831,6 +7036,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "euro"
    ],
@@ -5846,6 +7054,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Berlin"
    ],
@@ -5861,6 +7072,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "German"
    ],
@@ -5876,6 +7090,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5891,6 +7108,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Germany",
+   "bridge_zh": [
+    "德国"
+   ],
    "answers": [
     "euro"
    ],
@@ -5906,6 +7126,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "Vienna"
    ],
@@ -5921,6 +7144,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "German"
    ],
@@ -5936,6 +7162,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -5951,6 +7180,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "euro"
    ],
@@ -5966,6 +7198,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "Vienna"
    ],
@@ -5981,6 +7216,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "German"
    ],
@@ -5996,6 +7234,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6011,6 +7252,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "euro"
    ],
@@ -6026,6 +7270,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "Vienna"
    ],
@@ -6041,6 +7288,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "German"
    ],
@@ -6056,6 +7306,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6071,6 +7324,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "euro"
    ],
@@ -6086,6 +7342,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "Vienna"
    ],
@@ -6101,6 +7360,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "German"
    ],
@@ -6116,6 +7378,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6131,6 +7396,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Austria",
+   "bridge_zh": [
+    "奥地利"
+   ],
    "answers": [
     "euro"
    ],
@@ -6146,6 +7414,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "Brussels"
    ],
@@ -6161,6 +7432,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6176,6 +7450,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "euro"
    ],
@@ -6191,6 +7468,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "Brussels"
    ],
@@ -6206,6 +7486,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6221,6 +7504,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "euro"
    ],
@@ -6236,6 +7522,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "Brussels"
    ],
@@ -6251,6 +7540,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6266,6 +7558,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Belgium",
+   "bridge_zh": [
+    "比利时"
+   ],
    "answers": [
     "euro"
    ],
@@ -6281,6 +7576,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Amsterdam"
    ],
@@ -6296,6 +7594,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Dutch"
    ],
@@ -6311,6 +7612,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6326,6 +7630,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -6341,6 +7648,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Amsterdam"
    ],
@@ -6356,6 +7666,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Dutch"
    ],
@@ -6371,6 +7684,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6386,6 +7702,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -6401,6 +7720,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Amsterdam"
    ],
@@ -6416,6 +7738,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Dutch"
    ],
@@ -6431,6 +7756,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6446,6 +7774,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -6461,6 +7792,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Amsterdam"
    ],
@@ -6476,6 +7810,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Dutch"
    ],
@@ -6491,6 +7828,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6506,6 +7846,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Netherlands",
+   "bridge_zh": [
+    "荷兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -6521,6 +7864,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Stockholm"
    ],
@@ -6536,6 +7882,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Swedish"
    ],
@@ -6551,6 +7900,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6566,6 +7918,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "krona"
    ],
@@ -6581,6 +7936,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Stockholm"
    ],
@@ -6596,6 +7954,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Swedish"
    ],
@@ -6611,6 +7972,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6626,6 +7990,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "krona"
    ],
@@ -6641,6 +8008,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Stockholm"
    ],
@@ -6656,6 +8026,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Swedish"
    ],
@@ -6671,6 +8044,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6686,6 +8062,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Sweden",
+   "bridge_zh": [
+    "瑞典"
+   ],
    "answers": [
     "krona"
    ],
@@ -6701,6 +8080,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Copenhagen"
    ],
@@ -6716,6 +8098,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Danish"
    ],
@@ -6731,6 +8116,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6746,6 +8134,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "krone"
    ],
@@ -6761,6 +8152,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Copenhagen"
    ],
@@ -6776,6 +8170,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Danish"
    ],
@@ -6791,6 +8188,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6806,6 +8206,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "krone"
    ],
@@ -6821,6 +8224,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Copenhagen"
    ],
@@ -6836,6 +8242,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Danish"
    ],
@@ -6851,6 +8260,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6866,6 +8278,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Denmark",
+   "bridge_zh": [
+    "丹麦"
+   ],
    "answers": [
     "krone"
    ],
@@ -6881,6 +8296,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Finland",
+   "bridge_zh": [
+    "芬兰"
+   ],
    "answers": [
     "Helsinki"
    ],
@@ -6896,6 +8314,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Finland",
+   "bridge_zh": [
+    "芬兰"
+   ],
    "answers": [
     "Finnish"
    ],
@@ -6911,6 +8332,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Finland",
+   "bridge_zh": [
+    "芬兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6926,6 +8350,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Finland",
+   "bridge_zh": [
+    "芬兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -6941,6 +8368,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Finland",
+   "bridge_zh": [
+    "芬兰"
+   ],
    "answers": [
     "Helsinki"
    ],
@@ -6956,6 +8386,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Finland",
+   "bridge_zh": [
+    "芬兰"
+   ],
    "answers": [
     "Finnish"
    ],
@@ -6971,6 +8404,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Finland",
+   "bridge_zh": [
+    "芬兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -6986,6 +8422,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Finland",
+   "bridge_zh": [
+    "芬兰"
+   ],
    "answers": [
     "euro"
    ],
@@ -7001,6 +8440,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Iceland",
+   "bridge_zh": [
+    "冰岛"
+   ],
    "answers": [
     "Reykjavik",
     "Reykjavík"
@@ -7017,6 +8459,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Iceland",
+   "bridge_zh": [
+    "冰岛"
+   ],
    "answers": [
     "Icelandic"
    ],
@@ -7032,6 +8477,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Iceland",
+   "bridge_zh": [
+    "冰岛"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7047,6 +8495,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Iceland",
+   "bridge_zh": [
+    "冰岛"
+   ],
    "answers": [
     "krona"
    ],
@@ -7062,6 +8513,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Iceland",
+   "bridge_zh": [
+    "冰岛"
+   ],
    "answers": [
     "Reykjavik",
     "Reykjavík"
@@ -7078,6 +8532,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Iceland",
+   "bridge_zh": [
+    "冰岛"
+   ],
    "answers": [
     "Icelandic"
    ],
@@ -7093,6 +8550,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Iceland",
+   "bridge_zh": [
+    "冰岛"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7108,6 +8568,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Iceland",
+   "bridge_zh": [
+    "冰岛"
+   ],
    "answers": [
     "krona"
    ],
@@ -7123,6 +8586,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Warsaw"
    ],
@@ -7138,6 +8604,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Polish"
    ],
@@ -7153,6 +8622,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7168,6 +8640,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "zloty",
     "złoty"
@@ -7184,6 +8659,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Warsaw"
    ],
@@ -7199,6 +8677,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Polish"
    ],
@@ -7214,6 +8695,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7229,6 +8713,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "zloty",
     "złoty"
@@ -7245,6 +8732,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Warsaw"
    ],
@@ -7260,6 +8750,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Polish"
    ],
@@ -7275,6 +8768,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7290,6 +8786,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Poland",
+   "bridge_zh": [
+    "波兰"
+   ],
    "answers": [
     "zloty",
     "złoty"
@@ -7306,6 +8805,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Hungary",
+   "bridge_zh": [
+    "匈牙利"
+   ],
    "answers": [
     "Budapest"
    ],
@@ -7321,6 +8823,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Hungary",
+   "bridge_zh": [
+    "匈牙利"
+   ],
    "answers": [
     "Hungarian"
    ],
@@ -7336,6 +8841,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Hungary",
+   "bridge_zh": [
+    "匈牙利"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7351,6 +8859,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Hungary",
+   "bridge_zh": [
+    "匈牙利"
+   ],
    "answers": [
     "forint"
    ],
@@ -7366,6 +8877,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Bucharest"
    ],
@@ -7381,6 +8895,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Romanian"
    ],
@@ -7396,6 +8913,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7411,6 +8931,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "leu"
    ],
@@ -7426,6 +8949,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Bucharest"
    ],
@@ -7441,6 +8967,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Romanian"
    ],
@@ -7456,6 +8985,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7471,6 +9003,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "leu"
    ],
@@ -7486,6 +9021,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Bucharest"
    ],
@@ -7501,6 +9039,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Romanian"
    ],
@@ -7516,6 +9057,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7531,6 +9075,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Romania",
+   "bridge_zh": [
+    "罗马尼亚"
+   ],
    "answers": [
     "leu"
    ],
@@ -7546,6 +9093,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Sofia"
    ],
@@ -7561,6 +9111,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Bulgarian"
    ],
@@ -7576,6 +9129,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7591,6 +9147,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Sofia"
    ],
@@ -7606,6 +9165,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Bulgarian"
    ],
@@ -7621,6 +9183,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7636,6 +9201,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Sofia"
    ],
@@ -7651,6 +9219,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Bulgarian"
    ],
@@ -7666,6 +9237,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Bulgaria",
+   "bridge_zh": [
+    "保加利亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7681,6 +9255,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Zagreb"
    ],
@@ -7696,6 +9273,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Croatian"
    ],
@@ -7711,6 +9291,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7726,6 +9309,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "euro"
    ],
@@ -7741,6 +9327,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Zagreb"
    ],
@@ -7756,6 +9345,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Croatian"
    ],
@@ -7771,6 +9363,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7786,6 +9381,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "euro"
    ],
@@ -7801,6 +9399,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Zagreb"
    ],
@@ -7816,6 +9417,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Croatian"
    ],
@@ -7831,6 +9435,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7846,6 +9453,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Croatia",
+   "bridge_zh": [
+    "克罗地亚"
+   ],
    "answers": [
     "euro"
    ],
@@ -7861,6 +9471,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Serbia",
+   "bridge_zh": [
+    "塞尔维亚"
+   ],
    "answers": [
     "Belgrade"
    ],
@@ -7876,6 +9489,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Serbia",
+   "bridge_zh": [
+    "塞尔维亚"
+   ],
    "answers": [
     "Serbian"
    ],
@@ -7891,6 +9507,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Serbia",
+   "bridge_zh": [
+    "塞尔维亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7906,6 +9525,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Serbia",
+   "bridge_zh": [
+    "塞尔维亚"
+   ],
    "answers": [
     "dinar"
    ],
@@ -7921,6 +9543,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Kyiv",
     "Kiev"
@@ -7937,6 +9562,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Ukrainian"
    ],
@@ -7952,6 +9580,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -7967,6 +9598,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "hryvnia"
    ],
@@ -7982,6 +9616,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Kyiv",
     "Kiev"
@@ -7998,6 +9635,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Ukrainian"
    ],
@@ -8013,6 +9653,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -8028,6 +9671,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "hryvnia"
    ],
@@ -8043,6 +9689,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Kyiv",
     "Kiev"
@@ -8059,6 +9708,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Ukrainian"
    ],
@@ -8074,6 +9726,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "Europe"
    ],
@@ -8089,6 +9744,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ukraine",
+   "bridge_zh": [
+    "乌克兰"
+   ],
    "answers": [
     "hryvnia"
    ],
@@ -8104,6 +9762,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "Hebrew"
    ],
@@ -8119,6 +9780,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8134,6 +9798,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "shekel"
    ],
@@ -8149,6 +9816,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "Hebrew"
    ],
@@ -8164,6 +9834,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8179,6 +9852,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "shekel"
    ],
@@ -8194,6 +9870,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "Hebrew"
    ],
@@ -8209,6 +9888,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8224,6 +9906,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Israel",
+   "bridge_zh": [
+    "以色列"
+   ],
    "answers": [
     "shekel"
    ],
@@ -8239,6 +9924,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Tehran",
     "Teheran"
@@ -8255,6 +9943,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Persian",
     "Farsi"
@@ -8271,6 +9962,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8286,6 +9980,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "rial"
    ],
@@ -8301,6 +9998,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Tehran",
     "Teheran"
@@ -8317,6 +10017,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Persian",
     "Farsi"
@@ -8333,6 +10036,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8348,6 +10054,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "rial"
    ],
@@ -8363,6 +10072,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Tehran",
     "Teheran"
@@ -8379,6 +10091,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Persian",
     "Farsi"
@@ -8395,6 +10110,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8410,6 +10128,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Iran",
+   "bridge_zh": [
+    "伊朗"
+   ],
    "answers": [
     "rial"
    ],
@@ -8425,6 +10146,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Baghdad"
    ],
@@ -8440,6 +10164,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -8455,6 +10182,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8470,6 +10200,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "dinar"
    ],
@@ -8485,6 +10218,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Baghdad"
    ],
@@ -8500,6 +10236,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -8515,6 +10254,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8530,6 +10272,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "dinar"
    ],
@@ -8545,6 +10290,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Baghdad"
    ],
@@ -8560,6 +10308,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -8575,6 +10326,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8590,6 +10344,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Iraq",
+   "bridge_zh": [
+    "伊拉克"
+   ],
    "answers": [
     "dinar"
    ],
@@ -8605,6 +10362,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Syria",
+   "bridge_zh": [
+    "叙利亚"
+   ],
    "answers": [
     "Damascus"
    ],
@@ -8620,6 +10380,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Syria",
+   "bridge_zh": [
+    "叙利亚"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -8635,6 +10398,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Syria",
+   "bridge_zh": [
+    "叙利亚"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8650,6 +10416,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Syria",
+   "bridge_zh": [
+    "叙利亚"
+   ],
    "answers": [
     "pound"
    ],
@@ -8665,6 +10434,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Syria",
+   "bridge_zh": [
+    "叙利亚"
+   ],
    "answers": [
     "Damascus"
    ],
@@ -8680,6 +10452,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Syria",
+   "bridge_zh": [
+    "叙利亚"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -8695,6 +10470,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Syria",
+   "bridge_zh": [
+    "叙利亚"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8710,6 +10488,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Syria",
+   "bridge_zh": [
+    "叙利亚"
+   ],
    "answers": [
     "pound"
    ],
@@ -8725,6 +10506,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Lebanon",
+   "bridge_zh": [
+    "黎巴嫩"
+   ],
    "answers": [
     "Beirut"
    ],
@@ -8740,6 +10524,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Lebanon",
+   "bridge_zh": [
+    "黎巴嫩"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -8755,6 +10542,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Lebanon",
+   "bridge_zh": [
+    "黎巴嫩"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8770,6 +10560,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Lebanon",
+   "bridge_zh": [
+    "黎巴嫩"
+   ],
    "answers": [
     "pound"
    ],
@@ -8785,6 +10578,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Lebanon",
+   "bridge_zh": [
+    "黎巴嫩"
+   ],
    "answers": [
     "Beirut"
    ],
@@ -8800,6 +10596,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Lebanon",
+   "bridge_zh": [
+    "黎巴嫩"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -8815,6 +10614,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Lebanon",
+   "bridge_zh": [
+    "黎巴嫩"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8830,6 +10632,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Lebanon",
+   "bridge_zh": [
+    "黎巴嫩"
+   ],
    "answers": [
     "pound"
    ],
@@ -8845,6 +10650,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Islamabad"
    ],
@@ -8860,6 +10668,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Urdu"
    ],
@@ -8875,6 +10686,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8890,6 +10704,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "rupee"
    ],
@@ -8905,6 +10722,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Islamabad"
    ],
@@ -8920,6 +10740,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Urdu"
    ],
@@ -8935,6 +10758,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Asia"
    ],
@@ -8950,6 +10776,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "rupee"
    ],
@@ -8965,6 +10794,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Islamabad"
    ],
@@ -8980,6 +10812,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Urdu"
    ],
@@ -8995,6 +10830,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9010,6 +10848,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Pakistan",
+   "bridge_zh": [
+    "巴基斯坦"
+   ],
    "answers": [
     "rupee"
    ],
@@ -9025,6 +10866,10 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Bangladesh",
+   "bridge_zh": [
+    "孟加拉国",
+    "孟加拉"
+   ],
    "answers": [
     "Dhaka",
     "Dacca"
@@ -9041,6 +10886,10 @@
    "category": "country",
    "relation": "language",
    "bridge": "Bangladesh",
+   "bridge_zh": [
+    "孟加拉国",
+    "孟加拉"
+   ],
    "answers": [
     "Bengali",
     "Bangla"
@@ -9057,6 +10906,10 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Bangladesh",
+   "bridge_zh": [
+    "孟加拉国",
+    "孟加拉"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9072,6 +10925,10 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Bangladesh",
+   "bridge_zh": [
+    "孟加拉国",
+    "孟加拉"
+   ],
    "answers": [
     "taka"
    ],
@@ -9087,6 +10944,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Nepal",
+   "bridge_zh": [
+    "尼泊尔"
+   ],
    "answers": [
     "Kathmandu"
    ],
@@ -9102,6 +10962,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Nepal",
+   "bridge_zh": [
+    "尼泊尔"
+   ],
    "answers": [
     "Nepali",
     "Nepalese"
@@ -9118,6 +10981,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Nepal",
+   "bridge_zh": [
+    "尼泊尔"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9133,6 +10999,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Nepal",
+   "bridge_zh": [
+    "尼泊尔"
+   ],
    "answers": [
     "rupee"
    ],
@@ -9148,6 +11017,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Nepal",
+   "bridge_zh": [
+    "尼泊尔"
+   ],
    "answers": [
     "Kathmandu"
    ],
@@ -9163,6 +11035,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Nepal",
+   "bridge_zh": [
+    "尼泊尔"
+   ],
    "answers": [
     "Nepali",
     "Nepalese"
@@ -9179,6 +11054,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Nepal",
+   "bridge_zh": [
+    "尼泊尔"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9194,6 +11072,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Nepal",
+   "bridge_zh": [
+    "尼泊尔"
+   ],
    "answers": [
     "rupee"
    ],
@@ -9209,6 +11090,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Manila"
    ],
@@ -9224,6 +11108,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Filipino",
     "Tagalog"
@@ -9240,6 +11127,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9255,6 +11145,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "peso"
    ],
@@ -9270,6 +11163,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Manila"
    ],
@@ -9285,6 +11181,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Filipino",
     "Tagalog"
@@ -9301,6 +11200,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9316,6 +11218,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "peso"
    ],
@@ -9331,6 +11236,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Manila"
    ],
@@ -9346,6 +11254,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Filipino",
     "Tagalog"
@@ -9362,6 +11273,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9377,6 +11291,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Philippines",
+   "bridge_zh": [
+    "菲律宾"
+   ],
    "answers": [
     "peso"
    ],
@@ -9392,6 +11309,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Malaysia",
+   "bridge_zh": [
+    "马来西亚"
+   ],
    "answers": [
     "Kuala Lumpur"
    ],
@@ -9407,6 +11327,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Malaysia",
+   "bridge_zh": [
+    "马来西亚"
+   ],
    "answers": [
     "Malay",
     "Bahasa"
@@ -9423,6 +11346,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Malaysia",
+   "bridge_zh": [
+    "马来西亚"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9438,6 +11364,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Malaysia",
+   "bridge_zh": [
+    "马来西亚"
+   ],
    "answers": [
     "ringgit"
    ],
@@ -9453,6 +11382,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Malaysia",
+   "bridge_zh": [
+    "马来西亚"
+   ],
    "answers": [
     "Kuala Lumpur"
    ],
@@ -9468,6 +11400,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Malaysia",
+   "bridge_zh": [
+    "马来西亚"
+   ],
    "answers": [
     "Malay",
     "Bahasa"
@@ -9484,6 +11419,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Malaysia",
+   "bridge_zh": [
+    "马来西亚"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9499,6 +11437,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Malaysia",
+   "bridge_zh": [
+    "马来西亚"
+   ],
    "answers": [
     "ringgit"
    ],
@@ -9514,6 +11455,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Singapore",
+   "bridge_zh": [
+    "新加坡"
+   ],
    "answers": [
     "English"
    ],
@@ -9529,6 +11473,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Singapore",
+   "bridge_zh": [
+    "新加坡"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9544,6 +11491,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Singapore",
+   "bridge_zh": [
+    "新加坡"
+   ],
    "answers": [
     "dollar"
    ],
@@ -9559,6 +11509,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Singapore",
+   "bridge_zh": [
+    "新加坡"
+   ],
    "answers": [
     "English"
    ],
@@ -9574,6 +11527,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Singapore",
+   "bridge_zh": [
+    "新加坡"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9589,6 +11545,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Singapore",
+   "bridge_zh": [
+    "新加坡"
+   ],
    "answers": [
     "dollar"
    ],
@@ -9604,6 +11563,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Myanmar",
+   "bridge_zh": [
+    "缅甸"
+   ],
    "answers": [
     "Naypyidaw",
     "Naypyitaw",
@@ -9621,6 +11583,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Myanmar",
+   "bridge_zh": [
+    "缅甸"
+   ],
    "answers": [
     "Burmese"
    ],
@@ -9636,6 +11601,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Myanmar",
+   "bridge_zh": [
+    "缅甸"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9651,6 +11619,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Myanmar",
+   "bridge_zh": [
+    "缅甸"
+   ],
    "answers": [
     "kyat"
    ],
@@ -9666,6 +11637,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Myanmar",
+   "bridge_zh": [
+    "缅甸"
+   ],
    "answers": [
     "Naypyidaw",
     "Naypyitaw",
@@ -9683,6 +11657,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Myanmar",
+   "bridge_zh": [
+    "缅甸"
+   ],
    "answers": [
     "Burmese"
    ],
@@ -9698,6 +11675,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Myanmar",
+   "bridge_zh": [
+    "缅甸"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9713,6 +11693,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Myanmar",
+   "bridge_zh": [
+    "缅甸"
+   ],
    "answers": [
     "kyat"
    ],
@@ -9728,6 +11711,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Laos",
+   "bridge_zh": [
+    "老挝"
+   ],
    "answers": [
     "Vientiane"
    ],
@@ -9743,6 +11729,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Laos",
+   "bridge_zh": [
+    "老挝"
+   ],
    "answers": [
     "Lao",
     "Laotian"
@@ -9759,6 +11748,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Laos",
+   "bridge_zh": [
+    "老挝"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9774,6 +11766,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Laos",
+   "bridge_zh": [
+    "老挝"
+   ],
    "answers": [
     "kip"
    ],
@@ -9789,6 +11784,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Laos",
+   "bridge_zh": [
+    "老挝"
+   ],
    "answers": [
     "Vientiane"
    ],
@@ -9804,6 +11802,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Laos",
+   "bridge_zh": [
+    "老挝"
+   ],
    "answers": [
     "Lao",
     "Laotian"
@@ -9820,6 +11821,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Laos",
+   "bridge_zh": [
+    "老挝"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9835,6 +11839,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Laos",
+   "bridge_zh": [
+    "老挝"
+   ],
    "answers": [
     "kip"
    ],
@@ -9850,6 +11857,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Afghanistan",
+   "bridge_zh": [
+    "阿富汗"
+   ],
    "answers": [
     "Kabul"
    ],
@@ -9865,6 +11875,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Afghanistan",
+   "bridge_zh": [
+    "阿富汗"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9880,6 +11893,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Afghanistan",
+   "bridge_zh": [
+    "阿富汗"
+   ],
    "answers": [
     "afghani"
    ],
@@ -9895,6 +11911,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Afghanistan",
+   "bridge_zh": [
+    "阿富汗"
+   ],
    "answers": [
     "Kabul"
    ],
@@ -9910,6 +11929,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Afghanistan",
+   "bridge_zh": [
+    "阿富汗"
+   ],
    "answers": [
     "Asia"
    ],
@@ -9925,6 +11947,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Afghanistan",
+   "bridge_zh": [
+    "阿富汗"
+   ],
    "answers": [
     "afghani"
    ],
@@ -9940,6 +11965,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Kazakhstan",
+   "bridge_zh": [
+    "哈萨克斯坦"
+   ],
    "answers": [
     "Astana",
     "Nur-Sultan"
@@ -9956,6 +11984,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Kazakhstan",
+   "bridge_zh": [
+    "哈萨克斯坦"
+   ],
    "answers": [
     "Kazakh",
     "Russian"
@@ -9972,6 +12003,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Kazakhstan",
+   "bridge_zh": [
+    "哈萨克斯坦"
+   ],
    "answers": [
     "Asia",
     "Europe"
@@ -9988,6 +12022,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Kazakhstan",
+   "bridge_zh": [
+    "哈萨克斯坦"
+   ],
    "answers": [
     "tenge"
    ],
@@ -10003,6 +12040,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Kazakhstan",
+   "bridge_zh": [
+    "哈萨克斯坦"
+   ],
    "answers": [
     "Astana",
     "Nur-Sultan"
@@ -10019,6 +12059,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Kazakhstan",
+   "bridge_zh": [
+    "哈萨克斯坦"
+   ],
    "answers": [
     "Kazakh",
     "Russian"
@@ -10035,6 +12078,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Kazakhstan",
+   "bridge_zh": [
+    "哈萨克斯坦"
+   ],
    "answers": [
     "Asia",
     "Europe"
@@ -10051,6 +12097,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Kazakhstan",
+   "bridge_zh": [
+    "哈萨克斯坦"
+   ],
    "answers": [
     "tenge"
    ],
@@ -10066,6 +12115,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Armenia",
+   "bridge_zh": [
+    "亚美尼亚"
+   ],
    "answers": [
     "Yerevan"
    ],
@@ -10081,6 +12133,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Armenia",
+   "bridge_zh": [
+    "亚美尼亚"
+   ],
    "answers": [
     "Armenian"
    ],
@@ -10096,6 +12151,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Armenia",
+   "bridge_zh": [
+    "亚美尼亚"
+   ],
    "answers": [
     "Asia",
     "Europe"
@@ -10112,6 +12170,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Armenia",
+   "bridge_zh": [
+    "亚美尼亚"
+   ],
    "answers": [
     "dram"
    ],
@@ -10127,6 +12188,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Rabat"
    ],
@@ -10142,6 +12206,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -10157,6 +12224,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10172,6 +12242,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "dirham"
    ],
@@ -10187,6 +12260,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Rabat"
    ],
@@ -10202,6 +12278,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -10217,6 +12296,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10232,6 +12314,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "dirham"
    ],
@@ -10247,6 +12332,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Rabat"
    ],
@@ -10262,6 +12350,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -10277,6 +12368,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10292,6 +12386,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Morocco",
+   "bridge_zh": [
+    "摩洛哥"
+   ],
    "answers": [
     "dirham"
    ],
@@ -10307,6 +12404,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Algeria",
+   "bridge_zh": [
+    "阿尔及利亚"
+   ],
    "answers": [
     "Algiers"
    ],
@@ -10322,6 +12422,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Algeria",
+   "bridge_zh": [
+    "阿尔及利亚"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -10337,6 +12440,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Algeria",
+   "bridge_zh": [
+    "阿尔及利亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10352,6 +12458,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Algeria",
+   "bridge_zh": [
+    "阿尔及利亚"
+   ],
    "answers": [
     "dinar"
    ],
@@ -10367,6 +12476,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Tunisia",
+   "bridge_zh": [
+    "突尼斯"
+   ],
    "answers": [
     "Tunis"
    ],
@@ -10382,6 +12494,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Tunisia",
+   "bridge_zh": [
+    "突尼斯"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -10397,6 +12512,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Tunisia",
+   "bridge_zh": [
+    "突尼斯"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10412,6 +12530,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Tunisia",
+   "bridge_zh": [
+    "突尼斯"
+   ],
    "answers": [
     "dinar"
    ],
@@ -10427,6 +12548,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Tunisia",
+   "bridge_zh": [
+    "突尼斯"
+   ],
    "answers": [
     "Tunis"
    ],
@@ -10442,6 +12566,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Tunisia",
+   "bridge_zh": [
+    "突尼斯"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -10457,6 +12584,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Tunisia",
+   "bridge_zh": [
+    "突尼斯"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10472,6 +12602,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Tunisia",
+   "bridge_zh": [
+    "突尼斯"
+   ],
    "answers": [
     "dinar"
    ],
@@ -10487,6 +12620,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Libya",
+   "bridge_zh": [
+    "利比亚"
+   ],
    "answers": [
     "Tripoli"
    ],
@@ -10502,6 +12638,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Libya",
+   "bridge_zh": [
+    "利比亚"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -10517,6 +12656,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Libya",
+   "bridge_zh": [
+    "利比亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10532,6 +12674,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Libya",
+   "bridge_zh": [
+    "利比亚"
+   ],
    "answers": [
     "dinar"
    ],
@@ -10547,6 +12692,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Libya",
+   "bridge_zh": [
+    "利比亚"
+   ],
    "answers": [
     "Tripoli"
    ],
@@ -10562,6 +12710,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Libya",
+   "bridge_zh": [
+    "利比亚"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -10577,6 +12728,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Libya",
+   "bridge_zh": [
+    "利比亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10592,6 +12746,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Libya",
+   "bridge_zh": [
+    "利比亚"
+   ],
    "answers": [
     "dinar"
    ],
@@ -10607,6 +12764,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "Abuja"
    ],
@@ -10622,6 +12782,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "English"
    ],
@@ -10637,6 +12800,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10652,6 +12818,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "naira"
    ],
@@ -10667,6 +12836,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "Abuja"
    ],
@@ -10682,6 +12854,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "English"
    ],
@@ -10697,6 +12872,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10712,6 +12890,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "naira"
    ],
@@ -10727,6 +12908,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "Abuja"
    ],
@@ -10742,6 +12926,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "English"
    ],
@@ -10757,6 +12944,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10772,6 +12962,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Nigeria",
+   "bridge_zh": [
+    "尼日利亚"
+   ],
    "answers": [
     "naira"
    ],
@@ -10787,6 +12980,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "Accra"
    ],
@@ -10802,6 +12998,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "English"
    ],
@@ -10817,6 +13016,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10832,6 +13034,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "cedi"
    ],
@@ -10847,6 +13052,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "Accra"
    ],
@@ -10862,6 +13070,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "English"
    ],
@@ -10877,6 +13088,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10892,6 +13106,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "cedi"
    ],
@@ -10907,6 +13124,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "Accra"
    ],
@@ -10922,6 +13142,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "English"
    ],
@@ -10937,6 +13160,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "Africa"
    ],
@@ -10952,6 +13178,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ghana",
+   "bridge_zh": [
+    "加纳"
+   ],
    "answers": [
     "cedi"
    ],
@@ -10967,6 +13196,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ethiopia",
+   "bridge_zh": [
+    "埃塞俄比亚"
+   ],
    "answers": [
     "Addis Ababa"
    ],
@@ -10982,6 +13214,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ethiopia",
+   "bridge_zh": [
+    "埃塞俄比亚"
+   ],
    "answers": [
     "Amharic"
    ],
@@ -10997,6 +13232,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ethiopia",
+   "bridge_zh": [
+    "埃塞俄比亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11012,6 +13250,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ethiopia",
+   "bridge_zh": [
+    "埃塞俄比亚"
+   ],
    "answers": [
     "birr"
    ],
@@ -11027,6 +13268,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ethiopia",
+   "bridge_zh": [
+    "埃塞俄比亚"
+   ],
    "answers": [
     "Addis Ababa"
    ],
@@ -11042,6 +13286,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ethiopia",
+   "bridge_zh": [
+    "埃塞俄比亚"
+   ],
    "answers": [
     "Amharic"
    ],
@@ -11057,6 +13304,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ethiopia",
+   "bridge_zh": [
+    "埃塞俄比亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11072,6 +13322,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ethiopia",
+   "bridge_zh": [
+    "埃塞俄比亚"
+   ],
    "answers": [
     "birr"
    ],
@@ -11087,6 +13340,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Dodoma"
    ],
@@ -11102,6 +13358,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Swahili"
    ],
@@ -11117,6 +13376,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11132,6 +13394,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "shilling"
    ],
@@ -11147,6 +13412,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Dodoma"
    ],
@@ -11162,6 +13430,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Swahili"
    ],
@@ -11177,6 +13448,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11192,6 +13466,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "shilling"
    ],
@@ -11207,6 +13484,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Dodoma"
    ],
@@ -11222,6 +13502,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Swahili"
    ],
@@ -11237,6 +13520,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11252,6 +13538,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Tanzania",
+   "bridge_zh": [
+    "坦桑尼亚"
+   ],
    "answers": [
     "shilling"
    ],
@@ -11267,6 +13556,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Uganda",
+   "bridge_zh": [
+    "乌干达"
+   ],
    "answers": [
     "Kampala"
    ],
@@ -11282,6 +13574,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Uganda",
+   "bridge_zh": [
+    "乌干达"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11297,6 +13592,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Uganda",
+   "bridge_zh": [
+    "乌干达"
+   ],
    "answers": [
     "shilling"
    ],
@@ -11312,6 +13610,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Uganda",
+   "bridge_zh": [
+    "乌干达"
+   ],
    "answers": [
     "Kampala"
    ],
@@ -11327,6 +13628,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Uganda",
+   "bridge_zh": [
+    "乌干达"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11342,6 +13646,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Uganda",
+   "bridge_zh": [
+    "乌干达"
+   ],
    "answers": [
     "shilling"
    ],
@@ -11357,6 +13664,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Madagascar",
+   "bridge_zh": [
+    "马达加斯加"
+   ],
    "answers": [
     "Antananarivo"
    ],
@@ -11372,6 +13682,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Madagascar",
+   "bridge_zh": [
+    "马达加斯加"
+   ],
    "answers": [
     "Malagasy"
    ],
@@ -11387,6 +13700,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Madagascar",
+   "bridge_zh": [
+    "马达加斯加"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11402,6 +13718,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Madagascar",
+   "bridge_zh": [
+    "马达加斯加"
+   ],
    "answers": [
     "ariary"
    ],
@@ -11417,6 +13736,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Mali",
+   "bridge_zh": [
+    "马里"
+   ],
    "answers": [
     "Bamako"
    ],
@@ -11432,6 +13754,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Mali",
+   "bridge_zh": [
+    "马里"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11447,6 +13772,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Mali",
+   "bridge_zh": [
+    "马里"
+   ],
    "answers": [
     "franc"
    ],
@@ -11462,6 +13790,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Mali",
+   "bridge_zh": [
+    "马里"
+   ],
    "answers": [
     "Bamako"
    ],
@@ -11477,6 +13808,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Mali",
+   "bridge_zh": [
+    "马里"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11492,6 +13826,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Mali",
+   "bridge_zh": [
+    "马里"
+   ],
    "answers": [
     "franc"
    ],
@@ -11507,6 +13844,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Sudan",
+   "bridge_zh": [
+    "苏丹"
+   ],
    "answers": [
     "Khartoum"
    ],
@@ -11522,6 +13862,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Sudan",
+   "bridge_zh": [
+    "苏丹"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -11537,6 +13880,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Sudan",
+   "bridge_zh": [
+    "苏丹"
+   ],
    "answers": [
     "Africa"
    ],
@@ -11552,6 +13898,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Sudan",
+   "bridge_zh": [
+    "苏丹"
+   ],
    "answers": [
     "pound"
    ],
@@ -11567,6 +13916,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "Buenos Aires"
    ],
@@ -11582,6 +13934,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -11597,6 +13952,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "South"
    ],
@@ -11612,6 +13970,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "peso"
    ],
@@ -11627,6 +13988,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "Buenos Aires"
    ],
@@ -11642,6 +14006,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -11657,6 +14024,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "South"
    ],
@@ -11672,6 +14042,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "peso"
    ],
@@ -11687,6 +14060,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "Buenos Aires"
    ],
@@ -11702,6 +14078,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -11717,6 +14096,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "South"
    ],
@@ -11732,6 +14114,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Argentina",
+   "bridge_zh": [
+    "阿根廷"
+   ],
    "answers": [
     "peso"
    ],
@@ -11747,6 +14132,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "Bogotá",
     "Bogota"
@@ -11763,6 +14151,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -11778,6 +14169,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "South"
    ],
@@ -11793,6 +14187,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "peso"
    ],
@@ -11808,6 +14205,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "Bogotá",
     "Bogota"
@@ -11824,6 +14224,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -11839,6 +14242,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "South"
    ],
@@ -11854,6 +14260,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "peso"
    ],
@@ -11869,6 +14278,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "Bogotá",
     "Bogota"
@@ -11885,6 +14297,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -11900,6 +14315,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "South"
    ],
@@ -11915,6 +14333,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "peso"
    ],
@@ -11930,6 +14351,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "Bogotá",
     "Bogota"
@@ -11946,6 +14370,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -11961,6 +14388,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "South"
    ],
@@ -11976,6 +14406,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Colombia",
+   "bridge_zh": [
+    "哥伦比亚"
+   ],
    "answers": [
     "peso"
    ],
@@ -11991,6 +14424,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Venezuela",
+   "bridge_zh": [
+    "委内瑞拉"
+   ],
    "answers": [
     "Caracas"
    ],
@@ -12006,6 +14442,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Venezuela",
+   "bridge_zh": [
+    "委内瑞拉"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12021,6 +14460,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Venezuela",
+   "bridge_zh": [
+    "委内瑞拉"
+   ],
    "answers": [
     "South"
    ],
@@ -12036,6 +14478,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Venezuela",
+   "bridge_zh": [
+    "委内瑞拉"
+   ],
    "answers": [
     "bolívar",
     "bolivar"
@@ -12052,6 +14497,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Ecuador",
+   "bridge_zh": [
+    "厄瓜多尔"
+   ],
    "answers": [
     "Quito"
    ],
@@ -12067,6 +14515,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Ecuador",
+   "bridge_zh": [
+    "厄瓜多尔"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12082,6 +14533,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Ecuador",
+   "bridge_zh": [
+    "厄瓜多尔"
+   ],
    "answers": [
     "South"
    ],
@@ -12097,6 +14551,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Ecuador",
+   "bridge_zh": [
+    "厄瓜多尔"
+   ],
    "answers": [
     "dollar"
    ],
@@ -12112,6 +14569,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Bolivia",
+   "bridge_zh": [
+    "玻利维亚"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12127,6 +14587,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Bolivia",
+   "bridge_zh": [
+    "玻利维亚"
+   ],
    "answers": [
     "South"
    ],
@@ -12142,6 +14605,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Bolivia",
+   "bridge_zh": [
+    "玻利维亚"
+   ],
    "answers": [
     "boliviano"
    ],
@@ -12157,6 +14623,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Uruguay",
+   "bridge_zh": [
+    "乌拉圭"
+   ],
    "answers": [
     "Montevideo"
    ],
@@ -12172,6 +14641,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Uruguay",
+   "bridge_zh": [
+    "乌拉圭"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12187,6 +14659,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Uruguay",
+   "bridge_zh": [
+    "乌拉圭"
+   ],
    "answers": [
     "South"
    ],
@@ -12202,6 +14677,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Uruguay",
+   "bridge_zh": [
+    "乌拉圭"
+   ],
    "answers": [
     "peso"
    ],
@@ -12217,6 +14695,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Uruguay",
+   "bridge_zh": [
+    "乌拉圭"
+   ],
    "answers": [
     "Montevideo"
    ],
@@ -12232,6 +14713,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Uruguay",
+   "bridge_zh": [
+    "乌拉圭"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12247,6 +14731,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Uruguay",
+   "bridge_zh": [
+    "乌拉圭"
+   ],
    "answers": [
     "South"
    ],
@@ -12262,6 +14749,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Uruguay",
+   "bridge_zh": [
+    "乌拉圭"
+   ],
    "answers": [
     "peso"
    ],
@@ -12277,6 +14767,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Cuba",
+   "bridge_zh": [
+    "古巴"
+   ],
    "answers": [
     "Havana"
    ],
@@ -12292,6 +14785,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Cuba",
+   "bridge_zh": [
+    "古巴"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12307,6 +14803,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Cuba",
+   "bridge_zh": [
+    "古巴"
+   ],
    "answers": [
     "North"
    ],
@@ -12322,6 +14821,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Cuba",
+   "bridge_zh": [
+    "古巴"
+   ],
    "answers": [
     "peso"
    ],
@@ -12337,6 +14839,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Cuba",
+   "bridge_zh": [
+    "古巴"
+   ],
    "answers": [
     "Havana"
    ],
@@ -12352,6 +14857,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Cuba",
+   "bridge_zh": [
+    "古巴"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12367,6 +14875,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Cuba",
+   "bridge_zh": [
+    "古巴"
+   ],
    "answers": [
     "North"
    ],
@@ -12382,6 +14893,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Cuba",
+   "bridge_zh": [
+    "古巴"
+   ],
    "answers": [
     "peso"
    ],
@@ -12397,6 +14911,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "Kingston"
    ],
@@ -12412,6 +14929,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "English"
    ],
@@ -12427,6 +14947,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "North"
    ],
@@ -12442,6 +14965,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "dollar"
    ],
@@ -12457,6 +14983,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "Kingston"
    ],
@@ -12472,6 +15001,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "English"
    ],
@@ -12487,6 +15019,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "North"
    ],
@@ -12502,6 +15037,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "dollar"
    ],
@@ -12517,6 +15055,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "Kingston"
    ],
@@ -12532,6 +15073,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "English"
    ],
@@ -12547,6 +15091,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "North"
    ],
@@ -12562,6 +15109,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "dollar"
    ],
@@ -12577,6 +15127,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "Kingston"
    ],
@@ -12592,6 +15145,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "English"
    ],
@@ -12607,6 +15163,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "North"
    ],
@@ -12622,6 +15181,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Jamaica",
+   "bridge_zh": [
+    "牙买加"
+   ],
    "answers": [
     "dollar"
    ],
@@ -12637,6 +15199,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Guatemala",
+   "bridge_zh": [
+    "危地马拉"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12652,6 +15217,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Guatemala",
+   "bridge_zh": [
+    "危地马拉"
+   ],
    "answers": [
     "North"
    ],
@@ -12667,6 +15235,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Guatemala",
+   "bridge_zh": [
+    "危地马拉"
+   ],
    "answers": [
     "quetzal"
    ],
@@ -12682,6 +15253,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Guatemala",
+   "bridge_zh": [
+    "危地马拉"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12697,6 +15271,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Guatemala",
+   "bridge_zh": [
+    "危地马拉"
+   ],
    "answers": [
     "North"
    ],
@@ -12712,6 +15289,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Guatemala",
+   "bridge_zh": [
+    "危地马拉"
+   ],
    "answers": [
     "quetzal"
    ],
@@ -12727,6 +15307,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Honduras",
+   "bridge_zh": [
+    "洪都拉斯"
+   ],
    "answers": [
     "Tegucigalpa"
    ],
@@ -12742,6 +15325,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Honduras",
+   "bridge_zh": [
+    "洪都拉斯"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12757,6 +15343,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Honduras",
+   "bridge_zh": [
+    "洪都拉斯"
+   ],
    "answers": [
     "North"
    ],
@@ -12772,6 +15361,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Honduras",
+   "bridge_zh": [
+    "洪都拉斯"
+   ],
    "answers": [
     "lempira"
    ],
@@ -12787,6 +15379,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Honduras",
+   "bridge_zh": [
+    "洪都拉斯"
+   ],
    "answers": [
     "Tegucigalpa"
    ],
@@ -12802,6 +15397,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Honduras",
+   "bridge_zh": [
+    "洪都拉斯"
+   ],
    "answers": [
     "Spanish"
    ],
@@ -12817,6 +15415,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Honduras",
+   "bridge_zh": [
+    "洪都拉斯"
+   ],
    "answers": [
     "North"
    ],
@@ -12832,6 +15433,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Honduras",
+   "bridge_zh": [
+    "洪都拉斯"
+   ],
    "answers": [
     "lempira"
    ],
@@ -12847,6 +15451,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Oman",
+   "bridge_zh": [
+    "阿曼"
+   ],
    "answers": [
     "Muscat"
    ],
@@ -12862,6 +15469,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Oman",
+   "bridge_zh": [
+    "阿曼"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -12877,6 +15487,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Oman",
+   "bridge_zh": [
+    "阿曼"
+   ],
    "answers": [
     "Asia"
    ],
@@ -12892,6 +15505,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Oman",
+   "bridge_zh": [
+    "阿曼"
+   ],
    "answers": [
     "rial",
     "riyal"
@@ -12908,6 +15524,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Yemen",
+   "bridge_zh": [
+    "也门"
+   ],
    "answers": [
     "Sanaa",
     "Sana'a"
@@ -12924,6 +15543,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Yemen",
+   "bridge_zh": [
+    "也门"
+   ],
    "answers": [
     "Arabic"
    ],
@@ -12939,6 +15561,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Yemen",
+   "bridge_zh": [
+    "也门"
+   ],
    "answers": [
     "Asia"
    ],
@@ -12954,6 +15579,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Yemen",
+   "bridge_zh": [
+    "也门"
+   ],
    "answers": [
     "rial",
     "riyal"
@@ -12970,6 +15598,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Cyprus",
+   "bridge_zh": [
+    "塞浦路斯"
+   ],
    "answers": [
     "Nicosia"
    ],
@@ -12985,6 +15616,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Cyprus",
+   "bridge_zh": [
+    "塞浦路斯"
+   ],
    "answers": [
     "Greek"
    ],
@@ -13000,6 +15634,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Cyprus",
+   "bridge_zh": [
+    "塞浦路斯"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -13016,6 +15653,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Cyprus",
+   "bridge_zh": [
+    "塞浦路斯"
+   ],
    "answers": [
     "euro"
    ],
@@ -13031,6 +15671,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Cyprus",
+   "bridge_zh": [
+    "塞浦路斯"
+   ],
    "answers": [
     "Nicosia"
    ],
@@ -13046,6 +15689,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Cyprus",
+   "bridge_zh": [
+    "塞浦路斯"
+   ],
    "answers": [
     "Greek"
    ],
@@ -13061,6 +15707,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Cyprus",
+   "bridge_zh": [
+    "塞浦路斯"
+   ],
    "answers": [
     "Europe",
     "Asia"
@@ -13077,6 +15726,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Cyprus",
+   "bridge_zh": [
+    "塞浦路斯"
+   ],
    "answers": [
     "euro"
    ],
@@ -13092,6 +15744,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Malta",
+   "bridge_zh": [
+    "马耳他"
+   ],
    "answers": [
     "Valletta"
    ],
@@ -13107,6 +15762,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Malta",
+   "bridge_zh": [
+    "马耳他"
+   ],
    "answers": [
     "Maltese",
     "English"
@@ -13123,6 +15781,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Malta",
+   "bridge_zh": [
+    "马耳他"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13138,6 +15799,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Malta",
+   "bridge_zh": [
+    "马耳他"
+   ],
    "answers": [
     "euro"
    ],
@@ -13153,6 +15817,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Estonia",
+   "bridge_zh": [
+    "爱沙尼亚"
+   ],
    "answers": [
     "Tallinn"
    ],
@@ -13168,6 +15835,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Estonia",
+   "bridge_zh": [
+    "爱沙尼亚"
+   ],
    "answers": [
     "Estonian"
    ],
@@ -13183,6 +15853,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Estonia",
+   "bridge_zh": [
+    "爱沙尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13198,6 +15871,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Estonia",
+   "bridge_zh": [
+    "爱沙尼亚"
+   ],
    "answers": [
     "euro"
    ],
@@ -13213,6 +15889,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Estonia",
+   "bridge_zh": [
+    "爱沙尼亚"
+   ],
    "answers": [
     "Tallinn"
    ],
@@ -13228,6 +15907,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Estonia",
+   "bridge_zh": [
+    "爱沙尼亚"
+   ],
    "answers": [
     "Estonian"
    ],
@@ -13243,6 +15925,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Estonia",
+   "bridge_zh": [
+    "爱沙尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13258,6 +15943,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Estonia",
+   "bridge_zh": [
+    "爱沙尼亚"
+   ],
    "answers": [
     "euro"
    ],
@@ -13273,6 +15961,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Lithuania",
+   "bridge_zh": [
+    "立陶宛"
+   ],
    "answers": [
     "Vilnius"
    ],
@@ -13288,6 +15979,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Lithuania",
+   "bridge_zh": [
+    "立陶宛"
+   ],
    "answers": [
     "Lithuanian"
    ],
@@ -13303,6 +15997,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Lithuania",
+   "bridge_zh": [
+    "立陶宛"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13318,6 +16015,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Lithuania",
+   "bridge_zh": [
+    "立陶宛"
+   ],
    "answers": [
     "euro"
    ],
@@ -13333,6 +16033,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Lithuania",
+   "bridge_zh": [
+    "立陶宛"
+   ],
    "answers": [
     "Vilnius"
    ],
@@ -13348,6 +16051,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Lithuania",
+   "bridge_zh": [
+    "立陶宛"
+   ],
    "answers": [
     "Lithuanian"
    ],
@@ -13363,6 +16069,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Lithuania",
+   "bridge_zh": [
+    "立陶宛"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13378,6 +16087,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Lithuania",
+   "bridge_zh": [
+    "立陶宛"
+   ],
    "answers": [
     "euro"
    ],
@@ -13393,6 +16105,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Slovakia",
+   "bridge_zh": [
+    "斯洛伐克"
+   ],
    "answers": [
     "Bratislava"
    ],
@@ -13408,6 +16123,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Slovakia",
+   "bridge_zh": [
+    "斯洛伐克"
+   ],
    "answers": [
     "Slovak"
    ],
@@ -13423,6 +16141,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Slovakia",
+   "bridge_zh": [
+    "斯洛伐克"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13438,6 +16159,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Slovakia",
+   "bridge_zh": [
+    "斯洛伐克"
+   ],
    "answers": [
     "euro"
    ],
@@ -13453,6 +16177,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Slovenia",
+   "bridge_zh": [
+    "斯洛文尼亚"
+   ],
    "answers": [
     "Ljubljana"
    ],
@@ -13468,6 +16195,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Slovenia",
+   "bridge_zh": [
+    "斯洛文尼亚"
+   ],
    "answers": [
     "Slovene",
     "Slovenian"
@@ -13484,6 +16214,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Slovenia",
+   "bridge_zh": [
+    "斯洛文尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13499,6 +16232,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Slovenia",
+   "bridge_zh": [
+    "斯洛文尼亚"
+   ],
    "answers": [
     "euro"
    ],
@@ -13514,6 +16250,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Slovenia",
+   "bridge_zh": [
+    "斯洛文尼亚"
+   ],
    "answers": [
     "Ljubljana"
    ],
@@ -13529,6 +16268,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Slovenia",
+   "bridge_zh": [
+    "斯洛文尼亚"
+   ],
    "answers": [
     "Slovene",
     "Slovenian"
@@ -13545,6 +16287,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Slovenia",
+   "bridge_zh": [
+    "斯洛文尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13560,6 +16305,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Slovenia",
+   "bridge_zh": [
+    "斯洛文尼亚"
+   ],
    "answers": [
     "euro"
    ],
@@ -13575,6 +16323,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Albania",
+   "bridge_zh": [
+    "阿尔巴尼亚"
+   ],
    "answers": [
     "Tirana",
     "Tirane"
@@ -13591,6 +16342,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Albania",
+   "bridge_zh": [
+    "阿尔巴尼亚"
+   ],
    "answers": [
     "Albanian"
    ],
@@ -13606,6 +16360,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Albania",
+   "bridge_zh": [
+    "阿尔巴尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13621,6 +16378,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Albania",
+   "bridge_zh": [
+    "阿尔巴尼亚"
+   ],
    "answers": [
     "lek"
    ],
@@ -13636,6 +16396,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Albania",
+   "bridge_zh": [
+    "阿尔巴尼亚"
+   ],
    "answers": [
     "Tirana",
     "Tirane"
@@ -13652,6 +16415,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Albania",
+   "bridge_zh": [
+    "阿尔巴尼亚"
+   ],
    "answers": [
     "Albanian"
    ],
@@ -13667,6 +16433,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Albania",
+   "bridge_zh": [
+    "阿尔巴尼亚"
+   ],
    "answers": [
     "Europe"
    ],
@@ -13682,6 +16451,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Albania",
+   "bridge_zh": [
+    "阿尔巴尼亚"
+   ],
    "answers": [
     "lek"
    ],
@@ -13697,6 +16469,9 @@
    "category": "country",
    "relation": "capital",
    "bridge": "Belize",
+   "bridge_zh": [
+    "伯利兹"
+   ],
    "answers": [
     "Belmopan"
    ],
@@ -13712,6 +16487,9 @@
    "category": "country",
    "relation": "language",
    "bridge": "Belize",
+   "bridge_zh": [
+    "伯利兹"
+   ],
    "answers": [
     "English"
    ],
@@ -13727,6 +16505,9 @@
    "category": "country",
    "relation": "continent",
    "bridge": "Belize",
+   "bridge_zh": [
+    "伯利兹"
+   ],
    "answers": [
     "North"
    ],
@@ -13742,6 +16523,9 @@
    "category": "country",
    "relation": "currency",
    "bridge": "Belize",
+   "bridge_zh": [
+    "伯利兹"
+   ],
    "answers": [
     "dollar"
    ],
@@ -13757,6 +16541,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "California",
+   "bridge_zh": [
+    "加利福尼亚",
+    "加州"
+   ],
    "answers": [
     "Sacramento"
    ],
@@ -13772,6 +16560,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "California",
+   "bridge_zh": [
+    "加利福尼亚",
+    "加州"
+   ],
    "answers": [
     "Sacramento"
    ],
@@ -13787,6 +16579,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "California",
+   "bridge_zh": [
+    "加利福尼亚",
+    "加州"
+   ],
    "answers": [
     "Sacramento"
    ],
@@ -13802,6 +16598,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Florida",
+   "bridge_zh": [
+    "佛罗里达",
+    "佛州"
+   ],
    "answers": [
     "Tallahassee"
    ],
@@ -13817,6 +16617,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Florida",
+   "bridge_zh": [
+    "佛罗里达",
+    "佛州"
+   ],
    "answers": [
     "Tallahassee"
    ],
@@ -13832,6 +16636,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Florida",
+   "bridge_zh": [
+    "佛罗里达",
+    "佛州"
+   ],
    "answers": [
     "Tallahassee"
    ],
@@ -13847,6 +16655,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Arizona",
+   "bridge_zh": [
+    "亚利桑那",
+    "亚利桑那州"
+   ],
    "answers": [
     "Phoenix"
    ],
@@ -13862,6 +16674,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Arizona",
+   "bridge_zh": [
+    "亚利桑那",
+    "亚利桑那州"
+   ],
    "answers": [
     "Phoenix"
    ],
@@ -13877,6 +16693,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Nevada",
+   "bridge_zh": [
+    "内华达",
+    "内华达州"
+   ],
    "answers": [
     "Carson City"
    ],
@@ -13892,6 +16712,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Nevada",
+   "bridge_zh": [
+    "内华达",
+    "内华达州"
+   ],
    "answers": [
     "Carson City"
    ],
@@ -13907,6 +16731,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Texas",
+   "bridge_zh": [
+    "得克萨斯",
+    "德州"
+   ],
    "answers": [
     "Austin"
    ],
@@ -13922,6 +16750,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Texas",
+   "bridge_zh": [
+    "得克萨斯",
+    "德州"
+   ],
    "answers": [
     "Austin"
    ],
@@ -13937,6 +16769,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Texas",
+   "bridge_zh": [
+    "得克萨斯",
+    "德州"
+   ],
    "answers": [
     "Austin"
    ],
@@ -13952,6 +16788,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Louisiana",
+   "bridge_zh": [
+    "路易斯安那",
+    "路易斯安那州"
+   ],
    "answers": [
     "Baton Rouge"
    ],
@@ -13967,6 +16807,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Louisiana",
+   "bridge_zh": [
+    "路易斯安那",
+    "路易斯安那州"
+   ],
    "answers": [
     "Baton Rouge"
    ],
@@ -13982,6 +16826,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Pennsylvania",
+   "bridge_zh": [
+    "宾夕法尼亚",
+    "宾州"
+   ],
    "answers": [
     "Harrisburg"
    ],
@@ -13997,6 +16845,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Pennsylvania",
+   "bridge_zh": [
+    "宾夕法尼亚",
+    "宾州"
+   ],
    "answers": [
     "Harrisburg"
    ],
@@ -14012,6 +16864,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Pennsylvania",
+   "bridge_zh": [
+    "宾夕法尼亚",
+    "宾州"
+   ],
    "answers": [
     "Harrisburg"
    ],
@@ -14027,6 +16883,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Tennessee",
+   "bridge_zh": [
+    "田纳西",
+    "田纳西州"
+   ],
    "answers": [
     "Nashville"
    ],
@@ -14042,6 +16902,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Tennessee",
+   "bridge_zh": [
+    "田纳西",
+    "田纳西州"
+   ],
    "answers": [
     "Nashville"
    ],
@@ -14057,6 +16921,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Tennessee",
+   "bridge_zh": [
+    "田纳西",
+    "田纳西州"
+   ],
    "answers": [
     "Nashville"
    ],
@@ -14072,6 +16940,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Wyoming",
+   "bridge_zh": [
+    "怀俄明",
+    "怀俄明州"
+   ],
    "answers": [
     "Cheyenne"
    ],
@@ -14087,6 +16959,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Wyoming",
+   "bridge_zh": [
+    "怀俄明",
+    "怀俄明州"
+   ],
    "answers": [
     "Cheyenne"
    ],
@@ -14102,6 +16978,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Hawaii",
+   "bridge_zh": [
+    "夏威夷",
+    "夏威夷州"
+   ],
    "answers": [
     "Honolulu"
    ],
@@ -14117,6 +16997,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Hawaii",
+   "bridge_zh": [
+    "夏威夷",
+    "夏威夷州"
+   ],
    "answers": [
     "Honolulu"
    ],
@@ -14132,6 +17016,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Missouri",
+   "bridge_zh": [
+    "密苏里",
+    "密苏里州"
+   ],
    "answers": [
     "Jefferson City"
    ],
@@ -14147,6 +17035,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Missouri",
+   "bridge_zh": [
+    "密苏里",
+    "密苏里州"
+   ],
    "answers": [
     "Jefferson City"
    ],
@@ -14162,6 +17054,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Michigan",
+   "bridge_zh": [
+    "密歇根",
+    "密歇根州"
+   ],
    "answers": [
     "Lansing"
    ],
@@ -14177,6 +17073,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Michigan",
+   "bridge_zh": [
+    "密歇根",
+    "密歇根州"
+   ],
    "answers": [
     "Lansing"
    ],
@@ -14192,6 +17092,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Alabama",
+   "bridge_zh": [
+    "亚拉巴马",
+    "阿拉巴马"
+   ],
    "answers": [
     "Montgomery"
    ],
@@ -14207,6 +17111,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Alabama",
+   "bridge_zh": [
+    "亚拉巴马",
+    "阿拉巴马"
+   ],
    "answers": [
     "Montgomery"
    ],
@@ -14222,6 +17130,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Alabama",
+   "bridge_zh": [
+    "亚拉巴马",
+    "阿拉巴马"
+   ],
    "answers": [
     "Montgomery"
    ],
@@ -14237,6 +17149,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Alaska",
+   "bridge_zh": [
+    "阿拉斯加",
+    "阿拉斯加州"
+   ],
    "answers": [
     "Juneau"
    ],
@@ -14252,6 +17168,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Alaska",
+   "bridge_zh": [
+    "阿拉斯加",
+    "阿拉斯加州"
+   ],
    "answers": [
     "Juneau"
    ],
@@ -14267,6 +17187,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Arkansas",
+   "bridge_zh": [
+    "阿肯色",
+    "阿肯色州"
+   ],
    "answers": [
     "Little Rock"
    ],
@@ -14282,6 +17206,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Arkansas",
+   "bridge_zh": [
+    "阿肯色",
+    "阿肯色州"
+   ],
    "answers": [
     "Little Rock"
    ],
@@ -14297,6 +17225,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Arkansas",
+   "bridge_zh": [
+    "阿肯色",
+    "阿肯色州"
+   ],
    "answers": [
     "Little Rock"
    ],
@@ -14312,6 +17244,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Colorado",
+   "bridge_zh": [
+    "科罗拉多",
+    "科罗拉多州"
+   ],
    "answers": [
     "Denver"
    ],
@@ -14327,6 +17263,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Colorado",
+   "bridge_zh": [
+    "科罗拉多",
+    "科罗拉多州"
+   ],
    "answers": [
     "Denver"
    ],
@@ -14342,6 +17282,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Connecticut",
+   "bridge_zh": [
+    "康涅狄格",
+    "康州"
+   ],
    "answers": [
     "Hartford"
    ],
@@ -14357,6 +17301,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Connecticut",
+   "bridge_zh": [
+    "康涅狄格",
+    "康州"
+   ],
    "answers": [
     "Hartford"
    ],
@@ -14372,6 +17320,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Delaware",
+   "bridge_zh": [
+    "特拉华",
+    "特拉华州"
+   ],
    "answers": [
     "Dover"
    ],
@@ -14387,6 +17339,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Delaware",
+   "bridge_zh": [
+    "特拉华",
+    "特拉华州"
+   ],
    "answers": [
     "Dover"
    ],
@@ -14402,6 +17358,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Georgia",
+   "bridge_zh": [
+    "佐治亚",
+    "佐治亚州"
+   ],
    "answers": [
     "Atlanta"
    ],
@@ -14417,6 +17377,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Georgia",
+   "bridge_zh": [
+    "佐治亚",
+    "佐治亚州"
+   ],
    "answers": [
     "Atlanta"
    ],
@@ -14432,6 +17396,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Georgia",
+   "bridge_zh": [
+    "佐治亚",
+    "佐治亚州"
+   ],
    "answers": [
     "Atlanta"
    ],
@@ -14447,6 +17415,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Idaho",
+   "bridge_zh": [
+    "爱达荷",
+    "爱达荷州"
+   ],
    "answers": [
     "Boise"
    ],
@@ -14462,6 +17434,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Idaho",
+   "bridge_zh": [
+    "爱达荷",
+    "爱达荷州"
+   ],
    "answers": [
     "Boise"
    ],
@@ -14477,6 +17453,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Illinois",
+   "bridge_zh": [
+    "伊利诺伊",
+    "伊州"
+   ],
    "answers": [
     "Springfield"
    ],
@@ -14492,6 +17472,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Illinois",
+   "bridge_zh": [
+    "伊利诺伊",
+    "伊州"
+   ],
    "answers": [
     "Springfield"
    ],
@@ -14507,6 +17491,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Illinois",
+   "bridge_zh": [
+    "伊利诺伊",
+    "伊州"
+   ],
    "answers": [
     "Springfield"
    ],
@@ -14522,6 +17510,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Indiana",
+   "bridge_zh": [
+    "印第安纳",
+    "印第安纳州"
+   ],
    "answers": [
     "Indianapolis"
    ],
@@ -14537,6 +17529,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Indiana",
+   "bridge_zh": [
+    "印第安纳",
+    "印第安纳州"
+   ],
    "answers": [
     "Indianapolis"
    ],
@@ -14552,6 +17548,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Iowa",
+   "bridge_zh": [
+    "艾奥瓦",
+    "爱荷华"
+   ],
    "answers": [
     "Des Moines"
    ],
@@ -14567,6 +17567,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Kansas",
+   "bridge_zh": [
+    "堪萨斯",
+    "堪萨斯州"
+   ],
    "answers": [
     "Topeka"
    ],
@@ -14582,6 +17586,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Kansas",
+   "bridge_zh": [
+    "堪萨斯",
+    "堪萨斯州"
+   ],
    "answers": [
     "Topeka"
    ],
@@ -14597,6 +17605,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Kentucky",
+   "bridge_zh": [
+    "肯塔基",
+    "肯塔基州"
+   ],
    "answers": [
     "Frankfort"
    ],
@@ -14612,6 +17624,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Kentucky",
+   "bridge_zh": [
+    "肯塔基",
+    "肯塔基州"
+   ],
    "answers": [
     "Frankfort"
    ],
@@ -14627,6 +17643,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Kentucky",
+   "bridge_zh": [
+    "肯塔基",
+    "肯塔基州"
+   ],
    "answers": [
     "Frankfort"
    ],
@@ -14642,6 +17662,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Maine",
+   "bridge_zh": [
+    "缅因",
+    "缅因州"
+   ],
    "answers": [
     "Augusta"
    ],
@@ -14657,6 +17681,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Maine",
+   "bridge_zh": [
+    "缅因",
+    "缅因州"
+   ],
    "answers": [
     "Augusta"
    ],
@@ -14672,6 +17700,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Maryland",
+   "bridge_zh": [
+    "马里兰",
+    "马里兰州"
+   ],
    "answers": [
     "Annapolis"
    ],
@@ -14687,6 +17719,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Maryland",
+   "bridge_zh": [
+    "马里兰",
+    "马里兰州"
+   ],
    "answers": [
     "Annapolis"
    ],
@@ -14702,6 +17738,11 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Massachusetts",
+   "bridge_zh": [
+    "马萨诸塞",
+    "麻省",
+    "麻州"
+   ],
    "answers": [
     "Boston"
    ],
@@ -14717,6 +17758,11 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Massachusetts",
+   "bridge_zh": [
+    "马萨诸塞",
+    "麻省",
+    "麻州"
+   ],
    "answers": [
     "Boston"
    ],
@@ -14732,6 +17778,11 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Massachusetts",
+   "bridge_zh": [
+    "马萨诸塞",
+    "麻省",
+    "麻州"
+   ],
    "answers": [
     "Boston"
    ],
@@ -14747,6 +17798,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Minnesota",
+   "bridge_zh": [
+    "明尼苏达",
+    "明尼苏达州"
+   ],
    "answers": [
     "Saint Paul",
     "St. Paul",
@@ -14764,6 +17819,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Minnesota",
+   "bridge_zh": [
+    "明尼苏达",
+    "明尼苏达州"
+   ],
    "answers": [
     "Saint Paul",
     "St. Paul",
@@ -14781,6 +17840,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Mississippi",
+   "bridge_zh": [
+    "密西西比",
+    "密西西比州"
+   ],
    "answers": [
     "Jackson"
    ],
@@ -14796,6 +17859,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Mississippi",
+   "bridge_zh": [
+    "密西西比",
+    "密西西比州"
+   ],
    "answers": [
     "Jackson"
    ],
@@ -14811,6 +17878,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Montana",
+   "bridge_zh": [
+    "蒙大拿",
+    "蒙大拿州"
+   ],
    "answers": [
     "Helena"
    ],
@@ -14826,6 +17897,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Montana",
+   "bridge_zh": [
+    "蒙大拿",
+    "蒙大拿州"
+   ],
    "answers": [
     "Helena"
    ],
@@ -14841,6 +17916,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Nebraska",
+   "bridge_zh": [
+    "内布拉斯加",
+    "内布拉斯加州"
+   ],
    "answers": [
     "Lincoln"
    ],
@@ -14856,6 +17935,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Nebraska",
+   "bridge_zh": [
+    "内布拉斯加",
+    "内布拉斯加州"
+   ],
    "answers": [
     "Lincoln"
    ],
@@ -14871,6 +17954,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Ohio",
+   "bridge_zh": [
+    "俄亥俄",
+    "俄亥俄州"
+   ],
    "answers": [
     "Columbus"
    ],
@@ -14886,6 +17973,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Ohio",
+   "bridge_zh": [
+    "俄亥俄",
+    "俄亥俄州"
+   ],
    "answers": [
     "Columbus"
    ],
@@ -14901,6 +17992,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Ohio",
+   "bridge_zh": [
+    "俄亥俄",
+    "俄亥俄州"
+   ],
    "answers": [
     "Columbus"
    ],
@@ -14916,6 +18011,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Oregon",
+   "bridge_zh": [
+    "俄勒冈",
+    "俄勒冈州"
+   ],
    "answers": [
     "Salem"
    ],
@@ -14931,6 +18030,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Oregon",
+   "bridge_zh": [
+    "俄勒冈",
+    "俄勒冈州"
+   ],
    "answers": [
     "Salem"
    ],
@@ -14946,6 +18049,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Utah",
+   "bridge_zh": [
+    "犹他",
+    "犹他州"
+   ],
    "answers": [
     "Salt Lake City"
    ],
@@ -14961,6 +18068,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Utah",
+   "bridge_zh": [
+    "犹他",
+    "犹他州"
+   ],
    "answers": [
     "Salt Lake City"
    ],
@@ -14976,6 +18087,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Vermont",
+   "bridge_zh": [
+    "佛蒙特",
+    "佛蒙特州"
+   ],
    "answers": [
     "Montpelier"
    ],
@@ -14991,6 +18106,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Virginia",
+   "bridge_zh": [
+    "弗吉尼亚",
+    "弗吉尼亚州"
+   ],
    "answers": [
     "Richmond"
    ],
@@ -15006,6 +18125,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Virginia",
+   "bridge_zh": [
+    "弗吉尼亚",
+    "弗吉尼亚州"
+   ],
    "answers": [
     "Richmond"
    ],
@@ -15021,6 +18144,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Washington",
+   "bridge_zh": [
+    "华盛顿",
+    "华盛顿州"
+   ],
    "answers": [
     "Olympia"
    ],
@@ -15036,6 +18163,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Washington",
+   "bridge_zh": [
+    "华盛顿",
+    "华盛顿州"
+   ],
    "answers": [
     "Olympia"
    ],
@@ -15051,6 +18182,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Washington",
+   "bridge_zh": [
+    "华盛顿",
+    "华盛顿州"
+   ],
    "answers": [
     "Olympia"
    ],
@@ -15066,6 +18201,10 @@
    "category": "us_state",
    "relation": "capital",
    "bridge": "Wisconsin",
+   "bridge_zh": [
+    "威斯康星",
+    "威斯康星州"
+   ],
    "answers": [
     "Madison"
    ],
@@ -15081,6 +18220,9 @@
    "category": "animal",
    "relation": "legs",
    "bridge": "spider",
+   "bridge_zh": [
+    "蜘蛛"
+   ],
    "answers": [
     "8",
     "eight"
@@ -15097,6 +18239,10 @@
    "category": "animal",
    "relation": "legs",
    "bridge": "bee",
+   "bridge_zh": [
+    "蜜蜂",
+    "蜂"
+   ],
    "answers": [
     "6",
     "six"
@@ -15113,6 +18259,10 @@
    "category": "animal",
    "relation": "wings",
    "bridge": "bee",
+   "bridge_zh": [
+    "蜜蜂",
+    "蜂"
+   ],
    "answers": [
     "4",
     "four"
@@ -15129,6 +18279,9 @@
    "category": "animal",
    "relation": "arms",
    "bridge": "octopus",
+   "bridge_zh": [
+    "章鱼"
+   ],
    "answers": [
     "8",
     "eight"
@@ -15145,6 +18298,10 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "cow",
+   "bridge_zh": [
+    "牛",
+    "奶牛"
+   ],
    "answers": [
     "calf"
    ],
@@ -15160,6 +18317,10 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "dog",
+   "bridge_zh": [
+    "狗",
+    "犬"
+   ],
    "answers": [
     "puppy",
     "pup"
@@ -15176,6 +18337,10 @@
    "category": "animal",
    "relation": "legs",
    "bridge": "dog",
+   "bridge_zh": [
+    "狗",
+    "犬"
+   ],
    "answers": [
     "4",
     "four"
@@ -15192,6 +18357,9 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "cat",
+   "bridge_zh": [
+    "猫"
+   ],
    "answers": [
     "kitten"
    ],
@@ -15207,6 +18375,10 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "sheep",
+   "bridge_zh": [
+    "羊",
+    "绵羊"
+   ],
    "answers": [
     "lamb"
    ],
@@ -15222,6 +18394,9 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "pig",
+   "bridge_zh": [
+    "猪"
+   ],
    "answers": [
     "piglet"
    ],
@@ -15237,6 +18412,9 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "kangaroo",
+   "bridge_zh": [
+    "袋鼠"
+   ],
    "answers": [
     "joey"
    ],
@@ -15252,6 +18430,10 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "frog",
+   "bridge_zh": [
+    "青蛙",
+    "蛙"
+   ],
    "answers": [
     "tadpole"
    ],
@@ -15267,6 +18449,9 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "bear",
+   "bridge_zh": [
+    "熊"
+   ],
    "answers": [
     "cub"
    ],
@@ -15282,6 +18467,9 @@
    "category": "animal",
    "relation": "baby",
    "bridge": "horse",
+   "bridge_zh": [
+    "马"
+   ],
    "answers": [
     "foal",
     "colt",
@@ -15299,6 +18487,9 @@
    "category": "planet",
    "relation": "position",
    "bridge": "Mars",
+   "bridge_zh": [
+    "火星"
+   ],
    "answers": [
     "4",
     "four"
@@ -15315,6 +18506,9 @@
    "category": "planet",
    "relation": "moons",
    "bridge": "Mars",
+   "bridge_zh": [
+    "火星"
+   ],
    "answers": [
     "2",
     "two"
@@ -15331,6 +18525,9 @@
    "category": "planet",
    "relation": "position",
    "bridge": "Jupiter",
+   "bridge_zh": [
+    "木星"
+   ],
    "answers": [
     "5",
     "five"
@@ -15347,6 +18544,9 @@
    "category": "planet",
    "relation": "position",
    "bridge": "Saturn",
+   "bridge_zh": [
+    "土星"
+   ],
    "answers": [
     "6",
     "six"
@@ -15363,6 +18563,9 @@
    "category": "planet",
    "relation": "position",
    "bridge": "Venus",
+   "bridge_zh": [
+    "金星"
+   ],
    "answers": [
     "2",
     "two"
@@ -15379,6 +18582,10 @@
    "category": "element",
    "relation": "symbol",
    "bridge": "oxygen",
+   "bridge_zh": [
+    "氧",
+    "氧气"
+   ],
    "answers": [
     "O"
    ],
@@ -15394,6 +18601,10 @@
    "category": "element",
    "relation": "atomic_number",
    "bridge": "oxygen",
+   "bridge_zh": [
+    "氧",
+    "氧气"
+   ],
    "answers": [
     "8",
     "eight"
@@ -15410,6 +18621,9 @@
    "category": "element",
    "relation": "symbol",
    "bridge": "iron",
+   "bridge_zh": [
+    "铁"
+   ],
    "answers": [
     "Fe"
    ],
@@ -15425,6 +18639,9 @@
    "category": "element",
    "relation": "symbol",
    "bridge": "copper",
+   "bridge_zh": [
+    "铜"
+   ],
    "answers": [
     "Cu"
    ],
@@ -15440,6 +18657,9 @@
    "category": "element",
    "relation": "atomic_number",
    "bridge": "carbon",
+   "bridge_zh": [
+    "碳"
+   ],
    "answers": [
     "6",
     "six"
@@ -15456,6 +18676,10 @@
    "category": "element",
    "relation": "atomic_number",
    "bridge": "hydrogen",
+   "bridge_zh": [
+    "氢",
+    "氢气"
+   ],
    "answers": [
     "1",
     "one"
@@ -15472,6 +18696,10 @@
    "category": "element",
    "relation": "symbol",
    "bridge": "gold",
+   "bridge_zh": [
+    "金",
+    "黄金"
+   ],
    "answers": [
     "Au"
    ],
@@ -15487,6 +18715,10 @@
    "category": "element",
    "relation": "symbol",
    "bridge": "silver",
+   "bridge_zh": [
+    "银",
+    "白银"
+   ],
    "answers": [
     "Ag"
    ],
@@ -15502,6 +18734,9 @@
    "category": "person",
    "relation": "birth_country",
    "bridge": "Einstein",
+   "bridge_zh": [
+    "爱因斯坦"
+   ],
    "answers": [
     "Germany"
    ],
@@ -15517,6 +18752,9 @@
    "category": "person",
    "relation": "birth_country",
    "bridge": "Shakespeare",
+   "bridge_zh": [
+    "莎士比亚"
+   ],
    "answers": [
     "England",
     "UK",
@@ -15535,6 +18773,9 @@
    "category": "person",
    "relation": "birth_country",
    "bridge": "Mozart",
+   "bridge_zh": [
+    "莫扎特"
+   ],
    "answers": [
     "Austria"
    ],
@@ -15550,6 +18791,9 @@
    "category": "person",
    "relation": "birth_country",
    "bridge": "Darwin",
+   "bridge_zh": [
+    "达尔文"
+   ],
    "answers": [
     "England",
     "UK",
@@ -15568,6 +18812,10 @@
    "category": "person",
    "relation": "birth_country",
    "bridge": "Curie",
+   "bridge_zh": [
+    "居里",
+    "居里夫人"
+   ],
    "answers": [
     "Poland"
    ],

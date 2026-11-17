@@ -36,11 +36,14 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
 ## Files
 - `config.py`: `EvalConfig`: dataset paths, conditions, prompt types, seed, answer length, readout k, probe and perplexity settings, output dir.
 - `data_loading.py`
-  - `TwoHopItem`: the one item type every dataset is loaded into.
-  - `load_jbypass`, `load_paper_probe_swap`, `load_paper_multihop`, `load_dataset(name, path)`.
+  - `TwoHopItem`: the one item type every dataset is loaded into. `bridge_zh`: simplified Chinese spellings of the bridge, full name first; `()` for datasets without them (the paper sets).
+  - `load_jbypass`, `load_paper_probe_swap`, `load_paper_multihop`, `load_dataset(name, path)`. All read the JSON as UTF-8; `load_jbypass` requires the `bridge_zh` key.
 - `scoring.py`
   - `greedy_continuation(lm, prompt, interventions_for, n_tokens)`: thin wrapper over `model.inference.greedy_tokens`; `interventions_for(enc)` rebuilds the interventions at every step from the current token ids, so sequence-dependent ablations see the right sequence. Decodes the generated token ids (no re-tokenising of text) and stops early at EOS. Returns (continuation text, first generated token id).
   - `matches(continuation, answers)`: exact match with synonyms and filler skipping.
+  - `FILLER_WORDS`: `FILLER_PREFIXES` without their trailing space ("a", "the", ...).
+  - `is_answer_token(text)`: a decoded token is not whitespace, a bare quote or a filler word.
+  - `answer_index(tokenizer, response_ids)`: index of the first response token `is_answer_token` accepts (0 if none); the per-token mirror of `matches` that the viewer uses to stop the heatmap at the answer. Unlike `matches` it treats " a" as filler without a following space and does not stop at a newline; `correct` still comes from `matches`.
   - `answer_token_ids(tokenizer, answers)`: first token of every spelling of each answer (for the paper's metric).
 - `conditions.py`
   - `Builder = (js, item, enc, rng) -> Sequence[Intervention]`; one builder per condition, registered in `CONDITIONS`; `()` for the clean run. `enc` is the current one-row token sequence (`model.inference.Encoded`). The top-k builders run a clean pass on it for the exclude mask.
@@ -86,8 +89,9 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
     - `KINDS`: how a subject points at its bridge, as (hop-1 template, reference template): `place` ("is located in"), `person` ("was born in"), `company` ("is headquartered in"), `description` ("the lightest element is"), `known_as` ("the planet known as the Red Planet is").
     - `Bridge`: `name` (the ablated word), `attrs` (`{relation: [answers]}`, first = training target), `subjects` (`[(kind, text)]`), `phrase` (how hop 2 names it, e.g. "a spider"), `lead` (hop-1 lead-in, e.g. " the", " Albert"). Built by `country`, `state`, `described`, `animal`; `None` for a country attribute omits that relation.
     - `compose(category, bridge, kind, subject, relation)`: one item. `build_items()`: the cross product. `validate(items)`: raises on duplicate names, a bridge in two categories, or a bridge named in its own two-hop prompt. `add_swaps(items, seed)`: `swap_to` = another bridge of the same category.
-    - Rules: no subject is in, born in, or headquartered in the bridge's capital, or best known for its ties to it (Rosa Parks and Montgomery), so the model can't skip the bridge for capital questions; a subject never contains its bridge's name; every new bridge name is a single Qwen token (Curie, kangaroo and octopus are not, and are dropped by `readable_items`); a relation is omitted when its answer contains the bridge name (Singapore, Guatemala capitals) or is disputed.
-    - Row keys: `name` (`{category}-{bridge}-{relation}-{subject slug}`, no index, so table edits don't rename other items), `category`, `relation`, `bridge`, `answers`, `subject`, `subject_kind`, `hop1_prompt`, `prompt`, `hop2_prompt`, `swap_to`. `load_jbypass` ignores `relation`, `subject` and `subject_kind`.
+    - `BRIDGE_ZH`: `{bridge name: [simplified Chinese spellings]}` for every bridge, full name first, then common short forms (`"California": ["加利福尼亚", "加州"]`). `check_bridge_zh(bridges, table)`: raises naming bridges without an entry, keys that are not bridges, and empty / all-ASCII spellings; `main()` calls it first.
+    - Rules: no subject is in, born in, or headquartered in the bridge's capital, or best known for its ties to it (Rosa Parks and Montgomery), so the model can't skip the bridge for capital questions; every bridge has simplified Chinese spellings, full name first (they need not be single tokens; consumers filter); a subject never contains its bridge's name; every new bridge name is a single Qwen token (Curie, kangaroo and octopus are not, and are dropped by `readable_items`); a relation is omitted when its answer contains the bridge name (Singapore, Guatemala capitals) or is disputed.
+    - Row keys: `name` (`{category}-{bridge}-{relation}-{subject slug}`, no index, so table edits don't rename other items), `category`, `relation`, `bridge`, `answers`, `subject`, `subject_kind`, `hop1_prompt`, `prompt`, `hop2_prompt`, `bridge_zh`, `swap_to`. `load_jbypass` ignores `relation`, `subject` and `subject_kind`.
   - `probe-swap.json` (90 items), `lens-eval-multihop.json` (93 items): Anthropic's two-hop sets, copied unchanged from jacobian-lens (Apache 2.0, see `data/NOTICE`).
 
 ## Coverage of the proposal's Evaluation section

@@ -8,7 +8,7 @@ import torch
 from evaluation.conditions import CONDITIONS, interventions_for_item, item_rng
 from evaluation.data_loading import TwoHopItem
 from evaluation.perplexity import perplexity
-from evaluation.scoring import greedy_continuation
+from evaluation.scoring import answer_index, greedy_continuation, is_answer_token
 from model.inference import encode, forward_logits, greedy_tokens
 
 from conftest import synthetic_js
@@ -59,3 +59,26 @@ def test_perplexity_is_token_weighted_over_texts(qwen_lm):
         n += ids.shape[1] - 1
     with torch.no_grad():
         assert math.isclose(perplexity(qwen_lm, texts, max_len=6, batch_size=2), math.exp(nll / n), rel_tol=1e-4)
+
+
+def test_is_answer_token():
+    assert is_answer_token(" Paris")
+    for text in (" ", "\n", "", ' "', " a", " The", ' "the', " called", " number"):
+        assert not is_answer_token(text), text
+
+
+def test_answer_index_skips_filler_quotes_whitespace_and_eos(tokenizer):
+    def ids(text):
+        return tokenizer(text, add_special_tokens=False).input_ids
+
+    assert tokenizer.decode(ids(' "Paris')[:1]) == ' "'
+    assert [tokenizer.decode([t]) for t in ids(" 8")] == [" ", "8"]
+    eos = tokenizer.eos_token_id
+    assert answer_index(tokenizer, ids(" a calf")) == 1
+    assert answer_index(tokenizer, ids(' "Paris')) == 1
+    assert answer_index(tokenizer, ids(" 8")) == 1
+    assert answer_index(tokenizer, ids(" the number 8")) == 3
+    assert answer_index(tokenizer, ids(" Paris")) == 0
+    assert answer_index(tokenizer, [eos]) == 0
+    assert answer_index(tokenizer, ids(" a") + ids(" the")) == 0
+    assert answer_index(tokenizer, ids(" Paris") + [eos]) == 0

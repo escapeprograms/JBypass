@@ -1,0 +1,7 @@
+The translation box uses CC-CEDICT (cedict_1_0_ts_utf-8_mdbg.txt.gz), obtained from
+https://www.mdbg.net/chinese/dictionary?page=cc-cedict. CC-CEDICT is licensed under the
+Creative Commons Attribution-ShareAlike 4.0 International License:
+https://creativecommons.org/licenses/by-sa/4.0/
+The dictionary file is not redistributed in this repository (each user downloads it into
+downloads/). Generated viewer pages embed excerpts of it (the entries for the tokens shown),
+with the attribution "CC-CEDICT · CC BY-SA 4.0" displayed in the box.

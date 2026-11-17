@@ -43,6 +43,8 @@ python -m model.run_download --model qwen3-0.6b # downloads another profile
 ```
 `model.run_download` saves the weights and tokenizer to the Hugging Face cache. It takes only the shared flags.
 
+For the viewer's click-to-translate box (section 8), download the CC-CEDICT dictionary **by hand in a browser**: open https://www.mdbg.net/chinese/dictionary?page=cc-cedict, download `cedict_1_0_ts_utf-8_mdbg.txt.gz`, and save it as `downloads/cedict_1_0_ts_utf-8_mdbg.txt.gz` in the repo root (gitignored). There is no download command: the site states that automated or scripted access is prohibited. Without the file, `viz.run_app` stops at startup; set `dictionary_file: null` in `configs/viz.yaml` to run without translations.
+
 ## 2. Checks
 ```powershell
 python -m pytest tests                          # unit tests on CPU with tiny random models; no download needed
@@ -167,7 +169,7 @@ The second command uses a new tag (`mexp_relens`) so it doesn't overwrite the re
 python -m viz.run_app                                   # then open http://127.0.0.1:7860
 python -m viz.run_app --device cpu                      # no GPU (slow)
 ```
-`viz.run_app` starts a local Gradio app for looking at one example at a time: it generates under one ablation and shows the J-lens readout of every layer over the prompt and the response (jlens's heatmap page). The model loads when the page opens (a few seconds on GPU). The first run in each process downloads d3 from a CDN, so it needs internet once. An env created before gradio was added needs `pip install gradio==6.32.0` and `pip install -e .` (a fresh `conda env create -f environment.yml` already has it).
+`viz.run_app` starts a local Gradio app for looking at one example at a time: it generates under one ablation and shows the J-lens readout of every layer over the prompt and the response (jlens's heatmap page). The model loads when the page opens (a few seconds on GPU). The first run in each process downloads d3 from a CDN, so it needs internet once. An env created before gradio was added needs `pip install gradio==6.32.0` and `pip install -e .` (a fresh `conda env create -f environment.yml` already has it). At startup it prints `CC-CEDICT: <N> entries, <M> headwords <- <path>` (or `Translations off (dictionary_file: null)`); it stops with an error naming the download page if the dictionary file from section 1 is missing.
 | flag | default | what it does |
 |---|---|---|
 | `--config <path>` | `configs/run.yaml` | Run settings; `generation.max_new_tokens` is the response length. |
@@ -180,6 +182,7 @@ What you can do in the UI:
 - **Dataset / Split / Example**: splits come from `results/splits_expanded.json` (`all` = no filter); only items whose bridge the lens can read are listed. **Random example** picks one.
 - **Prompt field / Ablation**: only the fields the item has and the conditions that can be built for it (`wrong_bridge` needs a swap bridge). `none` is the clean run.
 - **Run**: shows the response, whether it is correct, and the heatmap: click a cell for its top tokens, click a pin to see its rank over every (position, layer); the bridge and the answers are pinned. Rows at ablated layers show the residual after the ablation.
+- **Translations**: click a Chinese token (in the By Layer / By Pos lists, a pinned chip, the prompt strip or a grid cell) for its translation: a box at the bottom right shows the pinyin and senses of each word (CC-CEDICT). Clicking still pins the token as before. Other scripts show "no dictionary entry"; English tokens close the box; × closes it.
 
 ## Outputs
 | command | writes |
