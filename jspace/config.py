@@ -3,6 +3,7 @@ values here, not inline. The model and its prefit lens location live in the mode
 profile (configs/models/*.yaml), not here."""
 
 from dataclasses import dataclass
+from pathlib import Path
 
 
 # TODO(debt-002): dataclass defaults, while run and model settings are YAML.
@@ -22,6 +23,14 @@ class JSpaceConfig:
     ablation_skip_first: int = 1
     # Paper excludes tokens in the clean forward pass's top-k output from ablation.
     ablation_exclude_top_k: int = 10
+
+    # Readout clamp (clamp.ReadoutClamp): cap each readout at mean + clamp_z * std of
+    # its clean reference distribution (0 = clamp to the mean).
+    clamp_z: float = 0.5
+    # Folder of reference readout statistics, one <profile name>.pt per model.
+    readout_stats_dir: Path = Path("stats")
+    # Texts per forward pass when collecting them ([batch, seq, vocab] fp32 per layer).
+    stats_batch_size: int = 4
 
     # J-space decomposition: sparse nonnegative combination of at most k J-lens
     # vectors ("typically no more than 25" in the paper).

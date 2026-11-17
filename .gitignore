@@ -8,6 +8,7 @@ venv/
 # Experiment outputs
 results/
 runs/
+stats/
 checkpoints/
 wandb/
 

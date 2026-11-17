@@ -15,8 +15,8 @@ import numpy as np
 import pytest
 import torch
 
-from conftest import VOCAB, synthetic_js
-from evaluation.conditions import CONDITIONS, interventions_for_item
+from conftest import VOCAB, synthetic_js, synthetic_stats
+from evaluation.conditions import CONDITIONS, NEEDS_STATS, interventions_for_item
 from evaluation.config import EvalConfig
 from evaluation.data_loading import TwoHopItem
 from evaluation.scoring import answer_index, answer_token_ids, matches
@@ -25,8 +25,8 @@ from model.cli import DEFAULT_RUN_CONFIG
 from model.config import load_run_config
 from model.inference import encode, greedy_tokens
 from model.lora import PROFILE_FILE
-from viz.catalog import (ALL_SPLITS, ModelChoice, examples, lens_profiles, model_choices,
-                         pick_random, split_names, valid_conditions, valid_fields)
+from viz.catalog import (ALL_SPLITS, NEEDS_SWAP, ModelChoice, buildable_conditions, examples, lens_profiles,
+                         model_choices, pick_random, split_names, valid_conditions, valid_fields)
 from viz.cedict import (CEDICT_FILE, CEDICT_PAGE, Entry, Segment, load_cedict, parse_cedict, parse_line,
                         segment)
 from viz.config import DEFAULT_VIZ_CONFIG, load_viz_config
@@ -138,9 +138,16 @@ def test_split_names_offers_only_non_empty_splits(tmp_path):
 def test_valid_conditions_and_fields():
     with_swap, without = make_item(), make_item(swap_to=None)
     assert "wrong_bridge" in valid_conditions(with_swap, CONDITIONS)
-    assert valid_conditions(without, CONDITIONS) == [c for c in CONDITIONS if c != "wrong_bridge"]
+    assert valid_conditions(without, CONDITIONS) == [c for c in CONDITIONS if c not in NEEDS_SWAP]
     fields = ("prompt", "hop2_prompt", "hop1_prompt")
     assert valid_fields(with_swap, fields) == ["prompt", "hop1_prompt"]
+
+
+def test_buildable_conditions_drop_clamps_only_without_readout_stats(qwen_lm):
+    js, item = synthetic_js(qwen_lm), make_item()
+    assert buildable_conditions(js, item, CONDITIONS) == [c for c in CONDITIONS if c not in NEEDS_STATS]
+    js.readout_stats = synthetic_stats(js)
+    assert buildable_conditions(js, item, CONDITIONS) == valid_conditions(item, CONDITIONS)
 
 
 def test_pick_random_is_seeded():
@@ -235,6 +242,7 @@ def test_slice_matches_jlens_compute_slice_on_a_clean_prompt(lm):
 @pytest.mark.parametrize("condition", list(CONDITIONS))
 def test_replay_reproduces_generation_under_every_condition(lm, condition):
     js = synthetic_js(lm)
+    js.readout_stats = synthetic_stats(js)
     result = run_example(js, make_item(), "prompt", condition, 0, N_NEW)
     assert replay_mismatches(run_slice(js, result, 3, 4), result) == []
 
@@ -551,9 +559,10 @@ def test_app_builds_and_choice_handlers_filter_invalid_options(qwen_lm, tmp_path
     items, example = on_split(ctx, "tiny", "paper_multihop", ALL_SPLITS)
     assert list(items) == ["ok"] and example.value == "ok"
     no_swap = {"t": make_item(swap_to=None)}
-    fields, conditions = on_example(ctx, no_swap, "t", "hop2_prompt", "wrong_bridge")
+    fields, conditions = on_example(ctx, "tiny", no_swap, "t", "hop2_prompt", "wrong_bridge")
     assert _values(fields) == ["prompt", "hop1_prompt"] and fields.value == "prompt"
     assert "wrong_bridge" not in _values(conditions) and conditions.value == "none"
+    assert not NEEDS_STATS & set(_values(conditions))   # synthetic_js has no readout stats
 
 
 def test_app_run_handler_returns_summary_and_iframe(qwen_lm, tmp_path, monkeypatch):

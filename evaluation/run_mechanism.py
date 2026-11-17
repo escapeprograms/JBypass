@@ -10,7 +10,7 @@ python -m evaluation.run_mechanism --adapter runs/some_adapter --extra_lens reco
 import argparse
 import dataclasses
 
-from evaluation.cli_common import add_model_args, load_from_args, load_items, write_json
+from evaluation.cli_common import add_model_args, add_output_args, load_from_args, load_items, write_json
 from evaluation.conditions import item_rng
 from evaluation.config import EvalConfig
 from evaluation.mechanism import bridge_ranks_all_positions, collect_final_token, summarize_ranks
@@ -61,6 +61,7 @@ def main():
     p.add_argument("--conditions", default=",".join(cfg.mechanism_conditions))
     p.add_argument("--tag", default="M")
     add_model_args(p)
+    add_output_args(p, cfg)
     args = p.parse_args()
 
     js = load_from_args(args)
@@ -77,7 +78,7 @@ def main():
         conds = args.conditions.split(",")
         out[label] = {"readout": readout_section(js_l, items, conds, cfg),
                       "probes": probe_section(js_l, items, conds, cfg)}
-    write_json(out, cfg.out_dir / f"mechanism_{args.tag}_{args.dataset}_{args.split or 'all'}.json")
+    write_json(out, args.out_dir / f"mechanism_{args.tag}_{args.dataset}_{args.split or 'all'}.json")
 
 
 if __name__ == "__main__":

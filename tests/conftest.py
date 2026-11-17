@@ -11,6 +11,7 @@ import pytest
 import torch
 from transformers import AutoTokenizer, GPT2Config, GPT2LMHeadModel, Qwen3Config, Qwen3ForCausalLM
 
+from jspace.baseline import ReadoutStats
 from jspace.config import JSpaceConfig
 from jspace.loading import lens_view
 from model.config import GenerationSettings, LoraSettings, ModelProfile, TrainSettings
@@ -93,4 +94,20 @@ def synthetic_js(lm: LanguageModel, layers=(0, 1, 2), band=(1,)) -> types.Simple
     """A JSpace stand-in on a tiny model: a real JacobianLens with identity J matrices,
     so each token's J-lens vector is its unembedding row."""
     lens = jlens.JacobianLens({l: torch.eye(lm.d_model) for l in layers}, n_prompts=1, d_model=lm.d_model)
-    return types.SimpleNamespace(lm=lm, lens=lens, lens_model=lens_view(lm), band=list(band), cfg=JSpaceConfig())
+    return types.SimpleNamespace(
+        lm=lm, lens=lens, lens_model=lens_view(lm), band=list(band), cfg=JSpaceConfig(),
+        readout_stats=None,
+    )
+
+
+def synthetic_stats(js, seed: int = 0) -> ReadoutStats:
+    """Small ReadoutStats for js's band layers: random mean, positive std, every token
+    counted once, named after js.lm's profile."""
+    generator = torch.Generator().manual_seed(seed)
+    vocab = js.lm.unembedding_matrix.shape[0]
+    shape = (len(js.band), vocab)
+    return ReadoutStats(
+        layers=list(js.band), mean=torch.randn(shape, generator=generator),
+        std=torch.rand(shape, generator=generator) + 0.1, count=torch.ones(vocab, dtype=torch.long),
+        model=js.lm.profile.name, n_texts=1,
+    )

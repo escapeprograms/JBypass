@@ -31,11 +31,13 @@ Translations come from CC-CEDICT, read once at startup from `dictionary_file` in
   - `split_names(items, split_file)` — `ALL_SPLITS` plus each split in the file naming at least one item; `[ALL_SPLITS]` when `split_file` is None.
   - `examples(js, dataset, split, eval_cfg, split_file)` — the dataset's items in the split whose bridge (and `swap_to`) has a single-token spelling (`readable_items`).
   - `valid_fields(item, fields)` — the prompt fields that are not None on the item.
-  - `valid_conditions(item, conditions)` — drops `wrong_bridge` when the item has no `swap_to`.
+  - `NEEDS_SWAP` — the conditions built from `item.swap_to` (`wrong_bridge`, `wrong_bridge_clamp`).
+  - `valid_conditions(item, conditions)` — drops the `NEEDS_SWAP` conditions when the item has no `swap_to`.
+  - `buildable_conditions(js, item, conditions)` — `valid_conditions`, minus `evaluation.conditions.NEEDS_STATS` (the clamp conditions) when the loaded model has no readout statistics (`js.readout_stats is None`; run `python -m evaluation.run_readout_stats` to get `stats/<model>.pt`).
   - `pick_random(items, rng)` — one item from a `random.Random`.
 - `session.py` — at most one model in memory.
   - `Session(load)` — `.get(choice)` returns the cached JSpace for the current choice, else releases it and calls `load(choice)`; `.release()` drops the model, runs `gc.collect()` and empties the CUDA cache. Switching adapters reloads the whole model.
-  - `make_loader(run, device)` — `choice -> load_frozen_jspace(profile, choice.adapter)` with the profile from `run.profiles_dir`, on `device` (None = the profile's device), using the profile's prefit lens.
+  - `make_loader(run, device)` — `choice -> load_frozen_jspace(profile, choice.adapter)` with the profile from `run.profiles_dir`, on `device` (None = the profile's device), using the profile's prefit lens and `stats/<model>.pt` if present.
 - `run.py` — one generation.
   - `RunResult` — frozen, plain Python values only: `item, field, condition, seed, prompt, prompt_ids, response_ids, response_text, answers, correct, answer_index` (`answer_index` indexes `response_ids` at the token scoring compares against, from `evaluation.scoring.answer_index`). Property `shown_ids` = `response_ids[:answer_index + 1]`, what the heatmap shows after the prompt.
   - `run_example(js, item, field, condition, seed, max_new_tokens)` — greedy-decode the item's field under the condition; text decoded and scored exactly as `evaluation.runner.score_one` does.
@@ -86,7 +88,7 @@ Reading the result: generation still runs the full `max_new_tokens`, and the sum
   - `on_model(ctx, label)` — load the model via `session.get`; returns a "Loaded" note and clears the old page.
   - `on_dataset(ctx, label, dataset)` — split dropdown: `split_names` of the dataset's readable items, reset to `all`.
   - `on_split(ctx, label, dataset, split)` — the split's examples as `{name: TwoHopItem}` (kept in a per-tab `gr.State` so later events don't re-read the dataset) and the example dropdown, first selected.
-  - `on_example(ctx, items, name, field, condition)` — field and ablation dropdowns limited to `valid_fields` / `valid_conditions`; the current choice is kept if still valid.
+  - `on_example(ctx, label, items, name, field, condition)` — field and ablation dropdowns limited to `valid_fields` / `buildable_conditions` (for the loaded model `label`, so it shares the model queue); the current choice is kept if still valid.
   - `on_card(items, name, field)` — the example card (`page.item_card`).
   - `on_random(ctx, items)` — example dropdown set to `pick_random`.
   - `on_run(ctx, label, items, name, field, condition)` — `run_example` -> `run_slice` -> `replay_mismatches` -> `_page` -> `(summary, iframe)`; `gr.Error` only if no example/field/ablation is selected.

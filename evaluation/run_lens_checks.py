@@ -10,7 +10,7 @@ Prints:
 
 import argparse
 
-from evaluation.cli_common import add_model_args, load_from_args, load_items, write_json
+from evaluation.cli_common import add_model_args, add_output_args, load_from_args, load_items, write_json
 from evaluation.config import EvalConfig
 from evaluation.lens_checks import bridge_readout, swap_success
 from evaluation.runner import readable_items
@@ -21,6 +21,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--tag", default="M")
     add_model_args(p)
+    add_output_args(p, cfg)
     args = p.parse_args()
     js = load_from_args(args)
 
@@ -35,7 +36,7 @@ def main():
     out["paper_probe_swap/swap"] = swap_success(js, swap_items, cfg.max_answer_tokens)
     s = out["paper_probe_swap/swap"]
     print(f"{'paper_probe_swap/swap':32s} success = {s['success']:.2f} ({s['n_solved']} solved of {s['n']})")
-    write_json(out, cfg.out_dir / f"lens_checks_{args.tag}.json")
+    write_json(out, args.out_dir / f"lens_checks_{args.tag}.json")
 
 
 if __name__ == "__main__":

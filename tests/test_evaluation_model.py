@@ -3,15 +3,18 @@
 
 import math
 
+import pytest
 import torch
 
 from evaluation.conditions import CONDITIONS, interventions_for_item, item_rng
 from evaluation.data_loading import TwoHopItem
 from evaluation.perplexity import perplexity
+from evaluation.run_readout_stats import reference_texts
 from evaluation.scoring import answer_index, greedy_continuation, is_answer_token
+from jspace import ReadoutClamp, token_variants
 from model.inference import encode, forward_logits, greedy_tokens
 
-from conftest import synthetic_js
+from conftest import synthetic_js, synthetic_stats
 
 ITEM = TwoHopItem(name="x-0", category="test", prompt="Fact: The capital of the country is",
                   bridge="France", answers=("Paris",), swap_to="Spain")
@@ -25,11 +28,49 @@ def test_greedy_continuation_returns_text_and_first_token(qwen_lm):
 
 def test_builders_return_sequences_and_none_is_empty(qwen_lm):
     js = synthetic_js(qwen_lm)
+    js.readout_stats = synthetic_stats(js)
     enc = encode(qwen_lm, [ITEM.prompt])
     for name, build in CONDITIONS.items():
         interventions = build(js, ITEM, enc, item_rng(0, ITEM, name))
         assert len(interventions) == (0 if name == "none" else 1), name
         assert all(set(iv.layers) <= set(js.band) for iv in interventions)
+
+
+def test_bridge_clamp_builds_one_readout_clamp_on_the_band(qwen_lm):
+    js = synthetic_js(qwen_lm)
+    js.readout_stats = synthetic_stats(js)
+    enc = encode(qwen_lm, [ITEM.prompt])
+    interventions = CONDITIONS["bridge_clamp"](js, ITEM, enc, item_rng(0, ITEM, "bridge_clamp"))
+    assert len(interventions) == 1 and isinstance(interventions[0], ReadoutClamp)
+    assert interventions[0].layers == js.band
+
+
+def test_clamp_conditions_without_stats_say_how_to_get_them(qwen_lm):
+    js = synthetic_js(qwen_lm)
+    enc = encode(qwen_lm, [ITEM.prompt])
+    for name in ("bridge_clamp", "wrong_bridge_clamp"):
+        with pytest.raises(ValueError, match="run_readout_stats"):
+            CONDITIONS[name](js, ITEM, enc, item_rng(0, ITEM, name))
+
+
+def test_wrong_bridge_clamp_caps_the_swap_to_tokens(qwen_lm):
+    js = synthetic_js(qwen_lm)
+    js.readout_stats = synthetic_stats(js)
+    enc = encode(qwen_lm, [ITEM.prompt])
+    right, wrong = (CONDITIONS[c](js, ITEM, enc, item_rng(0, ITEM, c))[0]
+                    for c in ("bridge_clamp", "wrong_bridge_clamp"))
+    expected = js.readout_stats.caps(token_variants(qwen_lm.tokenizer, ITEM.swap_to), js.band, js.cfg.clamp_z)
+    layer = js.band[0]
+    torch.testing.assert_close(wrong.caps[layer].cpu(), expected[layer])
+    assert right.caps[layer].shape != wrong.caps[layer].shape or not torch.equal(right.caps[layer], wrong.caps[layer])
+
+
+def test_reference_texts_are_prompts_excluding_their_own_bridge(tokenizer):
+    other = TwoHopItem(name="y-0", category="test", prompt="Fact: The capital of Italy is",
+                       bridge="Italy", answers=("Rome",))
+    texts, exclude = reference_texts(tokenizer, [ITEM, other])
+    assert texts == [ITEM.prompt, other.prompt]
+    assert exclude == [token_variants(tokenizer, "France"), token_variants(tokenizer, "Italy")]
 
 
 def test_random_builders_repeat_with_the_same_item_rng(qwen_lm):

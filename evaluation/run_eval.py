@@ -7,7 +7,7 @@ python -m evaluation.run_eval --dataset paper_probe_swap --tag M --limit 20 --co
 
 import argparse
 
-from evaluation.cli_common import add_model_args, load_from_args, load_items, write_json
+from evaluation.cli_common import add_model_args, add_output_args, load_from_args, load_items, write_json
 from evaluation.config import EvalConfig
 from evaluation.runner import accuracy_table, evaluate, format_table, readable_items, solved_items
 
@@ -23,6 +23,7 @@ def main():
     p.add_argument("--all_items", action="store_true", help="keep items the clean model gets wrong")
     p.add_argument("--tag", default="M")
     add_model_args(p)
+    add_output_args(p, cfg)
     args = p.parse_args()
 
     js = load_from_args(args)
@@ -39,7 +40,7 @@ def main():
     print("next token (paper's metric):\n" + format_table(paper_table, conditions))
     write_json({"tag": args.tag, "dataset": args.dataset, "split": args.split, "adapter": args.adapter,
                 "band": js.band, "table": table, "next_token_table": paper_table, "records": records},
-               cfg.out_dir / f"eval_{args.tag}_{args.dataset}_{args.split or 'all'}.json")
+               args.out_dir / f"eval_{args.tag}_{args.dataset}_{args.split or 'all'}.json")
 
 
 if __name__ == "__main__":

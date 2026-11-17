@@ -9,14 +9,15 @@ Depends on `jspace/` and `model/`: models are loaded from the profile by `model.
 ```
 python -m evaluation.run_lens_checks --tag M                       # 1. does the lens behave like the paper?
 python -m evaluation.make_splits --out results/splits.json         # 2. keep items M solves, split by bridge
+python -m evaluation.run_readout_stats                             # 2b. reference readout stats -> stats/<model>.pt (clamp conditions)
 python -m evaluation.run_eval --dataset jbypass --tag M            # 3. baseline table on M
 python -m evaluation.run_eval --dataset paper_probe_swap --tag M --fields prompt
 python -m evaluation.run_mechanism --tag M                         # 4. bridge readout by position + probes
 python -m evaluation.run_perplexity --tag M                        # 5. held-out perplexity
-python -m evaluation.show_table "results/eval_*.json"              # reprint saved eval tables (no model)
+python -m evaluation.show_table "results/*/eval_*.json"            # reprint saved eval tables (no model)
 ```
-Every script takes `--config` (run.yaml) and `--model` (profile; default from run.yaml), `--device` (default = the profile's device; `--device mps` on a Mac), `--adapter path/to/adapter` to evaluate a fine-tuned model instead of M (an adapter saved by `finetune.run_train` / `model.lora.save_adapter`, loaded unmerged), and `--lens_path` to ablate with a different lens (e.g. one from `jspace.fit_lens`; required for a profile without `prefit_lens`). `run_eval` and `run_mechanism` take `--split_file results/splits.json --split test_seen` (or `test_unseen`). `run_mechanism` takes `--extra_lens recomputed=path.pt` to compare a recomputed lens with the original side by side.
-For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to `results/`.
+Every script takes `--config` (run.yaml) and `--model` (profile; default from run.yaml), `--device` (default = the profile's device; `--device mps` on a Mac), `--adapter path/to/adapter` to evaluate a fine-tuned model instead of M (an adapter saved by `finetune.run_train` / `model.lora.save_adapter`, loaded unmerged), `--lens_path` to ablate with a different lens (e.g. one from `jspace.fit_lens`; required for a profile without `prefit_lens`), and `--stats_path` for the reference readout statistics the clamp conditions need (default `stats/<model>.pt` if present; keyed by profile, so an adapter uses base M's file). `run_eval` and `run_mechanism` take `--split_file results/splits.json --split test_seen` (or `test_unseen`). `run_mechanism` takes `--extra_lens recomputed=path.pt` to compare a recomputed lens with the original side by side.
+For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to `results/`, or to `--out_dir` (one folder per run, e.g. `results/exp 1`).
 
 ## Conditions (`conditions.py`)
 | name | removes | role |
@@ -24,9 +25,13 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
 | `none` | nothing | clean accuracy |
 | `bridge` | J-lens vectors of the item's bridge, over the band | the intervention |
 | `wrong_bridge` | same, for `swap_to`, another bridge of the same kind | specificity control |
+| `bridge_clamp` | lowers the bridge's J-lens readout over the band to its reference level mu + z*sigma (`JSpaceConfig.clamp_z`) only where it exceeds it; other positions untouched | in-distribution ablation (no exactly-zero readout to key on) |
+| `wrong_bridge_clamp` | same clamp, for `swap_to` | specificity control for the clamp |
 | `random_tok` | same number of random word tokens' J-lens vectors | Mrand-style control |
 | `random_dir` | same number of Gaussian directions | "does any ablation hurt?" control |
 | `topk_light`, `topk_medium`, `topk_heavy` | paper's ablation, top 10 active per position, over the first third, two thirds, or all of the band | positive control |
+
+The clamp conditions (`NEEDS_STATS`) need readout statistics: run `run_readout_stats` once per model profile, or pass `--stats_path`. Without them their builders raise a `ValueError` that says so.
 
 ## Prompt types
 - `prompt`: two-hop (main metric).
@@ -48,6 +53,9 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
 - `conditions.py`
   - `Builder = (js, item, enc, rng) -> Sequence[Intervention]`; one builder per condition, registered in `CONDITIONS`; `()` for the clean run. `enc` is the current one-row token sequence (`model.inference.Encoded`). The top-k builders run a clean pass on it for the exclude mask.
   - `item_rng(seed, item, condition)`: the per-item random source; one seeding rule for eval, mechanism and training.
+  - `NEEDS_STATS`: the conditions whose builders read `js.readout_stats` (`bridge_clamp`, `wrong_bridge_clamp`).
+  - `require_stats(js) -> ReadoutStats`: `js.readout_stats`, or a `ValueError` naming both fixes (`python -m evaluation.run_readout_stats`, `--stats_path`).
+  - `_word_ids(js, word)`: the word's single-token variants; raises if it has none. Shared by `_project_word` (`ProjectOut` of the word's J-lens vectors) and `_clamp_word` (`ReadoutClamp` capped at `require_stats(js).caps(ids, js.band, js.cfg.clamp_z)`).
   - `interventions_for_item(js, item, condition, seed)`: an `InterventionsFor` (`enc -> interventions`) that calls the condition's builder with a fresh `item_rng` on every call, so random ablations stay fixed across decoding steps.
 - `runner.py`
   - `evaluate(js, items, conditions, fields, seed, n_tokens)`: one record per item, prompt type, and condition.
@@ -70,12 +78,15 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
   - `chance_level`: majority-class accuracy.
 - `perplexity.py`: `perplexity(lm, texts, max_len, batch_size)`: token-weighted perplexity over all texts, each truncated to `max_len` tokens, texts under 2 tokens skipped, computed in left-padded batches with `model.inference.sequence_nll`.
 - `cli_common.py`
-  - `add_model_args(parser)`: `--config`, `--model`, `--device` (from `model.cli`), `--adapter`, `--lens_path`, `--limit`.
+  - `add_model_args(parser)`: `--config`, `--model`, `--device` (from `model.cli`), `--adapter`, `--lens_path`, `--stats_path`, `--limit`. `STATS_PATH_HELP` is the `--stats_path` help text (reused by `finetune.run_train`).
+  - `add_output_args(parser, cfg)`: `--out_dir` (default `cfg.out_dir`, i.e. `results`), the folder a run's result JSON goes to. Used by `run_eval`, `run_mechanism`, `run_perplexity`, `run_lens_checks`.
   - `load_frozen_model(profile, adapter=None)`: the profile's model plus the adapter if given (unmerged, `model.lora.load_adapter`), with every weight frozen (`model.loading.freeze`; the probes' decomposition relies on it).
-  - `load_frozen_jspace(profile, adapter=None, lens_path=None)`: the above plus the lens (`lens_path`, or the profile's prefit lens), as a `JSpace` with the default `JSpaceConfig` (`TODO(debt-002)`).
+  - `load_frozen_jspace(profile, adapter=None, lens_path=None, stats_path=None)`: the above plus the lens (`lens_path`, or the profile's prefit lens) and the readout statistics (`stats_path`, else `stats/<model>.pt` if present, else `None`), as a `JSpace` with the default `JSpaceConfig` (`TODO(debt-002)`).
   - `load_model_from_args(args)`: `load_frozen_model` with the profile and `--adapter` from the flags. Used by `run_perplexity`, which needs no lens.
-  - `load_from_args(args)`: `load_frozen_jspace` with the profile, `--adapter` and `--lens_path` from the flags.
+  - `load_from_args(args)`: `load_frozen_jspace` with the profile, `--adapter`, `--lens_path` and `--stats_path` from the flags.
   - `load_items(name, cfg, split_file, split, limit)`, `write_json(obj, path)`.
+- `run_readout_stats.py`: command-line tool that writes the reference readout statistics (`jspace.collect_readout_stats` over the dataset's prompts, each excluding its own bridge's tokens) to `--out` (default `stats/<model>.pt`). Flags: model flags, `--dataset` (default `jbypass`), optional `--split_file`/`--split` (default whole dataset). Prints texts, editable positions, band layers and the output path.
+  - `reference_texts(tokenizer, items) -> (texts, exclude_ids)`: each item's `prompt` and the `token_variants` of its `bridge`.
 - `run_eval.py`, `run_lens_checks.py`, `make_splits.py`, `run_mechanism.py`, `run_perplexity.py`: command-line entry points.
 - `show_table.py`: command-line tool that reprints `run_eval` result tables without loading a model.
   - `expand(patterns) -> list[Path]`: paths or glob patterns (expanded here, since PowerShell doesn't), each pattern's matches sorted; raises `FileNotFoundError` if a pattern matches nothing.
@@ -118,7 +129,7 @@ For a quick first try, add `--limit 10 --conditions none,bridge`. Results go to 
 If `bridge` barely hurts but `topk` does, removing the bridge alone isn't enough. That's a finding in itself, and the next step is to ablate more of the J-space.
 
 ## Tested
-`tests/test_jspace_eval.py` runs without a model: loaders, split leakage, the dataset generator's invariants, answer matching, probe separability and subject leakage, decomposition recovery, projection, and swap math. `tests/test_evaluation_model.py` runs decoding, the condition builders and perplexity on a tiny random model with a synthetic lens.
+`tests/test_jspace_eval.py` runs without a model: loaders, split leakage, the dataset generator's invariants, answer matching, probe separability and subject leakage, decomposition recovery, projection, and swap math. `tests/test_evaluation_model.py` runs decoding, the condition builders (including the clamp builders with and without stats), `reference_texts` and perplexity on a tiny random model with a synthetic lens.
 
 Every script was also run end to end on Qwen3-1.7B with the prefit lens, on small item counts on an M-series Mac (`--device mps`). Smoke numbers, not results:
 - Lens checks (30 items): bridge readout pass@10 is 0.77 on our dataset and 0.27 on the paper's multihop set. Bridge ablation drops it to 0.07 and 0.00. Swap success is 0.10 (1 of 10 solved). The paper reports 54% to 70% on Claude.

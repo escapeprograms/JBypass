@@ -2,10 +2,12 @@
 jspace module lives here; the model itself is loaded by `model.loading.load_model`."""
 
 from dataclasses import dataclass
+from pathlib import Path
 
 import jlens
 from huggingface_hub import hf_hub_download
 
+from jspace.baseline import ReadoutStats, load_readout_stats
 from jspace.config import JSpaceConfig
 from jspace.vectors import workspace_band
 from model.loading import LanguageModel
@@ -20,6 +22,7 @@ class JSpace:
         lm's block modules, so hooks registered on lm.blocks fire inside jlens.
     lens: fitted jlens.JacobianLens, J_l per layer.
     band: workspace layer indices.
+    readout_stats: reference readout statistics (needed by ReadoutClamp), or None.
     """
 
     lm: LanguageModel
@@ -27,6 +30,7 @@ class JSpace:
     lens: jlens.JacobianLens
     band: list[int]
     cfg: JSpaceConfig
+    readout_stats: ReadoutStats | None = None
 
 
 def lens_view(lm: LanguageModel) -> jlens.HFLensModel:
@@ -57,11 +61,31 @@ def load_lens(lm: LanguageModel, lens_path: str | None = None) -> jlens.Jacobian
     return lens
 
 
-def load_jspace(lm: LanguageModel, cfg: JSpaceConfig = JSpaceConfig(), lens_path: str | None = None) -> JSpace:
-    """Bundle a loaded model with its lens (`lens_path`, or the profile's prefit lens)."""
+def load_jspace(
+    lm: LanguageModel, cfg: JSpaceConfig = JSpaceConfig(), lens_path: str | None = None,
+    stats_path: str | Path | None = None,
+) -> JSpace:
+    """Bundle a loaded model with its lens (`lens_path`, or the profile's prefit lens) and
+    its readout statistics (`stats_path`, else the default file if it exists, else None)."""
     lens = load_lens(lm, lens_path)
     band = workspace_band(lm.n_layers, cfg.band_start, cfg.band_end)
-    return JSpace(lm, lens_view(lm), lens, band, cfg)
+    return JSpace(lm, lens_view(lm), lens, band, cfg, _load_stats(lm, cfg, band, stats_path))
+
+
+def default_stats_path(lm: LanguageModel, cfg: JSpaceConfig) -> Path:
+    """Where the readout statistics of lm's profile live by default."""
+    return Path(cfg.readout_stats_dir) / f"{lm.profile.name}.pt"
+
+
+def _load_stats(
+    lm: LanguageModel, cfg: JSpaceConfig, band: list[int], stats_path: str | Path | None
+) -> ReadoutStats | None:
+    """Stats at an explicit path (a missing file raises), else the default file if present."""
+    if stats_path is None:
+        stats_path = default_stats_path(lm, cfg)
+        if not stats_path.exists():
+            return None
+    return load_readout_stats(stats_path, lm, band)
 
 
 def _lens_file(lm: LanguageModel, lens_path: str | None) -> str:

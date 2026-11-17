@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from evaluation.cli_common import load_items
+from evaluation.conditions import NEEDS_STATS
 from evaluation.config import EvalConfig
 from evaluation.data_loading import TwoHopItem
 from evaluation.runner import readable_items
@@ -14,6 +15,7 @@ from model.config import load_model_profile
 from model.lora import PROFILE_FILE, saved_profile
 
 ALL_SPLITS = "all"   # split choice meaning "no split filter"
+NEEDS_SWAP = frozenset({"wrong_bridge", "wrong_bridge_clamp"})   # conditions built from item.swap_to
 
 
 @dataclass(frozen=True)
@@ -70,7 +72,13 @@ def valid_fields(item: TwoHopItem, fields) -> list[str]:
 def valid_conditions(item: TwoHopItem, conditions) -> list[str]:
     """The conditions that can be built for the item."""
     # TODO(debt): this rule lives away from its builder in evaluation/conditions.py; move it there when eval needs it
-    return [c for c in conditions if not (c == "wrong_bridge" and item.swap_to is None)]
+    return [c for c in conditions if not (c in NEEDS_SWAP and item.swap_to is None)]
+
+
+def buildable_conditions(js, item: TwoHopItem, conditions) -> list[str]:
+    """valid_conditions, minus the ones that need readout statistics when js has none."""
+    valid = valid_conditions(item, conditions)
+    return valid if js.readout_stats is not None else [c for c in valid if c not in NEEDS_STATS]
 
 
 def pick_random(items: list[TwoHopItem], rng: random.Random) -> TwoHopItem:

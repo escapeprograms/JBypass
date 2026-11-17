@@ -1,7 +1,7 @@
 """Print the accuracy tables of saved run_eval results, without loading a model.
 
-python -m evaluation.show_table results/eval_M_jbypass_all.json
-python -m evaluation.show_table "results/eval_mexp_*.json" results/eval_M_jbypass_all.json
+python -m evaluation.show_table results/baseline/eval_M_jbypass_all.json
+python -m evaluation.show_table "results/exp 1/eval_mexp_*.json" results/baseline/eval_M_jbypass_all.json
 """
 
 import argparse

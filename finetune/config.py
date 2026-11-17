@@ -4,9 +4,10 @@ Optimiser, LoRA and step settings come from configs/run.yaml."""
 from dataclasses import dataclass
 
 # Eval conditions a model may be trained under (names in evaluation/conditions.py):
-# none = Mctrl, bridge = Mexp, random_tok / random_dir = Mrand. Top-k ablation is left
-# out until it has a training test.
-TRAIN_CONDITIONS = ("none", "bridge", "random_tok", "random_dir")
+# none = Mctrl, bridge = Mexp, random_tok / random_dir = Mrand, bridge_clamp = Mexp with
+# the bridge readout capped at its reference level instead of zeroed (needs readout stats).
+# Top-k ablation is left out until it has a training test.
+TRAIN_CONDITIONS = ("none", "bridge", "random_tok", "random_dir", "bridge_clamp")
 
 
 @dataclass(frozen=True)

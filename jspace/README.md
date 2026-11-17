@@ -20,14 +20,16 @@ Used by `evaluation/` and `finetune/`.
 | swap: `c = pinv(V) h`, `h + V(swap(c) - c)` with `V = [v_s v_t]` | `interventions.LensSwap` |
 | workspace band ~L38 to ~L92 of 100 | `config.band_start/band_end` (the paper gives no Qwen band; we reuse the fractions) |
 | our proposal: ablate the bridge's J-space component | `interventions.ProjectOut` over all one-token spellings of the bridge |
+| (ours) lower the bridge readout only where it is abnormally high, instead of pinning it at 0 | `clamp.ReadoutClamp` with caps from `baseline.ReadoutStats` |
 
 ## Files
-- `config.py`: `JSpaceConfig`: band fractions, top-k ablation settings, leading positions never edited, decomposition k, lens-fitting settings. Model identity and lens location live in the model profile.
+- `config.py`: `JSpaceConfig`: band fractions, top-k ablation settings, leading positions never edited, readout clamp settings (`clamp_z`: cap = mean + z * std, default 2; `readout_stats_dir`: folder of `<profile>.pt` statistics, default `stats/`; `stats_batch_size`: texts per pass when collecting them, default 4), decomposition k, lens-fitting settings. Model identity and lens location live in the model profile.
 - `loading.py` (all file and network access)
-  - `JSpace(lm, lens_model, lens, band, cfg)`: the shared `LanguageModel`, a jlens view of it, the lens, the band layers, the config.
+  - `JSpace(lm, lens_model, lens, band, cfg, readout_stats=None)`: the shared `LanguageModel`, a jlens view of it, the lens, the band layers, the config, and the reference readout statistics (`ReadoutStats`, needed by `ReadoutClamp`) or `None`.
   - `lens_view(lm)`: `jlens.from_hf` on `lm.base_model`, then restores every parameter's `requires_grad` and every module's train/eval mode (from_hf freezes and calls `.eval()`). Safe before or after `attach_lora`. The view shares `lm.blocks`, so our hooks fire inside `lens.apply` and `jlens.fit`. Never compiled.
   - `load_lens(lm, lens_path=None)`: the `.pt` at `lens_path`, else the profile's `prefit_lens` from the Hub; J matrices moved to `lm.device`. Raises if neither exists, or if the lens's `d_model`, layers or matrix shapes do not fit `lm`.
-  - `load_jspace(lm, cfg=JSpaceConfig(), lens_path=None)`: bundles the above into a `JSpace`.
+  - `load_jspace(lm, cfg=JSpaceConfig(), lens_path=None, stats_path=None)`: bundles the above into a `JSpace`. Readout stats: an explicit `stats_path` is loaded (a missing file raises); with `None`, the default file is loaded if it exists, else `readout_stats` is `None`.
+  - `default_stats_path(lm, cfg)`: `cfg.readout_stats_dir / "<profile name>.pt"`. Keyed by profile, so an adapter run uses its base model's statistics.
 - `vectors.py`
   - `workspace_band(n_layers, start, end)`: layer indices in the band.
   - `band_prefix(band, fraction)`: the first part of the band (for ablation strengths).
@@ -41,6 +43,13 @@ Used by `evaluation/` and `finetune/`.
   - `ProjectOut(js, {layer: [k, d]})`: removes the span of fixed vectors (joint orthogonal projection).
   - `TopKAblation(js, layers, k, exclude_mask)`: the paper's ablation; `exclude_mask` is `[batch, seq, vocab]`, aligned with the full sequence.
   - `LensSwap(js, source, target, alpha=1)`: the paper's swap formula.
+- `baseline.py`: reference statistics of the lens readout (no file paths or dataset knowledge; texts come in as strings).
+  - `ReadoutStats(layers, mean, std, count, model, n_texts)` (frozen): `mean`, `std` `[len(layers), vocab]` fp32 on CPU, `count` `[vocab]` positions per token, `model` the profile name. `caps(token_ids, layers, z)`: `{layer: [k]}` `mean + z * std`; raises `ValueError` for a layer without statistics or a token with count 0.
+  - `collect_readout_stats(js, texts, exclude_ids, batch_size)`: clean forward passes in batches; at each band layer, accumulates (fp64) the lens logit of every token over editable positions (`editable_positions`, so the first token and padding never count), skipping `exclude_ids[i]` for text `i`. `std = sqrt(E[x^2] - mean^2)`. Helpers `_exclusion_mask`, `_accumulate`, `_finish`.
+  - `save_readout_stats(stats, path)`: `torch.save` of the fields (creates the folder). `load_readout_stats(path, lm, band)`: raises `ValueError` if the file is for another profile, another vocab size, or lacks a band layer.
+- `clamp.py`: why it exists: `ProjectOut` sets the bridge readout to exactly 0, a value never seen in clean runs, and a model fine-tuned under it learned to exploit that signal. The clamp only lowers readouts above `mean + z * std`; every other position stays bit-identical.
+  - `set_readout(h, V, V_pinv, targets)`: minimum-norm edit `h + (targets - h V^T) pinv(V)^T` giving `h V^T = targets` (zero targets = `ProjectOut`).
+  - `ReadoutClamp(js, vectors, caps)`: `LayerIntervention`; `vectors` `{layer: [k, d]}`, `caps` `{layer: [k]}` (e.g. `ReadoutStats.caps`). `edit` sets each readout to `min(readout, cap)`; the part of `h` orthogonal to the vectors is untouched.
 - `readout.py`
   - `lens_logits(js, prompt, interventions=(), layers=None, positions=None)`: `{layer: [n_positions, vocab]}` from `lens.apply`, with the interventions applied (an all-ones mask shaped like jlens's encoding of the prompt).
   - `token_ranks(js, prompt, ids, position=-1, layers=None, interventions=())`: best rank of those tokens in the J-lens readout, per layer.
@@ -59,13 +68,17 @@ Used by `evaluation/` and `finetune/`.
 from model.config import load_model_profile, load_run_config
 from model.loading import load_model
 from model.inference import next_token_logits
-from jspace import load_jspace, lens_vectors, token_variants, ProjectOut
+from jspace import load_jspace, lens_vectors, token_variants, ProjectOut, ReadoutClamp
 
 run = load_run_config("configs/run.yaml")
 js = load_jspace(load_model(load_model_profile(run.model, run.profiles_dir)))
 ids = token_variants(js.lm.tokenizer, "spider")
 ablate = ProjectOut(js, lens_vectors(js.lens, js.lm.unembedding_matrix, ids, js.band))
 logits = next_token_logits(js.lm, ["Fact: The number of legs on the animal that spins webs is"], [ablate])
+
+# clamp instead of zeroing (needs stats/<profile>.pt, or load_jspace(..., stats_path=...))
+vecs = lens_vectors(js.lens, js.lm.unembedding_matrix, ids, js.band)
+clamp = ReadoutClamp(js, vecs, js.readout_stats.caps(ids, js.band, js.cfg.clamp_z))
 ```
 
 ## Open choices (the paper doesn't specify these)

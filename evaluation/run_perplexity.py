@@ -8,7 +8,7 @@ import argparse
 
 from datasets import load_dataset
 
-from evaluation.cli_common import add_model_args, load_model_from_args, write_json
+from evaluation.cli_common import add_model_args, add_output_args, load_model_from_args, write_json
 from evaluation.config import EvalConfig
 from evaluation.perplexity import perplexity
 
@@ -29,6 +29,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--tag", default="M")
     add_model_args(p)
+    add_output_args(p, cfg)
     args = p.parse_args()
 
     lm = load_model_from_args(args)   # --lens_path is accepted but unused here
@@ -36,7 +37,7 @@ def main():
     ppl = perplexity(lm, texts, cfg.ppl_max_len, cfg.ppl_batch_size)
     print(f"[{args.tag}] held-out perplexity = {ppl:.2f}")
     write_json({"tag": args.tag, "adapter": args.adapter, "perplexity": ppl},
-               cfg.out_dir / f"perplexity_{args.tag}.json")
+               args.out_dir / f"perplexity_{args.tag}.json")
 
 
 if __name__ == "__main__":

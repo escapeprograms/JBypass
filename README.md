@@ -18,8 +18,10 @@ For the viewer's translations, save `cedict_1_0_ts_utf-8_mdbg.txt.gz` from https
 ```powershell
 & $py -m evaluation.run_lens_checks --tag M                                   # lens behaves like the paper?
 & $py -m evaluation.make_splits --out results/splits.json                    # items M solves, split by bridge
+& $py -m evaluation.run_readout_stats                                         # reference readout stats -> stats/<model>.pt (clamp conditions)
 & $py -m finetune.run_train --condition bridge --split_file results/splits.json --out runs/mexp    # Mexp
 & $py -m finetune.run_train --condition none   --split_file results/splits.json --out runs/mctrl   # Mctrl
+& $py -m finetune.run_train --condition bridge_clamp --split_file results/splits.json --out runs/mclamp   # bridge readout capped, not zeroed
 & $py -m evaluation.run_eval --adapter runs/mexp --split_file results/splits.json --split test_seen --tag mexp
 ```
 Every command takes `--config`, `--model` and `--device` (default: the profile's device). See `evaluation/README.md` for the full eval run order.
@@ -27,12 +29,13 @@ Every command takes `--config`, `--model` and `--device` (default: the profile's
 ## Layout
 Dependencies run one way: `model` ← `jspace` ← `evaluation` ← `finetune` / `viz`.
 - `model/` — loading, residual-stream hooks, inference, LoRA, training loop, CLI helpers, `run_download` and `run_smoke`.
-- `jspace/` — attaches a J-lens to a loaded model: lens loading, J-lens vectors, interventions, readout, `fit_lens`.
+- `jspace/` — attaches a J-lens to a loaded model: lens loading, J-lens vectors, interventions (including the readout clamp), readout statistics, readout, `fit_lens`.
 - `evaluation/` — dataset, ablation conditions, scoring, runner, lens checks, mechanism, probes, perplexity.
 - `finetune/` — LoRA training under an eval condition; saves the adapter the eval scripts load.
 - `viz/` — local Gradio app: run one example under one ablation and browse the J-lens readout of every layer (`python -m viz.run_app`).
 - `configs/` — `run.yaml` (which model plus run settings), `viz.yaml` (viewer settings) and `models/<name>.yaml` profiles.
+- `stats/` — reference readout statistics per model profile (`<model>.pt`, from `evaluation.run_readout_stats`; gitignored), read by the clamp conditions.
 - `tests/` — flat unit tests with one shared `conftest.py`.
-- `commands.md` — every CLI command (setup, checks, splits, training, eval, lens refit) in run order.
+- `commands.md` — every CLI command (setup, checks, splits, readout statistics, training, eval, lens refit) in run order.
 - `debt.md` — recorded technical debt that spans several files.
 - `environment.yml`, `pyproject.toml` — the `jbypass` env (with the pinned `jlens` commit) and package definition.

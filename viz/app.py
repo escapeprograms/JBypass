@@ -11,7 +11,7 @@ from jlens.vis import SliceData
 from evaluation.config import EvalConfig
 from evaluation.data_loading import TwoHopItem
 from model.config import RunConfig
-from viz.catalog import (ALL_SPLITS, ModelChoice, examples, pick_random, split_names, valid_conditions,
+from viz.catalog import (ALL_SPLITS, ModelChoice, buildable_conditions, examples, pick_random, split_names,
                          valid_fields)
 from viz.cedict import Cedict
 from viz.config import VizConfig
@@ -74,12 +74,14 @@ def on_split(ctx: AppContext, label: str, dataset: str, split: str) -> tuple[dic
     return by_name, gr.Dropdown(choices=names, value=names[0])
 
 
-def on_example(ctx: AppContext, items: dict, name: str, field: str,
+def on_example(ctx: AppContext, label: str, items: dict, name: str, field: str,
                condition: str) -> tuple[gr.Dropdown, gr.Dropdown]:
-    """Only the prompt fields and conditions valid for the item; keeps the current ones if valid."""
+    """Only the prompt fields and conditions the item (and the model's readout stats) allow;
+    keeps the current ones if still allowed."""
     item = items[name]
     fields = valid_fields(item, ctx.eval_cfg.prompt_fields)
-    conditions = valid_conditions(item, ctx.eval_cfg.conditions)
+    js = ctx.session.get(ctx.choices[label])
+    conditions = buildable_conditions(js, item, ctx.eval_cfg.conditions)
     return (gr.Dropdown(choices=fields, value=_keep(field, fields)),
             gr.Dropdown(choices=conditions, value=_keep(condition, conditions)))
 
@@ -165,7 +167,8 @@ def _steps(ctx: AppContext, ui: _Controls) -> list[dict]:
         dict(api_name="split", fn=partial(on_split, ctx), inputs=[ui.model, ui.dataset, ui.split],
              outputs=[ui.items, ui.example], **MODEL_QUEUE),
         dict(api_name="example", fn=partial(on_example, ctx),
-             inputs=[ui.items, ui.example, ui.field, ui.condition], outputs=[ui.field, ui.condition]),
+             inputs=[ui.model, ui.items, ui.example, ui.field, ui.condition],
+             outputs=[ui.field, ui.condition], **MODEL_QUEUE),
         dict(api_name="card", fn=on_card, inputs=[ui.items, ui.example, ui.field], outputs=[ui.card]),
     ]
 

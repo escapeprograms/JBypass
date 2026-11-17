@@ -16,8 +16,8 @@ class EvalConfig:
         "paper_multihop": DATA_DIR / "lens-eval-multihop.json",
     })
     # Ablation conditions to run (names registered in evaluation/conditions.py).
-    conditions: tuple = ("none", "bridge", "wrong_bridge", "random_tok", "random_dir",
-                         "topk_light", "topk_medium", "topk_heavy")
+    conditions: tuple = ("none", "bridge", "wrong_bridge", "bridge_clamp", "wrong_bridge_clamp",
+                         "random_tok", "random_dir", "topk_light", "topk_medium", "topk_heavy")
     # Question types: prompt fields on an item (two-hop, plus one-hop controls).
     prompt_fields: tuple = ("prompt", "hop2_prompt", "hop1_prompt")
     seed: int = 0

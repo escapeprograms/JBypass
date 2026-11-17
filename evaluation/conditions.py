@@ -6,12 +6,20 @@ and registering it in CONDITIONS. Training uses the same builders (finetune/abla
   none          clean model
   bridge        project out the bridge's J-lens vectors over the band   (the intervention)
   wrong_bridge  same for item.swap_to, another bridge of the same kind  (specificity control)
+  bridge_clamp  lower the bridge's J-lens readout over the band to its reference level
+                mu + z*sigma (readout statistics, z = JSpaceConfig.clamp_z) only where it
+                exceeds it; other positions untouched                    (in-distribution ablation)
+  wrong_bridge_clamp
+                same clamp for item.swap_to                             (specificity control)
   random_tok    same number of J-lens vectors of random word tokens     (Mrand-style control)
   random_dir    same number of random Gaussian directions               (any-ablation control)
   topk_light / topk_medium / topk_heavy
                 paper's ablation: top-k active J-lens vectors per position, excluding
                 the clean pass's top-k output tokens, over the first third / two
                 thirds / all of the band                                (positive control)
+
+The clamp conditions need `js.readout_stats` (python -m evaluation.run_readout_stats);
+NEEDS_STATS names them.
 """
 
 import random
@@ -20,7 +28,9 @@ from collections.abc import Callable, Sequence
 import torch
 
 from evaluation.data_loading import TwoHopItem
-from jspace import JSpace, ProjectOut, TopKAblation, band_prefix, lens_vectors, token_variants
+from jspace import (
+    JSpace, ProjectOut, ReadoutClamp, ReadoutStats, TopKAblation, band_prefix, lens_vectors, token_variants,
+)
 from jspace.config import JSpaceConfig
 from model.hooks import Intervention
 from model.inference import Encoded, InterventionsFor, forward_logits
@@ -53,6 +63,14 @@ def build_wrong_bridge(js, item, enc, rng):
     return (_project_word(js, item.swap_to),)
 
 
+def build_bridge_clamp(js, item, enc, rng):
+    return (_clamp_word(js, item.bridge),)
+
+
+def build_wrong_bridge_clamp(js, item, enc, rng):
+    return (_clamp_word(js, item.swap_to),)
+
+
 def build_random_tok(js, item, enc, rng):
     n = len(token_variants(js.lm.tokenizer, item.bridge))
     ids = _random_word_tokens(js.lm.tokenizer, n, rng)
@@ -78,6 +96,8 @@ CONDITIONS: dict[str, Builder] = {
     "none": build_none,
     "bridge": build_bridge,
     "wrong_bridge": build_wrong_bridge,
+    "bridge_clamp": build_bridge_clamp,
+    "wrong_bridge_clamp": build_wrong_bridge_clamp,
     "random_tok": build_random_tok,
     "random_dir": build_random_dir,
 }
@@ -85,12 +105,35 @@ CONDITIONS: dict[str, Builder] = {
 for _name, _fraction in JSpaceConfig().ablation_strengths:
     CONDITIONS[f"topk_{_name}"] = make_topk_builder(_fraction)
 
+# Conditions whose builders read js.readout_stats.
+NEEDS_STATS = frozenset({"bridge_clamp", "wrong_bridge_clamp"})
 
-def _project_word(js, word: str):
+
+def require_stats(js) -> ReadoutStats:
+    """js.readout_stats, or a ValueError saying how to get them."""
+    if js.readout_stats is None:
+        raise ValueError("this condition needs readout statistics: run "
+                         "`python -m evaluation.run_readout_stats` or pass --stats_path")
+    return js.readout_stats
+
+
+def _word_ids(js, word: str) -> list[int]:
+    """The word's single-token variants; raises if it has none."""
     ids = token_variants(js.lm.tokenizer, word)
     if not ids:
         raise ValueError(f"{word!r} has no single-token spelling; the J-lens cannot read it")
+    return ids
+
+
+def _project_word(js, word: str):
+    ids = _word_ids(js, word)
     return ProjectOut(js, lens_vectors(js.lens, js.lm.unembedding_matrix, ids, js.band))
+
+
+def _clamp_word(js, word: str):
+    ids = _word_ids(js, word)
+    caps = require_stats(js).caps(ids, js.band, js.cfg.clamp_z)
+    return ReadoutClamp(js, lens_vectors(js.lens, js.lm.unembedding_matrix, ids, js.band), caps)
 
 
 def _random_word_tokens(tokenizer, n: int, rng: random.Random) -> list[int]:

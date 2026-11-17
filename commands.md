@@ -20,10 +20,12 @@ With the env active (`conda activate jbypass`), plain `python -m ...` works. Add
 **Every eval command** (`evaluation.*`) also takes these:
 | flag | default | what it does |
 |---|---|---|
-| `--tag <name>` | `M` | A label for the run. It is printed in the log and used in the output filename (`results/eval_<tag>_...json`), so runs don't overwrite each other. Use `M` for the base model and the adapter's name for a fine-tuned one (`mexp`, `mctrl`, ...). It does not change what gets computed. |
+| `--tag <name>` | `M` | A label for the run. It is printed in the log and used in the output filename (`<out_dir>/eval_<tag>_...json`), so runs don't overwrite each other. Use `M` for the base model and the adapter's name for a fine-tuned one (`mexp`, `mctrl`, ...). It does not change what gets computed. |
 | `--adapter <dir>` | none (base model M) | Loads a LoRA adapter saved by `finetune.run_train`, so you evaluate Mexp, Mctrl or Mrand instead of M. |
 | `--lens_path <file.pt>` | the profile's prefit lens (downloaded from Neuronpedia) | Uses a different J-lens for the ablations and readouts, e.g. one refit with `jspace.fit_lens`. |
+| `--stats_path <file.pt>` | `stats/<model>.pt` if it exists, else none | Reference readout statistics from `evaluation.run_readout_stats` (section 3b). Needed only by the clamp conditions; an adapter uses base M's file (stats are keyed by model profile). |
 | `--limit <N>` | all items | Uses only the first N items of each dataset. For quick test runs. |
+| `--out_dir <dir>` | `results` | Folder the result JSON is written to. Give each run (experiment) its own folder, e.g. `--out_dir "results/exp 3"`; it is created if missing. Existing layout: `results/baseline/` (base M), `results/exp 1/` (Mexp), `results/exp 2/` (Mclamp and the clamp_z sweep on M), `results/smoke/`. |
 
 **Splits flags** (`run_eval`, `run_mechanism`):
 | flag | default | what it does |
@@ -52,7 +54,7 @@ python -m model.run_smoke                       # end-to-end GPU check: generati
 python -m evaluation.run_lens_checks --tag M    # does the lens reproduce the paper's results on this model?
 ```
 - `run_smoke` takes only the shared flags. It stops with an error at the first check that fails.
-- `run_lens_checks` reports the bridge's lens readout (pass@k), clean and with the bridge ablated, plus the paper's swap check. It writes `results/lens_checks_<tag>.json`.
+- `run_lens_checks` reports the bridge's lens readout (pass@k), clean and with the bridge ablated, plus the paper's swap check. It writes `<out_dir>/lens_checks_<tag>.json` (default `results/`).
 
 ## 3. Data and splits
 ```powershell
@@ -67,6 +69,20 @@ python -m evaluation.make_splits --out results/splits.json    # train / test spl
 
 It also takes the eval flags (`--adapter`, `--lens_path`, `--limit`). Normally you run it on base M with no extra flags.
 
+## 3b. Readout statistics (for the clamp conditions)
+```powershell
+python -m evaluation.run_readout_stats                                            # -> stats/qwen3-1.7b.pt
+python -m evaluation.run_readout_stats --split_file results/splits.json --split train --out stats/train.pt
+```
+The clamp exists because the Mexp adapter answered better with the bridge ablation on than off (0.92 vs 0.66 on test_seen), so it was keying on the exactly-zero bridge readout that `bridge` produces and a clean pass never does; `bridge_clamp` instead lowers the readout only to its normal level. `run_readout_stats` records that normal level: for every token and every band layer, the mean and standard deviation of its J-lens logit over the dataset's prompts (each prompt leaves out its own bridge's tokens). The clamp caps the bridge at mean + `clamp_z` x std (`JSpaceConfig.clamp_z`, 2.0). Run it once per model profile, before evaluating or training with `bridge_clamp` / `wrong_bridge_clamp`; every later command loads `stats/<model>.pt` automatically. It prints the number of texts, editable positions, band layers and the output path.
+| flag | default | what it does |
+|---|---|---|
+| `--dataset <name>` | `jbypass` | Dataset whose prompts are the reference texts. |
+| `--split_file <path>`, `--split <name>` | none (whole dataset) | Restrict the reference texts to one split. |
+| `--out <path>` | `stats/<model>.pt` | Where to write the statistics. Another path must then be passed as `--stats_path` to later commands. |
+
+It also takes the shared and eval flags (`--adapter`, `--lens_path`, `--limit`; `--stats_path` is accepted but not needed). If an existing `stats/<model>.pt` no longer fits the band, delete it before rerunning.
+
 ## 4. Baselines on base model M
 ```powershell
 python -m evaluation.run_eval --dataset jbypass --tag M
@@ -77,11 +93,11 @@ python -m evaluation.run_perplexity --tag M
 Quick first try: add `--limit 10 --conditions none,bridge`.
 
 ### `evaluation.run_eval`: accuracy under each ablation
-Prints and saves a table of accuracy for each condition and prompt type. Output: `results/eval_<tag>_<dataset>_<split or all>.json`.
+Prints and saves a table of accuracy for each condition and prompt type. Output: `<out_dir>/eval_<tag>_<dataset>_<split or all>.json`.
 | flag | default | what it does |
 |---|---|---|
 | `--dataset <name>` | `jbypass` | `jbypass` (our 1032 items), `paper_probe_swap` or `paper_multihop` (Anthropic's sets). |
-| `--conditions <a,b,...>` | all eight | Comma-separated ablations to run, with no spaces (see the table below). |
+| `--conditions <a,b,...>` | all ten (the two clamp ones need section 3b) | Comma-separated ablations to run, with no spaces (see the table below). |
 | `--fields <a,b,...>` | `prompt,hop2_prompt,hop1_prompt` | Which prompt types to score. `prompt` is the two-hop question (main metric). `hop2_prompt` gives the bridge and asks for the answer (fair one-hop control). `hop1_prompt` asks for the bridge itself. Anthropic's datasets only have `prompt`, so pass `--fields prompt` for them. |
 | `--all_items` | off | Keeps items that M gets wrong with no ablation. By default those are dropped, so accuracy measures what the ablation breaks. |
 
@@ -93,18 +109,20 @@ It also takes the shared, eval and split flags.
 | `none` | nothing (clean accuracy) |
 | `bridge` | the J-lens vectors of the item's bridge, over the ablation band (the intervention) |
 | `wrong_bridge` | the same, for a different bridge of the same kind (checks that the ablation is specific) |
+| `bridge_clamp` | lowers the bridge's J-lens readout over the band to its normal level (mean + `clamp_z` x std from section 3b) only where it is higher; other positions are untouched |
+| `wrong_bridge_clamp` | the same clamp, for a different bridge of the same kind (specificity control for the clamp) |
 | `random_tok` | J-lens vectors of the same number of random word tokens |
 | `random_dir` | the same number of random Gaussian directions |
 | `topk_light`, `topk_medium`, `topk_heavy` | the paper's ablation: the top 10 active J-lens vectors at each position, over the first third, two thirds, or all of the band |
 
 ### `evaluation.show_table`: reprint saved eval tables
 ```powershell
-python -m evaluation.show_table results/eval_M_jbypass_all.json "results/eval_mexp_*.json"
+python -m evaluation.show_table results/baseline/eval_M_jbypass_all.json "results/exp 1/eval_mexp_*.json"
 ```
 Prints the exact-match and next-token tables of saved `run_eval` results, rebuilt from their per-item records, without loading a model. Takes one or more files or glob patterns (quote patterns; the script expands them). No other flags. Writes nothing.
 
 ### `evaluation.run_mechanism`: how the model gets around the ablation
-For each condition it saves the bridge's J-lens rank at each layer and position, plus the accuracy of linear probes that predict the bridge from the residual stream. Output: `results/mechanism_<tag>_<dataset>_<split or all>.json`.
+For each condition it saves the bridge's J-lens rank at each layer and position, plus the accuracy of linear probes that predict the bridge from the residual stream. Output: `<out_dir>/mechanism_<tag>_<dataset>_<split or all>.json`.
 | flag | default | what it does |
 |---|---|---|
 | `--dataset <name>` | `jbypass` | As in `run_eval`. |
@@ -114,7 +132,7 @@ For each condition it saves the bridge's J-lens rank at each layer and position,
 It also takes the shared, eval and split flags.
 
 ### `evaluation.run_perplexity`: did fine-tuning damage general language modeling?
-Perplexity on held-out WikiText. Output: `results/perplexity_<tag>.json`. Takes only the shared and eval flags. `--limit` sets the number of texts, and `--lens_path` is accepted but ignored.
+Perplexity on held-out WikiText. Output: `<out_dir>/perplexity_<tag>.json`. Takes only the shared and eval flags. `--limit` sets the number of texts, and `--lens_path` is accepted but ignored.
 
 ## 5. Train
 **Set `train.steps` in `configs/run.yaml` first.** It is 4 (smoke-test length). Steps, batch size, learning rate, LoRA rank and seed all come from that file. To try settings without editing it, copy it and pass `--config <copy>`.
@@ -122,23 +140,25 @@ Perplexity on held-out WikiText. Output: `results/perplexity_<tag>.json`. Takes 
 python -m finetune.run_train --condition bridge     --split_file results/splits.json --out runs/mexp    # Mexp
 python -m finetune.run_train --condition none       --split_file results/splits.json --out runs/mctrl   # Mctrl
 python -m finetune.run_train --condition random_tok --split_file results/splits.json --out runs/mrand   # Mrand
+python -m finetune.run_train --condition bridge_clamp --split_file results/splits.json --out runs/mclamp # clamp experiment (needs section 3b)
 ```
 `finetune.run_train` trains a LoRA adapter on the `train` split, with the chosen ablation applied during every forward pass.
 | flag | default | what it does |
 |---|---|---|
-| `--condition <name>` | required | The ablation applied during training: `bridge` (Mexp), `none` (Mctrl), `random_tok` or `random_dir` (Mrand). |
+| `--condition <name>` | required | The ablation applied during training: `bridge` (Mexp), `none` (Mctrl), `random_tok` or `random_dir` (Mrand), `bridge_clamp` (bridge readout capped at its normal level instead of zeroed; needs section 3b). |
 | `--split_file <path>` | required | Split file from `make_splits`. Training always uses its `train` split. |
-| `--out <dir>` | required | Folder to save the adapter in, along with `train_info.json` (condition, seeds, per-step losses). Pass this folder to the eval commands as `--adapter`. |
+| `--out <dir>` | required | Folder to save the adapter in, along with `train_info.json` (condition, seeds, stats file used and `clamp_z`, per-step losses). Pass this folder to the eval commands as `--adapter`. |
 | `--lens_path <file.pt>` | the profile's prefit lens | The lens whose vectors are ablated during training. |
+| `--stats_path <file.pt>` | `stats/<model>.pt` if it exists | Reference readout statistics for `bridge_clamp`. |
 
 It also takes the shared flags. It prints the loss at every step and the peak GPU memory at the end.
 
 ## 6. Evaluate fine-tuned models
 Same commands as section 4, plus `--adapter`, the split flags, and a `--tag` naming the model. Run each one for every adapter (`mexp`, `mctrl`, `mrand`) and for both `test_seen` and `test_unseen`:
 ```powershell
-python -m evaluation.run_eval       --adapter runs/mexp --split_file results/splits.json --split test_seen --tag mexp
-python -m evaluation.run_mechanism  --adapter runs/mexp --split_file results/splits.json --split test_seen --tag mexp
-python -m evaluation.run_perplexity --adapter runs/mexp --tag mexp
+python -m evaluation.run_eval       --adapter runs/mexp --split_file results/splits.json --split test_seen --tag mexp --out_dir "results/exp 1"
+python -m evaluation.run_mechanism  --adapter runs/mexp --split_file results/splits.json --split test_seen --tag mexp --out_dir "results/exp 1"
+python -m evaluation.run_perplexity --adapter runs/mexp --tag mexp --out_dir "results/exp 1"
 ```
 The split name is already in the output filename, so `--tag mexp` is enough for both splits. `run_perplexity` has no split, so run it once per adapter.
 
@@ -180,7 +200,7 @@ python -m viz.run_app --device cpu                      # no GPU (slow)
 What you can do in the UI:
 - **Model**: the base model or any adapter in `runs/` trained from it (switching reloads; only one model is in memory). Adapters are read with the base model's prefit lens.
 - **Dataset / Split / Example**: splits come from `results/splits_expanded.json` (`all` = no filter); only items whose bridge the lens can read are listed. **Random example** picks one.
-- **Prompt field / Ablation**: only the fields the item has and the conditions that can be built for it (`wrong_bridge` needs a swap bridge). `none` is the clean run.
+- **Prompt field / Ablation**: only the fields the item has and the conditions that can be built for it (`wrong_bridge` / `wrong_bridge_clamp` need a swap bridge; the clamp conditions appear only when `stats/<model>.pt` exists). `none` is the clean run.
 - **Run**: shows the response, whether it is correct, and the heatmap: click a cell for its top tokens, click a pin to see its rank over every (position, layer); the bridge and the answers are pinned. Rows at ablated layers show the residual after the ablation.
 - **Translations**: click a Chinese token (in the By Layer / By Pos lists, a pinned chip, the prompt strip or a grid cell) for its translation: a box at the bottom right shows the pinyin and senses of each word (CC-CEDICT). Clicking still pins the token as before. Other scripts show "no dictionary entry"; English tokens close the box; × closes it.
 
@@ -188,10 +208,11 @@ What you can do in the UI:
 | command | writes |
 |---|---|
 | `make_splits` | `results/splits.json` (or `--out`) |
-| `run_eval` | `results/eval_<tag>_<dataset>_<split or all>.json` |
-| `run_mechanism` | `results/mechanism_<tag>_<dataset>_<split or all>.json` |
-| `run_perplexity` | `results/perplexity_<tag>.json` |
-| `run_lens_checks` | `results/lens_checks_<tag>.json` |
+| `run_readout_stats` | `stats/<model>.pt` (or `--out`) |
+| `run_eval` | `<out_dir>/eval_<tag>_<dataset>_<split or all>.json` (`--out_dir`, default `results`) |
+| `run_mechanism` | `<out_dir>/mechanism_<tag>_<dataset>_<split or all>.json` |
+| `run_perplexity` | `<out_dir>/perplexity_<tag>.json` |
+| `run_lens_checks` | `<out_dir>/lens_checks_<tag>.json` |
 | `run_train` | `<out>/` (adapter + `train_info.json`) |
 | `fit_lens` | `<out>` (lens `.pt`) |
 | `viz.run_app` | nothing (serves a local web page) |
