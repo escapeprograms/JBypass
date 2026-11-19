@@ -1,6 +1,7 @@
 """What the viewer can offer: models (base profiles and saved adapters), splits, examples,
 prompt fields and conditions. Invalid combinations are filtered out here, never caught later."""
 
+import dataclasses
 import json
 import random
 from dataclasses import dataclass
@@ -10,7 +11,7 @@ from evaluation.cli_common import load_items
 from evaluation.conditions import NEEDS_STATS
 from evaluation.config import EvalConfig
 from evaluation.data_loading import TwoHopItem
-from evaluation.runner import readable_items
+from evaluation.runner import tokenizer_readable_items
 from model.config import load_model_profile
 from model.lora import PROFILE_FILE, saved_profile
 
@@ -22,6 +23,7 @@ NEEDS_SWAP = frozenset({"wrong_bridge", "wrong_bridge_clamp"})   # conditions bu
 class ModelChoice:
     profile: str                    # model profile name
     adapter: Path | None = None     # saved LoRA adapter folder; None = base model
+    lens: Path | None = None        # the model's refit lens file (readout only); None = none found
 
     @property
     def label(self) -> str:
@@ -48,6 +50,26 @@ def _adapter_choices(runs_dir: Path, profiles: set[str]) -> list[ModelChoice]:
     return [ModelChoice(profile, d) for profile, d in pairs if profile in profiles]
 
 
+# TODO(debt-003): a lens is paired with its model by file name only (profiles and adapter folders share one namespace)
+def refit_lens_file(choice: ModelChoice, lenses_dir: Path) -> Path:
+    """Where the choice's refit lens lives: <lenses_dir>/<adapter folder name>.pt, or
+    <lenses_dir>/<profile>.pt for a base model."""
+    stem = choice.profile if choice.adapter is None else choice.adapter.name
+    return Path(lenses_dir) / f"{stem}.pt"
+
+
+def with_refit_lenses(choices: list[ModelChoice], lenses_dir: Path) -> list[ModelChoice]:
+    """The choices, each with `.lens` set to its refit lens file where that file exists."""
+    found = [(c, refit_lens_file(c, lenses_dir)) for c in choices]
+    return [dataclasses.replace(c, lens=f) if f.is_file() else c for c, f in found]
+
+
+def fit_command(choice: ModelChoice, lens_file: Path) -> str:
+    """The command line that fits the choice's refit lens into `lens_file`."""
+    adapter = "" if choice.adapter is None else f" --adapter {choice.adapter}"
+    return f"python -m jspace.fit_lens --model {choice.profile}{adapter} --out {lens_file}"
+
+
 def split_names(items: list[TwoHopItem], split_file: str | Path | None) -> list[str]:
     """ALL_SPLITS plus every split in `split_file` that names at least one of the items."""
     if split_file is None:
@@ -57,11 +79,12 @@ def split_names(items: list[TwoHopItem], split_file: str | Path | None) -> list[
     return [ALL_SPLITS] + [s for s, members in splits.items() if names & set(members)]
 
 
-def examples(js, dataset: str, split: str, eval_cfg: EvalConfig,
+def examples(tokenizer, dataset: str, split: str, eval_cfg: EvalConfig,
              split_file: str | Path | None) -> list[TwoHopItem]:
-    """The dataset's items in `split` (every item for ALL_SPLITS) whose bridge the lens can read."""
+    """The dataset's items in `split` (every item for ALL_SPLITS) whose bridge has a single-token
+    spelling under `tokenizer` (so the lens can read it); needs no model."""
     split_file, split = (None, None) if split == ALL_SPLITS else (split_file, split)
-    return readable_items(js, load_items(dataset, eval_cfg, split_file, split))
+    return tokenizer_readable_items(tokenizer, load_items(dataset, eval_cfg, split_file, split))
 
 
 def valid_fields(item: TwoHopItem, fields) -> list[str]:
@@ -75,10 +98,10 @@ def valid_conditions(item: TwoHopItem, conditions) -> list[str]:
     return [c for c in conditions if not (c in NEEDS_SWAP and item.swap_to is None)]
 
 
-def buildable_conditions(js, item: TwoHopItem, conditions) -> list[str]:
-    """valid_conditions, minus the ones that need readout statistics when js has none."""
+def buildable_conditions(has_stats: bool, item: TwoHopItem, conditions) -> list[str]:
+    """valid_conditions, minus the ones that need readout statistics when there are none."""
     valid = valid_conditions(item, conditions)
-    return valid if js.readout_stats is not None else [c for c in valid if c not in NEEDS_STATS]
+    return valid if has_stats else [c for c in valid if c not in NEEDS_STATS]
 
 
 def pick_random(items: list[TwoHopItem], rng: random.Random) -> TwoHopItem:

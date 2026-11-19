@@ -13,7 +13,17 @@ import torch
 
 def workspace_band(n_layers: int, start: float, end: float) -> list[int]:
     """Layer indices between fractions start and end of depth (inclusive)."""
+    # TODO(debt): no bounds check; round(end * n_layers) can equal n_layers (e.g. 3 layers -> [1, 2, 3]),
+    # a layer that does not exist. load_jspace now rejects such a band (no lens matrix for it).
     return list(range(round(start * n_layers), round(end * n_layers) + 1))
+
+
+def layer_range(first: int, last: int, n_layers: int) -> list[int]:
+    """Layer indices first..last (inclusive); raises unless 0 <= first <= last < n_layers."""
+    if not 0 <= first <= last < n_layers:
+        raise ValueError(f"band layers {first}-{last} are not an inclusive range "
+                         f"within a {n_layers}-layer model (need 0 <= first <= last < {n_layers})")
+    return list(range(first, last + 1))
 
 
 def band_prefix(band: list[int], fraction: float) -> list[int]:

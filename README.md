@@ -33,8 +33,8 @@ Dependencies run one way: `model` ← `jspace` ← `evaluation` ← `finetune` /
 - `evaluation/` — dataset, ablation conditions, scoring, runner, lens checks, mechanism, probes, perplexity.
 - `finetune/` — LoRA training under an eval condition; saves the adapter the eval scripts load.
 - `viz/` — local Gradio app: run one example under one ablation and browse the J-lens readout of every layer (`python -m viz.run_app`).
-- `configs/` — `run.yaml` (which model plus run settings), `viz.yaml` (viewer settings) and `models/<name>.yaml` profiles.
-- `stats/` — reference readout statistics per model profile (`<model>.pt`, from `evaluation.run_readout_stats`; gitignored), read by the clamp conditions.
+- `configs/` — `run.yaml` (which model plus run settings and optional `jspace:` overrides), `exp3.yaml` (experiment 3: band layers 8-26), `viz.yaml` (viewer settings) and `models/<name>.yaml` profiles.
+- `stats/` — reference readout statistics per model profile (`<model>.pt`, from `evaluation.run_readout_stats`; gitignored), read by the clamp conditions; `stats/exp3/` holds those for experiment 3's band (layers 8-26).
 - `tests/` — flat unit tests with one shared `conftest.py`.
 - `commands.md` — every CLI command (setup, checks, splits, readout statistics, training, eval, lens refit) in run order.
 - `debt.md` — recorded technical debt that spans several files.

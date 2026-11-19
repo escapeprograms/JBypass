@@ -14,8 +14,13 @@ def field_answers(item, field: str) -> tuple[str, ...]:
 
 def readable_items(js, items):
     """Drop items whose bridge (or swap_to) has no single-token spelling."""
+    return tokenizer_readable_items(js.lm.tokenizer, items)
+
+
+def tokenizer_readable_items(tokenizer, items):
+    """readable_items with only a tokenizer (no model needed)."""
     def ok(word):
-        return word is None or bool(token_variants(js.lm.tokenizer, word))
+        return word is None or bool(token_variants(tokenizer, word))
     return [it for it in items if ok(it.bridge) and ok(it.swap_to)]
 
 

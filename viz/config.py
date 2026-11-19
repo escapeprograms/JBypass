@@ -11,6 +11,7 @@ DEFAULT_VIZ_CONFIG = Path(__file__).resolve().parent.parent / "configs" / "viz.y
 @dataclass(frozen=True)
 class VizConfig:
     runs_dir: Path                  # folder whose subfolders are saved adapters
+    lenses_dir: Path                # refit lenses, <adapter folder name>.pt or <profile>.pt
     split_file: Path | None         # {split: [item names]}; None offers only "all"
     dictionary_file: Path | None    # gzipped CC-CEDICT; None turns translations off
     top_n: int                      # top tokens per (position, layer) cell
@@ -21,13 +22,14 @@ class VizConfig:
 
 
 def load_viz_config(path: str | Path = DEFAULT_VIZ_CONFIG) -> VizConfig:
-    """Read viz.yaml. `runs_dir`, `split_file` and `dictionary_file` are relative to the file's
-    folder; `null` for the last two gives None."""
+    """Read viz.yaml. `runs_dir`, `lenses_dir`, `split_file` and `dictionary_file` are relative to
+    the file's folder; `null` for the last two gives None."""
     path = Path(path)
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     return VizConfig(**{
         **data,
         "runs_dir": _relative_to(path, data["runs_dir"]),
+        "lenses_dir": _relative_to(path, data["lenses_dir"]),
         "split_file": _optional_path(path, data["split_file"]),
         "dictionary_file": _optional_path(path, data["dictionary_file"]),
     })

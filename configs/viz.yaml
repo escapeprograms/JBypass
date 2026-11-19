@@ -1,5 +1,6 @@
 # Settings for the J-space viewer (python -m viz.run_app). Paths are relative to this file's folder.
 runs_dir: ../runs                            # each subfolder holding a saved adapter becomes a model choice
+lenses_dir: ../lenses                        # refit lenses: <adapter folder name>.pt, or <profile>.pt for a base model
 split_file: ../results/splits_expanded.json  # {split: [item names]}; null offers only "all"
 dictionary_file: ../downloads/cedict_1_0_ts_utf-8_mdbg.txt.gz  # CC-CEDICT, saved by hand from mdbg.net; null = no translations
 top_n: 10                                    # top tokens kept per (position, layer) cell

@@ -6,7 +6,7 @@ from pathlib import Path
 DATA_DIR = Path(__file__).parent / "data"
 
 
-# TODO(debt-002): dataclass defaults, while run and model settings are YAML.
+# TODO(debt-002): dataclass defaults, while run, model and J-space settings are YAML.
 @dataclass(frozen=True)
 class EvalConfig:
     # Datasets (name -> path). paper_* are Anthropic's, copied from jacobian-lens.

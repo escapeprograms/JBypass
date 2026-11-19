@@ -9,7 +9,7 @@ from huggingface_hub import hf_hub_download
 
 from jspace.baseline import ReadoutStats, load_readout_stats
 from jspace.config import JSpaceConfig
-from jspace.vectors import workspace_band
+from jspace.vectors import layer_range, workspace_band
 from model.loading import LanguageModel
 
 
@@ -66,15 +66,36 @@ def load_jspace(
     stats_path: str | Path | None = None,
 ) -> JSpace:
     """Bundle a loaded model with its lens (`lens_path`, or the profile's prefit lens) and
-    its readout statistics (`stats_path`, else the default file if it exists, else None)."""
+    its readout statistics (`stats_path`, else the default file if it exists, else None).
+    Raises if the lens has no J matrix for a band layer."""
     lens = load_lens(lm, lens_path)
-    band = workspace_band(lm.n_layers, cfg.band_start, cfg.band_end)
+    band = _band(lm, cfg)
+    _check_lens_covers(lens, band)
     return JSpace(lm, lens_view(lm), lens, band, cfg, _load_stats(lm, cfg, band, stats_path))
+
+
+def _band(lm: LanguageModel, cfg: JSpaceConfig) -> list[int]:
+    """cfg.band_layers (inclusive) if set, else the band_start/band_end fractions of lm's depth."""
+    if cfg.band_layers is not None:
+        return layer_range(*cfg.band_layers, lm.n_layers)
+    return workspace_band(lm.n_layers, cfg.band_start, cfg.band_end)
+
+
+def _check_lens_covers(lens: jlens.JacobianLens, band: list[int]) -> None:
+    missing = [l for l in band if l not in lens.jacobians]
+    if missing:
+        raise ValueError(f"the lens has no J matrix for band layers {missing} "
+                         f"(lens layers: {sorted(lens.source_layers)})")
 
 
 def default_stats_path(lm: LanguageModel, cfg: JSpaceConfig) -> Path:
     """Where the readout statistics of lm's profile live by default."""
-    return Path(cfg.readout_stats_dir) / f"{lm.profile.name}.pt"
+    return profile_stats_path(lm.profile.name, cfg)
+
+
+def profile_stats_path(profile_name: str, cfg: JSpaceConfig) -> Path:
+    """Where the readout statistics of the named profile live by default (no model needed)."""
+    return Path(cfg.readout_stats_dir) / f"{profile_name}.pt"
 
 
 def _load_stats(

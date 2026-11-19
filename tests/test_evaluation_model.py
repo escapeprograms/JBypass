@@ -10,6 +10,7 @@ from evaluation.conditions import CONDITIONS, interventions_for_item, item_rng
 from evaluation.data_loading import TwoHopItem
 from evaluation.perplexity import perplexity
 from evaluation.run_readout_stats import reference_texts
+from evaluation.runner import readable_items, tokenizer_readable_items
 from evaluation.scoring import answer_index, greedy_continuation, is_answer_token
 from jspace import ReadoutClamp, token_variants
 from model.inference import encode, forward_logits, greedy_tokens
@@ -71,6 +72,14 @@ def test_reference_texts_are_prompts_excluding_their_own_bridge(tokenizer):
     texts, exclude = reference_texts(tokenizer, [ITEM, other])
     assert texts == [ITEM.prompt, other.prompt]
     assert exclude == [token_variants(tokenizer, "France"), token_variants(tokenizer, "Italy")]
+
+
+def test_tokenizer_readable_items_equals_readable_items(qwen_lm):
+    unreadable = TwoHopItem(name="z-0", category="test", prompt="p", bridge="Xqzvbnmplk", answers=("a",))
+    no_swap = TwoHopItem(name="w-0", category="test", prompt="p", bridge="Italy", answers=("Rome",))
+    items = [ITEM, unreadable, no_swap]
+    kept = tokenizer_readable_items(qwen_lm.tokenizer, items)
+    assert kept == readable_items(synthetic_js(qwen_lm), items) == [ITEM, no_swap]
 
 
 def test_random_builders_repeat_with_the_same_item_rng(qwen_lm):

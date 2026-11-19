@@ -1,5 +1,5 @@
 """HTML and markdown for one run: the jlens slice page (optionally with the translation box),
-its iframe, and a text summary. The only viz module that produces HTML (and, through jlens,
+its iframe, a text summary, the no-refit-lens note, and the table of a question's runs. The only viz module that produces HTML (and, through jlens,
 touches the network); it also reads the box's static files (viz/static/)."""
 
 import html
@@ -10,6 +10,7 @@ from jlens.vis import SliceData, build_page
 
 from evaluation.data_loading import TwoHopItem
 from evaluation.runner import field_answers
+from viz.cache import RunKey, Shown
 from viz.run import RunResult
 
 GLOSS_DATA_ID = "jb-gloss-data"   # id of the JSON <script> that viz/static/gloss.js reads
@@ -55,6 +56,14 @@ def iframe(page: str, height: int) -> str:
     return f'<iframe srcdoc="{html.escape(page)}" style="width:100%;height:{height}px;border:0"></iframe>'
 
 
+def no_refit_lens_note(label: str, command: str) -> str:
+    """HTML for the refit-lens pane of a model with no refit lens: the command that fits one."""
+    return (f"<div style=\"padding:1em\"><p>No refit lens for <b>{html.escape(label)}</b>. "
+            f"Fit one, then restart the viewer. As written the command uses the config's default "
+            f"prompt count and batch size; commands.md section 7 has the settings and timing used "
+            f"for the other lenses:</p><pre>{html.escape(command)}</pre></div>")
+
+
 def summary(result: RunResult, mismatches: list[int]) -> str:
     """Short markdown: prompt, bridge, answers, full response, score, shown positions, replay check."""
     n_prompt = len(result.prompt_ids)
@@ -66,6 +75,25 @@ def summary(result: RunResult, mismatches: list[int]) -> str:
         _shown_line(result),
         _replay_line(mismatches, n_prompt),
     ])
+
+
+def responses_table(rows: list[tuple[RunKey, Shown]]) -> str:
+    """Markdown table of one question's cached runs (`ResultCache.entries`), in run order:
+    model, prompt field, ablation, response, correct. "" when there are none."""
+    if not rows:
+        return ""
+    header = ["| Model | Prompt field | Ablation | Response | Correct |", "|---|---|---|---|---|"]
+    return "\n".join(header + [_table_row(key, shown) for key, shown in rows])
+
+
+def _table_row(key: RunKey, shown: Shown) -> str:
+    cells = [key.model, key.field, key.condition, shown.response, "yes" if shown.correct else "no"]
+    return "| " + " | ".join(_table_cell(c) for c in cells) + " |"
+
+
+def _table_cell(text: str) -> str:
+    """`text` on one line, HTML-escaped, with pipes escaped, so it cannot break the table."""
+    return html.escape(one_line(text).replace("\r", "")).replace("|", "\\|")
 
 
 def one_line(text: str) -> str:

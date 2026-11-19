@@ -75,9 +75,14 @@ def freeze(lm: LanguageModel) -> None:
     lm.hf_model.requires_grad_(False)
 
 
+def load_tokenizer(profile: ModelProfile) -> PreTrainedTokenizerBase:
+    """The profile's tokenizer only (from the HF cache, downloading if needed); no model weights."""
+    return AutoTokenizer.from_pretrained(profile.hf_id)
+
+
 def load_model(profile: ModelProfile) -> LanguageModel:
     """Load the profile's model (from the HF cache, downloading if needed) onto its device, in eval mode."""
-    tokenizer = AutoTokenizer.from_pretrained(profile.hf_id)
+    tokenizer = load_tokenizer(profile)
     hf_model = AutoModelForCausalLM.from_pretrained(profile.hf_id, dtype=getattr(torch, profile.dtype))
     hf_model.to(profile.device).eval()
     return LanguageModel(hf_model, tokenizer, profile)

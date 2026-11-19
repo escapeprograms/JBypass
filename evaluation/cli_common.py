@@ -7,14 +7,14 @@ from pathlib import Path
 
 from evaluation.config import EvalConfig
 from evaluation.data_loading import load_dataset
-from jspace import JSpace, JSpaceConfig, load_jspace
+from jspace import JSpace, JSpaceConfig, jspace_config, load_jspace
 from model.cli import add_profile_args, resolve_profile
 from model.config import ModelProfile
 from model.loading import LanguageModel, freeze, load_model
 from model.lora import load_adapter
 
-STATS_PATH_HELP = ("reference readout statistics .pt from evaluation.run_readout_stats; "
-                   "default = stats/<model>.pt if present")
+STATS_PATH_HELP = ("reference readout statistics .pt from evaluation.run_readout_stats; default = "
+                   "<readout_stats_dir>/<model>.pt if present (stats/ unless --config's jspace section sets it)")
 
 
 def add_model_args(parser: argparse.ArgumentParser) -> None:
@@ -41,13 +41,13 @@ def load_frozen_model(profile: ModelProfile, adapter: str | Path | None = None) 
     return lm
 
 
-def load_frozen_jspace(profile: ModelProfile, adapter: str | Path | None = None,
+def load_frozen_jspace(profile: ModelProfile, jspace_cfg: JSpaceConfig, adapter: str | Path | None = None,
                        lens_path: str | None = None, stats_path: str | Path | None = None) -> JSpace:
     """load_frozen_model plus the lens (`lens_path`, or the profile's prefit lens) and the
-    readout statistics (`stats_path`, else the profile's default file if present, else None)."""
-    # TODO(debt-002): J-space settings are the dataclass defaults, not read from a file.
+    readout statistics (`stats_path`, else jspace_cfg's default file if present, else None),
+    with the band and other J-space settings of `jspace_cfg`."""
     lm = load_frozen_model(profile, adapter)
-    return load_jspace(lm, JSpaceConfig(), lens_path=lens_path, stats_path=stats_path)
+    return load_jspace(lm, jspace_cfg, lens_path=lens_path, stats_path=stats_path)
 
 
 def load_model_from_args(args) -> LanguageModel:
@@ -57,9 +57,10 @@ def load_model_from_args(args) -> LanguageModel:
 
 
 def load_from_args(args) -> JSpace:
-    """load_frozen_jspace with the profile, --adapter, --lens_path and --stats_path from args."""
-    _, profile = resolve_profile(args)
-    return load_frozen_jspace(profile, args.adapter, args.lens_path, args.stats_path)
+    """load_frozen_jspace with the profile and J-space settings of --config/--model/--device,
+    and --adapter, --lens_path and --stats_path from args."""
+    run, profile = resolve_profile(args)
+    return load_frozen_jspace(profile, jspace_config(run), args.adapter, args.lens_path, args.stats_path)
 
 
 def load_items(name: str, cfg: EvalConfig, split_file: str | None = None, split: str | None = None,

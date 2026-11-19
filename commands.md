@@ -13,7 +13,7 @@ With the env active (`conda activate jbypass`), plain `python -m ...` works. Add
 **Every command** takes these:
 | flag | default | what it does |
 |---|---|---|
-| `--config <path>` | `configs/run.yaml` | Run settings file: which model, generation length, LoRA rank, training steps, batch size, learning rate, seed. |
+| `--config <path>` | `configs/run.yaml` | Run settings file: which model, generation length, LoRA rank, training steps, batch size, learning rate, seed, and an optional `jspace:` section that overrides J-space settings (any field of `JSpaceConfig` in `jspace/config.py`), e.g. `band_layers: [8, 26]` (inclusive layer indices, replacing the default band = layers 11-26), `clamp_z`, `readout_stats_dir` (relative to the YAML's folder). Unknown keys stop with an error. Training, readout statistics, every eval command and the viewer all read it, so one `--config` fixes the band for a whole experiment. `configs/run.yaml` has no `jspace:` section (defaults = exp 2); `configs/exp3.yaml` is experiment 3 (section 9). |
 | `--model <name>` | `model:` in run.yaml (`qwen3-1.7b`) | Model profile from `configs/models/<name>.yaml`. Overrides run.yaml. Options: `qwen3-1.7b`, `qwen3-0.6b`. |
 | `--device <name>` | the profile's `device` (`cuda`) | Where to run: `cuda`, `cpu` or `mps` (Mac). |
 
@@ -23,7 +23,7 @@ With the env active (`conda activate jbypass`), plain `python -m ...` works. Add
 | `--tag <name>` | `M` | A label for the run. It is printed in the log and used in the output filename (`<out_dir>/eval_<tag>_...json`), so runs don't overwrite each other. Use `M` for the base model and the adapter's name for a fine-tuned one (`mexp`, `mctrl`, ...). It does not change what gets computed. |
 | `--adapter <dir>` | none (base model M) | Loads a LoRA adapter saved by `finetune.run_train`, so you evaluate Mexp, Mctrl or Mrand instead of M. |
 | `--lens_path <file.pt>` | the profile's prefit lens (downloaded from Neuronpedia) | Uses a different J-lens for the ablations and readouts, e.g. one refit with `jspace.fit_lens`. |
-| `--stats_path <file.pt>` | `stats/<model>.pt` if it exists, else none | Reference readout statistics from `evaluation.run_readout_stats` (section 3b). Needed only by the clamp conditions; an adapter uses base M's file (stats are keyed by model profile). |
+| `--stats_path <file.pt>` | `<readout_stats_dir>/<model>.pt` if it exists, else none (`stats/qwen3-1.7b.pt` with run.yaml, `stats/exp3/qwen3-1.7b.pt` with exp3.yaml) | Reference readout statistics from `evaluation.run_readout_stats` (section 3b). Needed only by the clamp conditions; an adapter uses base M's file (stats are keyed by model profile). |
 | `--limit <N>` | all items | Uses only the first N items of each dataset. For quick test runs. |
 | `--out_dir <dir>` | `results` | Folder the result JSON is written to. Give each run (experiment) its own folder, e.g. `--out_dir "results/exp 3"`; it is created if missing. Existing layout: `results/baseline/` (base M), `results/exp 1/` (Mexp), `results/exp 2/` (Mclamp and the clamp_z sweep on M), `results/smoke/`. |
 
@@ -72,16 +72,17 @@ It also takes the eval flags (`--adapter`, `--lens_path`, `--limit`). Normally y
 ## 3b. Readout statistics (for the clamp conditions)
 ```powershell
 python -m evaluation.run_readout_stats                                            # -> stats/qwen3-1.7b.pt
+python -m evaluation.run_readout_stats --config configs/exp3.yaml                 # band 8-26 -> stats/exp3/qwen3-1.7b.pt
 python -m evaluation.run_readout_stats --split_file results/splits.json --split train --out stats/train.pt
 ```
-The clamp exists because the Mexp adapter answered better with the bridge ablation on than off (0.92 vs 0.66 on test_seen), so it was keying on the exactly-zero bridge readout that `bridge` produces and a clean pass never does; `bridge_clamp` instead lowers the readout only to its normal level. `run_readout_stats` records that normal level: for every token and every band layer, the mean and standard deviation of its J-lens logit over the dataset's prompts (each prompt leaves out its own bridge's tokens). The clamp caps the bridge at mean + `clamp_z` x std (`JSpaceConfig.clamp_z`, 2.0). Run it once per model profile, before evaluating or training with `bridge_clamp` / `wrong_bridge_clamp`; every later command loads `stats/<model>.pt` automatically. It prints the number of texts, editable positions, band layers and the output path.
+The clamp exists because the Mexp adapter answered better with the bridge ablation on than off (0.92 vs 0.66 on test_seen), so it was keying on the exactly-zero bridge readout that `bridge` produces and a clean pass never does; `bridge_clamp` instead lowers the readout only to its normal level. `run_readout_stats` records that normal level: for every token and every band layer, the mean and standard deviation of its J-lens logit over the dataset's prompts (each prompt leaves out its own bridge's tokens). The clamp caps the bridge at mean + `clamp_z` x std (`JSpaceConfig.clamp_z`, 0.5; override with `jspace: {clamp_z: ...}` in the `--config` file). Statistics cover only the band's layers, so run it once per model profile and band (i.e. per `--config` whose band differs), before evaluating or training with `bridge_clamp` / `wrong_bridge_clamp`; every later command with the same `--config` loads `<readout_stats_dir>/<model>.pt` automatically. It prints the number of texts, editable positions, band layers and the output path.
 | flag | default | what it does |
 |---|---|---|
 | `--dataset <name>` | `jbypass` | Dataset whose prompts are the reference texts. |
 | `--split_file <path>`, `--split <name>` | none (whole dataset) | Restrict the reference texts to one split. |
-| `--out <path>` | `stats/<model>.pt` | Where to write the statistics. Another path must then be passed as `--stats_path` to later commands. |
+| `--out <path>` | `<readout_stats_dir>/<model>.pt` (`stats/` by default, `stats/exp3/` with exp3.yaml) | Where to write the statistics. Another path must then be passed as `--stats_path` to later commands. |
 
-It also takes the shared and eval flags (`--adapter`, `--lens_path`, `--limit`; `--stats_path` is accepted but not needed). If an existing `stats/<model>.pt` no longer fits the band, delete it before rerunning.
+It also takes the shared and eval flags (`--adapter`, `--lens_path`, `--limit`; `--stats_path` is accepted but not needed). The command also loads the existing default file of its `--config`, so if `<readout_stats_dir>/<model>.pt` no longer fits that config's band, delete it before rerunning. A config with a different band should set its own `readout_stats_dir` (as `configs/exp3.yaml` does with `stats/exp3/`) so each band keeps its own file.
 
 ## 4. Baselines on base model M
 ```powershell
@@ -147,9 +148,9 @@ python -m finetune.run_train --condition bridge_clamp --split_file results/split
 |---|---|---|
 | `--condition <name>` | required | The ablation applied during training: `bridge` (Mexp), `none` (Mctrl), `random_tok` or `random_dir` (Mrand), `bridge_clamp` (bridge readout capped at its normal level instead of zeroed; needs section 3b). |
 | `--split_file <path>` | required | Split file from `make_splits`. Training always uses its `train` split. |
-| `--out <dir>` | required | Folder to save the adapter in, along with `train_info.json` (condition, seeds, stats file used and `clamp_z`, per-step losses). Pass this folder to the eval commands as `--adapter`. |
+| `--out <dir>` | required | Folder to save the adapter in, along with `train_info.json` (condition, seeds, stats file used, `clamp_z`, `band` layers, per-step losses). Pass this folder to the eval commands as `--adapter`. |
 | `--lens_path <file.pt>` | the profile's prefit lens | The lens whose vectors are ablated during training. |
-| `--stats_path <file.pt>` | `stats/<model>.pt` if it exists | Reference readout statistics for `bridge_clamp`. |
+| `--stats_path <file.pt>` | `<readout_stats_dir>/<model>.pt` if it exists | Reference readout statistics for `bridge_clamp`. |
 
 It also takes the shared flags. It prints the loss at every step and the peak GPU memory at the end.
 
@@ -163,17 +164,23 @@ python -m evaluation.run_perplexity --adapter runs/mexp --tag mexp --out_dir "re
 The split name is already in the output filename, so `--tag mexp` is enough for both splits. `run_perplexity` has no split, so run it once per adapter.
 
 ## 7. Recompute the lens after training
+The refit lenses for exp 2 and exp 3 (shown by the viewer, section 8); run them one at a time, since each needs the whole GPU:
 ```powershell
-python -m jspace.fit_lens --adapter runs/mexp --out lenses/mexp.pt                    # full fit
-python -m jspace.fit_lens --adapter runs/mexp --n_prompts 100 --out lenses/quick.pt   # quick, rougher fit
+python -m jspace.fit_lens --adapter runs/mclamp       --n_prompts 100 --dim_batch 8 --out lenses/mclamp.pt        # exp 2 adapter
+python -m jspace.fit_lens --adapter runs/mclamp-L8-26 --n_prompts 100 --dim_batch 8 --out lenses/mclamp-L8-26.pt  # exp 3 adapter
+python -m jspace.fit_lens                             --n_prompts 100 --dim_batch 8 --out lenses/qwen3-1.7b.pt    # base M, control
 ```
-`jspace.fit_lens` fits a new J-lens with Anthropic's `jlens.fit` on WikiText prompts, the same corpus the prefit lens used.
+`jspace.fit_lens` fits a new J-lens with Anthropic's `jlens.fit` on WikiText prompts, the same corpus the prefit lens used, with the adapter active (not merged). The band does not affect a fit, so no `--config` is needed. The base-M fit is a control: it uses the same recipe as the adapter fits, while the prefit Neuronpedia lens used a different one (466 prompts with early stopping, longer prompts; `jlens.fit` has no early stopping), so compare an adapter's refit with the base-M refit, not only with the prefit lens.
+
+Cost on this 8 GB laptop GPU at `--dim_batch 8`: 53-56 s per prompt with nothing else on the GPU, about 65 s with a game open (the exp 2 fit took 1 h 37 min for 100 prompts). `--dim_batch 16` exceeds dedicated GPU memory: the Windows driver spills into shared memory instead of failing, and no prompt finished in 15 minutes.
+
+The fit writes a checkpoint `<out>.ckpt` every 10 prompts (`fit_checkpoint_every` in a `jspace:` section; `null` = only at the end) and resumes from it: rerun an interrupted fit with the same command. Rerunning the same `--out` with a larger `--n_prompts` extends the fit (e.g. 100 -> 200 prompts costs only the new 100). The checkpoint does not record the model, so a different model or adapter needs a different `--out` (debt 003).
 | flag | default | what it does |
 |---|---|---|
-| `--out <path>` | required | Where to save the lens `.pt`. A checkpoint `<out>.ckpt` is written while it runs. |
+| `--out <path>` | required | Where to save the lens `.pt`. A checkpoint `<out>.ckpt` is written while it runs and resumed from. |
 | `--adapter <dir>` | none (base M) | Fits the lens on the fine-tuned model instead of M. |
 | `--n_prompts <N>` | `1000` | Number of WikiText prompts to fit on. Fewer is faster and rougher. |
-| `--dim_batch <N>` | `32` | Number of dimensions `jlens.fit` processes at once. Lower it if you run out of GPU memory. |
+| `--dim_batch <N>` | `32` | Number of dimensions `jlens.fit` processes at once. Lower it if you run out of GPU memory (8 on an 8 GB GPU). |
 
 It also takes the shared flags.
 
@@ -187,32 +194,54 @@ The second command uses a new tag (`mexp_relens`) so it doesn't overwrite the re
 ## 8. Visualize
 ```powershell
 python -m viz.run_app                                   # then open http://127.0.0.1:7860
+python -m viz.run_app --config configs/exp3.yaml        # exp 3 band (layers 8-26)
 python -m viz.run_app --device cpu                      # no GPU (slow)
 ```
-`viz.run_app` starts a local Gradio app for looking at one example at a time: it generates under one ablation and shows the J-lens readout of every layer over the prompt and the response (jlens's heatmap page). The model loads when the page opens (a few seconds on GPU). The first run in each process downloads d3 from a CDN, so it needs internet once. An env created before gradio was added needs `pip install gradio==6.32.0` and `pip install -e .` (a fresh `conda env create -f environment.yml` already has it). At startup it prints `CC-CEDICT: <N> entries, <M> headwords <- <path>` (or `Translations off (dictionary_file: null)`); it stops with an error naming the download page if the dictionary file from section 1 is missing.
+`viz.run_app` starts a local Gradio app for looking at one example at a time: it generates under one ablation and shows the J-lens readout of every layer over the prompt and the response (jlens's heatmap page), through the original lens and through the model's refit lens. The page opens at once without loading a model (startup loads only the tokenizer); a model loads on the first **Run** (a few seconds on GPU). The first run in each process downloads d3 from a CDN, so it needs internet once. An env created before gradio was added needs `pip install gradio==6.32.0` and `pip install -e .` (a fresh `conda env create -f environment.yml` already has it). At startup it prints `CC-CEDICT: <N> entries, <M> headwords <- <path>` (or `Translations off (dictionary_file: null)`); it stops with an error naming the download page if the dictionary file from section 1 is missing.
 | flag | default | what it does |
 |---|---|---|
-| `--config <path>` | `configs/run.yaml` | Run settings; `generation.max_new_tokens` is the response length. |
-| `--model <name>` | `model:` in run.yaml | The base model selected when the page opens. Must have a prefit lens (`qwen3-1.7b`). |
+| `--config <path>` | `configs/run.yaml` | Run settings; `generation.max_new_tokens` is the response length, and its `jspace:` section sets the band and readout statistics (e.g. `configs/exp3.yaml` for layers 8-26). |
+| `--model <name>` | `model:` in run.yaml | The base model of this viewer: the model dropdown lists it and its adapters only. Must have a prefit lens (`qwen3-1.7b`). |
 | `--device <name>` | the profile's `device` | Where every model choice runs. |
-| `--viz_config <path>` | `configs/viz.yaml` | Viewer settings: adapters folder, split file, top-n, tracked-token cap, iframe height, host and port. |
+| `--viz_config <path>` | `configs/viz.yaml` | Viewer settings: adapters folder, refit-lens folder (`lenses_dir`), split file, top-n, tracked-token cap, iframe height, host and port. |
 
-What you can do in the UI:
-- **Model**: the base model or any adapter in `runs/` trained from it (switching reloads; only one model is in memory). Adapters are read with the base model's prefit lens.
-- **Dataset / Split / Example**: splits come from `results/splits_expanded.json` (`all` = no filter); only items whose bridge the lens can read are listed. **Random example** picks one.
-- **Prompt field / Ablation**: only the fields the item has and the conditions that can be built for it (`wrong_bridge` / `wrong_bridge_clamp` need a swap bridge; the clamp conditions appear only when `stats/<model>.pt` exists). `none` is the clean run.
-- **Run**: shows the response, whether it is correct, and the heatmap: click a cell for its top tokens, click a pin to see its rank over every (position, layer); the bridge and the answers are pinned. Rows at ablated layers show the residual after the ablation.
+**Which `--config` for which adapter:** the ablations use the band of the viewer's `--config`, so open `runs/mclamp` (exp 2) with the default `configs/run.yaml` (band 11-26) and `runs/mclamp-L8-26` (exp 3) with `--config configs/exp3.yaml` (band 8-26). Both adapters are listed under either config; with ablation `none` the band does not matter.
+
+What you can do in the UI, top to bottom:
+- **Dataset / Split**, then **Example** (or **Random example**): splits come from `results/splits_expanded.json` (`all` = no filter); only items whose bridge the lens can read are listed.
+- **Prompt field / Ablation**: only the fields the item has and the conditions that can be built for it (`wrong_bridge` / `wrong_bridge_clamp` need a swap bridge; the clamp conditions appear only when `<readout_stats_dir>/<model>.pt` of `--config` exists). `none` is the clean run. The item card below shows the prompt, bridge and expected answers.
+- **Model**, then **Run**: the base model or any adapter in `runs/` trained from it (only one model is in memory; running another model reloads). Run generates and shows the response, whether it is correct, and the heatmaps.
+- **Result cache**: every run is kept for the selected question, so flipping the model dropdown back to a model that already ran shows its result at once with no reload (in either tab); a model not yet run shows "Not run yet ... Press Run.". Changing the question clears the result on screen, and the first Run on a new question drops the old question's results. The table above the summary lists every run of the question (model, prompt field, ablation, response, correct).
+- **Two lens tabs**: "Original lens" reads the model through the base model's prefit lens; "Refit lens (this model)" through the model's own refit lens: `lenses/<adapter folder name>.pt`, or `lenses/<profile>.pt` for the base model (section 7). Generation and the ablations always use the original lens; the refit lens only reads out. Without a refit lens the tab shows the command that fits one. Lenses are found at startup, so **restart the viewer after fitting a lens**.
+- **Heatmap**: click a cell for its top tokens, click a pin to see its rank over every (position, layer); the bridge and the answers are pinned. Rows at ablated layers show the residual after the ablation.
 - **Translations**: click a Chinese token (in the By Layer / By Pos lists, a pinned chip, the prompt strip or a grid cell) for its translation: a box at the bottom right shows the pinyin and senses of each word (CC-CEDICT). Clicking still pins the token as before. Other scripts show "no dictionary entry"; English tokens close the box; × closes it.
+
+## 9. Experiment 3: clamp from layer 8
+Exp 2 with the band widened from layers 11-26 (the default fractions) to layers 8-26. Everything else is unchanged: `configs/exp3.yaml` is `configs/run.yaml` (same model, LoRA, 500 steps, seed) plus `jspace: {band_layers: [8, 26], readout_stats_dir: ../stats/exp3}`. Pass `--config configs/exp3.yaml` to every command so training, statistics, evals and the viewer all use the same band.
+```powershell
+# readout statistics over the whole dataset for layers 8-26 (exp 2's stats/qwen3-1.7b.pt: whole dataset, 1026 texts) -> stats/exp3/qwen3-1.7b.pt
+python -m evaluation.run_readout_stats --config configs/exp3.yaml
+# Mclamp with the wider band (bridge_clamp, clamp_z 0.5, train split of splits_expanded, as runs/mclamp)
+python -m finetune.run_train --config configs/exp3.yaml --condition bridge_clamp --split_file results/splits_expanded.json --out runs/mclamp-L8-26
+# base M under the wider band (exp 2: tags M_clamp at clamp_z 2.0 and M_z05 at 0.5)
+python -m evaluation.run_eval --config configs/exp3.yaml --split_file results/splits_expanded.json --split test_unseen --conditions none,bridge,bridge_clamp,wrong_bridge_clamp --all_items --tag M_L8-26 --out_dir "results/exp 3"
+# the adapter: four diagnostic conditions, then all ten (exp 2: tags mclamp-diag, mclamp-all)
+python -m evaluation.run_eval --config configs/exp3.yaml --adapter runs/mclamp-L8-26 --split_file results/splits_expanded.json --split test_unseen --conditions none,bridge_clamp,bridge,wrong_bridge_clamp --all_items --tag mclamp-L8-26-diag --out_dir "results/exp 3"
+python -m evaluation.run_eval --config configs/exp3.yaml --adapter runs/mclamp-L8-26 --split_file results/splits_expanded.json --split test_unseen --all_items --tag mclamp-L8-26-all --out_dir "results/exp 3"
+# viewer on the same band (clamp conditions use stats/exp3/)
+python -m viz.run_app --config configs/exp3.yaml
+```
+All evals use all three prompt types (the default `--fields`) on the 154 `test_unseen` items, as in exp 2. `--all_items` keeps items the adapter gets wrong clean (exp 2's adapter runs used it; for base M it changes nothing, since the splits hold only items M answers). The diag run's four conditions are a subset of the all run, kept to mirror exp 2. `train_info.json` and every eval JSON record the band (`"band": [8, ..., 26]`); check it before comparing with `results/exp 2/` (`[11, ..., 26]`). To repeat exp 2's clamp_z sweep on this band, copy `configs/exp3.yaml` and add `clamp_z: 2.0` under `jspace:` (statistics do not depend on `clamp_z`, so the same `readout_stats_dir` works).
 
 ## Outputs
 | command | writes |
 |---|---|
 | `make_splits` | `results/splits.json` (or `--out`) |
-| `run_readout_stats` | `stats/<model>.pt` (or `--out`) |
+| `run_readout_stats` | `<readout_stats_dir>/<model>.pt`, default `stats/<model>.pt` (or `--out`) |
 | `run_eval` | `<out_dir>/eval_<tag>_<dataset>_<split or all>.json` (`--out_dir`, default `results`) |
 | `run_mechanism` | `<out_dir>/mechanism_<tag>_<dataset>_<split or all>.json` |
 | `run_perplexity` | `<out_dir>/perplexity_<tag>.json` |
 | `run_lens_checks` | `<out_dir>/lens_checks_<tag>.json` |
 | `run_train` | `<out>/` (adapter + `train_info.json`) |
-| `fit_lens` | `<out>` (lens `.pt`) |
+| `fit_lens` | `<out>` (lens `.pt`) and `<out>.ckpt` (checkpoint, resumed by a rerun with the same `--out`) |
 | `viz.run_app` | nothing (serves a local web page) |

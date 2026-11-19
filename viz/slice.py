@@ -34,10 +34,27 @@ def pinned_tokens(js, result: RunResult) -> list[int]:
 def run_slice(js, result: RunResult, top_n: int, max_tracked: int | None) -> SliceData:
     """The readout of prompt + response up to the answer token (`result.shown_ids`) under the
     result's condition, rebuilt once on that sequence, with the bridge and answers pinned."""
-    ids = torch.tensor([result.prompt_ids + result.shown_ids], dtype=torch.long, device=js.lm.device)
-    enc = Encoded(ids, torch.ones_like(ids))
+    return run_slices(js, [js], result, top_n, max_tracked)[0]
+
+
+@torch.no_grad()
+def run_slices(js, readers: Sequence, result: RunResult, top_n: int,
+               max_tracked: int | None) -> list[SliceData]:
+    """run_slice once per reader (a JSpace on the same model, e.g. with another lens), from one
+    forward pass: the condition's interventions are built from `js` (the original lens) and the
+    residuals captured at the union of the readers' readout layers."""
+    enc = shown_encoding(js, result)
     interventions = interventions_for_item(js, result.item, result.condition, result.seed)(enc)
-    return slice_from_ids(js, enc, interventions, top_n, max_tracked, pinned_tokens(js, result))
+    layers = sorted(set().union(*(readout_layers(r) for r in readers)))
+    resids = forward_residuals(js.lm, enc, layers, interventions)
+    pinned = pinned_tokens(js, result)
+    return [slice_from_resids(r, enc, resids, top_n, max_tracked, pinned) for r in readers]
+
+
+def shown_encoding(js, result: RunResult) -> Encoded:
+    """One unpadded row of prompt + shown response ids on js's device."""
+    ids = torch.tensor([result.prompt_ids + result.shown_ids], dtype=torch.long, device=js.lm.device)
+    return Encoded(ids, torch.ones_like(ids))
 
 
 @torch.no_grad()
@@ -45,8 +62,16 @@ def slice_from_ids(js, enc: Encoded, interventions: Sequence[Intervention], top_
                    max_tracked: int | None, pinned: Sequence[int]) -> SliceData:
     """SliceData of one unpadded row: top-n ids per (position, layer), the tracked tokens
     (jlens's frequency rule capped by max_tracked, plus `pinned`) and their full-vocab ranks."""
+    resids = forward_residuals(js.lm, enc, readout_layers(js), interventions)
+    return slice_from_resids(js, enc, resids, top_n, max_tracked, pinned)
+
+
+@torch.no_grad()
+def slice_from_resids(js, enc: Encoded, resids: dict[int, torch.Tensor], top_n: int,
+                      max_tracked: int | None, pinned: Sequence[int]) -> SliceData:
+    """slice_from_ids from residuals already captured for `enc` (at least at js's readout layers),
+    read through js's lens."""
     layers = readout_layers(js)
-    resids = forward_residuals(js.lm, enc, layers, interventions)
     top_ids, vocab_size = _top_ids(js, resids, layers, top_n)
     tracked = _tracked_tokens(top_ids, max_tracked, pinned)
     ids = enc.input_ids[0].tolist()

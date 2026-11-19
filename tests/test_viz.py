@@ -20,21 +20,24 @@ from evaluation.conditions import CONDITIONS, NEEDS_STATS, interventions_for_ite
 from evaluation.config import EvalConfig
 from evaluation.data_loading import TwoHopItem
 from evaluation.scoring import answer_index, answer_token_ids, matches
-from jspace import token_variants
+from jspace import JSpaceConfig, load_jspace, token_variants
 from model.cli import DEFAULT_RUN_CONFIG
 from model.config import load_run_config
-from model.inference import encode, greedy_tokens
+from model.inference import encode, forward_residuals, greedy_tokens
 from model.lora import PROFILE_FILE
-from viz.catalog import (ALL_SPLITS, NEEDS_SWAP, ModelChoice, buildable_conditions, examples, lens_profiles,
-                         model_choices, pick_random, split_names, valid_conditions, valid_fields)
+from viz.cache import ResultCache, RunKey, Shown
+from viz.catalog import (ALL_SPLITS, NEEDS_SWAP, ModelChoice, buildable_conditions, examples, fit_command,
+                         lens_profiles, model_choices, pick_random, refit_lens_file, split_names,
+                         valid_conditions, valid_fields, with_refit_lenses)
 from viz.cedict import (CEDICT_FILE, CEDICT_PAGE, Entry, Segment, load_cedict, parse_cedict, parse_line,
                         segment)
 from viz.config import DEFAULT_VIZ_CONFIG, load_viz_config
 from viz.gloss import gloss_payload, is_foreign, token_gloss
-from viz.page import GLOSS_DATA_ID, iframe, item_card, one_line, slice_page, summary, with_glosses
+from viz.page import (GLOSS_DATA_ID, iframe, item_card, no_refit_lens_note, one_line, responses_table, slice_page,
+                      summary, with_glosses)
 from viz.run import run_example
-from viz.session import Session
-from viz.slice import pinned_tokens, replay_mismatches, run_slice, slice_from_ids
+from viz.session import Loaded, Session, attach_refit
+from viz.slice import pinned_tokens, replay_mismatches, run_slice, run_slices, shown_encoding, slice_from_ids
 
 PROFILES_DIR = load_run_config(DEFAULT_RUN_CONFIG).profiles_dir
 PROMPT = "The capital of France is"
@@ -79,9 +82,10 @@ def write(path: Path, text: str) -> Path:
 
 def test_viz_config_resolves_paths_against_its_folder(tmp_path):
     cfg = load_viz_config(write(tmp_path / "c" / "viz.yaml", (
-        "runs_dir: ../runs\nsplit_file: s.json\ndictionary_file: ../d/cedict.txt.gz\ntop_n: 5\n"
-        "max_tracked: null\npage_height: 100\nserver_name: localhost\nserver_port: 1\n")))
+        "runs_dir: ../runs\nlenses_dir: ../lenses\nsplit_file: s.json\ndictionary_file: ../d/cedict.txt.gz\n"
+        "top_n: 5\nmax_tracked: null\npage_height: 100\nserver_name: localhost\nserver_port: 1\n")))
     assert cfg.runs_dir == (tmp_path / "runs").resolve()
+    assert cfg.lenses_dir == (tmp_path / "lenses").resolve()
     assert cfg.split_file == (tmp_path / "c" / "s.json").resolve()
     assert cfg.dictionary_file == (tmp_path / "d" / "cedict.txt.gz").resolve()
     assert cfg.max_tracked is None and cfg.top_n == 5
@@ -89,7 +93,7 @@ def test_viz_config_resolves_paths_against_its_folder(tmp_path):
 
 def test_viz_config_null_split_and_dictionary_files(tmp_path):
     cfg = load_viz_config(write(tmp_path / "viz.yaml", (
-        "runs_dir: r\nsplit_file: null\ndictionary_file: null\ntop_n: 5\nmax_tracked: 3\n"
+        "runs_dir: r\nlenses_dir: l\nsplit_file: null\ndictionary_file: null\ntop_n: 5\nmax_tracked: 3\n"
         "page_height: 100\nserver_name: localhost\nserver_port: 1\n")))
     assert cfg.split_file is None and cfg.dictionary_file is None
 
@@ -97,6 +101,7 @@ def test_viz_config_null_split_and_dictionary_files(tmp_path):
 def test_committed_viz_config_loads():
     cfg = load_viz_config(DEFAULT_VIZ_CONFIG)
     assert cfg.runs_dir.name == "runs" and cfg.top_n > 0 and cfg.server_port == 7860
+    assert cfg.lenses_dir == cfg.runs_dir.parent / "lenses"
     assert cfg.dictionary_file.name == CEDICT_FILE and cfg.dictionary_file.parent.name == "downloads"
 
 
@@ -128,6 +133,28 @@ def test_model_choices_without_runs_dir(tmp_path):
     assert model_choices(PROFILES_DIR, tmp_path / "missing") == [ModelChoice("qwen3-1.7b")]
 
 
+def test_refit_lens_file_is_named_after_the_adapter_folder_or_the_profile(tmp_path):
+    assert refit_lens_file(ModelChoice("qwen3-1.7b"), tmp_path) == tmp_path / "qwen3-1.7b.pt"
+    assert refit_lens_file(ModelChoice("qwen3-1.7b", Path("runs/mclamp")), tmp_path) == tmp_path / "mclamp.pt"
+
+
+def test_with_refit_lenses_sets_lens_only_where_the_file_exists(tmp_path):
+    lens = write(tmp_path / "mclamp.pt", "")
+    choices = [ModelChoice("qwen3-1.7b"), ModelChoice("qwen3-1.7b", Path("runs/mclamp")),
+               ModelChoice("qwen3-1.7b", Path("runs/mexp"))]
+    found = with_refit_lenses(choices, tmp_path)
+    assert [c.lens for c in found] == [None, lens, None]
+    assert [c.label for c in found] == [c.label for c in choices]
+
+
+def test_fit_command_has_adapter_only_for_adapters(tmp_path):
+    out = tmp_path / "x.pt"
+    base = fit_command(ModelChoice("qwen3-1.7b"), out)
+    assert base == f"python -m jspace.fit_lens --model qwen3-1.7b --out {out}"
+    adapter = fit_command(ModelChoice("qwen3-1.7b", Path("runs/mclamp")), out)
+    assert adapter == f"python -m jspace.fit_lens --model qwen3-1.7b --adapter {Path('runs/mclamp')} --out {out}"
+
+
 def test_split_names_offers_only_non_empty_splits(tmp_path):
     split_file = write(tmp_path / "s.json", json.dumps({"a": ["t1", "x"], "b": ["x"], "c": []}))
     items = [make_item(name="t1"), make_item(name="t2")]
@@ -143,11 +170,10 @@ def test_valid_conditions_and_fields():
     assert valid_fields(with_swap, fields) == ["prompt", "hop1_prompt"]
 
 
-def test_buildable_conditions_drop_clamps_only_without_readout_stats(qwen_lm):
-    js, item = synthetic_js(qwen_lm), make_item()
-    assert buildable_conditions(js, item, CONDITIONS) == [c for c in CONDITIONS if c not in NEEDS_STATS]
-    js.readout_stats = synthetic_stats(js)
-    assert buildable_conditions(js, item, CONDITIONS) == valid_conditions(item, CONDITIONS)
+def test_buildable_conditions_drop_clamps_only_without_readout_stats():
+    item = make_item()
+    assert buildable_conditions(False, item, CONDITIONS) == [c for c in CONDITIONS if c not in NEEDS_STATS]
+    assert buildable_conditions(True, item, CONDITIONS) == valid_conditions(item, CONDITIONS)
 
 
 def test_pick_random_is_seeded():
@@ -155,16 +181,16 @@ def test_pick_random_is_seeded():
     assert pick_random(items, random.Random(3)) == pick_random(items, random.Random(3))
 
 
-def test_examples_drops_unreadable_bridges_and_filters_splits(tmp_path, qwen_lm):
+def test_examples_drops_unreadable_bridges_and_filters_splits(tmp_path, tokenizer):
     rows = [{"name": "ok", "prompt": PROMPT, "target": "Paris", "intermediates": ["France"]},
             {"name": "bad", "prompt": PROMPT, "target": "Paris", "intermediates": ["Xqzvbnmplk"]},
             {"name": "other", "prompt": PROMPT, "target": "Berlin", "intermediates": ["Germany"]}]
     data = write(tmp_path / "d.json", json.dumps({"items": rows}))
     split_file = write(tmp_path / "s.json", json.dumps({"one": ["ok", "bad"]}))
     cfg = EvalConfig(datasets={"paper_multihop": data})
-    js = synthetic_js(qwen_lm)
-    assert [it.name for it in examples(js, "paper_multihop", ALL_SPLITS, cfg, split_file)] == ["ok", "other"]
-    assert [it.name for it in examples(js, "paper_multihop", "one", cfg, split_file)] == ["ok"]
+    everything = examples(tokenizer, "paper_multihop", ALL_SPLITS, cfg, split_file)
+    assert [it.name for it in everything] == ["ok", "other"]
+    assert [it.name for it in examples(tokenizer, "paper_multihop", "one", cfg, split_file)] == ["ok"]
 
 
 # ---- session --------------------------------------------------------------------------------
@@ -190,6 +216,32 @@ def test_session_caches_one_model_and_frees_the_old_one():
     assert session.get(b).choice == b and calls == [a, b]
     gc.collect()
     assert old() is None
+
+
+def _save_lens(lm, path: Path, layers, scale: float = 0.0) -> Path:
+    """A lens file at `path`: identity J matrices plus `scale` x seeded Gaussian noise."""
+    generator = torch.Generator().manual_seed(7)
+    d = lm.d_model
+    jacobians = {l: torch.eye(d) + scale * torch.randn(d, d, generator=generator) for l in layers}
+    jlens.JacobianLens(jacobians, n_prompts=2, d_model=d).save(str(path))
+    return path
+
+
+def test_attach_refit_reads_the_same_model_through_the_files_lens(qwen_lm, tmp_path):
+    cfg = dataclasses.replace(JSpaceConfig(), readout_stats_dir=tmp_path / "stats", band_layers=(0, 1))
+    js = load_jspace(qwen_lm, cfg, str(_save_lens(qwen_lm, tmp_path / "prefit.pt", range(3))))
+    refit_file = _save_lens(qwen_lm, tmp_path / "refit.pt", range(2), scale=0.5)
+    loaded = attach_refit(js, refit_file)
+    own = loaded.own
+    assert own.lm is js.lm and own.band == js.band and own.readout_stats is js.readout_stats
+    assert own.lens_model is js.lens_model and js.lens.source_layers == [0, 1, 2]
+    expected = jlens.JacobianLens.load(str(refit_file))
+    assert own.lens.source_layers == [0, 1] and own.lens.n_prompts == 2
+    for layer in (0, 1):
+        assert torch.equal(own.lens.jacobians[layer].cpu(), expected.jacobians[layer])
+    assert [r is x for r, x in zip(loaded.readers, [js, own], strict=True)] == [True, True]
+    alone = attach_refit(js, None)
+    assert alone.own is None and len(alone.readers) == 1 and alone.readers[0] is js
 
 
 # ---- run ------------------------------------------------------------------------------------
@@ -279,6 +331,49 @@ def test_bridge_ablation_changes_the_slice(qwen_lm):
     a, b = run_slice(js, clean, 5, 6), run_slice(js, ablated, 5, 6)
     n = len(clean.prompt_ids)
     assert not np.array_equal(a.top_ids[:n], b.top_ids[:n])
+
+
+def _assert_same_slice(a: jlens.vis.SliceData, b: jlens.vis.SliceData) -> None:
+    assert a.layers == b.layers and a.context_token_ids == b.context_token_ids
+    assert np.array_equal(a.top_ids, b.top_ids) and np.array_equal(a.top_ranks, b.top_ranks)
+    assert a.tracked_token_ids == b.tracked_token_ids and np.array_equal(a.rank_tensor, b.rank_tensor)
+    assert a.vocab_fragment == b.vocab_fragment and a.pinned_token_ids == b.pinned_token_ids
+
+
+def _random_lens_js(lm, layers=(0, 1)):
+    """synthetic_js on the same lm reading through seeded random J matrices (n_prompts=2)."""
+    own = synthetic_js(lm, layers=layers)
+    generator = torch.Generator().manual_seed(5)
+    d = lm.d_model
+    own.lens = jlens.JacobianLens({l: torch.randn(d, d, generator=generator) / d ** 0.5 for l in layers},
+                                  n_prompts=2, d_model=d)
+    return own
+
+
+def test_run_slices_with_one_reader_equals_run_slice(qwen_lm):
+    js = synthetic_js(qwen_lm)
+    result = run_example(js, make_item(), "prompt", "bridge", 0, N_NEW)
+    (only,) = run_slices(js, [js], result, 5, 6)
+    _assert_same_slice(only, run_slice(js, result, 5, 6))
+
+
+def test_run_slices_reads_a_second_lens_from_one_forward_pass(qwen_lm, monkeypatch):
+    import viz.slice
+    js, own = synthetic_js(qwen_lm, layers=(0, 1)), _random_lens_js(qwen_lm)
+    result = run_example(js, make_item(), "prompt", "bridge", 0, N_NEW)
+    calls = []
+
+    def counted_forward(*args, **kwargs):
+        calls.append(args[2])   # layers
+        return forward_residuals(*args, **kwargs)
+    monkeypatch.setattr(viz.slice, "forward_residuals", counted_forward)
+    first, second = run_slices(js, [js, own], result, 5, 6)
+    assert calls == [[0, 1, 2]]
+    enc = shown_encoding(js, result)
+    from_js = interventions_for_item(js, result.item, "bridge", 0)(enc)   # never built from own's lens
+    _assert_same_slice(second, slice_from_ids(own, enc, from_js, 5, 6, pinned_tokens(js, result)))
+    assert not np.array_equal(first.top_ids[:, :-1], second.top_ids[:, :-1])
+    assert np.array_equal(first.top_ids[:, -1], second.top_ids[:, -1])
 
 
 def test_replay_mismatches_reports_a_wrong_token(qwen_lm):
@@ -536,14 +631,28 @@ def test_jlens_page_contract(ours, theirs):
 
 # ---- app (gradio) ---------------------------------------------------------------------------
 
-def _app_context(js, tmp_path, dictionary=None):
+DATASET = "paper_multihop"
+TINY_CHOICES = {"tiny": ModelChoice("tiny"), "tiny + a": ModelChoice("tiny", Path("a"))}
+
+
+def _app_context(js, tmp_path, dictionary=None, load=None, own=None):
+    """An AppContext over `js` (with `own` as the refit-lens reader); `load` (choice -> Loaded)
+    replaces the session's loader."""
     from viz.app import AppContext
     rows = [{"name": "ok", "prompt": PROMPT, "target": "Paris", "intermediates": ["France"]}]
-    cfg = EvalConfig(datasets={"paper_multihop": write(tmp_path / "d.json", json.dumps({"items": rows}))})
-    viz = dataclasses.replace(load_viz_config(DEFAULT_VIZ_CONFIG), split_file=None, top_n=3, max_tracked=4)
+    cfg = EvalConfig(datasets={DATASET: write(tmp_path / "d.json", json.dumps({"items": rows}))})
+    viz = dataclasses.replace(load_viz_config(DEFAULT_VIZ_CONFIG), split_file=None, top_n=3, max_tracked=4,
+                              lenses_dir=tmp_path / "lenses")
     return AppContext(run=load_run_config(DEFAULT_RUN_CONFIG), viz=viz, eval_cfg=cfg,
-                      session=Session(lambda choice: js), choices={"tiny": ModelChoice("tiny")},
-                      default_model="tiny", rng=random.Random(0), dictionary=dictionary)
+                      session=Session(load or (lambda choice: Loaded(js, own))), tokenizer=js.lm.tokenizer,
+                      has_stats=js.readout_stats is not None, choices=TINY_CHOICES,
+                      default_model="tiny", rng=random.Random(0), dictionary=dictionary, cache=ResultCache())
+
+
+def _offline_pages(monkeypatch) -> None:
+    """Seed jlens's embed-template memo so building a page never fetches d3."""
+    monkeypatch.setitem(jlens.vis._TEMPLATE_FOR_MODE, "embed",
+                        jlens.vis.PAGE_TEMPLATE.replace("__D3__", "<script>/*d3*/</script>"))
 
 
 def _values(dropdown) -> list[str]:
@@ -555,39 +664,172 @@ def test_app_builds_and_choice_handlers_filter_invalid_options(qwen_lm, tmp_path
     from viz.app import build_app, on_dataset, on_example, on_split
     ctx = _app_context(synthetic_js(qwen_lm), tmp_path)
     assert isinstance(build_app(ctx), gr.Blocks)
-    assert _values(on_dataset(ctx, "tiny", "paper_multihop")) == [ALL_SPLITS]
-    items, example = on_split(ctx, "tiny", "paper_multihop", ALL_SPLITS)
+    assert _values(on_dataset(ctx, "paper_multihop")) == [ALL_SPLITS]
+    items, example = on_split(ctx, "paper_multihop", ALL_SPLITS)
     assert list(items) == ["ok"] and example.value == "ok"
     no_swap = {"t": make_item(swap_to=None)}
-    fields, conditions = on_example(ctx, "tiny", no_swap, "t", "hop2_prompt", "wrong_bridge")
+    fields, conditions = on_example(ctx, no_swap, "t", "hop2_prompt", "wrong_bridge")
     assert _values(fields) == ["prompt", "hop1_prompt"] and fields.value == "prompt"
     assert "wrong_bridge" not in _values(conditions) and conditions.value == "none"
     assert not NEEDS_STATS & set(_values(conditions))   # synthetic_js has no readout stats
 
 
+def test_profile_choices_keep_the_session_profile_and_its_adapters(tmp_path):
+    pytest.importorskip("gradio")
+    from viz.run_app import profile_choices
+    runs = tmp_path / "runs"
+    _adapter_dir(runs, "mexp", "qwen3-1.7b")
+    run = load_run_config(DEFAULT_RUN_CONFIG)
+    viz = dataclasses.replace(load_viz_config(DEFAULT_VIZ_CONFIG), runs_dir=runs)
+    assert list(profile_choices(run, viz, "qwen3-1.7b")) == ["qwen3-1.7b", "qwen3-1.7b + mexp"]
+    with pytest.raises(ValueError, match="no prefit lens"):
+        profile_choices(run, viz, "qwen3-0.6b")
+
+
+def test_every_cascade_ends_in_show_and_only_show_and_run_use_the_model_queue(qwen_lm, tmp_path):
+    pytest.importorskip("gradio")
+    from viz.app import build_app
+    demo = build_app(_app_context(synthetic_js(qwen_lm), tmp_path))
+    deps = demo.config["dependencies"]
+    parents = {d["trigger_after"] for d in deps}
+    leaves = sorted(d["api_name"] for d in deps if d["id"] not in parents)
+    assert leaves[0] == "run" and leaves[1:] and all(name.startswith("show") for name in leaves[1:])
+    queued = {fn.api_name for fn in demo.fns.values() if fn.concurrency_id == "model"}
+    names = [d["api_name"] for d in deps]
+    assert queued == {name for name in names if name == "run" or name.startswith("show")}
+
+
 def test_app_run_handler_returns_summary_and_iframe(qwen_lm, tmp_path, monkeypatch):
     gr = pytest.importorskip("gradio")
     from viz.app import on_run
-    monkeypatch.setitem(jlens.vis._TEMPLATE_FOR_MODE, "embed",
-                        jlens.vis.PAGE_TEMPLATE.replace("__D3__", "<script>/*d3*/</script>"))
+    _offline_pages(monkeypatch)
     ctx = _app_context(synthetic_js(qwen_lm), tmp_path)
     items = {"t": make_item()}
-    text, embed = on_run(ctx, "tiny", items, "t", "prompt", "bridge")
-    assert "**Response** (bridge)" in text and embed.startswith("<iframe") and "tiny: t" in html.unescape(embed)
+    _, text, embed, own = on_run(ctx, "tiny", DATASET, items, "t", "prompt", "bridge")
+    assert text.startswith("**Model:** tiny\n") and "**Response** (bridge)" in text
+    assert embed.startswith("<iframe") and "tiny: t | original lens (1 prompts)" in html.unescape(embed)
+    assert "No refit lens" in own
+    assert html.escape(f"python -m jspace.fit_lens --model tiny --out {tmp_path / 'lenses' / 'tiny.pt'}") in own
     with pytest.raises(gr.Error):
-        on_run(ctx, "tiny", items, None, "prompt", "none")
+        on_run(ctx, "tiny", DATASET, items, None, "prompt", "none")
 
 
 def test_app_run_embeds_glosses_only_with_a_dictionary(qwen_lm, tmp_path, monkeypatch):
     pytest.importorskip("gradio")
     from viz.app import on_run
-    monkeypatch.setitem(jlens.vis._TEMPLATE_FOR_MODE, "embed",
-                        jlens.vis.PAGE_TEMPLATE.replace("__D3__", "<script>/*d3*/</script>"))
+    _offline_pages(monkeypatch)
     js, items = synthetic_js(qwen_lm), {"t": make_item()}
-    _, with_dict = on_run(_app_context(js, tmp_path, SAMPLE), "tiny", items, "t", "prompt", "none")
-    _, without = on_run(_app_context(js, tmp_path, None), "tiny", items, "t", "prompt", "none")
+    with_dict = on_run(_app_context(js, tmp_path, SAMPLE), "tiny", DATASET, items, "t", "prompt", "none")[2]
+    without = on_run(_app_context(js, tmp_path, None), "tiny", DATASET, items, "t", "prompt", "none")[2]
     assert f'id="{GLOSS_DATA_ID}"' in html.unescape(with_dict)
     assert GLOSS_DATA_ID not in html.unescape(without)
+
+
+def test_app_refit_pane_shows_the_refit_lens_page_when_the_model_has_one(qwen_lm, tmp_path, monkeypatch):
+    pytest.importorskip("gradio")
+    from viz.app import on_run
+    _offline_pages(monkeypatch)
+    js, own = synthetic_js(qwen_lm, layers=(0, 1)), _random_lens_js(qwen_lm)
+    ctx = _app_context(js, tmp_path, SAMPLE, own=own)
+    _, _, original, refit = on_run(ctx, "tiny", DATASET, {"t": make_item()}, "t", "prompt", "bridge")
+    assert refit.startswith("<iframe") and "tiny: t | refit lens (2 prompts)" in html.unescape(refit)
+    assert "tiny: t | original lens (1 prompts)" in html.unescape(original)
+    assert f'id="{GLOSS_DATA_ID}"' in html.unescape(refit) and refit != original
+
+
+def _counting_app(js, tmp_path, monkeypatch):
+    """An AppContext whose loader records each load and whose generation (viz.app.run_example)
+    records each call; returns (ctx, loads, generations)."""
+    import viz.app
+    loads, generations = [], []
+
+    def load(choice):
+        loads.append(choice)
+        return Loaded(js)
+
+    def counted_run_example(*args, **kwargs):
+        generations.append(args[2:4])   # (field, condition)
+        return run_example(*args, **kwargs)
+    monkeypatch.setattr(viz.app, "run_example", counted_run_example)
+    _offline_pages(monkeypatch)
+    return _app_context(js, tmp_path, load=load), loads, generations
+
+
+def test_app_show_and_run_load_and_generate_once_per_model_and_question(qwen_lm, tmp_path, monkeypatch):
+    pytest.importorskip("gradio")
+    from viz.app import on_run, on_show
+    ctx, loads, generations = _counting_app(synthetic_js(qwen_lm), tmp_path, monkeypatch)
+    items = {"t": make_item(), "u": make_item(name="u")}
+    placeholder = ("", "Not run yet for **tiny** on this question. Press Run.", "", "")   # no table yet
+    assert on_show(ctx, "tiny", DATASET, "t", "prompt", "none") == placeholder and loads == []
+    first = on_run(ctx, "tiny", DATASET, items, "t", "prompt", "none")
+    assert on_run(ctx, "tiny", DATASET, items, "t", "prompt", "none") == first
+    assert len(loads) == 1 and len(generations) == 1
+    other = on_run(ctx, "tiny + a", DATASET, items, "t", "prompt", "none")
+    assert other[1].startswith("**Model:** tiny + a\n") and len(loads) == 2 and len(generations) == 2
+    back = on_show(ctx, "tiny", DATASET, "t", "prompt", "none")
+    assert back[1:] == first[1:] and back[0] == other[0]   # the table now lists both runs
+    assert len(loads) == 2 and len(generations) == 2
+    on_run(ctx, "tiny", DATASET, items, "u", "prompt", "none")
+    assert on_show(ctx, "tiny", DATASET, "t", "prompt", "none") == placeholder
+
+
+def test_app_table_lists_the_questions_runs_in_run_order(qwen_lm, tmp_path, monkeypatch):
+    pytest.importorskip("gradio")
+    from viz.app import on_run, on_show
+    ctx, _, _ = _counting_app(synthetic_js(qwen_lm), tmp_path, monkeypatch)
+    items = {"t": make_item(), "u": make_item(name="u")}
+    one = on_run(ctx, "tiny + a", DATASET, items, "t", "prompt", "none")[0]
+    table = on_run(ctx, "tiny", DATASET, items, "t", "prompt", "bridge")[0]
+    rows = table.splitlines()[2:]
+    assert len(one.splitlines()) == 3 and len(rows) == 2
+    assert rows[0].startswith("| tiny + a | prompt | none |") and rows[1].startswith("| tiny | prompt | bridge |")
+    assert on_show(ctx, "tiny", DATASET, "u", "prompt", "none")[0] == ""
+
+
+# ---- cache ----------------------------------------------------------------------------------
+
+def _shown(text: str) -> Shown:
+    return Shown(summary=text, original=f"<iframe>{text}</iframe>", own="", response=text, correct=False)
+
+
+def test_result_cache_round_trip_and_two_models_on_one_question():
+    cache = ResultCache()
+    a, b = RunKey("d", "t", "prompt", "none", "m1"), RunKey("d", "t", "prompt", "none", "m2")
+    assert cache.get(a) is None
+    cache.put(a, _shown("a"))
+    cache.put(b, _shown("b"))
+    assert cache.get(a) == _shown("a") and cache.get(b) == _shown("b")
+    assert a.question == b.question == ("d", "t")
+
+
+def test_result_cache_drops_the_old_question_and_lists_entries_in_order():
+    cache = ResultCache()
+    keys = [RunKey("d", "t", "prompt", c, m) for c, m in [("none", "m1"), ("bridge", "m1"), ("none", "m2")]]
+    for i, key in enumerate(keys):
+        cache.put(key, _shown(str(i)))
+    assert cache.entries(("d", "t")) == [(k, _shown(str(i))) for i, k in enumerate(keys)]
+    new = RunKey("d", "u", "prompt", "none", "m1")
+    cache.put(new, _shown("new"))
+    assert [cache.get(k) for k in keys] == [None, None, None]
+    assert cache.entries(("d", "t")) == [] and cache.entries(("d", "u")) == [(new, _shown("new"))]
+
+
+def test_responses_table_rows_and_escaping():
+    assert responses_table([]) == ""
+    rows = [(RunKey("d", "t", "prompt", "none", "m1"), _shown("Paris")),
+            (RunKey("d", "t", "hop1_prompt", "bridge", "m | 2"),
+             dataclasses.replace(_shown("a|b\nc <i>x</i>"), correct=True))]
+    lines = responses_table(rows).splitlines()
+    assert lines[0] == "| Model | Prompt field | Ablation | Response | Correct |" and len(lines) == 4
+    assert lines[2] == "| m1 | prompt | none | Paris | no |"
+    assert lines[3] == "| m \\| 2 | hop1_prompt | bridge | a\\|b⏎c &lt;i&gt;x&lt;/i&gt; | yes |"
+
+
+def test_no_refit_lens_note_escapes_and_shows_the_command():
+    note = no_refit_lens_note("m <1>", "python -m jspace.fit_lens --out a&b.pt")
+    assert "m &lt;1&gt;" in note and "<pre>python -m jspace.fit_lens --out a&amp;b.pt</pre>" in note
+    assert "restart the viewer" in note
 
 
 def test_item_card_shows_the_fields_prompt_and_answers():

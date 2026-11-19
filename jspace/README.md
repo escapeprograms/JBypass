@@ -18,20 +18,24 @@ Used by `evaluation/` and `finetune/`.
 | ablation: "at each token position, across a band of layers, we identify the k=10 most strongly activated J-lens vectors and zero out the residual stream's projection onto each" (skipping tokens in the clean pass's top 10) | `interventions.TopKAblation` |
 | light / medium / heavy ablation "differ in the range of layers" | `config.ablation_strengths`: first third, two thirds, or all of the band |
 | swap: `c = pinv(V) h`, `h + V(swap(c) - c)` with `V = [v_s v_t]` | `interventions.LensSwap` |
-| workspace band ~L38 to ~L92 of 100 | `config.band_start/band_end` (the paper gives no Qwen band; we reuse the fractions) |
+| workspace band ~L38 to ~L92 of 100 | `config.band_start/band_end` (the paper gives no Qwen band; we reuse the fractions: layers 11-26 on Qwen3-1.7B), or explicit `config.band_layers` |
 | our proposal: ablate the bridge's J-space component | `interventions.ProjectOut` over all one-token spellings of the bridge |
 | (ours) lower the bridge readout only where it is abnormally high, instead of pinning it at 0 | `clamp.ReadoutClamp` with caps from `baseline.ReadoutStats` |
 
 ## Files
-- `config.py`: `JSpaceConfig`: band fractions, top-k ablation settings, leading positions never edited, readout clamp settings (`clamp_z`: cap = mean + z * std, default 2; `readout_stats_dir`: folder of `<profile>.pt` statistics, default `stats/`; `stats_batch_size`: texts per pass when collecting them, default 4), decomposition k, lens-fitting settings. Model identity and lens location live in the model profile.
+- `config.py`: J-space settings. Model identity and lens location live in the model profile.
+  - `JSpaceConfig`: the defaults: band fractions (`band_start`/`band_end`) or explicit inclusive `band_layers` `(first, last)` (default `None` = fractions), top-k ablation settings, leading positions never edited, readout clamp settings (`clamp_z`: cap = mean + z * std, default 0.5; `readout_stats_dir`: folder of `<profile>.pt` statistics, default `stats/` relative to the working directory; `stats_batch_size`: texts per pass when collecting them, default 4), decomposition k, lens-fitting settings (`fit_n_prompts`, `fit_max_seq_len`, `fit_dim_batch`, and `fit_checkpoint_every`: prompts between writes of the resumable `<out>.ckpt`, default 10, `None` = only at the end; each write is ~450 MB for Qwen3-1.7B).
+  - `jspace_config(run)`: the `JSpaceConfig` for a `RunConfig`: defaults with run.yaml's optional `jspace:` section (`run.jspace`) applied (`dataclasses.replace`). No file access. Unknown keys raise `ValueError` naming them; `readout_stats_dir` is resolved relative to the YAML's folder (`run.config_dir`); `band_layers` must be a list of two ints (`null` = fractions) and becomes a tuple. Helpers: `_check_keys`, `_convert` (via the `_CONVERTERS` table), `_config_relative_path`, `_layer_pair`.
 - `loading.py` (all file and network access)
   - `JSpace(lm, lens_model, lens, band, cfg, readout_stats=None)`: the shared `LanguageModel`, a jlens view of it, the lens, the band layers, the config, and the reference readout statistics (`ReadoutStats`, needed by `ReadoutClamp`) or `None`.
   - `lens_view(lm)`: `jlens.from_hf` on `lm.base_model`, then restores every parameter's `requires_grad` and every module's train/eval mode (from_hf freezes and calls `.eval()`). Safe before or after `attach_lora`. The view shares `lm.blocks`, so our hooks fire inside `lens.apply` and `jlens.fit`. Never compiled.
   - `load_lens(lm, lens_path=None)`: the `.pt` at `lens_path`, else the profile's `prefit_lens` from the Hub; J matrices moved to `lm.device`. Raises if neither exists, or if the lens's `d_model`, layers or matrix shapes do not fit `lm`.
-  - `load_jspace(lm, cfg=JSpaceConfig(), lens_path=None, stats_path=None)`: bundles the above into a `JSpace`. Readout stats: an explicit `stats_path` is loaded (a missing file raises); with `None`, the default file is loaded if it exists, else `readout_stats` is `None`.
-  - `default_stats_path(lm, cfg)`: `cfg.readout_stats_dir / "<profile name>.pt"`. Keyed by profile, so an adapter run uses its base model's statistics.
+  - `load_jspace(lm, cfg=JSpaceConfig(), lens_path=None, stats_path=None)`: bundles the above into a `JSpace`. Band: `_band(lm, cfg)` = `layer_range(*cfg.band_layers)` if set, else `workspace_band` with the fractions; `_check_lens_covers` raises `ValueError` if the lens has no J matrix for a band layer. Readout stats: an explicit `stats_path` is loaded (a missing file raises); with `None`, the default file is loaded if it exists, else `readout_stats` is `None`.
+  - `default_stats_path(lm, cfg)`: `cfg.readout_stats_dir / "<profile name>.pt"`. Keyed by profile, so an adapter run uses its base model's statistics. Delegates to `profile_stats_path`.
+  - `profile_stats_path(profile_name, cfg)`: the same path from a profile name alone (no model loaded; used by the viewer to check for stats at startup).
 - `vectors.py`
-  - `workspace_band(n_layers, start, end)`: layer indices in the band.
+  - `workspace_band(n_layers, start, end)`: layer indices between the depth fractions (inclusive; no bounds check, see its `TODO(debt)`).
+  - `layer_range(first, last, n_layers)`: `first..last` inclusive; raises `ValueError` unless `0 <= first <= last < n_layers`.
   - `band_prefix(band, fraction)`: the first part of the band (for ablation strengths).
   - `token_variants(tokenizer, word)`: ids of every single-token spelling (space or no space, case); builds the variants and delegates to `single_token_ids`.
   - `single_token_ids(tokenizer, spellings)`: ids of the given spellings that tokenize to exactly one token, first-seen order, deduplicated; no case or space variants added (used for the Chinese bridge spellings).
@@ -58,7 +62,10 @@ Used by `evaluation/` and `finetune/`.
 - `decompose.py`: the paper's J-space as a sparse nonnegative combination of at most 25 J-lens vectors, found by gradient pursuit.
   - `jspace_decompose(lens, W_U, h, layer, k)`: returns the J-space part of `h`, the chosen token ids, and their coefficients.
   - `non_jspace_part(lens, W_U, h, layer, k)`: `h` minus its J-space part (used by the probes in `evaluation/`).
-- `fit_lens.py`: CLI that fits a new lens with the official `jlens.fit` on WikiText (paper settings: 128 tokens, up to 1000 prompts) on the profile's model, optionally with an unmerged LoRA adapter. This is the "recomputed J-lens" from the proposal, and the way to get a lens for a model without a prefit one (Qwen3-0.6B). Takes `--config`, `--model`, `--device`, `--adapter`, `--out`, `--n_prompts`, `--dim_batch`.
+- `fit_lens.py`: CLI that fits a new lens with the official `jlens.fit` on WikiText (paper settings: 128 tokens, up to 1000 prompts) on the profile's model, optionally with an unmerged LoRA adapter. This is the "recomputed J-lens" from the proposal, and the way to get a lens for a model without a prefit one (Qwen3-0.6B). Takes `--config`, `--model`, `--device`, `--adapter`, `--out`, `--n_prompts`, `--dim_batch` (the last two default to `fit_n_prompts` / `fit_dim_batch` of `jspace_config(run)`; `with_flags(cfg, args)` applies them). `main` parses flags, loads the model (and adapter), freezes it, downloads the WikiText prompts and calls:
+  - `fit_to_file(lm, prompts, cfg, out)`: `jlens.fit` on `lens_view(lm)` (the model as loaded, adapter included) with `cfg.fit_dim_batch`, `cfg.fit_max_seq_len` and `checkpoint_every=cfg.fit_checkpoint_every`, checkpointing to `<out>.ckpt`; saves the lens to `out` (creating its folder) and returns it.
+
+  The fit resumes from an existing `<out>.ckpt`: rerunning the same `--out` with a larger `--n_prompts` extends the fit (the first prompts are skipped, not refitted). Neither the lens nor the checkpoint records the model (debt 003), so a different model or adapter must use a different `--out`.
   ```
   python -m jspace.fit_lens --adapter path/to/adapter --out lenses/recomputed.pt
   ```
@@ -68,15 +75,15 @@ Used by `evaluation/` and `finetune/`.
 from model.config import load_model_profile, load_run_config
 from model.loading import load_model
 from model.inference import next_token_logits
-from jspace import load_jspace, lens_vectors, token_variants, ProjectOut, ReadoutClamp
+from jspace import jspace_config, load_jspace, lens_vectors, token_variants, ProjectOut, ReadoutClamp
 
-run = load_run_config("configs/run.yaml")
-js = load_jspace(load_model(load_model_profile(run.model, run.profiles_dir)))
+run = load_run_config("configs/run.yaml")   # configs/exp3.yaml: band 8-26, stats/exp3/
+js = load_jspace(load_model(load_model_profile(run.model, run.profiles_dir)), jspace_config(run))
 ids = token_variants(js.lm.tokenizer, "spider")
 ablate = ProjectOut(js, lens_vectors(js.lens, js.lm.unembedding_matrix, ids, js.band))
 logits = next_token_logits(js.lm, ["Fact: The number of legs on the animal that spins webs is"], [ablate])
 
-# clamp instead of zeroing (needs stats/<profile>.pt, or load_jspace(..., stats_path=...))
+# clamp instead of zeroing (needs <readout_stats_dir>/<profile>.pt, or load_jspace(..., stats_path=...))
 vecs = lens_vectors(js.lens, js.lm.unembedding_matrix, ids, js.band)
 clamp = ReadoutClamp(js, vecs, js.readout_stats.caps(ids, js.band, js.cfg.clamp_z))
 ```

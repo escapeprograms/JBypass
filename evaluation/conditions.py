@@ -101,7 +101,8 @@ CONDITIONS: dict[str, Builder] = {
     "random_tok": build_random_tok,
     "random_dir": build_random_dir,
 }
-# TODO(debt): strengths are read from the default JSpaceConfig at import time.
+# TODO(debt): strengths are read from the default JSpaceConfig at import time, so a
+# `jspace.ablation_strengths` override in run.yaml is not seen here (topk_* keep the defaults).
 for _name, _fraction in JSpaceConfig().ablation_strengths:
     CONDITIONS[f"topk_{_name}"] = make_topk_builder(_fraction)
 

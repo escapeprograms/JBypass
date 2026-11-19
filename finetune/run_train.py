@@ -6,9 +6,10 @@ python -m finetune.run_train --condition none   --split_file results/splits.json
 python -m finetune.run_train --condition bridge_clamp --split_file results/splits.json --out runs/mclamp
 
 bridge_clamp needs readout statistics: run `python -m evaluation.run_readout_stats` first
-(writes stats/<model>.pt, loaded by default) or pass --stats_path.
+(writes <readout_stats_dir>/<model>.pt, loaded by default) or pass --stats_path.
 
-Steps, batch size, learning rate, LoRA rank and seed come from configs/run.yaml (--config).
+Steps, batch size, learning rate, LoRA rank and seed come from configs/run.yaml (--config);
+so do J-space overrides (band, clamp_z, readout_stats_dir) in its optional `jspace:` section.
 """
 
 import argparse
@@ -21,7 +22,7 @@ from evaluation.config import EvalConfig
 from evaluation.runner import readable_items
 from finetune.ablated import condition_factory, item_text
 from finetune.config import TRAIN_CONDITIONS, FinetuneConfig
-from jspace import JSpace, JSpaceConfig, default_stats_path, load_jspace
+from jspace import JSpace, default_stats_path, jspace_config, load_jspace
 from model.cli import add_profile_args, resolve_profile
 from model.loading import load_model
 from model.lora import attach_lora, save_adapter
@@ -51,8 +52,7 @@ def main():
     cfg, eval_cfg = FinetuneConfig(), EvalConfig()
     run, profile = resolve_profile(args)
     lm = load_model(profile)
-    # TODO(debt-002): J-space settings are the dataclass defaults, not read from a file.
-    js = load_jspace(lm, JSpaceConfig(), lens_path=args.lens_path, stats_path=args.stats_path)
+    js = load_jspace(lm, jspace_config(run), lens_path=args.lens_path, stats_path=args.stats_path)
     attach_lora(lm, run.lora)
     items = readable_items(js, load_items(cfg.dataset, eval_cfg, args.split_file, cfg.split))
     print(f"training {profile.name} under {args.condition!r} on {len(items)} {cfg.split} items, "
@@ -64,7 +64,7 @@ def main():
     write_json({"condition": args.condition, "seed": run.train.seed, "ablation_seed": eval_cfg.seed,
                 "split_file": args.split_file, "split": cfg.split,
                 "stats_path": used_stats_path(js, args.stats_path), "clamp_z": js.cfg.clamp_z,
-                "losses": losses},
+                "band": js.band, "losses": losses},
                Path(args.out) / cfg.info_file)
     if torch.cuda.is_available():
         print(f"peak VRAM: {torch.cuda.max_memory_allocated() / 2**30:.2f} GiB")

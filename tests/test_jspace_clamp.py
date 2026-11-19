@@ -93,19 +93,25 @@ def _lens_file(lm, tmp_path):
     return str(path)
 
 
+def _cfg(tmp_path):
+    """Stats under tmp_path and a band the lens above covers (the default fractions give
+    layers 1-3 on the 3-layer tiny model, past its last layer)."""
+    return dataclasses.replace(JSpaceConfig(), readout_stats_dir=tmp_path / "stats", band_layers=(0, 1))
+
+
 def test_load_jspace_with_a_missing_explicit_stats_path_raises(qwen_lm, tmp_path):
     with pytest.raises(FileNotFoundError):
-        load_jspace(qwen_lm, lens_path=_lens_file(qwen_lm, tmp_path), stats_path=tmp_path / "none.pt")
+        load_jspace(qwen_lm, _cfg(tmp_path), lens_path=_lens_file(qwen_lm, tmp_path),
+                    stats_path=tmp_path / "none.pt")
 
 
 def test_load_jspace_without_stats_file_has_no_readout_stats(qwen_lm, tmp_path):
-    cfg = dataclasses.replace(JSpaceConfig(), readout_stats_dir=tmp_path / "stats")
-    js = load_jspace(qwen_lm, cfg, lens_path=_lens_file(qwen_lm, tmp_path))
+    js = load_jspace(qwen_lm, _cfg(tmp_path), lens_path=_lens_file(qwen_lm, tmp_path))
     assert js.readout_stats is None
 
 
 def test_load_jspace_reads_the_default_stats_file(qwen_lm, tmp_path):
-    cfg = dataclasses.replace(JSpaceConfig(), readout_stats_dir=tmp_path / "stats")
+    cfg = _cfg(tmp_path)
     lens_path = _lens_file(qwen_lm, tmp_path)
     js = load_jspace(qwen_lm, cfg, lens_path=lens_path)
     stats = synthetic_stats(js)

@@ -1,8 +1,8 @@
 """Settings dataclasses and the YAML loaders that build them.
 
 Model-specific facts live in one YAML file per model (`configs/models/<name>.yaml`).
-Experiment choices (which model, generation, LoRA and training values) live in
-`configs/run.yaml`.
+Experiment choices (which model, generation, LoRA and training values, and optional
+J-space overrides) live in `configs/run.yaml`.
 """
 
 from dataclasses import dataclass
@@ -62,6 +62,8 @@ class RunConfig:
     generation: GenerationSettings
     lora: LoraSettings
     train: TrainSettings
+    jspace: dict                    # raw optional `jspace:` section ({} if absent); read by jspace.jspace_config
+    config_dir: Path                # resolved folder of the YAML file (base for relative paths in it)
 
 
 def _read_yaml(path: Path) -> dict:
@@ -74,17 +76,21 @@ def _lens_source(data: dict | None) -> LensSource | None:
     return None if data is None else LensSource(**data)
 
 
-# TODO(debt-002): run and model settings are YAML; JSpaceConfig and EvalConfig are dataclass defaults.
+# TODO(debt-002): EvalConfig and FinetuneConfig are dataclass defaults, not sections of run.yaml.
 def load_run_config(path: str | Path) -> RunConfig:
-    """Read run.yaml. `profiles_dir` in the file is relative to the file's folder."""
+    """Read run.yaml. `profiles_dir` in the file is relative to the file's folder. The optional
+    `jspace:` section is kept raw; `jspace.jspace_config` interprets it."""
     path = Path(path)
     data = _read_yaml(path)
+    config_dir = path.parent.resolve()
     return RunConfig(
         model=data["model"],
-        profiles_dir=(path.parent / data["profiles_dir"]).resolve(),
+        profiles_dir=(config_dir / data["profiles_dir"]).resolve(),
         generation=GenerationSettings(**data["generation"]),
         lora=LoraSettings(**data["lora"]),
         train=TrainSettings(**data["train"]),
+        jspace=data.get("jspace") or {},
+        config_dir=config_dir,
     )
 
 

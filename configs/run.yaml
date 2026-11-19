@@ -15,3 +15,9 @@ train:                           # sized for an 8 GB GPU; raise batch_size on a 
   batch_size: 2
   steps: 500                       # smoke-test length; raise for real runs
   seed: 0
+
+# Optional `jspace:` section: overrides of JSpaceConfig fields (jspace/config.py), e.g.
+# band_layers: [first, last] (inclusive; replaces the band_start/band_end fractions),
+# clamp_z, readout_stats_dir (relative to this file's folder). Unknown keys raise.
+# None here, so the defaults apply (band = layers 11-26 on qwen3-1.7b, stats in stats/ under
+# the working directory). configs/exp3.yaml is an example.

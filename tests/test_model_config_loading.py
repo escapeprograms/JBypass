@@ -1,15 +1,18 @@
 import argparse
+import dataclasses
 from pathlib import Path
 
 import pytest
 import torch
 
+from jspace.config import JSpaceConfig, jspace_config
 from model.cli import add_profile_args, resolve_profile
 from model.config import LensSource, load_model_profile, load_run_config
 
 from conftest import D_MODEL, N_LAYERS, VOCAB, random_ids
 
 RUN_YAML = Path(__file__).resolve().parents[1] / "configs" / "run.yaml"
+EXP3_YAML = RUN_YAML.parent / "exp3.yaml"
 
 
 def test_run_config_loads_and_points_at_profiles():
@@ -49,6 +52,85 @@ def test_profile_name_must_match_file(tmp_path):
     )
     with pytest.raises(ValueError):
         load_model_profile("a", tmp_path)
+
+
+def _run_yaml_with(tmp_path, jspace_section: str = "") -> Path:
+    """A copy of configs/run.yaml in tmp_path/cfg/ with `jspace_section` appended."""
+    folder = tmp_path / "cfg"
+    folder.mkdir()
+    path = folder / "run.yaml"
+    path.write_text(RUN_YAML.read_text(encoding="utf-8") + jspace_section, encoding="utf-8")
+    return path
+
+
+def test_run_config_keeps_raw_jspace_section_and_config_dir(tmp_path):
+    path = _run_yaml_with(tmp_path, "jspace:\n  clamp_z: 1.5\n")
+    run = load_run_config(path)
+    assert run.jspace == {"clamp_z": 1.5}
+    assert run.config_dir == path.parent.resolve()
+    assert load_run_config(RUN_YAML).config_dir == RUN_YAML.parent
+
+
+def test_no_jspace_section_gives_the_default_jspace_config():
+    run = load_run_config(RUN_YAML)
+    assert run.jspace == {}
+    assert jspace_config(run) == JSpaceConfig()
+
+
+def test_empty_jspace_section_gives_the_default_jspace_config(tmp_path):
+    assert jspace_config(load_run_config(_run_yaml_with(tmp_path, "jspace:\n"))) == JSpaceConfig()
+
+
+def test_jspace_override_is_applied(tmp_path):
+    run = load_run_config(_run_yaml_with(tmp_path, "jspace:\n  clamp_z: 1.5\n  ablation_top_k: 3\n"))
+    assert jspace_config(run) == dataclasses.replace(JSpaceConfig(), clamp_z=1.5, ablation_top_k=3)
+
+
+def test_unknown_jspace_key_raises_naming_it(tmp_path):
+    run = load_run_config(_run_yaml_with(tmp_path, "jspace:\n  clamp_zz: 1.5\n"))
+    with pytest.raises(ValueError, match="clamp_zz"):
+        jspace_config(run)
+
+
+def test_readout_stats_dir_is_relative_to_the_config_folder(tmp_path):
+    run = load_run_config(_run_yaml_with(tmp_path, "jspace:\n  readout_stats_dir: ../stats/exp\n"))
+    assert jspace_config(run).readout_stats_dir == (tmp_path / "stats" / "exp").resolve()
+
+
+def test_band_layers_list_becomes_a_tuple(tmp_path):
+    run = load_run_config(_run_yaml_with(tmp_path, "jspace:\n  band_layers: [8, 26]\n"))
+    assert jspace_config(run).band_layers == (8, 26)
+
+
+@pytest.mark.parametrize("value", ["[8]", "[8, 26, 27]", "[8.0, 26]", "8", "[true, 26]", "'8-26'"])
+def test_band_layers_must_be_two_ints(tmp_path, value):
+    run = load_run_config(_run_yaml_with(tmp_path, f"jspace:\n  band_layers: {value}\n"))
+    with pytest.raises(ValueError, match="band_layers"):
+        jspace_config(run)
+
+
+def test_fit_checkpoint_every_defaults_to_10():
+    assert JSpaceConfig().fit_checkpoint_every == 10
+
+
+@pytest.mark.parametrize("value, expected", [("null", None), ("25", 25)])
+def test_fit_checkpoint_every_from_yaml(tmp_path, value, expected):
+    run = load_run_config(_run_yaml_with(tmp_path, f"jspace:\n  fit_checkpoint_every: {value}\n"))
+    assert jspace_config(run).fit_checkpoint_every == expected
+
+
+def test_exp3_config_differs_from_run_yaml_only_in_its_jspace_section():
+    run, exp3 = load_run_config(RUN_YAML), load_run_config(EXP3_YAML)
+    cfg = jspace_config(exp3)
+    assert cfg.band_layers == (8, 26)
+    assert cfg.readout_stats_dir == (RUN_YAML.parents[1] / "stats" / "exp3").resolve()
+    assert cfg == dataclasses.replace(JSpaceConfig(), band_layers=(8, 26),
+                                      readout_stats_dir=cfg.readout_stats_dir)
+    assert dataclasses.replace(exp3, jspace={}) == run
+
+
+def test_default_readout_stats_dir_stays_cwd_relative():
+    assert jspace_config(load_run_config(RUN_YAML)).readout_stats_dir == Path("stats")
 
 
 def test_sizes_are_read_from_model(lm):

@@ -10,6 +10,7 @@ from dataclasses import dataclass
 TRAIN_CONDITIONS = ("none", "bridge", "random_tok", "random_dir", "bridge_clamp")
 
 
+# TODO(debt-002): dataclass defaults, while run, model and J-space settings are YAML.
 @dataclass(frozen=True)
 class FinetuneConfig:
     dataset: str = "jbypass"            # name in EvalConfig.datasets

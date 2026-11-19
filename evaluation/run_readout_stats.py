@@ -4,6 +4,7 @@ Each prompt leaves its own bridge's tokens out. Stats are keyed by model profile
 adapter run uses base M's file.
 
 python -m evaluation.run_readout_stats                                      # -> stats/<model>.pt
+python -m evaluation.run_readout_stats --config configs/exp3.yaml           # -> stats/exp3/<model>.pt
 python -m evaluation.run_readout_stats --split_file results/splits.json --split train --out stats/train.pt
 """
 
@@ -28,7 +29,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--dataset", default="jbypass", choices=sorted(cfg.datasets))
     p.add_argument("--split_file", default=None, help="restrict to one split; default = whole dataset")
     p.add_argument("--split", default=None)
-    p.add_argument("--out", default=None, help="output .pt; default = stats/<model>.pt")
+    p.add_argument("--out", default=None, help="output .pt; default = <readout_stats_dir>/<model>.pt "
+                   "(stats/ unless --config's jspace section sets readout_stats_dir)")
     add_model_args(p)
     return p.parse_args()
 

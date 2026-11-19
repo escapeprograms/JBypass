@@ -20,8 +20,8 @@ python -m model.run_smoke    [--model qwen3-0.6b]   # GPU end-to-end check
 - `LensSource(repo, file, revision)`: Hub location of a prefit J-lens.
 - `ModelProfile`: every model-specific value (`name`, `hf_id`, `dtype`, `device`, `blocks_path`, `final_norm_path`, `chat_template_kwargs`, `lora_target_modules`, `prefit_lens`). One YAML file per model in `configs/models/`; `prefit_lens: null` when the model has none.
 - `GenerationSettings` (`max_new_tokens`), `LoraSettings` (`r`, `alpha`, `dropout`), `TrainSettings` (`learning_rate`, `batch_size`, `steps`, `seed`).
-- `RunConfig`: chosen profile name, `profiles_dir`, and the three settings above.
-- `load_run_config(path)`: reads run.yaml; `profiles_dir` is resolved relative to the file.
+- `RunConfig`: chosen profile name, `profiles_dir`, the three settings above, `jspace` (the raw optional `jspace:` section as a dict, `{}` when absent; model/ does not interpret it, `jspace.jspace_config` does) and `config_dir` (the YAML file's resolved folder, base for relative paths in it).
+- `load_run_config(path)`: reads run.yaml; `profiles_dir` is resolved relative to the file. Marked `TODO(debt-002)`: eval and fine-tune settings are not sections of it yet.
 - `load_model_profile(name, profiles_dir)`: reads `<profiles_dir>/<name>.yaml` (turning `prefit_lens` into a `LensSource`); raises if the file's `name` differs.
 
 ### `loading.py` — the model wrapper
@@ -33,7 +33,8 @@ python -m model.run_smoke    [--model qwen3-0.6b]   # GPU end-to-end check
   - `unembed(resid)`: `lm_head(final_norm(resid))`. `unembedding_matrix`: `[vocab, d_model]` lm_head weight.
   - `token_ids(text)`: encoding without added special tokens.
 - `freeze(lm)`: turns off `requires_grad` on every parameter (eval and lens fitting; the eval code relies on frozen weights so maths on the unembedding builds no autograd graph).
-- `load_model(profile)`: loads tokenizer and weights from the HF cache (downloading if needed) onto the profile's device and dtype, in eval mode.
+- `load_tokenizer(profile)`: the profile's tokenizer only (HF cache, downloading if needed); no weights. Used by the viewer to list questions before any model is loaded.
+- `load_model(profile)`: `load_tokenizer` plus the weights from the HF cache (downloading if needed) onto the profile's device and dtype, in eval mode.
 
 ### `hooks.py` — the intervention contract
 - Hook point "layer i" = the residual returned by `lm.blocks[i]`.

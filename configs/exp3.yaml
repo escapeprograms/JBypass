@@ -1,0 +1,23 @@
+# Experiment 3: exp 2 (bridge_clamp, clamp_z 0.5) with the band widened to layers 8-26.
+# Same model, generation, LoRA and training values as run.yaml; only `jspace:` differs.
+# Pass it to every command with `--config configs/exp3.yaml`.
+model: qwen3-1.7b
+profiles_dir: models             # relative to this file's folder
+
+generation:
+  max_new_tokens: 16             # answers are short; generation has no KV cache
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+
+train:                           # sized for an 8 GB GPU; raise batch_size on a bigger one
+  learning_rate: 2.0e-4
+  batch_size: 2
+  steps: 500                     # same as exp 2 (runs/mclamp)
+  seed: 0
+
+jspace:
+  band_layers: [8, 26]             # exp 3: clamp from layer 8 (exp 2 used the default fractions = layers 11-26)
+  readout_stats_dir: ../stats/exp3 # layers 8-26 need their own statistics; stats/qwen3-1.7b.pt has 11-26 only
